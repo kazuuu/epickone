@@ -31,8 +31,11 @@ class ApplicationController < ActionController::Base
   
   def correct_user
     @user = User.find(params[:id])
-    @current_user_session =  current_user_session && current_user_session.record    
-    redirect_to root_url unless ((@user.id == @current_user_session.id) || (@current_user_session.admin_flag))
+    redirect_to root_url unless ((@user.id == current_user.id) || (current_user.admin_flag))
+    return false
+  end
+  def require_admin
+    redirect_to root_url unless (current_user.admin_flag)
     return false
   end
 end
