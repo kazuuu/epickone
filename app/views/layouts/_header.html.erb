@@ -1,0 +1,21 @@
+<header class="navbar navbar-fixed-top"> 
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Pk One", '#', id: "logo" %> 
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Help", help_path %></li>
+          <li><%= link_to "Sign in", '#' %></li>
+          <% if current_user %>
+            <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
+            <li><%= link_to "Logout", :logout%></li>
+          <% else %>
+            <li><%= link_to "Register", new_user_path%></li>
+            <li><%= link_to "Login", :login %></li>
+          <% end %>
+        </ul> 
+      </nav>
+    </div>
+  </div>
+</header>
