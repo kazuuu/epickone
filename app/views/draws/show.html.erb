@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @draw.user_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @draw.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @draw.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_draw_path(@draw) %> |
+<%= link_to 'Back', draws_path %>
