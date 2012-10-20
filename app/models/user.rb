@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
                   :address1,
                   :address2,
                   :zipcode,
-                  :phone_mobile
+                  :phone_mobile,
+                  :admin_flag
     has_many :draws 
   acts_as_authentic do |c| 
     c.login_field = :email 

@@ -1,0 +1,8 @@
+<li>
+  <%= gravatar_for user, :size => 52 %>
+  <%= link_to user.first_name, user %>
+  <% if current_user.admin_flag == true %>
+  <td><%= link_to 'Edit', edit_user_path(user) %></td>
+  <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+  <% end %>
+</li>

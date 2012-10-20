@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
+  before_filter :require_user,  :only => [:show, :edit, :update]
+  before_filter :correct_user,  :only => [:edit, :update]
+  
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    # @users = User.all # Authlogic
+    @users = User.paginate(page: params[:page]) # willpaginate
 
     respond_to do |format|
       format.html # index.html.erb

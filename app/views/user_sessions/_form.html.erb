@@ -11,16 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
-  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
-  <div class="actions">
-    <%= f.submit "Sign In"%>
+  <div class="row">
+    <div class="span6 offset3">
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+      <%= f.label :password %><br />
+      <%= f.password_field :password %><br>
+      <%= f.check_box :remember_me %><%= f.label :remember_me %><br>
+      <%= f.submit "Login", class: "btn btn-large btn-primary" %>
+      <p>New user? <%= link_to "Sign up now!", new_user_path %></p> 
+    </div>
   </div>
 <% end %>
+
+
+

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user 
       flash[:notice] = "Please sign in to access this page"
-      redirect_to root_url
+      redirect_to :login
       return false
     end
   end 
@@ -27,5 +27,12 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
       return false
     end
+  end
+  
+  def correct_user
+    @user = User.find(params[:id])
+    @current_user_session =  current_user_session && current_user_session.record    
+    redirect_to root_url unless ((@user.id == @current_user_session.id) || (@current_user_session.admin_flag))
+    return false
   end
 end

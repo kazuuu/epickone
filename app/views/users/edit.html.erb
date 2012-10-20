@@ -1,6 +1,15 @@
-<h1>Editing user</h1>
+<% provide(:title, "Edit profile") %>
+<h1>Update your profile</h1>
+<div class="row">
+  <div class="span6 offset3">
+
+    <%= gravatar_for @user %><br>
+    <a href="http://gravatar.com/emails">change</a>
+  </div>
+</div>
 
 <%= render 'form' %>
+
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

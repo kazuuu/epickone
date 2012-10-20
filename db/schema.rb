@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020021433) do
+ActiveRecord::Schema.define(:version => 20121020211502) do
 
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20121020021433) do
     t.string   "address2"
     t.string   "zipcode"
     t.string   "phone_mobile"
+    t.boolean   "admin_flag"    
   end
 
 end
