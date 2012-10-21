@@ -4,12 +4,12 @@ class CreateDraws < ActiveRecord::Migration
       t.integer :user_id
       t.string :title
       t.string :description
-      t.string :min_users
-      t.string :max_users
+      t.integer :min_users
+      t.integer :max_users
       t.string :localization
-      t.string :price
-      t.string :date_due
-      t.string :date_start
+      t.decimal :price
+      t.datetime :date_due
+      t.datetime :date_start
       t.has_attached_file :avatar
 
       t.timestamps

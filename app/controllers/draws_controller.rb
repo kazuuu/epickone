@@ -3,7 +3,8 @@ class DrawsController < ApplicationController
   # GET /draws
   # GET /draws.json
   def index
-    @draws = Draw.all
+    #@draws = Draw.all
+    @draws = Draw.paginate(page: params[:page]) # willpaginate
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,13 +49,18 @@ class DrawsController < ApplicationController
   # POST /draws.json
   def create
     @draw = current_user.draws.build(params[:draw]) 
-    if @draw.save
-      flash[:success] = "Draw created!"
-      redirect_to root_path
-    else
-      render 'static_pages/home'
+
+    respond_to do |format|
+      if @draw.save
+        format.html { redirect_to @draw, notice: 'Registration successfull.' }
+        format.json { render json: @draw, status: :created, location: @draw }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @draw.errors, status: :unprocessable_entity }
+      end
     end
   end
+  
 
   # PUT /draws/1
   # PUT /draws/1.json

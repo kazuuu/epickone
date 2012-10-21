@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_no_user,  :only => [:new]
   before_filter :correct_user,  :only => [:show, :edit, :update]
   before_filter :require_admin,  :only => [:index]
   
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @draws = @user.draws.paginate(page: params[:page])
+    # @draws = @user.draws.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # show.html.erb

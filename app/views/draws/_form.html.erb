@@ -11,17 +11,34 @@
     </div>
   <% end %>
 
+
+  <%= image_tag @draw.avatar.url(:thumb) %>
   <%= f.file_field :avatar %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description, :rows =>10 %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.label :title %><br />
+  <%= f.text_field :title %>
+
+  <%= f.label :min_users %><br />
+  <%= f.text_field :min_users %>
+
+  <%= f.label :max_users %><br />
+  <%= f.text_field :max_users %>
+
+  <%= f.label :localization %><br />
+  <%= f.text_field :localization %>
+
+  <%= f.label :price %><br />
+  <%= f.text_field :price %>
+
+  <%= f.label :date_due %><br />
+  <%= f.datetime_select :date_due %>
+
+  <%= f.label :date_start %><br />
+  <%= f.date_select :date_start %>
+
+  <%= f.label :description %><br />
+  <%= f.text_area :description, :rows =>10 %>
+
+  <%= f.submit %>
 <% end %>
+

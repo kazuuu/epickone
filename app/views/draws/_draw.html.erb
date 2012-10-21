@@ -1,4 +1,15 @@
-<li>
-<span class="content"><%= draw.description %></span> <span class="timestamp">
-Posted <%= time_ago_in_words(draw.created_at) %> ago. </span>
-</li>
+<tr>
+  <td colspan=2>
+    <h3><%= draw.title %></h3>
+  </td>
+</tr>
+<tr>
+  <td style="width:300px;">
+    <%= image_tag draw.avatar.url(:medium) %>
+  </td>
+  <td  style="width:600px;">
+    <%= simple_format(draw.description) %>
+    <br>
+    <span class="timestamp">Due Date <%= draw.date_due %>. </span>
+  </td>
+</tr>

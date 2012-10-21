@@ -17,6 +17,12 @@ ActiveRecord::Schema.define(:version => 20121020211502) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
+    t.integer  "min_users"
+    t.integer  "max_users"
+    t.string   "localization"
+    t.decimal  "price"
+    t.datetime "date_due"
+    t.datetime "date_start"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.string   "avatar_file_name"

@@ -4,20 +4,11 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= image_tag @user.avatar.url(:medium) %>
+        <%= image_tag @user.avatar.url(:thumb) %>
         <%= @user.first_name %>
       </h1>
     </section>
   </aside>
-  <div class="span8">
-    <% if @user.draws.any? %>
-      <h3>Draws (<%= @user.draws.count %>)</h3> 
-      <ol class="draws">
-        <%= render @draws %>
-      </ol>
-      <%= will_paginate @draws %>
-    <% end %>
-  </div>  
 </div>
 
 

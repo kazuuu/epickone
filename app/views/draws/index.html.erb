@@ -12,7 +12,7 @@
 
 <% @draws.each do |draw| %>
   <tr>
-    <td><%= draw.user_id %></td>
+    <td><%= image_tag draw.avatar.url(:medium) %><td>
     <td><%= draw.title %></td>
     <td><%= draw.description %></td>
     <td><%= link_to 'Show', draw %></td>

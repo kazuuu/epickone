@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-          attr_accessible :email, 
+  attr_accessible :email, 
                   :password, 
                   :password_salt, 
                   :persistence_token, 
@@ -20,10 +20,13 @@ class User < ActiveRecord::Base
                   :avatar,
                   :avatar_delete
                   
-    has_attached_file :avatar
-    before_save :destroy_avatar?
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   has_many :draws, dependent: :destroy
+                  
+  before_save :destroy_avatar?
+  has_attached_file :avatar
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+  
   acts_as_authentic do |c| 
     c.login_field = :email 
     c.require_password_confirmation = false

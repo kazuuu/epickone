@@ -1,10 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
-    if current_user 
-      redirect_to current_user
-      return false    
-    end
     @user = User.new
+    @draws = Draw.paginate(page: params[:page]) # willpaginate
 
     respond_to do |format|
       format.html # new.html.erb
