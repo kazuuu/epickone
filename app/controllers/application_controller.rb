@@ -31,11 +31,17 @@ class ApplicationController < ActionController::Base
   
   def correct_user
     @user = User.find(params[:id])
-    redirect_to root_url unless ((@user.id == current_user.id) || (current_user.admin_flag))
-    return false
+    unless ((@user.id == current_user.id) || (current_user.admin_flag))
+      flash[:notice] = "You do not have permission"
+      redirect_to root_url 
+      return false
+    end
   end
   def require_admin
-    redirect_to root_url unless (current_user.admin_flag)
-    return false
+    unless (current_user.admin_flag)
+      flash[:notice] = "You do not have permission"
+      redirect_to root_url
+      return false
+    end
   end
 end

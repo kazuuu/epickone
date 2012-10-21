@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20121020211502) do
     t.string   "address2"
     t.string   "zipcode"
     t.string   "phone_mobile"
-    t.boolean   "admin_flag"    
+    t.boolean  "admin_flag"
   end
 
 end

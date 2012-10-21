@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
                   :zipcode,
                   :phone_mobile,
                   :admin_flag
-    has_many :draws 
+  has_many :draws, dependent: :destroy
   acts_as_authentic do |c| 
     c.login_field = :email 
     c.require_password_confirmation = false
   end 
+  
 end
