@@ -1,5 +1,7 @@
 class Draw < ActiveRecord::Base
-  attr_accessible :description, :title
+  attr_accessible :description, :title, :avatar
+                  
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   belongs_to :user
   
   validates :user_id, presence: true  

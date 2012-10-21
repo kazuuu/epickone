@@ -17,8 +17,12 @@ ActiveRecord::Schema.define(:version => 20121020211502) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "user_sessions", :force => true do |t|
@@ -31,8 +35,8 @@ ActiveRecord::Schema.define(:version => 20121020211502) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "current_login_ip"
     t.string   "first_name"
     t.string   "last_name"
@@ -47,6 +51,10 @@ ActiveRecord::Schema.define(:version => 20121020211502) do
     t.string   "zipcode"
     t.string   "phone_mobile"
     t.boolean  "admin_flag"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

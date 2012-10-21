@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, 
+          attr_accessible :email, 
                   :password, 
                   :password_salt, 
                   :persistence_token, 
@@ -16,7 +16,10 @@ class User < ActiveRecord::Base
                   :address2,
                   :zipcode,
                   :phone_mobile,
-                  :admin_flag
+                  :admin_flag,
+                  :avatar
+                  
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   has_many :draws, dependent: :destroy
   acts_as_authentic do |c| 
     c.login_field = :email 

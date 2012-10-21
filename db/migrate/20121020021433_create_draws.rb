@@ -10,6 +10,7 @@ class CreateDraws < ActiveRecord::Migration
       t.string :price
       t.string :date_due
       t.string :date_start
+      t.has_attached_file :avatar
 
       t.timestamps
     end
