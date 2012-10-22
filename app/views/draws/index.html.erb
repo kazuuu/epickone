@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Image</th>
     <th>User</th>
     <th>Title</th>
     <th>Description</th>
@@ -13,7 +14,8 @@
 <% @draws.each do |draw| %>
   <tr>
     <td><%= image_tag draw.avatar.url(:medium) %><td>
-    <td><%= draw.title %></td>
+      <td><%= draw.user_id %></td>
+      <td><%= draw.title %></td>
     <td><%= draw.description %></td>
     <td><%= link_to 'Show', draw %></td>
     <td><%= link_to 'Edit', edit_draw_path(draw) %></td>

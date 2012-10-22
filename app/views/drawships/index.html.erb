@@ -1,0 +1,27 @@
+<h1>Listing drawships</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Draw</th>
+    <th>Picked number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @drawships.each do |drawship| %>
+  <tr>
+    <td><%= drawship.user_id %></td>
+    <td><%= drawship.draw_id %></td>
+    <td><%= drawship.picked_number %></td>
+    <td><%= link_to 'Show', drawship %></td>
+    <td><%= link_to 'Edit', edit_drawship_path(drawship) %></td>
+    <td><%= link_to 'Destroy', drawship, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Drawship', new_drawship_path %>

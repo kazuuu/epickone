@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020211502) do
+ActiveRecord::Schema.define(:version => 20121022174105) do
+
+  create_table "answers", :force => true do |t|
+    t.string   "titlet"
+    t.string   "description"
+    t.integer  "order"
+    t.integer  "iscorrect"
+    t.integer  "question_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
@@ -31,9 +41,36 @@ ActiveRecord::Schema.define(:version => 20121020211502) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "drawships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "draw_id"
+    t.integer  "picked_number"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.string   "titlet"
+    t.string   "description"
+    t.integer  "order"
+    t.integer  "type"
+    t.integer  "draw_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "user_sessions", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_ships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "member_id"
+    t.string   "member_type"
+    t.integer  "number_picked"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

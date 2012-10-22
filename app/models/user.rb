@@ -20,7 +20,10 @@ class User < ActiveRecord::Base
                   :avatar,
                   :avatar_delete
                   
-  has_many :draws, dependent: :destroy
+  has_many :drawships, :dependent => :destroy
+  has_many :draws, :through => :drawships
+  
+  has_many :draws                 
                   
   before_save :destroy_avatar?
   has_attached_file :avatar
@@ -31,13 +34,18 @@ class User < ActiveRecord::Base
     c.login_field = :email 
     c.require_password_confirmation = false
   end 
+  
+  
+  def all_draws
+    (self.draws + self.draw_owners).uniq
+  end  
   def avatar_delete
-      @avatar_delete ||= "0"
-    end
+    @avatar_delete ||= "0"
+  end
 
-    def avatar_delete=(value)
-      @avatar_delete = value
-    end
+  def avatar_delete=(value)
+    @avatar_delete = value
+  end
 
   private
     def destroy_avatar?

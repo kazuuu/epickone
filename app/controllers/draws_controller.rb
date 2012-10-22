@@ -1,4 +1,6 @@
 class DrawsController < ApplicationController
+  before_filter :require_user
+  before_filter :require_admin,  :except => [:join]
   
   # GET /draws
   # GET /draws.json
@@ -26,12 +28,6 @@ class DrawsController < ApplicationController
   # GET /draws/new
   # GET /draws/new.json
   def new
-    if current_user.nil?
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to (new_user_session_url)
-      return
-    end
-      
     @draw = Draw.new
 
     respond_to do |format|
@@ -48,8 +44,11 @@ class DrawsController < ApplicationController
   # POST /draws
   # POST /draws.json
   def create
+    # @draw = Draw.new(params[:draw])    
+ 
     @draw = current_user.draws.build(params[:draw]) 
 
+ 
     respond_to do |format|
       if @draw.save
         format.html { redirect_to @draw, notice: 'Registration successfull.' }
@@ -89,4 +88,17 @@ class DrawsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def join    
+    @draw = Draw.find(params[:id])
+    @m = @draw.drawships.build(:user_id => current_user.id)
+    respond_to do |format|
+      if @m.save
+        format.html { redirect_to(root_path, :notice => 'You have joined this Draw.') }
+        format.xml  { head :ok }
+      else
+        format.html { redirect_to(root_path, :notice => 'Join error.') }
+        format.xml  { render :xml => @draw.errors, :status => :unprocessable_entity }
+      end
+    end
+  end  
 end

@@ -1,11 +1,18 @@
 Pickone::Application.routes.draw do
+  resources :drawships
+
+  resources :answers
+
+  resources :questions
+
   get "admin/draws"
 
   get "account/account"
 
-  resources :draws
+  resources :draws do
+    get 'join', :on => :member 
+  end
   resources :users, :user_sessions
-  resources :draws, only: [:create, :destroy]
 
   root to: 'static_pages#home'
   match '/help',    to: 'static_pages#help'

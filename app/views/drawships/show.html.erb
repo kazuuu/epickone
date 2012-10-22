@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @drawship.user_id %>
+</p>
+
+<p>
+  <b>Draw:</b>
+  <%= @drawship.draw_id %>
+</p>
+
+<p>
+  <b>Picked number:</b>
+  <%= @drawship.picked_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_drawship_path(@drawship) %> |
+<%= link_to 'Back', drawships_path %>
