@@ -1,6 +1,6 @@
 class DrawshipsController < ApplicationController
   before_filter :require_user
-  before_filter :require_admin
+  before_filter :require_user_admin
 
 
   # GET /drawships

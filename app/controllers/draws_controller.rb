@@ -1,6 +1,6 @@
 class DrawsController < ApplicationController
   before_filter :require_user
-  before_filter :require_admin,  :except => [:join]
+  before_filter :require_user_admin,  :except => [:join]
   
   # GET /draws
   # GET /draws.json

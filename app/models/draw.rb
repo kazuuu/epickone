@@ -1,5 +1,5 @@
 class Draw < ActiveRecord::Base
-  attr_accessible :description, :title, :avatar, :min_users, :max_users, :localization, :price, :date_due, :date_start
+  attr_accessible :description, :title, :avatar, :min_users, :max_users, :localization, :price, :date_due, :date_start, :user_id
                   
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   belongs_to :users

@@ -1,11 +1,12 @@
 Pickone::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
   resources :drawships
 
   resources :answers
 
   resources :questions
 
-  get "admin/draws"
 
   get "account/account"
 

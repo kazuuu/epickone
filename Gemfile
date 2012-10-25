@@ -6,7 +6,10 @@ gem 'bootstrap-sass', '2.0.0'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
-gem "paperclip", "~> 3.0"
+gem 'paperclip', '~> 3.0'
+gem 'activeadmin'
+gem 'country-select', '1.1.1'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
