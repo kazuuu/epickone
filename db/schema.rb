@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20121022174105) do
 
   create_table "answers", :force => true do |t|
-    t.string   "titlet"
+    t.string   "title"
     t.string   "description"
     t.integer  "order"
     t.integer  "iscorrect"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20121022174105) do
   end
 
   create_table "questions", :force => true do |t|
-    t.string   "titlet"
+    t.string   "title"
     t.string   "description"
     t.integer  "order"
     t.integer  "type"

@@ -6,7 +6,7 @@ class Draw < ActiveRecord::Base
     
   has_many :drawships, :dependent => :destroy
   has_many :users, :through => :drawships
-      
+        
   validates :user_id, presence: true  
   validates :title, presence: true
   validates :title, :length => { :maximum => 25 }
