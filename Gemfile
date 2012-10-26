@@ -9,6 +9,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'paperclip', '~> 3.0'
 gem 'activeadmin'
 gem 'country-select', '1.1.1'
+#gem 'formtastic', '2.2.1'
 
 
 # Bundle edge Rails instead:

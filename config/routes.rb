@@ -7,11 +7,11 @@ Pickone::Application.routes.draw do
 
   resources :questions
 
-
   get "account/account"
 
   resources :draws do
     get 'join', :on => :member 
+    get 'join_questions', :on => :member
   end
   resources :users, :user_sessions
 

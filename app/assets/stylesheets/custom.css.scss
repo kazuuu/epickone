@@ -21,6 +21,15 @@ $grayMediumLight: #eaeaea;
 }
 
 /* universal */
+a.btn:hover {
+  color:yellow;
+}
+a.btn:visited {
+  color:white;
+}
+
+
+
 html {
 overflow-y: scroll;
 }
@@ -115,6 +124,7 @@ footer {
 /* sidebar */
 aside {
   section {
+    width:150px;
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
     &:first-child {
@@ -162,3 +172,15 @@ aside {
 .timestamp {
   color: $grayLight;
 }
+
+/* home */
+
+.banner_medium
+{
+  float:left;
+  width:300px;
+  margin:10px;
+	border-style:solid;
+	border-width:1px;
+}
+

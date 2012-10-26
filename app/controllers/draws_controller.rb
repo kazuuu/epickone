@@ -101,4 +101,8 @@ class DrawsController < ApplicationController
       end
     end
   end  
+
+  def join_questions
+    @draw = Draw.find(params[:id])
+  end
 end

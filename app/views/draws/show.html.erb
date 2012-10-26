@@ -1,24 +1,49 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <aside style="float:left;">
+    <section>
+      <%= image_tag @draw.avatar.url(:thumb) %>
+      <p>
+        <b>Owner Id:</b>
+        <%= @draw.user_id %>
+      </p>
+      <%= link_to "Join this draw", join_questions_draw_path(@draw), :class => "btn btn-large btn-primary" %>
+      
+    </section>
+  </aside>
+  <div>
+    <p>
+      <b>Title:</b>
+      <%= @draw.title %>
+    </p>
 
-<%= image_tag @draw.avatar.url(:thumb) %>
+    <p>
+      <b>Description:</b>
+      <%= simple_format(@draw.description) %>
+    </p>  
+
+  </div
+</div>
+<hr>
+<ol class="questions">
+<% @draw.questions.each do |question| %>
+  <li>
+    <%= question.title %>
+    <ol class="answers">
+      <% question.answers.each do |answer| %>
+        <li><%= answer.title %></li>
+      <% end %>
+    </ol>
+  </li>
+<% end %>
+</ol>
 
 
-<p>
-  <b>Owner Id:</b>
-  <%= @draw.user_id %>
-</p>
 
 
-<p>
-  <b>Title:</b>
-  <%= @draw.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @draw.description %>
-</p>
 
 
-<%= link_to 'Edit', edit_draw_path(@draw) %> |
-<%= link_to 'Back', draws_path %>
+
+
+
+

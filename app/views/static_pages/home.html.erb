@@ -9,12 +9,21 @@
   </div>
 </div>
 
-  <div class="center draws">
-    <% if @draws.any? %>
-      <table>    
-      <%= render @draws %>
-      </table>
-      <%= will_paginate @draws %>
+<div class="row">
+    <% @draws.each_slice(3) do |row| %>
+      <% row.each do |col| %>
+      <div class="center banner_medium">
+        <div>
+          <%= link_to(col.title, col) %>
+        </div>
+        <div>
+          <%= link_to(image_tag(col.avatar.url(:medium)), col) %>
+        </div>
+        <div>
+          <%= link_to "Join this draw", join_draw_path(col), :class => "btn btn-large btn-primary" %>
+        </div>
+      </div>  
+      <% end%>
     <% end %>
-  </div>  
+</div>
 
