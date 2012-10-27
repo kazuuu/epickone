@@ -1,0 +1,16 @@
+<h1>Pick a number</h1>
+<h2>The smallest uniq picked number will win!</h2>
+
+  <% @numbers.each_slice(10) do |row| %>
+    <div class="row">
+    <% row.each do |i| %>
+      <div style="float:left;width:30px;text-align:center;border-width:1px;border-style:solid;margin:3px;">
+        <%= link_to(i, join_draw_path(:number => i))  %>
+      </div>
+    <% end %>
+    </div>  
+  <% end %>  
+
+<%= will_paginate @numbers %>
+
+

@@ -1,4 +1,6 @@
 class DrawsController < ApplicationController
+  require 'will_paginate/array'
+
   before_filter :require_user
   before_filter :require_user_admin,  :except => [:join]
   
@@ -91,8 +93,13 @@ class DrawsController < ApplicationController
   def join    
     @draw = Draw.find(params[:id])
     @m = @draw.drawships.build(:user_id => current_user.id)
-      if !@m.save
+    @m.picked_number = params[:number]
+      if @m.save
+        flash[:notice] = "You have joined!."
+         redirect_to root_path
+      else
         flash[:notice] = "error!."
+         redirect_to pick_a_number_draw_path
       end
   end  
 
@@ -107,14 +114,22 @@ class DrawsController < ApplicationController
     @draw.questions.each do |question|
       @ans = question.answers.find(:all, :conditions => 'iscorrect = 1')
 
-      if params[question.id.to_s].nil? || params[question.id.to_s][:answer] != @ans[0]['id'].to_s
-        if @bOk == true
-          @bOk = false
+      if !@ans.empty?
+        if params[question.id.to_s].nil? || params[question.id.to_s][:answer] != @ans[0]['id'].to_s
+          if @bOk == true
+            @bOk = false
+          end
         end
+      else
+        @bOk = false
       end
     end
     if @bOk
-      join
+      redirect_to pick_a_number_draw_path
     end    
+  end
+
+  def pick_a_number
+    @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
   end
 end

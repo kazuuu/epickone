@@ -13,6 +13,7 @@ Pickone::Application.routes.draw do
     get 'join', :on => :member 
     get 'join_questions', :on => :member
     post 'questions_check', :on => :member
+    get 'pick_a_number', :on => :member
   end
   resources :users, :user_sessions
 
