@@ -6,6 +6,7 @@ class CreateAnswers < ActiveRecord::Migration
       t.integer :order
       t.integer :iscorrect
       t.integer :question_id
+      t.has_attached_file :avatar
 
       t.timestamps
     end

@@ -4,6 +4,7 @@ class CreateDraws < ActiveRecord::Migration
       t.integer :user_id
       t.string :title
       t.string :description
+      t.string :instruction
       t.integer :min_users
       t.integer :max_users
       t.string :localization

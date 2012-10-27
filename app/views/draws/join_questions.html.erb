@@ -1,1 +1,40 @@
-JOIN
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div style="display:block;float:left;">
+    <aside style="float:left;">
+      <section>
+        <%= image_tag @draw.avatar.url(:thumb) %>
+        <p>
+          <b>Owner Id:</b>
+          <%= @draw.user_id %>
+        </p>
+      </section>
+    </aside>
+  </div>
+  <%= form_tag questions_check_draw_path(@draw) do |f| %>
+  <div style="float:left;display:block">
+    <p>
+      <b>Title:</b>
+      <%= @draw.title %>
+    </p>
+
+    <ol class="questions">
+    <% @draw.questions.each do |question| %>
+      <li>
+        <%= question.title %>
+        <ol class="answers">
+          <% question.answers.each do |answer| %>
+            <%= radio_button question.id, "answer", answer.id %> <%= answer.title %> <br>
+              
+          <% end %>
+        </ol>
+      </li>
+    <% end %>
+    </ol>
+    <%= submit_tag "Check Answers" %>
+  </div
+  <% end %>
+</div>
+
+<hr>
+

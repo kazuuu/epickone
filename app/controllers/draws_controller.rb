@@ -91,18 +91,30 @@ class DrawsController < ApplicationController
   def join    
     @draw = Draw.find(params[:id])
     @m = @draw.drawships.build(:user_id => current_user.id)
-    respond_to do |format|
-      if @m.save
-        format.html { redirect_to(root_path, :notice => 'You have joined this Draw.') }
-        format.xml  { head :ok }
-      else
-        format.html { redirect_to(root_path, :notice => 'Join error.') }
-        format.xml  { render :xml => @draw.errors, :status => :unprocessable_entity }
+      if !@m.save
+        flash[:notice] = "error!."
       end
-    end
   end  
 
   def join_questions
     @draw = Draw.find(params[:id])
+  end
+  
+  def questions_check
+    @draw = Draw.find(params[:id])
+    @bOk = true;
+    
+    @draw.questions.each do |question|
+      @ans = question.answers.find(:all, :conditions => 'iscorrect = 1')
+
+      if params[question.id.to_s].nil? || params[question.id.to_s][:answer] != @ans[0]['id'].to_s
+        if @bOk == true
+          @bOk = false
+        end
+      end
+    end
+    if @bOk
+      join
+    end    
   end
 end

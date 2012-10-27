@@ -1,7 +1,10 @@
 ActiveAdmin.register User do
   form do |f|
     f.inputs "Users", :multipart => true do
-          f.input :avatar
+          f.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => f.object.avatar.nil? ? 
+            f.template.content_tag(:span, "No Image Yet") : 
+            f.template.image_tag(f.object.avatar.url(:thumb)) 
+            f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
           f.input :email
           f.input :first_name
           f.input :last_name

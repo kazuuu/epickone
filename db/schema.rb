@@ -34,14 +34,19 @@ ActiveRecord::Schema.define(:version => 20121025165413) do
     t.integer  "order"
     t.integer  "iscorrect"
     t.integer  "question_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
+    t.string   "instruction"
     t.integer  "min_users"
     t.integer  "max_users"
     t.string   "localization"
@@ -72,8 +77,12 @@ ActiveRecord::Schema.define(:version => 20121025165413) do
     t.integer  "order"
     t.integer  "type"
     t.integer  "draw_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "user_sessions", :force => true do |t|

@@ -20,7 +20,7 @@
           <%= link_to(image_tag(col.avatar.url(:medium)), col) %>
         </div>
         <div>
-          <%= link_to "Join this draw", join_draw_path(col), :class => "btn btn-large btn-primary" %>
+          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
         </div>
       </div>  
       <% end%>
