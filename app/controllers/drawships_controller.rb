@@ -44,7 +44,9 @@ class DrawshipsController < ApplicationController
   # POST /drawships
   # POST /drawships.json
   def create
-    @drawship = current_user.drawships.build(:draw_id => params[:draw_id])
+    @drawship = current_user.drawships.build(:draw_id => params[:id])
+    
+    
     if @drawship.save
       flash[:notice] = "You have joined this draw."
       redirect_to :back

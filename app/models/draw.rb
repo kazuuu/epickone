@@ -2,13 +2,15 @@ class Draw < ActiveRecord::Base
   attr_accessible :description, :title, :avatar, :min_users, :max_users, :localization, :price, :date_due, :date_start, :user_id, :questions_attributes,
                   :avatar, :avatar_delete
                   
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'
   before_save :destroy_avatar?
   
-  belongs_to :users
+  belongs_to :user
     
   has_many :drawships, :dependent => :destroy
   has_many :users, :through => :drawships
+
+  has_many :carts
   
   has_many :questions
   accepts_nested_attributes_for :questions, allow_destroy: true   

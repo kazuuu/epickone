@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
                   :first_name, 
                   :last_name, 
                   :document_number,
+                  :title,
                   :gender,
                   :birth_date,
                   :city,
@@ -24,10 +25,11 @@ class User < ActiveRecord::Base
   has_many :draws, :through => :drawships
   
   has_many :draws                 
+  has_many :credits
+  has_one :cart
                   
   before_save :destroy_avatar?
-  has_attached_file :avatar
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   
   acts_as_authentic do |c| 

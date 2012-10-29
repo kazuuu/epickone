@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025165413) do
+ActiveRecord::Schema.define(:version => 20121029023147) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -42,6 +42,32 @@ ActiveRecord::Schema.define(:version => 20121025165413) do
     t.datetime "updated_at",          :null => false
   end
 
+  create_table "cartitems", :force => true do |t|
+    t.integer  "draw_id"
+    t.decimal  "unit_price"
+    t.integer  "quantity"
+    t.string   "comment"
+    t.integer  "cart_id"
+    t.integer  "picked_number"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "carts", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "purchased_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "credits", :force => true do |t|
+    t.integer  "user_id"
+    t.decimal  "value"
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
@@ -66,9 +92,11 @@ ActiveRecord::Schema.define(:version => 20121025165413) do
   create_table "drawships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "draw_id"
-    t.integer  "picked_number"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "cart_id"
+    t.string   "comment"
+    t.integer  "picked_number", :limit => 255
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "questions", :force => true do |t|
@@ -99,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20121025165413) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "document_number"
+    t.string   "title"
     t.string   "gender"
     t.datetime "birth_date"
     t.string   "city"

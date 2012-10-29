@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :document_number
       t.string :gender
+      t.string :title
       t.datetime :birth_date
       t.string :city
       t.string :state

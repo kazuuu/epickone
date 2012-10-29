@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
   before_save :destroy_avatar?
   
   belongs_to :question
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'
   
   def avatar_delete
     @avatar_delete ||= "0"

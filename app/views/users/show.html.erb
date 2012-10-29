@@ -1,16 +1,29 @@
 <% provide(:title, @user.first_name) %>
 <p id="notice"><%= notice %></p>
+
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= image_tag @user.avatar.url(:thumb) %>
-        <%= @user.first_name %>
-      </h1>
-    </section>
-  </aside>
+  <div style="float:left;">
+    <div style="width:250px;height:500px;border-style:solid;border-width:1px;margin-top:0px;margin-right:20px;">
+    </div>
+  </div>
+  <div style="width:620px;float:left;"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab1" data-toggle="tab">My Details</a></li>
+      <li><a href="#tab2" data-toggle="tab">Order History</a></li>
+      <li><a href="#tab3" data-toggle="tab">Draw History</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+        <%= render 'users/details' %>  
+      </div>
+      <div class="tab-pane" id="tab2">  
+        <%= render 'users/orders' %>  
+      </div>
+      <div class="tab-pane" id="tab3">
+        <%= render 'users/draws' %>  
+      </div>
+    </div>
+  </div>
 </div>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
