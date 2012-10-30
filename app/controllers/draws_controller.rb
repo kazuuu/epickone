@@ -130,23 +130,15 @@ class DrawsController < ApplicationController
   end
 
   def pick_a_number
+    session[:draw_id] = params[:id]
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
     #@carts = current_user.carts.find(:all, :conditions => 'draw_id = ' + params[:id])
-    if current_user.cart.nil?
-      @cart = Cart.new
-      @cart.user_id = current_user.id
-      if !@cart.save
-        flash[:error] = "error!."
-        redirect_to root_path
-      end
-    else
-      @cart = current_user.cart
-    end
+    @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
     #@cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
-  def add_cart    
-    @cartitem = current_user.cart.cartitems.build(:draw_id => params[:id])
+  def add_cart
+    @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.quantity = 1
     @cartitem.unit_price = 1.50
     @cartitem.picked_number = params[:number]
@@ -156,9 +148,5 @@ class DrawsController < ApplicationController
       flash[:notice] = "error!."
       redirect_to pick_a_number_draw_path
     end
-  end  
-  def checkout
-    @cart = current_user.cart
-  end   
-  
+  end    
 end

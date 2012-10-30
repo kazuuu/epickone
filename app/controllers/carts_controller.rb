@@ -1,4 +1,8 @@
 class CartsController < InheritedResources::Base
+  def checkout
+    @cart = current_cart
+  end   
+
   def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
@@ -31,4 +35,6 @@ class CartsController < InheritedResources::Base
       end
     end
   end
+  
+  
 end

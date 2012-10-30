@@ -47,4 +47,31 @@ class ApplicationController < ActionController::Base
       return false
     end
   end  
+  def current_cart
+    if current_user    
+      if session[:cart_id]
+        @current_cart ||= current_user.carts.find(session[:cart_id])
+        session[:cart_id] = nil if @current_cart.purchased_at
+      else
+        session[:cart_id] = nil
+        @current_user.carts.each do |cart|
+          session[:cart_id] = cart.id if !cart.purchased_at
+          @current_cart = cart
+        end
+      end
+    
+      if session[:cart_id].nil?
+        @current_cart = current_user.carts.build()
+        if !@current_cart.save
+          flash[:notice] = "error!."
+          redirect_to pick_a_number_draw_path
+        end
+      
+        session[:cart_id] = @current_cart.id
+      end
+      @current_cart
+    end
+  end
+  
+
 end

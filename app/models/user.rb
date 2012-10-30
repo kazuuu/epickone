@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   
   has_many :draws                 
   has_many :credits
-  has_one :cart
+  has_many :carts
                   
   before_save :destroy_avatar?
   has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'

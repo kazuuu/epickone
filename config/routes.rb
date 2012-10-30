@@ -1,8 +1,4 @@
 Pickone::Application.routes.draw do
-  resources :cartitems
-
-  resources :carts
-
   resources :credits
 
   ActiveAdmin.routes(self)
@@ -21,9 +17,14 @@ Pickone::Application.routes.draw do
     post 'questions_check', :on => :member
     get 'pick_a_number', :on => :member
     get 'add_cart', :on => :member
-    get 'checkout', :on => :member
   end
   resources :users, :user_sessions
+
+  resources :carts do
+    get 'checkout', :on => :member
+  end
+  resources :cartitems
+  resources :payment_notifications
 
   root to: 'static_pages#home'
   match '/help',    to: 'static_pages#help'
