@@ -144,6 +144,7 @@ class DrawsController < ApplicationController
     @cartitem.picked_number = params[:number]
     if @cartitem.save
       redirect_to pick_a_number_draw_path
+      session[:cart_count] = current_cart.cartitems.count
     else
       flash[:notice] = "error!."
       redirect_to pick_a_number_draw_path

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user
+  helper_method :current_user, :cart_count, :current_cart
+  
   
   private
   
@@ -52,10 +53,12 @@ class ApplicationController < ActionController::Base
       if session[:cart_id]
         @current_cart ||= current_user.carts.find(session[:cart_id])
         session[:cart_id] = nil if @current_cart.purchased_at
+        session[:cart_count] = 0 if @current_cart.purchased_at
       else
         session[:cart_id] = nil
         @current_user.carts.each do |cart|
           session[:cart_id] = cart.id if !cart.purchased_at
+          session[:cart_count] = cart.cartitems.count if !cart.purchased_at
           @current_cart = cart
         end
       end
@@ -68,10 +71,9 @@ class ApplicationController < ActionController::Base
         end
       
         session[:cart_id] = @current_cart.id
+        session[:cart_count] = 0
       end
       @current_cart
     end
-  end
-  
-
+  end  
 end
