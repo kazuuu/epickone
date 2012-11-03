@@ -20,7 +20,11 @@
           <%= link_to(image_tag(col.avatar.url(:medium)), col) %>
         </div>
         <div>
-          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+          <% if  Time.now <= col.date_due %>
+            <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+          <% else %>
+            <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+          <% end %>
         </div>
       </div>  
       <% end%>

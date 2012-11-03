@@ -17,7 +17,6 @@ class UserSessionsController < ApplicationController
   # POST /user_sessions.xml
   def create
     @user_session = UserSession.new(params[:user_session])
-
     respond_to do |format|
       if @user_session.save
         format.html { redirect_to(root_path, :notice => 'Login Successful') }

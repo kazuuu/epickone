@@ -27,7 +27,7 @@
   </div>
 </div>
 <div style="display:block;">
-  <%= link_to "Go to Check out", checkout_cart_path, :class => "btn btn-large btn-primary" %>
+  <%= link_to "Go to Check out", checkout_cart_path(current_cart.id), :class => "btn btn-large btn-primary" %>
   <%= link_to "Try other prizes", root_path, :class => "btn btn-large btn-primary" %>  
 </div>
 
