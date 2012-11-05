@@ -20,10 +20,7 @@ class User < ActiveRecord::Base
                   :admin_flag,
                   :avatar,
                   :avatar_delete
-  
-  has_many :drawships, :dependent => :destroy
-  has_many :draws, :through => :drawships
-  
+    
   has_many :draws                 
   has_many :credits
   has_many :carts

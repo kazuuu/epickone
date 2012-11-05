@@ -7,18 +7,27 @@ class Draw < ActiveRecord::Base
   
   belongs_to :user
     
-  has_many :drawships, :dependent => :destroy
-  has_many :users, :through => :drawships
-
   has_many :carts
+  has_many :cartitems
   
   has_many :questions
   accepts_nested_attributes_for :questions, allow_destroy: true   
         
+  # presence
   validates :user_id, presence: true  
   validates :title, presence: true
-  validates :title, :length => { :maximum => 25 }
+  validates :avatar, presence: true
   validates :description, presence: true
+  validates :instruction, presence: true
+  validates :min_users, presence: true
+  validates :max_users, presence: true
+  validates :localization, presence: true
+  validates :price, presence: true
+  validates :min_users, presence: true
+  validates :min_users, presence: true
+
+
+  validates :title, :length => { :maximum => 25 }
 
   #validates_attachment_presence :avatar
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']

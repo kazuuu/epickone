@@ -20,10 +20,6 @@ class CartsController < ApplicationController
   
   def create
     @cart = current_user.carts.build(params[:cart]) 
-    @cart.drawships.each do |i|
-      i.user_id=current_user.id
-      i.draw_id=params[:cart][:draw_id]
-    end
  
     respond_to do |format|
       if @cart.save

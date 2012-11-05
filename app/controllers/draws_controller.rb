@@ -90,18 +90,6 @@ class DrawsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def join    
-    @draw = Draw.find(params[:id])
-    @m = @draw.drawships.build(:user_id => current_user.id)
-    @m.picked_number = params[:number]
-      if @m.save
-        flash[:notice] = "You have joined!."
-         redirect_to root_path
-      else
-        flash[:notice] = "error!."
-         redirect_to pick_a_number_draw_path
-      end
-  end  
 
   def join_questions
     @draw = Draw.find(params[:id])

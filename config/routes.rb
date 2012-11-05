@@ -3,8 +3,6 @@ Pickone::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  resources :drawships
-
   resources :answers
 
   resources :questions

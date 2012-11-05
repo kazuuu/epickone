@@ -5,10 +5,10 @@ class CreateDraws < ActiveRecord::Migration
       t.string :title
       t.string :description
       t.string :instruction
-      t.integer :min_users
-      t.integer :max_users
+      t.integer :join_min
+      t.integer :join_max
       t.string :localization
-      t.decimal :price
+      t.decimal :price_original
       t.datetime :date_due
       t.datetime :date_start
       t.has_attached_file :avatar

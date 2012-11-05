@@ -5,13 +5,14 @@ ActiveAdmin.register Draw do
       f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 
       f.input :title
-      f.input :min_users
-      f.input :max_users
+      f.input :join_min
+      f.input :join_max
       f.input :localization
-      f.input :price
+      f.input :price_original
       f.input :date_due
       f.input :date_start
       f.input :description, :as => :text
+      f.input :instruction, :as => :text
       f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
     end
         
@@ -97,8 +98,8 @@ ActiveAdmin.register Draw do
       end
       
       div :class => "panel" do
-        h3 "Drawships"
-        if draw.drawships and draw.drawships.count > 0
+        h3 "Participants Completed"
+        if draw.cartitems and draw.cartitems.count > 0
           div :class => "panel_contents" do
             div :class => "attributes_table" do
               table do
@@ -107,20 +108,26 @@ ActiveAdmin.register Draw do
                     "user_id"
                   end
                   th do
+                    "purchased_at"
+                  end
+                  th do
                     "picked_number"
                   end
                 end
                 tbody do
-                  draw.drawships.each do |drawship|
+                  draw.cartitems.each do |cartitem|
                     div :class => "panel_contents" do
                       div :class => "attributes_table" do
                         table do
                           tr do
                             th do
-                              drawship.user_id
+                              cartitem.cart.user_id
                             end
                             th do
-                              drawship.picked_number
+                              cartitem.cart.purchased_at
+                            end
+                            th do
+                              cartitem.picked_number
                             end
                           end
                         end
@@ -132,7 +139,7 @@ ActiveAdmin.register Draw do
             end
           end
         else
-          h3 "No drawships available"
+          h3 "No cartitem available"
         end
 
       end

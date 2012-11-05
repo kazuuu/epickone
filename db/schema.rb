@@ -73,10 +73,10 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.string   "title"
     t.string   "description"
     t.string   "instruction"
-    t.integer  "min_users"
-    t.integer  "max_users"
+    t.integer  "join_min"
+    t.integer  "join_max"
     t.string   "localization"
-    t.decimal  "price"
+    t.decimal  "price_original"
     t.datetime "date_due"
     t.datetime "date_start"
     t.string   "avatar_file_name"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.integer  "draw_id"
     t.integer  "cart_id"
     t.string   "comment"
-    t.integer  "picked_number", :limit => 255
+    t.integer  "picked_number"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end

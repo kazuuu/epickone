@@ -9,7 +9,8 @@
           <li><%= link_to "Promos", '#' %></li>
           <% if current_user %> 
             <%
-              session[:cart_id] = current_cart if session[:cart_id].nil?
+              #session[:cart_id] = nil
+              @cart = current_cart if session[:cart_id].nil?
             %>
             <li><%= link_to "My Cart(" + session[:cart_count].to_s  + ")", checkout_cart_path(session[:cart_id]) %></li> 
             <li id="fat-menu" class="dropdown">
