@@ -1,2 +1,15 @@
 <div style="border-style:solid;border-width:1px;width:250px;height:250px;">
+<% @user.carts.each do |cart| %>
+    <% if cart.purchased_at != nil %>
+      <p>
+      Day: <%= cart.purchased_at %> <br>
+      <% cart.cartitems.each do |item| %>
+        <%= item.draw.title %> <%= item.picked_number %> <%= item.quantity %> <%= number_to_currency(item.unit_price) %><br>
+        
+      <% end %>
+      TOTAL: <%= number_to_currency(cart.total_price)%>
+      </p>
+    <% end %>
+    
+<% end %>
 </div>

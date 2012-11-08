@@ -6,6 +6,7 @@ class CreateCartitems < ActiveRecord::Migration
       t.integer  :quantity
       t.string   :comment
       t.integer  :cart_id
+      t.integer  :user_id
       t.integer  :picked_number
 
       t.timestamps

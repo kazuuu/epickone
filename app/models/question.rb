@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :description, :draw_id, :order, :title, :type, :answers_attributes, :avatar, :avatar_delete
+  attr_accessible :description, :draw_id, :position, :title, :style, :answers_attributes, :avatar, :avatar_delete
 
   before_save :destroy_avatar?
   

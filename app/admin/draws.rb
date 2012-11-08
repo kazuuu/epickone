@@ -4,11 +4,13 @@ ActiveAdmin.register Draw do
       f.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => f.object.avatar.nil? ? f.template.content_tag(:span, "No Image Yet") : f.template.image_tag(f.object.avatar.url(:thumb)) 
       f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 
+      f.input :join_type
       f.input :title
       f.input :join_min
       f.input :join_max
       f.input :localization
       f.input :price_original
+      f.input :price_ticket
       f.input :date_due
       f.input :date_start
       f.input :description, :as => :text
@@ -23,8 +25,8 @@ ActiveAdmin.register Draw do
       q.inputs "Question", :multipart => true do
         q.input :title         
         q.input :description         
-        q.input :order         
-        q.input :type         
+        q.input :position         
+        q.input :style         
         q.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => q.object.avatar.nil? ? q.template.content_tag(:span, "No Image Yet") : q.template.image_tag(q.object.avatar.url(:thumb)) 
         q.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
       end
@@ -35,10 +37,10 @@ ActiveAdmin.register Draw do
           a.input :_destroy, :as => :boolean, :label => "delete"
         end
         a.inputs "Answer", :multipart => true do
-          a.input :title
+          a.input :text
           a.input :description
           a.input :iscorrect
-          a.input :order
+          a.input :position
           a.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => a.object.avatar.nil? ? a.template.content_tag(:span, "No Image Yet") : a.template.image_tag(a.object.avatar.url(:thumb)) 
           a.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
         end
@@ -80,7 +82,7 @@ ActiveAdmin.register Draw do
                           question.answers.each do |answer|
                             tr do
                               td do
-                                answer.title
+                                answer.text
                               end
                             end
                           end

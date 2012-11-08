@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
                   :current_login_ip, 
                   :first_name, 
                   :last_name, 
-                  :document_number,
+                  :document,
                   :title,
                   :gender,
                   :birth_date,
@@ -20,10 +20,10 @@ class User < ActiveRecord::Base
                   :admin_flag,
                   :avatar,
                   :avatar_delete
-    
   has_many :draws                 
   has_many :credits
   has_many :carts
+  has_many :cartitems
                   
   before_save :destroy_avatar?
   has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'
@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
     c.require_password_confirmation = false
   end 
   
+  def total_credits(draw_id)
+    # convert to array so it doesn't try to do sum on database directly
+    if draw_id.nil?
+      credits.to_a.sum(&:value)    
+    else  
+      credits.find(:all, :conditions => "draw_id=" + draw_id.to_s).to_a.sum(&:value)
+    end
+  end
   
   def all_draws
     (self.draws + self.draw_owners).uniq

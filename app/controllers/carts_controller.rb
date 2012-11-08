@@ -1,7 +1,4 @@
 class CartsController < ApplicationController
-  def checkout
-    @cart = current_cart
-  end   
 
   def destroy
     @cart = Cart.find(params[:id])
@@ -84,6 +81,22 @@ class CartsController < ApplicationController
       end
     end
   end
-
-  
+  def payment_not_needed
+    @cart = Cart.find(params[:id])
+    
+    respond_to do |format|
+      if @cart.update_attribute(:purchased_at, Time.now)
+        session[:cart_id] = nil
+        session[:cart_count] = nil
+        format.html { redirect_to root_path, notice: 'Successful.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "payment_not_needed" }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
+  end  
+  def checkout
+    @cart = current_cart
+  end   
 end

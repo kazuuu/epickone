@@ -31,5 +31,4 @@ class Cart < ActiveRecord::Base
     end
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
-  
 end

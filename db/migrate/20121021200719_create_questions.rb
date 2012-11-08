@@ -3,8 +3,8 @@ class CreateQuestions < ActiveRecord::Migration
     create_table :questions do |t|
       t.string :title
       t.string :description
-      t.integer :order
-      t.integer :type
+      t.integer :position
+      t.string :style
       t.integer :draw_id
       t.has_attached_file :avatar
 

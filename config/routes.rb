@@ -10,16 +10,21 @@ Pickone::Application.routes.draw do
   get "account/account"
 
   resources :draws do
-    get 'join', :on => :member 
+    get 'results', :on => :member 
+    get 'join_promo', :on => :member 
+    get 'join_paid', :on => :member 
     get 'join_questions', :on => :member
     post 'questions_check', :on => :member
     get 'pick_a_number', :on => :member
+    get 'pick_a_number_promo', :on => :member
     get 'add_cart', :on => :member
   end
+  
   resources :users, :user_sessions
 
   resources :carts do
     get 'checkout', :on => :member
+    get 'payment_not_needed', :on => :member
   end
   resources :cartitems
   resources :payment_notifications

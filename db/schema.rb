@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "answers", :force => true do |t|
-    t.string   "title"
+    t.string   "text"
     t.string   "description"
-    t.integer  "order"
+    t.integer  "position"
     t.integer  "iscorrect"
     t.integer  "question_id"
     t.string   "avatar_file_name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.integer  "quantity"
     t.string   "comment"
     t.integer  "cart_id"
+    t.integer  "user_id"
     t.integer  "picked_number"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
 
   create_table "credits", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "draw_id"
     t.decimal  "value"
     t.string   "comment"
     t.datetime "created_at", :null => false
@@ -76,7 +78,9 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.integer  "join_min"
     t.integer  "join_max"
     t.string   "localization"
+    t.string   "join_type"
     t.decimal  "price_original"
+    t.decimal  "price_ticket"
     t.datetime "date_due"
     t.datetime "date_start"
     t.string   "avatar_file_name"
@@ -95,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.integer  "cart_id"
     t.string   "comment"
     t.integer  "picked_number"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "payment_notifications", :force => true do |t|
@@ -111,8 +115,8 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
   create_table "questions", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "order"
-    t.integer  "type"
+    t.integer  "position"
+    t.string   "style"
     t.integer  "draw_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -135,7 +139,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.string   "current_login_ip"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "document_number"
+    t.string   "document"
     t.string   "title"
     t.string   "gender"
     t.datetime "birth_date"

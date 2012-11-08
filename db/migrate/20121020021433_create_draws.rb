@@ -8,7 +8,9 @@ class CreateDraws < ActiveRecord::Migration
       t.integer :join_min
       t.integer :join_max
       t.string :localization
+      t.string :join_type
       t.decimal :price_original
+      t.decimal :price_ticket
       t.datetime :date_due
       t.datetime :date_start
       t.has_attached_file :avatar

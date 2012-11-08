@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top"> 
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Pk One", root_path, id: "logo" %> 
+      <%= link_to "ePick One", root_path, id: "logo" %> 
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
@@ -9,10 +9,14 @@
           <li><%= link_to "Promos", '#' %></li>
           <% if current_user %> 
             <%
-              #session[:cart_id] = nil
+            session[:cart_id] = nil
+            session[:free_credits] = nil
               @cart = current_cart if session[:cart_id].nil?
+              session[:free_credits] = current_user.total_credits(nil) if session[:free_credits].nil?
             %>
             <li><%= link_to "My Cart(" + session[:cart_count].to_s  + ")", checkout_cart_path(session[:cart_id]) %></li> 
+            <li><%= link_to "Free Credits(" + session[:free_credits].to_i.to_s  + ")", checkout_cart_path(session[:cart_id]) %></li> 
+
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
                 Account <b class="caret"></b>

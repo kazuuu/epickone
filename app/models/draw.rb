@@ -1,5 +1,5 @@
 class Draw < ActiveRecord::Base
-  attr_accessible :description, :title, :avatar, :min_users, :max_users, :localization, :price, :date_due, :date_start, :user_id, :questions_attributes,
+  attr_accessible :description, :instruction, :title, :avatar, :join_type, :join_min, :join_max, :localization, :price_original, :price_ticket, :date_due, :date_start, :user_id, :questions_attributes,
                   :avatar, :avatar_delete
                   
   has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'
@@ -18,14 +18,6 @@ class Draw < ActiveRecord::Base
   validates :title, presence: true
   validates :avatar, presence: true
   validates :description, presence: true
-  validates :instruction, presence: true
-  validates :min_users, presence: true
-  validates :max_users, presence: true
-  validates :localization, presence: true
-  validates :price, presence: true
-  validates :min_users, presence: true
-  validates :min_users, presence: true
-
 
   validates :title, :length => { :maximum => 25 }
 
@@ -33,7 +25,6 @@ class Draw < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
   default_scope order: 'draws.created_at DESC'
-
   def avatar_delete
     @avatar_delete ||= "0"
   end

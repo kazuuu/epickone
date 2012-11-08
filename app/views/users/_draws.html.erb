@@ -1,0 +1,19 @@
+<%
+  @cartitems_draws = current_user.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at !=''",  :group => "draw_id")
+ 
+ 
+  @cartitems_draws.each do |draw_cart| 
+%>
+
+    <b><%= draw_cart.draw.title%> </b><br>
+
+<%    
+    @cartitems = current_user.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at !='' and draw_id=" + draw_cart.draw.id.to_s)
+    
+    @cartitems.each do |item|
+      %>
+      <%=item.picked_number%> <br>
+    
+    
+      <% end %> 
+<% end %>
