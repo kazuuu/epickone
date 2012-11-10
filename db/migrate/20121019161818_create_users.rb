@@ -23,6 +23,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :phone_mobile
       t.boolean :admin_flag, :default => false
       t.has_attached_file :avatar
+
+      t.string  :facebook_uid
+      t.string  :twitter_uid
             
       t.timestamps
     end

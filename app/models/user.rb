@@ -46,16 +46,92 @@ class User < ActiveRecord::Base
   def all_draws
     (self.draws + self.draw_owners).uniq
   end  
-  def avatar_delete
-    @avatar_delete ||= "0"
-  end
-
-  def avatar_delete=(value)
-    @avatar_delete = value
-  end
-
-  private
-    def destroy_avatar?
-      self.avatar.clear if @avatar_delete == "1"
+    
+    
+    
+    
+# OMNIAUTH  GEM  
+    
+    def self.find_or_create_from_oauth(auth_hash)
+      provider = auth_hash["provider"]
+      uid = auth_hash["uid"]
+      case provider
+        when 'facebook'
+          if user = self.find_by_email(auth_hash["info"]["email"])
+            user.update_user_from_facebook(auth_hash)
+            return user
+          elsif user = self.find_by_facebook_uid(uid)
+            return user
+          else
+            return self.create_user_from_facebook(auth_hash)
+          end
+        when 'twitter'
+          if user = self.find_by_twitter_uid(uid)
+            return user
+          else
+            return self.create_user_from_twitter(auth_hash)
+          end
+      end
     end
+
+    def self.create_user_from_twitter(auth_hash)
+      self.create({
+        :twitter_uid => auth_hash["uid"],
+        :name => auth_hash["info"]["name"],
+        :avatar_url => auth_hash["info"]["image"],
+        :crypted_password => "twitter",
+        :password_salt => "twitter",
+        :persistence_token => "twitter"
+      })
+
+    end
+
+    def self.create_user_from_facebook(auth_hash)
+      self.create({
+        :facebook_uid => auth_hash["uid"],
+        :name => auth_hash["info"]["name"],
+        :avatar_url => auth_hash["info"]["image"],
+        :email => auth_hash["info"]["email"],
+        :crypted_password => "facebook",
+        :password_salt => "facebook",
+        :persistence_token => "facebook"
+      })
+    end
+
+    def image
+      avatar_url || "http://placehold.it/48x48"
+    end
+
+    def password_required?
+      facebook_uid.blank? && twitter_uid.blank?
+    end
+
+    def email_available?
+      twitter_uid.blank?
+    end
+
+    def update_user_from_facebook(auth_hash)
+      self.update_attributes({
+        :facebook_uid => auth_hash["uid"],
+        :avatar_url => auth_hash["info"]["image"]
+      })
+    end
+# End Omniauth
+
+# Paperclip for Images
+    
+    def avatar_delete
+      @avatar_delete ||= "0"
+    end
+
+    def avatar_delete=(value)
+      @avatar_delete = value
+    end
+
+    private
+      def destroy_avatar?
+        self.avatar.clear if @avatar_delete == "1"
+      end
+# End Paperclip for Images
+    
 end

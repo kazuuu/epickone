@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "facebook_uid"
+    t.string   "twitter_uid"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end

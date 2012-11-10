@@ -10,7 +10,8 @@ gem 'paperclip', '~> 3.0'
 gem 'activeadmin'
 gem 'country-select', '1.1.1'
 #gem 'formtastic', '2.2.1'
-
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
