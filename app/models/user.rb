@@ -26,7 +26,18 @@ class User < ActiveRecord::Base
   has_many :cartitems
                   
   before_save :destroy_avatar?
-  has_attached_file :avatar, :styles => { :medium => "250x250>", :thumb => "100x100>" }, :default_url => '/images/missing.png'
+  has_attached_file :avatar, 
+                    :styles => { :medium => "250x250>", :thumb => "100x100>" }, 
+                    :default_url => '/images/missing.png',
+                    :storage => :s3,
+                    :bucket => 'pkone',
+                    :s3_credentials => {
+                    :access_key_id => 'AKIAJX6GVL3O5HFMIBJA',
+                          :secret_access_key => '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'
+                        } 
+                    
+                    
+                    
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   
   acts_as_authentic do |c| 
