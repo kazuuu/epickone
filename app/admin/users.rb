@@ -21,6 +21,8 @@ ActiveAdmin.register User do
           f.input :phone_mobile
           f.input :admin_flag
           f.input :password
+          f.input :facebook_uid
+          f.input :twitter_uid
         end
         f.buttons
       end    

@@ -19,7 +19,9 @@ class User < ActiveRecord::Base
                   :phone_mobile,
                   :admin_flag,
                   :avatar,
-                  :avatar_delete
+                  :avatar_delete,
+                  :facebook_uid,
+                  :twitter_uid
   has_many :draws                 
   has_many :credits
   has_many :carts
