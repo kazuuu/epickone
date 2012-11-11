@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
     c.login_field = :email 
     c.require_password_confirmation = false
   end 
+
+  validates :password, :presence => { :if => :password_required? }, :confirmation => true
+  validates :email, :presence => { :if => :email_available?}, :uniqueness => true, :confirmation => true
+
+
   
   def total_credits(draw_id)
     # convert to array so it doesn't try to do sum on database directly
