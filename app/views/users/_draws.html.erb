@@ -1,5 +1,5 @@
 <%
-  @cartitems_draws = current_user.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at Is Null",  :group => "draw_id")
+  @cartitems_draws = current_user.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at Is Null", :select => "draw_id", :group => "draw_id")
  
  
   @cartitems_draws.each do |draw_cart| 
