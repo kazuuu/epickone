@@ -7,7 +7,7 @@ gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'paperclip', '~> 3.0'
-gem 'aws-s3'
+gem "aws-sdk", "~> 1.7.1"
 gem 'activeadmin'
 gem 'country-select', '1.1.1'
 #gem 'formtastic', '2.2.1'
