@@ -40,10 +40,10 @@ class User < ActiveRecord::Base
                     
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   
-  #acts_as_authentic do |c| 
-  #  c.login_field = :email 
-  #  c.require_password_confirmation = false
-  #end 
+  acts_as_authentic do |c| 
+    c.login_field = :email 
+    c.require_password_confirmation = false
+  end 
   
   def total_credits(draw_id)
     # convert to array so it doesn't try to do sum on database directly
