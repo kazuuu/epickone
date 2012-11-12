@@ -111,10 +111,10 @@ class User < ActiveRecord::Base
         :last_name => auth_hash["info"]["last_name"],
         :avatar_url => auth_hash["info"]["image"],
         :email => auth_hash["info"]["email"],
-        :birth_date   = Date.strptime(auth_hash.fetch('extra', {}).fetch('user_hash', {})['birthday'],'%m/%d/%Y') if auth_hash.fetch('extra', {}).fetch('user_hash', {})['birthday'],
         :crypted_password => "facebook",
         :password_salt => "facebook",
         :persistence_token => "facebook"
+        :birth_date   => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') if auth_hash["info"]["birthday"]
       })
     end
 
@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
         :avatar_url => auth_hash["info"]["image"],
         :first_name => auth_hash["info"]["first_name"],
         :last_name => auth_hash["info"]["last_name"],
-        :birth_date   = Date.strptime(auth_hash.fetch('extra', {}).fetch('user_hash', {})['birthday'],'%m/%d/%Y') if auth_hash.fetch('extra', {}).fetch('user_hash', {})['birthday'],
+        :birth_date   => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') if auth_hash["info"]["birthday"]
       })
     end
 # End Omniauth
