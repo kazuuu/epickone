@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
         :crypted_password => "facebook",
         :password_salt => "facebook",
         :persistence_token => "facebook",
-        :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
+        :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') 
       })
     end
 
