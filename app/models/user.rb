@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
     def update_user_from_facebook(auth_hash)
       self.update_attributes({
         :facebook_uid => auth_hash["uid"],
-        :avatar_url => auth_hash["info"]["image"]
+        :avatar_url => auth_hash["info"]["image"],
         :first_name => auth_hash["info"]["first_name"],
         :last_name => auth_hash["info"]["last_name"],
       })
