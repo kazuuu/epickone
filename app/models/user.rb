@@ -107,7 +107,8 @@ class User < ActiveRecord::Base
     def self.create_user_from_facebook(auth_hash)
       self.create({
         :facebook_uid => auth_hash["uid"],
-        :name => auth_hash["info"]["name"],
+        :first_name => auth_hash["info"]["first_name"],
+        :last_name => auth_hash["info"]["last_name"],
         :avatar_url => auth_hash["info"]["image"],
         :email => auth_hash["info"]["email"],
         :crypted_password => "facebook",
@@ -132,6 +133,8 @@ class User < ActiveRecord::Base
       self.update_attributes({
         :facebook_uid => auth_hash["uid"],
         :avatar_url => auth_hash["info"]["image"]
+        :first_name => auth_hash["info"]["first_name"],
+        :last_name => auth_hash["info"]["last_name"],
       })
     end
 # End Omniauth
