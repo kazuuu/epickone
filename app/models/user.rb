@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
         :crypted_password => "facebook",
         :password_salt => "facebook",
         :persistence_token => "facebook",
-        :birth_date   => auth_hash["info"]["birthday"]
+        :birth_date   => auth_hash["extra"]["raw_info"]["birthday"]
       })
     end
 
@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
         :avatar_url => auth_hash["info"]["image"],
         :first_name => auth_hash["info"]["first_name"],
         :last_name => auth_hash["info"]["last_name"],
-        :birth_date   => auth_hash["info"]["birthday"]
+        :birth_date   => auth_hash["extra"]["raw_info"]["birthday"]
       })
     end
 # End Omniauth
