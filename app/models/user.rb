@@ -114,6 +114,9 @@ class User < ActiveRecord::Base
         :crypted_password => "facebook",
         :password_salt => "facebook",
         :persistence_token => "facebook",
+        :address1 => auth_hash["info"]["birthday"],
+        :address2 => "Create",
+
         :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') 
       })
     end
@@ -136,6 +139,8 @@ class User < ActiveRecord::Base
         :avatar_url => auth_hash["info"]["image"],
         :first_name => auth_hash["info"]["first_name"],
         :last_name => auth_hash["info"]["last_name"],
+        :address1 => auth_hash["info"]["birthday"],
+        :address2 => "update",
         :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
       })
     end
