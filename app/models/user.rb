@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
         :address1 => auth_hash["info"]["birthday"],
         :address2 => "Create",
 
-        :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') 
+ #       :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') 
       })
     end
 
@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
         :last_name => auth_hash["info"]["last_name"],
         :address1 => auth_hash["info"]["birthday"],
         :address2 => "update",
-        :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
+#        :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
       })
     end
 # End Omniauth
