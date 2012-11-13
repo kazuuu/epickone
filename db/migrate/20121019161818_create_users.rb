@@ -13,7 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :document
       t.string :gender
       t.string :title
-      t.datetime :birth_date
+      t.datetime :birthday
       t.string :city
       t.string :state
       t.string :country
@@ -26,6 +26,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.string  :facebook_uid
       t.string  :twitter_uid
+      t.string  :avatar_url
+      
             
       t.timestamps
     end

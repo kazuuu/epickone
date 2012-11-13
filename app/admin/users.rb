@@ -11,7 +11,7 @@ ActiveAdmin.register User do
           f.input :document
           f.input :title
           f.input :gender
-          f.input :birth_date
+          f.input :birthday
           f.input :city
           f.input :state
           f.input :country

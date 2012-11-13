@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
                   :document,
                   :title,
                   :gender,
-                  :birth_date,
+                  :birthday,
                   :city,
                   :state,
                   :country,
@@ -47,8 +47,6 @@ class User < ActiveRecord::Base
     c.require_password_confirmation = false
   end 
 
-  validates :password, :presence => { :if => :password_required? }, :confirmation => true
-  validates :email, :presence => { :if => :email_available?}, :uniqueness => true, :confirmation => true
 
 
   
@@ -69,57 +67,68 @@ class User < ActiveRecord::Base
     
     
 # OMNIAUTH  GEM  
-    
-    def self.find_or_create_from_oauth(auth_hash)
-      provider = auth_hash["provider"]
-      uid = auth_hash["uid"]
-      case provider
-        when 'facebook'
-          if user = self.find_by_email(auth_hash["info"]["email"])
-            user.update_user_from_facebook(auth_hash)
-            return user
-          elsif user = self.find_by_facebook_uid(uid)
-            return user
-          else
-            return self.create_user_from_facebook(auth_hash)
-          end
-        when 'twitter'
-          if user = self.find_by_twitter_uid(uid)
-            return user
-          else
-            return self.create_user_from_twitter(auth_hash)
-          end
-      end
+  def self.find_or_create_from_oauth(auth_hash)
+    provider = auth_hash["provider"]
+    uid = auth_hash["uid"]
+    case provider
+      when 'facebook'
+        if user = self.find_by_email(auth_hash["info"]["email"])
+          user.update_user_from_facebook(auth_hash)
+          return user
+        elsif user = self.find_by_facebook_uid(uid)
+          return user
+        else
+          return self.create_user_from_facebook(auth_hash)
+        end
+      when 'twitter'
+        if user = self.find_by_twitter_uid(uid)
+          return user
+        else
+          return self.create_user_from_twitter(auth_hash)
+        end
     end
+  end
 
-    def self.create_user_from_twitter(auth_hash)
-      self.create({
-        :twitter_uid => auth_hash["uid"],
-        :name => auth_hash["info"]["name"],
-        :avatar_url => auth_hash["info"]["image"],
-        :crypted_password => "twitter",
-        :password_salt => "twitter",
-        :persistence_token => "twitter"
-      })
+  def self.create_user_from_twitter(auth_hash)
+    self.create({
+      :twitter_uid => auth_hash["uid"],
+      :name => auth_hash["info"]["name"],
+      :avatar_url => auth_hash["info"]["image"],
+      :crypted_password => "twitter",
+      :password_salt => "twitter",
+      :persistence_token => "twitter"
+    })
+  end
 
-    end
+  def self.create_user_from_facebook(auth_hash)
+    self.create({
+     :address1 => auth_hash["info"]["birthday"],
+     :address2 => "Create",
 
-    def self.create_user_from_facebook(auth_hash)
-      self.create({
-        :facebook_uid => auth_hash["uid"],
-        :first_name => auth_hash["info"]["first_name"],
-        :last_name => auth_hash["info"]["last_name"],
-        :avatar_url => auth_hash["info"]["image"],
-        :email => auth_hash["info"]["email"],
-        :crypted_password => "facebook",
-        :password_salt => "facebook",
-        :persistence_token => "facebook",
-        :address1 => auth_hash["info"]["birthday"],
-        :address2 => "Create",
+      #       :birthday => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') ,
+      :facebook_uid => auth_hash["uid"],
+      :first_name => auth_hash["info"]["first_name"],
+      :last_name => auth_hash["info"]["last_name"],
+      :avatar_url => auth_hash["info"]["image"],
+      :email => auth_hash["info"]["email"],
+      :crypted_password => "facebook",
+      :password_salt => "facebook",
+      :persistence_token => "facebook"
+    })
+  end
+  def update_user_from_facebook(auth_hash)
+    self.update_attributes({
+      :address1 => auth_hash["info"]["birthday"],
+      :address2 => "update",
+#        :birthday => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
 
- #       :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') 
-      })
-    end
+
+      :facebook_uid => auth_hash["uid"],
+      :avatar_url => auth_hash["info"]["image"],
+      :first_name => auth_hash["info"]["first_name"],
+      :last_name => auth_hash["info"]["last_name"],
+        })
+  end
 
     def image
       avatar_url || "http://placehold.it/48x48"
@@ -133,17 +142,6 @@ class User < ActiveRecord::Base
       twitter_uid.blank?
     end
 
-    def update_user_from_facebook(auth_hash)
-      self.update_attributes({
-        :facebook_uid => auth_hash["uid"],
-        :avatar_url => auth_hash["info"]["image"],
-        :first_name => auth_hash["info"]["first_name"],
-        :last_name => auth_hash["info"]["last_name"],
-        :address1 => auth_hash["info"]["birthday"],
-        :address2 => "update",
-#        :birth_date => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
-      })
-    end
 # End Omniauth
 
 # Paperclip for Images

@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.string   "document"
     t.string   "title"
     t.string   "gender"
-    t.datetime "birth_date"
+    t.datetime "birthday"
     t.string   "city"
     t.string   "state"
     t.string   "country"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.datetime "avatar_updated_at"
     t.string   "facebook_uid"
     t.string   "twitter_uid"
+    t.string   "avatar_url"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
