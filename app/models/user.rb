@@ -102,8 +102,8 @@ class User < ActiveRecord::Base
 
   def self.create_user_from_facebook(auth_hash)
     self.create({
-     :address1 => auth_hash["info"]["birthday"],
-     :address2 => "Create",
+      :address1 => auth_hash["extra"]["raw_info"]["birthday"],
+      :address2 => "Create",
 
       #       :birthday => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') ,
       :facebook_uid => auth_hash["uid"],
@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   end
   def update_user_from_facebook(auth_hash)
     self.update_attributes({
-      :address1 => auth_hash["info"]["birthday"],
+      :address1 => auth_hash["extra"]["raw_info"]["birthday"],
       :address2 => "update",
 #        :birthday => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
 
