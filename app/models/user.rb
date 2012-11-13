@@ -101,11 +101,14 @@ class User < ActiveRecord::Base
   end
 
   def self.create_user_from_facebook(auth_hash)
+    
+    
+    
+    
     self.create({
       :address1 => auth_hash["extra"]["raw_info"]["birthday"],
       :address2 => "Create",
-
-      #       :birthday => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y') ,
+      :birthday => Date.strptime("",'%m/%d/%Y'), 
       :facebook_uid => auth_hash["uid"],
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
@@ -120,7 +123,7 @@ class User < ActiveRecord::Base
     self.update_attributes({
       :address1 => auth_hash["extra"]["raw_info"]["birthday"],
       :address2 => "update",
-#        :birthday => Date.strptime(auth_hash["info"]["birthday"],'%m/%d/%Y')
+      :birthday => Date.strptime("",'%m/%d/%Y'), 
 
 
       :facebook_uid => auth_hash["uid"],
