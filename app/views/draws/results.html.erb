@@ -4,12 +4,8 @@
   @numbers.each do |num| %>
     <div class=row>
       <%
-#        conditions = []
- #       conditions << [ "picked_number = ?", num.to_s ]
-  #      conditions << [ "carts.purchased_at != ?", ""]
-#        @cartitems = @draw.cartitems.find(:all, :joins => :cart, :conditions => { :picked_number => num })
  
- @cartitems = @draw.cartitems.find(:all, :joins => :cart, :conditions => ['picked_number = ? and carts.purchased_at != ?', num.to_s, ""])
+ @cartitems = @draw.cartitems.find(:all, :joins => :cart, :conditions => ['picked_number = ? and carts.purchased_at is not null', num.to_s])
         
         if @cartitems.count > 0 %>
           <b><%= num %> (<%=@cartitems.count%>) 
