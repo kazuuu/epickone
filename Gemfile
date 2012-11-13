@@ -10,7 +10,7 @@ gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
 gem 'activeadmin'
 gem 'country-select', '1.1.1'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 
 # Bundle edge Rails instead:
