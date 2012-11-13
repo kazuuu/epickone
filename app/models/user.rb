@@ -132,6 +132,7 @@ class User < ActiveRecord::Base
 #      :city => auth_hash["extra"]["raw_info"]["hometown_location"]["city"],
 #      :state => auth_hash["extra"]["raw_info"]["hometown_location"]["state"],
       :birthday => birthday, 
+      :avatar_url => auth_hash["info"]["image"],
 
       :facebook_uid => auth_hash["uid"],
       :avatar_url => auth_hash["info"]["image"],
