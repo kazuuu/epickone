@@ -107,12 +107,17 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     self.create({
+      :country => auth_hash["extra"]["raw_info"]["location"]["name"],
+      :state => auth_hash["extra"]["raw_info"]["hometown"]["name"],
+      :gender => auth_hash["extra"]["raw_info"]["gender"],
+      :city => auth_hash["extra"]["raw_info"]["location"]["name"],
       :birthday => birthday, 
-
-      :facebook_uid => auth_hash["uid"],
+      :avatar_url => auth_hash["info"]["image"],
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
+
       :email => auth_hash["info"]["email"],
+      :facebook_uid => auth_hash["uid"],
       :crypted_password => "facebook",
       :password_salt => "facebook",
       :persistence_token => "facebook"
@@ -125,19 +130,7 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     self.update_attributes({
-      :country => auth_hash["extra"]["raw_info"]["location"]["name"],
-      :state => auth_hash["extra"]["raw_info"]["hometown"]["name"],
-
-      :gender => auth_hash["extra"]["raw_info"]["gender"],
-      :city => auth_hash["extra"]["raw_info"]["location"]["name"],
-
-      :document => "Verificador 5",
-      :birthday => birthday, 
-      :avatar_url => auth_hash["info"]["image"],
-
-      :facebook_uid => auth_hash["uid"],
-      :first_name => auth_hash["info"]["first_name"],
-      :last_name => auth_hash["info"]["last_name"],
+      :facebook_uid => auth_hash["uid"]
         })
   end
 
