@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
       :state => auth_hash["extra"]["raw_info"]["hometown"]["name"],
 
       :gender => auth_hash["extra"]["raw_info"]["gender"],
-      :city => auth_hash["extra"]["raw_info"]["current_location"],
+      :city => auth_hash["extra"]["raw_info"]["location"]["name"],
 
       :document => "Verificador 5",
       :birthday => birthday, 
