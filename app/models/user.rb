@@ -107,8 +107,7 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     self.create({
-      :address1 => auth_hash["extra"]["raw_info"]["birthday"],
-      :address2 => "Create",
+      :country => auth_hash["info"]["locale"],
       :birthday => birthday, 
 
       :facebook_uid => auth_hash["uid"],
@@ -128,8 +127,7 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     self.update_attributes({
-      :address1 => auth_hash["extra"]["raw_info"]["birthday"],
-      :address2 => "update",
+      :country => auth_hash["info"]["locale"],
       :birthday => birthday, 
 
       :facebook_uid => auth_hash["uid"],
