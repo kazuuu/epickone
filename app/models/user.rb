@@ -107,14 +107,13 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     self.create({
-      :country => auth_hash["info"]["locale"],
       :birthday => birthday, 
 
       :facebook_uid => auth_hash["uid"],
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
-      :avatar_url => auth_hash["info"]["image"],
       :email => auth_hash["info"]["email"],
+      :avatar_url => auth_hash["info"]["image"],
       :crypted_password => "facebook",
       :password_salt => "facebook",
       :persistence_token => "facebook"
