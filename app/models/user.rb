@@ -127,7 +127,7 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     self.update_attributes({
-      :country => auth_hash["extra"]["raw_info"]["location"],
+      :country => auth_hash["extra"]["raw_info"]["location"]["name"],
       :birthday => birthday, 
 
       :facebook_uid => auth_hash["uid"],
