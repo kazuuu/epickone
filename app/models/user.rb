@@ -131,12 +131,12 @@ class User < ActiveRecord::Base
 
 #      :city => auth_hash["extra"]["raw_info"]["current_location"]["city"],
 
-      :document => "Verificador 2",
+      :document => "Verificador 3",
       :birthday => birthday, 
       :avatar_url => auth_hash["info"]["image"],
 
       :facebook_uid => auth_hash["uid"],
-      :avatar_url => auth_hash["info"]["image"],
+      :avatar_url => auth_hash["info"]["picture"],
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
         })
