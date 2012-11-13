@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
   end
 
   create_table "credits", :force => true do |t|
-    t.integer  "user_id"
     t.integer  "draw_id"
+    t.integer  "user_id"
     t.decimal  "value"
     t.string   "comment"
     t.datetime "created_at", :null => false
@@ -92,16 +92,6 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
   end
 
   add_index "draws", ["user_id", "created_at"], :name => "index_draws_on_user_id_and_created_at"
-
-  create_table "drawships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "draw_id"
-    t.integer  "cart_id"
-    t.string   "comment"
-    t.integer  "picked_number"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
 
   create_table "payment_notifications", :force => true do |t|
     t.text     "params"
@@ -140,8 +130,8 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "document"
-    t.string   "title"
     t.string   "gender"
+    t.string   "title"
     t.datetime "birthday"
     t.string   "city"
     t.string   "state"

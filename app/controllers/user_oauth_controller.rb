@@ -1,6 +1,6 @@
 class UserOauthController < ApplicationController
   def create
-    @current_user = User.find_or_create_from_oauth(auth_hash)
+    @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
     if current_user
       UserSession.create(current_user, true)
       redirect_to root_url, :notice => "Logged in"

@@ -68,11 +68,11 @@ class User < ActiveRecord::Base
     
 # OMNIAUTH  GEM  
   def self.find_or_create_from_oauth(auth_hash)
-    provider = auth_hash["provider"]
-    uid = auth_hash["uid"]
+    provider = auth_hash.provider
+    uid = auth_hash.uid
     case provider
       when 'facebook'
-        if user = self.find_by_email(auth_hash["info"]["email"])
+        if user = self.find_by_email(auth_hash.info.email)
           user.update_user_from_facebook(auth_hash)
           return user
         elsif user = self.find_by_facebook_uid(uid)
@@ -101,36 +101,36 @@ class User < ActiveRecord::Base
   end
 
   def self.create_user_from_facebook(auth_hash)
-    if auth_hash["extra"]["raw_info"]["birthday"] != ""
-      birthday = Date.strptime(auth_hash["extra"]["raw_info"]["birthday"],'%m/%d/%Y')
+    if auth_hash.extra.raw_info.birthday != ""
+      birthday = Date.strptime(auth_hash.extra.raw_info.birthday,'%m/%d/%Y')
     else
       birthday = nil
     end
     self.create({
-      :country => auth_hash["extra"]["raw_info"]["location"]["name"],
-      :state => auth_hash["extra"]["raw_info"]["hometown"]["name"],
-      :gender => auth_hash["extra"]["raw_info"]["gender"],
-      :city => auth_hash["extra"]["raw_info"]["location"]["name"],
+      :country => auth_hash.extra.raw_info.location.name,
+      :state => auth_hash.extra.raw_info.hometown.name,
+      :gender => auth_hash.extra.gender,
+      :city => auth_hash.extra.raw_info.location.name,
       :birthday => birthday, 
-      :avatar_url => auth_hash["info"]["image"],
-      :first_name => auth_hash["info"]["first_name"],
-      :last_name => auth_hash["info"]["last_name"],
+      :avatar_url => auth_hash.info.image,
+      :first_name => auth_hash.info.first_name,
+      :last_name => auth_hash.info.last_name,
 
-      :email => auth_hash["info"]["email"],
-      :facebook_uid => auth_hash["uid"],
+      :email => auth_hash.info.email,
+      :facebook_uid => auth_hash.uid,
       :crypted_password => "facebook",
       :password_salt => "facebook",
       :persistence_token => "facebook"
     })
   end
   def update_user_from_facebook(auth_hash)
-    if auth_hash["extra"]["raw_info"]["birthday"] != ""
-      birthday = Date.strptime(auth_hash["extra"]["raw_info"]["birthday"],'%m/%d/%Y')
+    if auth_hash.extra.raw_info.birthday != ""
+      birthday = Date.strptime(auth_hash.extra.raw_info.birthday,'%m/%d/%Y')
     else
       birthday = nil
     end
     self.update_attributes({
-      :facebook_uid => auth_hash["uid"]
+      :facebook_uid => auth_hash.uid
         })
   end
 
@@ -147,6 +147,21 @@ class User < ActiveRecord::Base
     end
 
 # End Omniauth
+
+# Koala gem
+
+def facebook
+  @facebook ||= Koala::Facebook::API.new(oauth_token)
+  block_given? ? yield(@facebook) : @facebook
+rescue Koala::Facebook::APIError => e
+  logger.info e.to_s
+  nil
+end
+
+def friends_count
+  facebook { |fb| fb.get_connection("me", "friends").size }
+end
+# End Koala
 
 # Paperclip for Images
     
