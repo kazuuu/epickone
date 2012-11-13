@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
     end
     self.update_attributes({
       :country => auth_hash["extra"]["raw_info"]["location"]["name"],
-      :city => auth_hash["extra"]["raw_info"]["location"]["name"],
+      :city => auth_hash["extra"]["raw_info"]["hometown_location"]["city"],
       :state => auth_hash["extra"]["raw_info"]["hometown"]["name"],
  
       :birthday => birthday, 
