@@ -10,7 +10,7 @@
         </p>
         <p>
           <b>Joined:</b>
-          <%= @draw.cartitems.find(:all, :joins => :cart, :conditions => ["carts.purchased_at != ?", ""]).count %>
+          <%= @draw.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at is null").count %>
         </p>
         
       </section>
