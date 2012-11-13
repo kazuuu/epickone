@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
       :avatar_url => auth_hash["info"]["image"],
 
       :facebook_uid => auth_hash["uid"],
-      :avatar_url => auth_hash["info"]["picture"],
+      :avatar_url => auth_hash["info"]["pic_small"],
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
         })
