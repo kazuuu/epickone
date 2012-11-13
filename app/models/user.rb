@@ -113,7 +113,6 @@ class User < ActiveRecord::Base
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
       :email => auth_hash["info"]["email"],
-      :avatar_url => auth_hash["info"]["image"],
       :crypted_password => "facebook",
       :password_salt => "facebook",
       :persistence_token => "facebook"
@@ -129,14 +128,13 @@ class User < ActiveRecord::Base
       :country => auth_hash["extra"]["raw_info"]["location"]["name"],
       :state => auth_hash["extra"]["raw_info"]["hometown"]["name"],
 
-#      :city => auth_hash["extra"]["raw_info"]["current_location"]["city"],
+      :city => auth_hash["extra"]["raw_info"]["current_location"]["country"],
 
-      :document => "Verificador 3",
+      :document => "Verificador 4",
       :birthday => birthday, 
       :avatar_url => auth_hash["info"]["image"],
 
       :facebook_uid => auth_hash["uid"],
-      :avatar_url => auth_hash["info"]["pic_small"],
       :first_name => auth_hash["info"]["first_name"],
       :last_name => auth_hash["info"]["last_name"],
         })
