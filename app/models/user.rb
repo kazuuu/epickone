@@ -167,7 +167,7 @@ def friends_count
   facebook { |fb| fb.get_connection("me", "friends").size }
 end
 
-def share_join(user_id, draw_url)
+def self.share_join(user_id, draw_url)
   user = User.find(user_id)
   user.facebook.put_connections("me", "epickone:joined", :game => "http://www.epickone.com/draws/1")
 #  user.facebook.put_connections("me", "feed", :message => "I am writing on my wall!")
