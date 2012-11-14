@@ -150,6 +150,8 @@ class DrawsController < ApplicationController
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
   def add_cart
+    face_publish
+    
     @draw = Draw.find(params[:id])
     @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.user_id = current_user.id
@@ -197,5 +199,12 @@ class DrawsController < ApplicationController
     @draw = Draw.find(params[:id])
     @max_number = @draw.cartitems.maximum(:picked_number)
     @numbers = (1..@max_number)
+  end
+  def face_publish
+    @draw = Draw.find(params[:id])
+       if current_user
+         current_user.facebook.put_connections("me", "epickone:join", game: draw_url(@draw))
+       end
+       redirect_to root_path, notice: "Review has been created."
   end
 end
