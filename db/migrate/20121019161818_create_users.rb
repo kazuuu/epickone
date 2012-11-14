@@ -25,7 +25,9 @@ class CreateUsers < ActiveRecord::Migration
       t.has_attached_file :avatar
 
       t.string  :facebook_uid
-      t.string  :twitter_uid
+      t.string  :oauth_token
+      t.datetime :oauth_expires_at
+      t.string   :provider    
       t.string  :avatar_url
       
             
