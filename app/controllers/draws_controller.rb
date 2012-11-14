@@ -141,7 +141,7 @@ class DrawsController < ApplicationController
     session[:draw_id] = params[:id]
     @draw = Draw.find(params[:id])
     
-    User.share_join
+    current_user.share_join(current_user.id, draw_url(@draw))
     
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
