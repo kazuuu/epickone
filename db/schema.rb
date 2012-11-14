@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(:version => 20121029144441) do
     t.string   "facebook_uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.string   "provider"    
+    t.string   "provider"
     t.string   "avatar_url"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
