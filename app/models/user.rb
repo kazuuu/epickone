@@ -21,7 +21,9 @@ class User < ActiveRecord::Base
                   :avatar,
                   :avatar_delete,
                   :facebook_uid,
-                  :twitter_uid
+                  :oauth_token,
+                  :oauth_expires_at,
+                  :provider
   has_many :draws                 
   has_many :credits
   has_many :carts
