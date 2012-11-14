@@ -139,6 +139,7 @@ class DrawsController < ApplicationController
 
   def pick_a_number
     session[:draw_id] = params[:id]
+    @draw = Draw.find(params[:id])
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
