@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
     end   
     
     self.create({
-      :city => current_city
+      :city => current_city,
 #      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
 #      :country => auth_hash.extra.fetch('location', []).fetch('name', nil),
       :gender => auth_hash.extra.gender,
