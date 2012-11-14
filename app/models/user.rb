@@ -169,7 +169,7 @@ end
 
 def self.share_review(user_id, draw_url)
   user = User.find(user_id)
-  user.facebook.put_connections("me", "epickone:join", game: "http://www.epickone.com/draws/1")
+  user.facebook.put_connections("me", "epickone.join", game: "http://www.epickone.com/draws/1")
 end
 
 # End Koala
