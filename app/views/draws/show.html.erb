@@ -1,11 +1,3 @@
-<% content_for :head do %>
-  <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
-  <%= tag :meta, property: "og:site_name", content: "ePick One" %>
-  <%= tag :meta, property: "og:type", content: "ePickOne:Game" %>
-  <%= tag :meta, property: "og:title", content: @draw.title %>
-  <%= tag :meta, property: "og:url", content: draw_url(@draw) %>
-  <%= tag :meta, property: "og:image", content: @draw.avatar.url(:thumb) %>
-<% end %>
 
 
 <p id="notice"><%= notice %></p>
