@@ -152,7 +152,7 @@ class DrawsController < ApplicationController
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
   def add_cart
-#    face_publish
+    face_publish
     
     @draw = Draw.find(params[:id])
     @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
