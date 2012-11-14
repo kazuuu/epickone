@@ -205,6 +205,6 @@ class DrawsController < ApplicationController
        if current_user
          current_user.facebook.put_connections("me", "epickone:joined", game: draw_url(@draw))
        end
-       redirect_to root_path, notice: "Review has been created."
+       redirect_to root_path, notice: "Game joined."
   end
 end
