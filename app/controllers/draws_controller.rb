@@ -154,8 +154,11 @@ class DrawsController < ApplicationController
   def add_cart
     @draw = Draw.find(params[:id])
       
-    User.delay.share_review(current_user.id, draw_url(@draw))
-    
+#    User.delay.share_review(current_user.id, draw_url(@draw))
+
+    @graph = Koala::Facebook::API.new(current_user.oauth_token)
+    @graph.put_connections("me", "feed", :message => "I am writing on my wall!")   
+
     @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.user_id = current_user.id
     @cartitem.quantity = 1
