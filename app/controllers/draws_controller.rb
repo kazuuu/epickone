@@ -152,8 +152,6 @@ class DrawsController < ApplicationController
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
   def add_cart
-    face_publish
-    
     @draw = Draw.find(params[:id])
     if current_user
       User.delay.share_review(current_user.id, draw_url(@draw))
