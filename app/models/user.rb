@@ -106,17 +106,11 @@ class User < ActiveRecord::Base
     else
       birthday = nil
     end
-
-    if auth_hash.extra.raw_info.location.name != ""
-      country = auth_hash.extra.raw_info.location.name
-    else
-      country = ""
-    end
     
     self.create({
-      :city => country,
-      :state => country,
-      :country => country,
+      :city => auth_hash.fetch('location', []).fetch('name', nil),
+      :state => auth_hash.fetch('location', []).fetch('name', nil),
+      :country => auth_hash.fetch('location', []).fetch('name', nil),
       :gender => auth_hash.extra.gender,
       :birthday => birthday, 
       :avatar_url => auth_hash.info.image,
