@@ -107,8 +107,17 @@ class User < ActiveRecord::Base
       birthday = nil
     end
     
+    current_city =""
+    if auth_hash.extra.nil? == false
+      if auth_hash.extra.location.nil? == false
+        if auth_hash.extra.location.name.nil? == false
+          current_city = auth_hash.extra.location.name
+        end
+      end
+    end   
+    
     self.create({
-      :city => auth_hash.fetch('extra', []).fetch('location', []).fetch('name', nil),
+      :city => current_city
 #      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
 #      :country => auth_hash.extra.fetch('location', []).fetch('name', nil),
       :gender => auth_hash.extra.gender,
