@@ -101,13 +101,20 @@ class User < ActiveRecord::Base
   end
 
   def self.create_user_from_facebook(auth_hash)
-    if auth_hash.extra.raw_info.birthday != ""
-      birthday = Date.strptime(auth_hash.extra.raw_info.birthday,'%m/%d/%Y')
-    else
-      birthday = nil
+    birthday = ""
+    if auth_hash.extra.nil? == false
+      if auth_hash.extra.raw_info.nil? == false
+        if auth_hash.extra.raw_info.birthday.nil? == false
+          if auth_hash.extra.raw_info.birthday != ""
+            birthday = Date.strptime(auth_hash.extra.raw_info.birthday,'%m/%d/%Y')
+          else
+            birthday = nil
+          end
+        end
+      end
     end
     
-    current_city =""
+    current_city = ""
     if auth_hash.extra.nil? == false
       if auth_hash.extra.location.nil? == false
         if auth_hash.extra.location.name.nil? == false
