@@ -3,7 +3,8 @@
     <section>
       <h1>
         <%= image_tag @user.avatar.url(:thumb) %>
-        <%= @user.first_name %>
+        <%= @user.first_name %> <br>
+        <%= @user.friends_count %>
       </h1>
     </section>
   </aside>
