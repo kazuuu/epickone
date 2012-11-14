@@ -4,7 +4,7 @@
   <%= tag :meta, property: "og:type", content: "epickone:join" %>
   <%= tag :meta, property: "og:title", content: @draw.title %>
   <%= tag :meta, property: "og:url", content: draw_url(@draw) %>
-  <%= tag :meta, property: "og:image", content: current_user.avatar.url(:thumb) %>
+  <%= tag :meta, property: "og:image", content: "http://www.epickone.com" + current_user.avatar.url(:thumb) %>
 <% end %>
 
 <h1>Pick a number</h1>
