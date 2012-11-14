@@ -1,4 +1,11 @@
-
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
+  <%= tag :meta, property: "og:site_name", content: "ePick One" %>
+  <%= tag :meta, property: "og:type", content: "epickone:join" %>
+  <%= tag :meta, property: "og:title", content: @draw.title %>
+  <%= tag :meta, property: "og:url", content: draw_url(@draw) %>
+  <%= tag :meta, property: "og:image", content: "http://www.epickone.com" + current_user.avatar.url(:thumb) %>
+<% end %>
 
 <p id="notice"><%= notice %></p>
 <div class="row">
