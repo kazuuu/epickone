@@ -139,23 +139,32 @@ class DrawsController < ApplicationController
 
   def pick_a_number
     session[:draw_id] = params[:id]
+    @draw = Draw.find(params[:id])
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
   def pick_a_number_promo
     session[:draw_id] = params[:id]
+    @draw = Draw.find(params[:id])
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
   def add_cart
     @draw = Draw.find(params[:id])
+      
+#    User.delay.share_review(current_user.id, draw_url(@draw))
+
+    @graph = Koala::Facebook::API.new(current_user.oauth_token)
+    @graph.put_connections("me", "epickone:join", :game => draw_url(@draw))   
+
     @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.user_id = current_user.id
     @cartitem.quantity = 1
     @cartitem.unit_price = @draw.price_ticket
     @cartitem.picked_number = params[:number]
+    
     if @cartitem.save
       redirect_to pick_a_number_draw_path
       session[:cart_count] = current_cart.cartitems.count
