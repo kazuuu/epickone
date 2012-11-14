@@ -203,7 +203,7 @@ class DrawsController < ApplicationController
   def face_publish
     @draw = Draw.find(params[:id])
        if current_user
-         current_user.facebook.put_connections("me", "epickone:joined", game: draw_url(@draw))
+         current_user.facebook.put_connections("me", "epickone:joined", draw: draw_url(@draw))
        end
        redirect_to root_path, notice: "Game joined."
   end
