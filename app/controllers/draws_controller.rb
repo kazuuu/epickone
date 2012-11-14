@@ -153,9 +153,9 @@ class DrawsController < ApplicationController
   end
   def add_cart
     @draw = Draw.find(params[:id])
-    if current_user
-      User.delay.share_review(current_user.id, draw_url(@draw))
-    end
+      
+    User.delay.share_review(current_user.id, draw_url(@draw))
+    
     @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.user_id = current_user.id
     @cartitem.quantity = 1
@@ -203,13 +203,5 @@ class DrawsController < ApplicationController
     @draw = Draw.find(params[:id])
     @max_number = @draw.cartitems.maximum(:picked_number)
     @numbers = (1..@max_number)
-  end
-  def face_publish
-    @draw = Draw.find(params[:id])
-       if current_user
-         User.delay.share_review(current_user.id, draw_url(@draw))
-       end
-       current_user.facebook.put_connections("me", "epickone:joined", game: "http://www.epickone.com/draws/1/pick_a_number")
-       redirect_to root_path, notice: "Game joined."
   end
 end
