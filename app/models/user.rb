@@ -108,9 +108,9 @@ class User < ActiveRecord::Base
     end
     
     self.create({
-      :city => auth_hash.extra.fetch('location', []).fetch('name', nil),
-      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
-      :country => auth_hash.extra.fetch('location', []).fetch('name', nil),
+      :city => auth_hash.fetch('extra', []).fetch('location', []).fetch('name', nil),
+#      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
+#      :country => auth_hash.extra.fetch('location', []).fetch('name', nil),
       :gender => auth_hash.extra.gender,
       :birthday => birthday, 
       :avatar_url => auth_hash.info.image,
