@@ -157,7 +157,7 @@ class DrawsController < ApplicationController
 #    User.delay.share_review(current_user.id, draw_url(@draw))
 
     @graph = Koala::Facebook::API.new(current_user.oauth_token)
-    @graph.put_connections("me", "feed", :message => "I am writing on my wall!")   
+    @graph.put_connections("me", "epickone:join", :game => draw_url(@draw))   
 
     @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.user_id = current_user.id
