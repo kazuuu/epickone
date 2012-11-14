@@ -13,6 +13,7 @@ gem 'country-select', '1.1.1'
 gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 gem 'koala'
+gem 'delayed_job_active_record'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

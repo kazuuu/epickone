@@ -166,6 +166,10 @@ end
 def friends_count
   facebook { |fb| fb.get_connection("me", "friends").size }
 end
+def self.share_review(user_id, draw_url)
+  user = User.find(user_id)
+  user.facebook.put_connections("me", "epickone:join", game: draw_url)
+end
 # End Koala
 
 # Paperclip for Images
