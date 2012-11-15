@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   
   belongs_to :question
   has_attached_file :avatar, 
-                    :styles => { :medium => "250x250>", :thumb => "100x100>" }, 
+                    :styles => { :medium => "200x200>", :thumb => "100x100>" }, 
                     :default_url => '/images/missing.png',
                     :storage => :s3,
                     :bucket => 'pkone',
