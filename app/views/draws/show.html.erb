@@ -4,7 +4,7 @@
   <%= tag :meta, property: "og:type", content: "epickone:game" %>
   <%= tag :meta, property: "og:title", content: @draw.title %>
   <%= tag :meta, property: "og:url", content: draw_url(@draw) %>
-  <%= tag :meta, property: "og:image", content: @draw.avatar.url(:thumb)  %>
+  <%= tag :meta, property: "og:image", content: @draw.avatar.url(:medium)  %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
