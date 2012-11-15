@@ -237,5 +237,5 @@ DEPENDENCIES
   sass-rails (= 3.2.4)
   sqlite3 (= 1.3.5)
   uglifier (= 1.2.3)
-  unicorn
+  unicorn (= 4.4.0)
   will_paginate (= 3.0.3)
