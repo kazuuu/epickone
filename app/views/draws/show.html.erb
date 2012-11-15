@@ -5,6 +5,26 @@
   <%= tag :meta, property: "og:title", content: @draw.title %>
   <%= tag :meta, property: "og:url", content: draw_url(@draw) %>
   <%= tag :meta, property: "og:image", content: @draw.avatar.url(:medium)  %>
+  
+    <script type="text/javascript">
+      function postCook()
+      {
+          FB.api(
+            '/me/epickone:joined',
+            'post',
+            { recipe: '<%= draw_url(@draw) %>' },
+            function(response) {
+               if (!response || response.error) {
+                  alert('Error occured');
+               } else {
+                  alert('Draw was successful! Action ID: ' + response.id);
+               }
+            });
+      }
+      </script>
+
+  <% end %>
+  
 <% end %>
 
 <p id="notice"><%= notice %></p>
@@ -55,6 +75,9 @@
 
   </div
 </div>
+<form>
+  <input type="button" value="Cook" onclick="postCook()" />
+</form>
 
 
 
