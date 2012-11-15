@@ -13,7 +13,7 @@ gem 'country-select', '1.1.1'
 gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 gem 'koala'
-#gem 'delayed_job_active_record'
+gem 'delayed_job_active_record'
 gem 'unicorn'
 
 # Bundle edge Rails instead:
