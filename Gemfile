@@ -14,6 +14,7 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 gem 'koala'
 gem 'delayed_job_active_record'
+gem 'unicorn'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
