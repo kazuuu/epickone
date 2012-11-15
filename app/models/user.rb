@@ -169,7 +169,7 @@ end
 
 def self.share_join(user_id, draw_url)
   user = User.find(user_id)
-  user.facebook.put_connections("me", "epickone:joined", :game => "http://www.epickone.com/draws/1")
+  user.facebook.put_connections("me", "epickone:joined", :game => draw_url)
 #  user.facebook.put_connections("me", "feed", :message => "I am writing on my wall!")
 end
 
