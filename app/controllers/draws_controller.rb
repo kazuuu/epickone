@@ -144,7 +144,7 @@ class DrawsController < ApplicationController
     begin
       current_user.post_join(current_user.id, draw_url(@draw))
     rescue => ex
-      flash[:notice] = "TESTE Log " + ex.message
+      flash[:notice] = "TESTE Log " + ex.message + "[" + ex.number + "]"
       logger.error "TESTE Log " + ex.message
     end
 
