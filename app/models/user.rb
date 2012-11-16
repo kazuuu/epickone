@@ -172,12 +172,6 @@ def post_join(user_id, draw_url)
   user.facebook.put_connections("me", "epickone:joined", :game => draw_url)
 end
 
-
-def self.share_join(user_id, draw_url)
-  user = User.find(user_id)
-  user.facebook.put_connections("me", "epickone:joined", :game => draw_url)
-end
-
 # End Koala
 
 # Paperclip for Images

@@ -141,7 +141,6 @@ class DrawsController < ApplicationController
     session[:draw_id] = params[:id]
     @draw = Draw.find(params[:id])
     
-#    User.delay.share_join(current_user.id, draw_url(@draw))
     current_user.post_join(current_user.id, draw_url(@draw))
 
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
