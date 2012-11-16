@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
 
 # End Omniauth
 
-# Koala Gem
+# Koala Gem.
 def facebook
   @facebook ||= Koala::Facebook::API.new(oauth_token)
   block_given? ? yield(@facebook) : @facebook
