@@ -141,7 +141,11 @@ class DrawsController < ApplicationController
     session[:draw_id] = params[:id]
     @draw = Draw.find(params[:id])
     
-    current_user.post_join(current_user.id, draw_url(@draw))
+    begin
+      current_user.post_join(current_user.id, draw_url(@draw))
+    rescue => ex
+      logger.error "TESTE Log " + ex.message
+    end
 
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
