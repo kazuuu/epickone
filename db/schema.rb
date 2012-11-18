@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20121114222620) do
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
+    t.string   "site_position"
     t.string   "description"
     t.string   "instruction"
     t.integer  "join_min"
