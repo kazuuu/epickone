@@ -1,22 +1,71 @@
-<% @promo_draws.each do |promo_draw| %>
-  <%
-   promo_image = promo_draw.draw_images.find(:first, :conditions => "image_type='main_banner'")
-  %>
+<% content_for :head do %>
+  <style type="text/css">
+    #nav_slide { margin: 20px auto }
+    #nav_slide a { padding: 4px 6px; margin: 3px; border: 1px solid #ccc; text-align: center; text-decoration: none; background-color: #ddd }
+    #nav_slide a.activeSlide { color: #c00 }
+    #nav_slide a:focus { outline: none; }
 
-<%= link_to(image_tag(promo_image.image.url(:original), :style => "width:1000px;height:250px;" ), promo_draw) if !promo_image.nil? %>
+    .slideshow { }
+    .slide {}
+    .slideshow, .slide { height: 300px; width: 100%;}
+    .slideshow img {  border: 1px solid #ccc; background-color: #eee; margin: 0 }
+    
+    .hero-unit {
+      padding-top: 60px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: -60px;
+      margin-bottom: 0px;
+      height:240px;
+      font-size: 18px;
+      font-weight: 200;
+      line-height: 30px;
+      color: inherit;
+      cursor:pointer
+      background-color: #eeeeee;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+    }
+    
+  </style>
 
+  <!-- include jQuery library -->
+  <%= javascript_include_tag ['jquery-1.8.3', 'application'] %>
+  <!-- include Cycle plugin -->
+  <%= javascript_include_tag ['jquery.cycle2', 'application'] %>
 
 <% end %>
-<div class="center hero-unit">
-  <h1>Welcome to the ePick One</h1>
-  <h2>
-    Win prizes
-    <a href="http://railstutorial.org/">at ePick One</a> right now.
-  </h2>
-  <div>
-  <%= link_to "Sign up now!", new_user_path, class: "btn btn-large btn-primary" %>
-  </div>
+<div style="display:block;height:300px;">
+<div class="cycle-slideshow"data-cycle-fx="fade" 
+  data-cycle-timeout="3000"
+  data-cycle-slides="> div"
+   >
+   <div class="slide center hero-unit">
+       <h1>Welcome to the ePick One</h1>
+       <h2>
+         Win prizes
+         <a href="http://railstutorial.org/">at ePick One</a> right now.
+       </h2>
+       <div>
+       <%= link_to "Sign up now!", new_user_path, class: "btn btn-large btn-primary" %>
+       </div>
+   </div>
+ 
+       
+  <% @promo_draws.each do |promo_draw| 
+     promo_image = promo_draw.draw_images.find(:first, :conditions => "image_type='main_banner'")
+  %>
+  	<div class="slide">
+      <%= link_to(image_tag(promo_image.image.url(:original), :style => "width:1000px;height:300px;" ), promo_draw) if !promo_image.nil? %>
+    </div>
+  <% end %>  
 </div>
+</div>
+
+
+
+
 
 
 
