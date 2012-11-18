@@ -44,10 +44,10 @@ class User < ActiveRecord::Base
                     
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   
-#  acts_as_authentic do |c| 
-#    c.login_field = :email 
-#    c.require_password_confirmation = false
-#  end 
+  acts_as_authentic do |c| 
+    c.login_field = :email 
+    c.require_password_confirmation = false
+  end 
 
   def free_credits_load
     free_draws = Draw.find(:all, :conditions => "join_type = 'questions'")
