@@ -13,6 +13,7 @@ ActiveAdmin.register Draw do
       f.input :price_ticket
       f.input :date_due
       f.input :date_start
+      f.input :site_position
       f.input :description, :as => :text
       f.input :instruction, :as => :text
       f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false

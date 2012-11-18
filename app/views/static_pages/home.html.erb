@@ -1,5 +1,5 @@
 <% @promo_draws.each do |promo_draw| %>
-  <%= link_to(promo_draw.title, promo_draw) %><br>
+  <%= link_to(image_tag("draw_" + promo_draw.id.to_s + ".jpg", :alt => "home image", :width => 1000, :height => 100, :title => "Click here to return to Home"), promo_draw) %><br>
 
 <% end %>
 <div class="center hero-unit">
