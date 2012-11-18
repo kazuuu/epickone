@@ -65,12 +65,11 @@ ActiveRecord::Schema.define(:version => 20121114222620) do
     t.integer  "draw_id"
     t.integer  "user_id"
     t.decimal  "value"
+    t.string   "credit_type"
     t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "draws", :force => true do |t|
     t.integer  "user_id"

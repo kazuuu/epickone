@@ -49,9 +49,20 @@ class User < ActiveRecord::Base
     c.require_password_confirmation = false
   end 
 
+  def free_credits_load
+    free_draws = Draw.find(:all, :conditions => "join_type = 'questions'")
+    
+    free_draws.each do |draw|
+      if !credits.find(:first, :conditions => "comment = 'answered' and draw_id = " + draw.id.to_s)
+        credit = credits.build(:draw_id => draw.id)
+        credit.comment = "answered"
+        credit.value = 1
+        credit.credit_type = "free"
+        credit.save
+      end
+    end
+  end
 
-
-  
   def total_credits(draw_id)
     # convert to array so it doesn't try to do sum on database directly
     if draw_id.nil?

@@ -1,3 +1,7 @@
+<% @promo_draws.each do |promo_draw| %>
+  <%= link_to(promo_draw.title, promo_draw) %><br>
+
+<% end %>
 <div class="center hero-unit">
   <h1>Welcome to the ePick One</h1>
   <h2>
@@ -9,6 +13,9 @@
   </div>
 </div>
 
+
+
+
 <div class="row">
     <% @draws.each_slice(3) do |row| %>
       <% row.each do |col| %>
@@ -18,6 +25,9 @@
         </div>
         <div>
           <%= link_to(image_tag(col.avatar.url(:medium)), col) %>
+        </div>
+        <div>
+          Time left: <%= time_ago_in_words(col.date_due) %>
         </div>
         <div>
           <% if  Time.now <= col.date_due %>
@@ -33,5 +43,4 @@
 
 
 <%= link_to 'Login with Facebook', fb_login_path, id: "fb_sign_in" %><br/>
-<%= link_to 'Login with Twitter', tw_login_path %><br/>
 

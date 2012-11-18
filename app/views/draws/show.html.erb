@@ -21,6 +21,15 @@
           <b>Joined:</b>
           <%= @draw.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at is null").count %>
         </p>
+        <p>
+          <b>Credits available:</b>
+          <% 
+          credits = current_user.credits.find(:first, :joins => :draw, :conditions => "credit_type= 'free' and draw_id="+@draw.id.to_s, :select => "sum(value) as value", :group => "draw_id") 
+          %>
+          
+          <%= credits.value.to_s if !credits.nil? %>
+
+        </p>
         
       </section>
     </aside>

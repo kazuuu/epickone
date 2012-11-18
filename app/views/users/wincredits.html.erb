@@ -1,0 +1,40 @@
+<%
+  freedraw = Draw.find(:all, :conditions => "join_type='questions'") 
+%>
+
+<% freedraw.each do |draw| %>
+  <b><%= draw.title %></b> <br>
+
+  [ANSWERED]
+  
+  <%
+    # Answered
+    credit = @user.credits.find(:first, :conditions => ["credit_type='free' and comment='answered' and draw_id=?", draw.id.to_s], :select => "sum(value) as value", :group => "comment"  )
+    if credit.nil?
+  %>
+    You don't have any free credit to join this game. Contact us.<br>
+  <% elsif credit.value > 0 %>
+    You have credit and didn't use it yet! <br>
+  <% elsif credit.value <= 0 %>
+    You've already used your free credit <br>
+  <% end %>
+  
+  [FACEBOOK SHARE DRAW]
+<%  
+    # facebook_shared_draw
+    credit = nil
+    credit = @user.credits.find(:first, :conditions => ["credit_type='free' and comment='facebook_share_draw' and draw_id=?", draw.id.to_s], :select => "sum(value) as value", :group => "comment"  )
+    if credit.nil?
+  %>
+  <li><%= link_to "You haven't shared this draw on Facebook! Share it now and get one free credit!", facebook_share_draw_user_path(:draw_id => draw.id) %></li> 
+  <br>
+  <% elsif credit.value > 0 %>
+    You have credit and didn't use it yet! <br>
+  <% elsif credit.value <= 0 %>
+    You've already used your free credit <br>  
+  <% end %>
+  
+  
+  
+  
+<% end %>

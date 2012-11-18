@@ -117,21 +117,11 @@ class DrawsController < ApplicationController
       end
     end
     if @bOk
-      if !current_user.credits.find(:first, :conditions => "comment = 'answered' and draw_id = " + params[:id])
-        @credit = current_user.credits.build(:draw_id => params[:id])
-        @credit.comment = "answered"
-        @credit.value = 1
-        if @credit.save
-          session[:free_credits] = current_user.total_credits(nil)
-          redirect_to pick_a_number_promo_draw_path
-        end
+      if current_user.total_credits(params[:id]) > 0
+        redirect_to pick_a_number_promo_draw_path          
       else
-        if current_user.total_credits(params[:id]) > 0
-          redirect_to pick_a_number_promo_draw_path          
-        else
-          flash[:notice] = "You've already joined."
-          redirect_to root_path
-        end
+        flash[:notice] = "You don't have free credits to join this draw."
+        redirect_to root_path
       end
       
     end    
@@ -141,13 +131,6 @@ class DrawsController < ApplicationController
     session[:draw_id] = params[:id]
     @draw = Draw.find(params[:id])
     
-    begin
-      current_user.post_join(current_user.id, draw_url(@draw))
-    rescue => ex
-      flash[:notice] = "TESTE Log " + ex.message + "[" + ex.number + "]"
-      logger.error "TESTE Log " + ex.message
-    end
-
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
 
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
@@ -178,33 +161,30 @@ class DrawsController < ApplicationController
   end    
   def join_promo
     @draw = Draw.find(params[:id])
-    @current_cart = current_cart
-    @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
+
+    @new_cart = current_user.carts.build()
+    @new_cart.purchased_at = Time.now
+    @new_cart.save
+    
+    @cartitem = @new_cart.cartitems.build(:draw_id => params[:id])
     @cartitem.user_id = current_user.id
     @cartitem.quantity = 1
     @cartitem.unit_price = 0
     @cartitem.picked_number = params[:number]
-
-    if @cartitem.save
-      if @current_cart.update_attribute(:purchased_at, Time.now)
-        @credit = current_user.credits.build(:draw_id => params[:id])
-        @credit.comment = "answered"
-        @credit.value = -1
-        if @credit.save
-          session[:free_credits] = current_user.total_credits(nil)
-        end
-            
-        flash[:success] = "Congratulations! You've joined."
-        redirect_to root_path
-      else
-        flash[:notice] = "error!."
-        redirect_to root_path
-      end
-    else
-      flash[:notice] = "error!."
-      redirect_to root_path      
+    @cartitem.save
+    
+    @credit = current_user.credits.build(:draw_id => params[:id])
+    @credit.comment = "answered"
+    @credit.credit_type = "free"
+    @credit.value = -1
+    if @credit.save
+      session[:free_credits] = current_user.total_credits(nil)
     end
+            
+    flash[:success] = "Congratulations! You've joined."
+    redirect_to root_path
   end
+
   def results
     @draw = Draw.find(params[:id])
     @max_number = @draw.cartitems.maximum(:picked_number)

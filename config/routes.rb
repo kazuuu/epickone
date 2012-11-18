@@ -1,4 +1,14 @@
 Pickone::Application.routes.draw do
+
+  resources :users do
+    get 'credits', :on => :member 
+    get 'wincredits', :on => :member 
+    get 'facebook_share_draw', :on => :member 
+  end
+  
+  resources :user_sessions
+
+
   resources :credits
 
   ActiveAdmin.routes(self)
@@ -20,7 +30,6 @@ Pickone::Application.routes.draw do
     get 'add_cart', :on => :member
   end
   
-  resources :users, :user_sessions
 
   resources :carts do
     get 'checkout', :on => :member
@@ -30,6 +39,7 @@ Pickone::Application.routes.draw do
   resources :payment_notifications
 
   root to: 'static_pages#home'
+  match '/how_to_win',    to: 'static_pages#how_to_win'
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'

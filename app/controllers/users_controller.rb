@@ -3,6 +3,34 @@ class UsersController < ApplicationController
   before_filter :correct_user,  :only => [:show, :edit, :update]
   before_filter :require_user_admin,  :only => [:index]
   
+  def facebook_share_draw()  
+    begin
+      draw = Draw.find(params[:draw_id])
+      current_user.post_join(current_user.id, draw_url(draw))
+    rescue => ex
+      flash[:notice] = "TESTE Log " + ex.message 
+      logger.error "TESTE Log " + ex.message
+    end
+    
+    credit = current_user.credits.build(:draw_id => params[:draw_id])
+    credit.comment = "facebook_share_draw"
+    credit.value = 1
+    credit.credit_type = "free"
+    credit.save    
+
+    redirect_to root_path
+  end
+  
+  def wincredits
+    @user = current_user
+    @user.free_credits_load
+  end
+
+  def credits
+    @user = current_user
+    @user.free_credits_load
+  end
+  
   # GET /users
   # GET /users.json
   def index

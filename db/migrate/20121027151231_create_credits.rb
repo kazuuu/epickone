@@ -4,6 +4,7 @@ class CreateCredits < ActiveRecord::Migration
       t.integer :draw_id
       t.integer :user_id
       t.decimal :value
+      t.string :credit_type
       t.string :comment
 
       t.timestamps

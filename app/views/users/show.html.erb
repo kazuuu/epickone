@@ -1,5 +1,9 @@
-<% provide(:title, @user.first_name) %>
+<% 
+provide(:title, @user.first_name) 
+session[:free_credits] = current_user.total_credits(nil) if session[:free_credits].nil?
+%>
 <p id="notice"><%= notice %></p>
+
 
 <div class="row">
   <div style="float:left;">
@@ -9,8 +13,12 @@
   <div style="width:620px;float:left;"> <!-- Only required for left/right tabs -->
     <ul class="nav nav-tabs">
       <li class="active"><a href="#tab1" data-toggle="tab">My Details</a></li>
-      <li><a href="#tab2" data-toggle="tab">Order History</a></li>
-      <li><a href="#tab3" data-toggle="tab">Draw History</a></li>
+      <li>
+        <a href="#tab2" data-toggle="tab">
+           Free Credits(<%= session[:free_credits].to_i.to_s %>) 
+        </a>
+      </li>
+      <li><a href="#tab3" data-toggle="tab">Statement</a></li>
     </ul>
 
     <div class="tab-content">
@@ -18,11 +26,11 @@
         <%= render 'users/details' %>  
       </div>
       <div class="tab-pane" id="tab2">  
-        <%# render 'users/orders' %>  
+        <%= render 'users/credit_available' %>  
       </div>
       <div class="tab-pane" id="tab3">
-        <%#render 'users/draws' %>  
-      </div>
+        <%= render 'users/credit_statement' %>  
+      </div>      
     </div>
   </div>
 </div>
