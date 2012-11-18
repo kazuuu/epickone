@@ -2,7 +2,7 @@ class Draw < ActiveRecord::Base
   #  default_scope order: 'draws.created_at DESC'
 
   attr_accessible :description, :instruction, :title, :avatar, :join_type, :join_min, :join_max, :localization, :price_original, :price_ticket, :date_due, :date_start, :user_id, :questions_attributes,
-                  :avatar, :avatar_delete, :site_position
+                  :avatar, :avatar_delete, :site_position, :draw_images_attributes
                   
   has_attached_file :avatar, 
                     :styles => { :medium => "200x200>", :thumb => "100x100>" }, 
@@ -12,10 +12,7 @@ class Draw < ActiveRecord::Base
                     :s3_credentials => {
                     :access_key_id => 'AKIAJX6GVL3O5HFMIBJA',
                           :secret_access_key => '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'
-                        } 
-
-
-
+                        }
 
   before_save :destroy_avatar?
   
@@ -24,6 +21,9 @@ class Draw < ActiveRecord::Base
   has_many :carts
   has_many :cartitems
   has_many :credits
+
+  has_many :draw_images, :dependent => :destroy
+  accepts_nested_attributes_for :draw_images, allow_destroy: true   
   
   has_many :questions
   accepts_nested_attributes_for :questions, allow_destroy: true   

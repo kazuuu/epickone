@@ -16,6 +16,8 @@ Pickone::Application.routes.draw do
   resources :answers
 
   resources :questions
+  
+  resources :draw_images
 
   get "account/account"
 

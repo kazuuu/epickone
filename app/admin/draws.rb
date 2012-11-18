@@ -18,6 +18,18 @@ ActiveAdmin.register Draw do
       f.input :instruction, :as => :text
       f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
     end
+    
+    f.has_many :draw_images do |di|
+      if !di.object.id.nil?
+        di.input :_destroy, :as => :boolean, :label => "delete"
+      end
+      di.inputs "DrawImages", :multipart => true do
+        di.input :image_type
+        di.input :image, :as => :file, :multipart => true, :label => "Image", :hint => di.object.image.nil? ? di.template.content_tag(:span, "No Image Yet") : di.template.image_tag(di.object.image.url(:thumb)) 
+        di.input :image_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
+      end
+    end
+    
         
     f.has_many :questions do |q|
       if !q.object.id.nil?
