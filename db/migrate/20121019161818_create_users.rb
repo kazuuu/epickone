@@ -24,6 +24,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :admin_flag, :default => false
       t.has_attached_file :avatar
 
+      t.string  :locale
       t.string  :facebook_uid
       t.string  :oauth_token
       t.datetime :oauth_expires_at

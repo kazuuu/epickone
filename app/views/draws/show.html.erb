@@ -24,7 +24,8 @@
         <p>
           <b>Credits available:</b>
           <% 
-          credits = current_user.credits.find(:first, :joins => :draw, :conditions => "credit_type= 'free' and draw_id="+@draw.id.to_s, :select => "sum(value) as value", :group => "draw_id") 
+          credits = nil
+          credits = current_user.credits.find(:first, :joins => :draw, :conditions => "credit_type= 'free' and draw_id="+@draw.id.to_s, :select => "sum(value) as value", :group => "draw_id") if !current_user.nil?
           %>
           
           <%= credits.value.to_s if !credits.nil? %>

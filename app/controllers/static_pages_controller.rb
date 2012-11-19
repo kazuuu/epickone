@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
     @user = User.new
     
     @draws = Draw.find(:all, :conditions => "join_type='paid'", :order => "date_due asc")
-    @draws = @draws.paginate(page: params[:page]) if @draws.count > 0 # willpaginate 
+#    @draws = @draws.paginate(page: params[:page]) if @draws.count > 0 # willpaginate 
     
     @promo_draws = Draw.find(:all, :conditions => "site_position='main_banner'", :order => "date_due asc")
     respond_to do |format|

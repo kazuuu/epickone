@@ -4,19 +4,11 @@
       <%= link_to "ePick One", root_path, id: "logo" %> 
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "How to Win", how_to_win_path %></li>
+          <li><%= link_to t("main.home"), root_path %></li>
+          <li><%= link_to t("main.how_to_win"), how_to_win_path %></li>
 
+          <li><%= link_to t("main.games"), how_to_win_path %></li>
 
-          <li id="fat-menu" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-              Games <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "ePickOne", current_user %></li> 
-              <li><%= link_to "Promotional", "#{}" %></li>
-            </ul>
-          </li>
 
           <% if current_user %> 
             <%
@@ -42,9 +34,23 @@
 
           <% else %>
           
-            <li><%= link_to "Sign Up", new_user_path %></li>
-            <li><%= link_to "Login", :login %></li>
+            <li><%= link_to t("main.sign_up"), new_user_path %></li>
+            <li><%= link_to t("main.login"), :login %></li>
           <% end %>
+          <li id="fat-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+              <%= t "main.country" %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "English", locale: "en" %></li> 
+              <li><%= link_to "Portuguese", locale: "pt" %></li>
+            </ul>
+          </li>
+          
+          
+          
+          
+          
         </ul> 
       </nav>
     </div>

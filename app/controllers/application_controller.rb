@@ -2,8 +2,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :current_user, :cart_count, :current_cart
+  before_filter :set_locale
+
+  private
+  def set_locale
+    I18n.locale = params[:locale] if params[:locale].present?
+  end
   
-  
+  def default_url_options(options = {})
+    {locale: I18n.locale}
+  end
+    
   private
   
   def current_user_session

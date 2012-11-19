@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20121118032014) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "locale"
     t.string   "facebook_uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"

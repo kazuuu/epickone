@@ -1,3 +1,33 @@
+<% content_for :head do %>
+<style type="text/css">
+  .fbSignInButton {
+  	background: url("/assets/facebookButton.png") no-repeat scroll center center transparent;
+  	width: 195px;
+  	height: 26px;
+  	overflow: hidden;
+  	padding-top:7px;
+  	padding-left:30px;
+  	text-align: center;
+  	text-decoration: none !important;
+  	text-transform: none;
+  	color: #FFFFFF;
+  	display: block;
+  }
+  .fbSignInButton:visited {
+  	color: #FFFFFF;
+  }
+  
+  a.fbSignInButton:hover:visited {
+    color:yellow;
+  }  
+  a.fbSignInButton:hover {
+    color:yellow;
+  }  
+</style>
+<% end %>
+
+
+
 <%= form_for(@user_session) do |f| %>
   <% if @user_session.errors.any? %>
     <div id="error_explanation">
@@ -20,7 +50,7 @@
       <%= f.check_box :remember_me %><%= f.label :remember_me %><br>
       <%= f.submit "Login", class: "btn btn-large btn-primary" %>
       <p>New user? <%= link_to "Sign up now!", new_user_path %></p> 
-      <p><%= link_to 'Login with Facebook', fb_login_path, id: "fb_sign_in" %></p>
+      <p><%= link_to 'Login with Facebook', fb_login_path, id: "fb_sign_in", :class => "fbSignInButton" %></p>
       
     </div>
   </div>
