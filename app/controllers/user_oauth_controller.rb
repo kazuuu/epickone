@@ -7,6 +7,7 @@ class UserOauthController < ApplicationController
     rescue => ex
       flash[:error] = "[Error] " + ex.message 
       logger.error "[Error] " + ex.message      
+      logger.error "[Error] " + env["omniauth.auth"].provider     
     end
           
     if current_user

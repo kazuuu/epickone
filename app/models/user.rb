@@ -78,7 +78,6 @@ class User < ActiveRecord::Base
     
 # OMNIAUTH  GEM    
   def self.find_or_create_from_oauth(auth_hash)    
-    flash[:error] =  auth_hash.provider
     provider = auth_hash.provider
     uid = auth_hash.uid
     case provider
