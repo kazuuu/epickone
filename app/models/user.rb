@@ -76,9 +76,6 @@ class User < ActiveRecord::Base
     (self.draws + self.draw_owners).uniq
   end  
     
-    
-    
-    
 # OMNIAUTH  GEM  
   def self.find_or_create_from_oauth(auth_hash)
     provider = auth_hash.provider

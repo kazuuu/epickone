@@ -49,14 +49,14 @@ Pickone::Application.routes.draw do
 
     match 'login' => 'user_sessions#new', :as => :login
     match 'logout' => 'user_sessions#destroy', :as => :logout
-  
-    match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
-    match '/auth/failure' => 'user_oauth#failure', :as => :failure
-  
-    match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
-    match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
   end  
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
   match '', to: redirect("/#{I18n.default_locale}")
+
+  match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
+  match '/auth/failure' => 'user_oauth#failure', :as => :failure
+
+  match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
+  match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
   
 end
