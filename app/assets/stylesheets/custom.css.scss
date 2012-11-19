@@ -29,7 +29,29 @@ a.btn:visited {
   color:white;
 }
 
+.fbSignInButton {
+	background: url("/assets/facebookButton.png") no-repeat scroll center center transparent;
+	width: 195px;
+	height: 26px;
+	overflow: hidden;
+	padding-top:7px;
+	padding-left:30px;
+	text-align: center;
+	text-decoration: none !important;
+	text-transform: none;
+	color: #FFFFFF;
+	display: block;
+}
+.fbSignInButton:visited {
+	color: #FFFFFF;
+}
 
+a.fbSignInButton:hover:visited {
+  color:yellow;
+}  
+a.fbSignInButton:hover {
+  color:yellow;
+}  
 
 html {
 overflow-y: scroll;
