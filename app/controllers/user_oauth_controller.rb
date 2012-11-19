@@ -5,7 +5,7 @@ class UserOauthController < ApplicationController
     begin
       @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
     rescue => ex
-      flash[:notice] = "[Error] " + ex.message 
+      flash[:error] = "[Error] " + ex.message 
       logger.error "[Error] " + ex.message      
     end
           

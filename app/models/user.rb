@@ -76,16 +76,10 @@ class User < ActiveRecord::Base
     (self.draws + self.draw_owners).uniq
   end  
     
-# OMNIAUTH  GEM  
- def exctract_locale_from_url(url)
-    url[/^([^\/]*\/\/)?[^\/]+\/(\w{2})(\/.*)?/,2]
- end
-  
+# OMNIAUTH  GEM    
   def self.find_or_create_from_oauth(auth_hash)    
-    I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']    
- 
-#    provider = auth_hash.provider
-    provider = I18n.locale
+    flash[:error] =  auth_hash.provider
+    provider = auth_hash.provider
     uid = auth_hash.uid
     case provider
       when 'facebook'
