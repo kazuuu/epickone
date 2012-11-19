@@ -1,4 +1,5 @@
 class UserOauthController < ApplicationController
+  
   def create
     
     begin
