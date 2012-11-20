@@ -4,5 +4,10 @@ en:
 pt:
   routes:
     users: usuarios
+    new: novo
     edit: editar
-    
+    destroy: destruir
+    password: senha
+    sign_in: login
+    users: usuarios
+    cancel: cancelar
