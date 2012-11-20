@@ -20,11 +20,7 @@ class UserOauthController < ApplicationController
   end
 
   protected
-  def exctract_locale_from_url(url)
-    url[/^([^\/]*\/\/)?[^\/]+\/(\w{2})(\/.*)?/,2]
-  end
   def auth_hash
-#    I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
     request.env['omniauth.auth']
   end
 end
