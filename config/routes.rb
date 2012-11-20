@@ -40,6 +40,7 @@ Pickone::Application.routes.draw do
     resources :cartitems
     resources :payment_notifications
 
+    root to: 'static_pages#home'
     match '/how_to_win',    to: 'static_pages#how_to_win'
     match '/help',    to: 'static_pages#help'
     match '/about',   to: 'static_pages#about'
@@ -49,9 +50,6 @@ Pickone::Application.routes.draw do
     match 'login' => 'user_sessions#new', :as => :login
     match 'logout' => 'user_sessions#destroy', :as => :logout
 
-    root to: 'static_pages#home', as: "locale_root"
-    match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
- 
     match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
     match '/auth/failure' => 'user_oauth#failure', :as => :failure
 
@@ -59,9 +57,8 @@ Pickone::Application.routes.draw do
     match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
 
   end  
-  root to: redirect("/#{I18n.default_locale}")
-  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
-  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
+#  match '', to: redirect("/#{I18n.default_locale}")
 
   
 end
