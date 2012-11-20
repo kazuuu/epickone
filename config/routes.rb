@@ -1,5 +1,5 @@
 Pickone::Application.routes.draw do
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+  scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
     resources :users do
       get 'credits', :on => :member 
       get 'wincredits', :on => :member 
@@ -50,16 +50,14 @@ Pickone::Application.routes.draw do
     match 'login' => 'user_sessions#new', :as => :login
     match 'logout' => 'user_sessions#destroy', :as => :logout
 
-    match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
-    match '/auth/failure' => 'user_oauth#failure', :as => :failure
-
-    match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
-    match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
 
   end  
- match '*path', to: redirect {|params| "/#{I18n.default_locale}/#{CGI::unescape(params[:path])}" }, constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
-#  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
-  match '', to: redirect("/#{I18n.default_locale}")
+  match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
+  match '/auth/failure' => 'user_oauth#failure', :as => :failure
 
-  
+  match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
+  match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
+
+  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  match '', to: redirect("/#{I18n.default_locale}")
 end
