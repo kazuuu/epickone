@@ -1,4 +1,7 @@
 class UserOauthController < ApplicationController
+  def exctract_locale_from_url(url)
+    url[/^([^\/]*\/\/)?[^\/]+\/(\w{2})(\/.*)?/,2]
+  end
   def create
     begin
       @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
@@ -6,6 +9,7 @@ class UserOauthController < ApplicationController
       flash[:notice] = "[Error] " + ex.message 
       logger.error "[Error] " + ex.message      
     end
+    I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
           
     if current_user
       UserSession.create(current_user, true)

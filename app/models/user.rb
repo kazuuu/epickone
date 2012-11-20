@@ -77,19 +77,14 @@ class User < ActiveRecord::Base
   end  
     
 # OMNIAUTH  GEM    
-  def exctract_locale_from_url(url)
-    url[/^([^\/]*\/\/)?[^\/]+\/(\w{2})(\/.*)?/,2]
-  end
   def self.find_or_create_from_oauth(auth_hash)    
     provider = auth_hash.provider
     uid = auth_hash.uid
-    
-    I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
-    
+        
     case provider
       when 'facebook'
         if user = self.find_by_email(auth_hash.info.email)
-          user.update_user_from_facebook(auth_hash)
+          user.update_user_from_facebook(auth_hash)          
           return user
         elsif user = self.find_by_facebook_uid(uid)
           return user
