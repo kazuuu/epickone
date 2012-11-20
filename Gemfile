@@ -14,7 +14,7 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 gem 'koala'
 gem 'unicorn', '4.4.0'
-
+gem 'rails-translate-routes'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
