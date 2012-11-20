@@ -1,5 +1,5 @@
 Pickone::Application.routes.draw do
-  scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     resources :users do
       get 'credits', :on => :member 
       get 'wincredits', :on => :member 
@@ -57,8 +57,9 @@ Pickone::Application.routes.draw do
     match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
 
   end  
-  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
-#  match '', to: redirect("/#{I18n.default_locale}")
+ match '*path', to: redirect {|params| "/#{I18n.default_locale}/#{CGI::unescape(params[:path])}" }, constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+#  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  match '', to: redirect("/#{I18n.default_locale}")
 
   
 end
