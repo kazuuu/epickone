@@ -52,11 +52,6 @@ Pickone::Application.routes.draw do
 
 
 #  end  
-  match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
-  match '/auth/failure' => 'user_oauth#failure', :as => :failure
-
-  match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
-  match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
 
 
 #  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
@@ -69,6 +64,12 @@ Pickone::Application.routes.draw do
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
     root to: 'static_pages#home'
   end  
+  match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
+  match '/auth/failure' => 'user_oauth#failure', :as => :failure
+
+  match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
+  match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
+
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
   match '', to: redirect("/#{I18n.default_locale}")
 end
