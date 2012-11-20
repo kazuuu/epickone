@@ -14,8 +14,6 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
 gem 'koala'
 gem 'unicorn', '4.4.0'
-gem 'compass'
-gem 'haml' # for SASS
 
 
 # Bundle edge Rails instead:
