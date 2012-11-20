@@ -11,7 +11,6 @@ Pickone::Application.routes.draw do
 
     resources :credits
 
-    ActiveAdmin.routes(self)
 
     resources :answers
 
@@ -57,6 +56,8 @@ Pickone::Application.routes.draw do
 
   match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
   match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
+
+  ActiveAdmin.routes(self)
 
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
   match '', to: redirect("/#{I18n.default_locale}")
