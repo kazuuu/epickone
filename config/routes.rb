@@ -30,7 +30,8 @@ Pickone::Application.routes.draw do
       get 'pick_a_number_promo', :on => :member
       get 'add_cart', :on => :member
     end
-  
+
+    ActiveAdmin.routes(self)  
 
     resources :carts do
       get 'checkout', :on => :member
@@ -57,7 +58,6 @@ Pickone::Application.routes.draw do
   match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
   match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
 
-  ActiveAdmin.routes(self)
 
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
   match '', to: redirect("/#{I18n.default_locale}")
