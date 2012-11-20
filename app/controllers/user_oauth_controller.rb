@@ -1,6 +1,10 @@
 class UserOauthController < ApplicationController
   
+  def exctract_locale_from_url(url)
+    url[/^([^\/]*\/\/)?[^\/]+\/(\w{2})(\/.*)?/,2]
+  end
   def create
+    I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
     
     begin
       @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
