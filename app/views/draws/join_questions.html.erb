@@ -24,7 +24,7 @@
         <%= question.title %>
         <ol class="answers">
           <% question.answers.each do |answer| %>
-            <%= radio_button question.id, "answer", answer.id %> <%= answer.text %> <br>
+            <%= radio_button question.id, "answer", answer.id %> <%= answer.answer_text %> <br>
               
           <% end %>
         </ol>

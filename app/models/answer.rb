@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :description, :iscorrect, :position, :question_id, :text, :avatar, :avatar_delete
+  attr_accessible :description, :iscorrect, :position, :question_id, :answer_text, :avatar, :avatar_delete
   before_save :destroy_avatar?
   
   belongs_to :question

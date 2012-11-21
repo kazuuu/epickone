@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20121118032014) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "answers", :force => true do |t|
-    t.string   "exact_word"
+    t.string   "answer_text"
     t.text     "description"
     t.integer  "position"
     t.integer  "iscorrect"

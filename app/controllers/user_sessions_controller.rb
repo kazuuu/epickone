@@ -16,9 +16,12 @@ class UserSessionsController < ApplicationController
   # POST /user_sessions
   # POST /user_sessions.xml
   def create
+    session[:cart_id] = nil
+    session[:cart_count] = nil
+    session[:free_credits] = nil
     @user_session = UserSession.new(params[:user_session])
     respond_to do |format|
-      if @user_session.save
+      if @user_session.save        
         format.html { redirect_to(root_path, :notice => 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else

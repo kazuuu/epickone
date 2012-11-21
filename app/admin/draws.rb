@@ -51,7 +51,7 @@ ActiveAdmin.register Draw do
           a.input :_destroy, :as => :boolean, :label => "delete"
         end
         a.inputs "Answer", :multipart => true do
-          a.input :exact_word
+          a.input :answer_text
           a.input :description, :as => :text
           a.input :iscorrect
           a.input :position
@@ -96,7 +96,7 @@ ActiveAdmin.register Draw do
                           question.answers.each do |answer|
                             tr do
                               td do
-                                answer.text
+                                answer.answer_text
                               end
                             end
                           end
