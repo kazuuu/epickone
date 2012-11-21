@@ -31,8 +31,6 @@ Pickone::Application.routes.draw do
     get 'add_cart', :on => :member
   end
 
-  ActiveAdmin.routes(self)  
-
   resources :carts do
     get 'checkout', :on => :member
     get 'payment_not_needed', :on => :member
@@ -64,6 +62,8 @@ Pickone::Application.routes.draw do
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
     root to: 'static_pages#home'
   end  
+  ActiveAdmin.routes(self)  
+  
   match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
   match '/auth/failure' => 'user_oauth#failure', :as => :failure
 
