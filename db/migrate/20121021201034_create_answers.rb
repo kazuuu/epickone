@@ -1,8 +1,8 @@
 class CreateAnswers < ActiveRecord::Migration
   def change
     create_table :answers do |t|
-      t.string :text
-      t.string :description
+      t.string :exact_word
+      t.text :description
       t.integer :position
       t.integer :iscorrect
       t.integer :question_id

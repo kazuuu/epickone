@@ -3,9 +3,10 @@ class CreateDraws < ActiveRecord::Migration
     create_table :draws do |t|
       t.integer :user_id
       t.string :title
+      t.string :headline
       t.string :site_position
-      t.string :description
-      t.string :instruction
+      t.text :description
+      t.text :instruction
       t.integer :join_min
       t.integer :join_max
       t.string :localization

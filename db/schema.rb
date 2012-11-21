@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20121118032014) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "answers", :force => true do |t|
-    t.string   "text"
-    t.string   "description"
+    t.string   "exact_word"
+    t.text     "description"
     t.integer  "position"
     t.integer  "iscorrect"
     t.integer  "question_id"
@@ -85,9 +85,10 @@ ActiveRecord::Schema.define(:version => 20121118032014) do
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
     t.string   "title"
+    t.string   "headline"
     t.string   "site_position"
-    t.string   "description"
-    t.string   "instruction"
+    t.text     "description"
+    t.text     "instruction"
     t.integer  "join_min"
     t.integer  "join_max"
     t.string   "localization"
@@ -117,7 +118,7 @@ ActiveRecord::Schema.define(:version => 20121118032014) do
 
   create_table "questions", :force => true do |t|
     t.string   "title"
-    t.string   "description"
+    t.text     "description"
     t.integer  "position"
     t.string   "style"
     t.integer  "draw_id"

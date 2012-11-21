@@ -6,6 +6,7 @@ ActiveAdmin.register Draw do
 
       f.input :join_type
       f.input :title
+      f.input :headline
       f.input :join_min
       f.input :join_max
       f.input :localization
@@ -37,7 +38,7 @@ ActiveAdmin.register Draw do
       end
       q.inputs "Question", :multipart => true do
         q.input :title         
-        q.input :description         
+        q.input :description, :as => :text
         q.input :position         
         q.input :style         
         q.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => q.object.avatar.nil? ? q.template.content_tag(:span, "No Image Yet") : q.template.image_tag(q.object.avatar.url(:thumb)) 
@@ -50,8 +51,8 @@ ActiveAdmin.register Draw do
           a.input :_destroy, :as => :boolean, :label => "delete"
         end
         a.inputs "Answer", :multipart => true do
-          a.input :text
-          a.input :description
+          a.input :exact_word
+          a.input :description, :as => :text
           a.input :iscorrect
           a.input :position
           a.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => a.object.avatar.nil? ? a.template.content_tag(:span, "No Image Yet") : a.template.image_tag(a.object.avatar.url(:thumb)) 
