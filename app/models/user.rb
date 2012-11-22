@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
                   :facebook_uid,
                   :oauth_token,
                   :oauth_expires_at,
+                  :locale,
                   :provider
   has_many :draws                 
   has_many :credits

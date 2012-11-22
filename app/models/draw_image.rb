@@ -1,5 +1,5 @@
 class DrawImage < ActiveRecord::Base
-  attr_accessible :draw_id, :image, :image_type, :image_delete
+  attr_accessible :draw_id, :image, :image_type, :image_delete, :locale
   
   before_save :destroy_image?
   

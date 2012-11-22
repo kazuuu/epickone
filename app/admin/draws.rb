@@ -5,8 +5,6 @@ ActiveAdmin.register Draw do
       f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 
       f.input :join_type
-      f.input :title
-      f.input :headline
       f.input :join_min
       f.input :join_max
       f.input :localization
@@ -15,9 +13,18 @@ ActiveAdmin.register Draw do
       f.input :date_due
       f.input :date_start
       f.input :site_position
-      f.input :description, :as => :text
-      f.input :instruction, :as => :text
       f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
+
+      f.globalize_inputs :translations do |lf|
+        lf.inputs do
+          lf.input :title
+          lf.input :headline
+          lf.input :description, :as => :text
+          lf.input :instruction, :as => :text
+
+          lf.input :locale, :as => :hidden
+        end
+      end      
     end
     
     f.has_many :draw_images do |di|
@@ -64,11 +71,18 @@ ActiveAdmin.register Draw do
     f.buttons
   end    
 
-  show :title => :title do |draw|
+  show do |draw|
     attributes_table do
       row :id
-      row :title
+      I18n.available_locales.each do |locale|
+        h3 I18n.t(locale, scope: ["translation"])
+        div do
+          h4 draw.translations.where(locale: locale).first.title
+        end
+      end      
     end
+    
+    
     div :class => "panel" do
       h3 "Questions"
       if draw.questions and draw.questions.count > 0

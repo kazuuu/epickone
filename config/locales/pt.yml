@@ -1,4 +1,8 @@
 pt:
+  translation:
+    en: "Inglês"
+    pt: "Português"
+
   main:
     home: "Home"
     how_to_win: "Como Ganhar"

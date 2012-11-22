@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121118032014) do
+ActiveRecord::Schema.define(:version => 20121122014512) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(:version => 20121118032014) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end
+
+  create_table "draw_translations", :force => true do |t|
+    t.integer  "draw_id"
+    t.string   "locale"
+    t.string   "title"
+    t.string   "headline"
+    t.text     "description"
+    t.text     "instruction"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "draw_translations", ["draw_id"], :name => "index_draw_translations_on_draw_id"
+  add_index "draw_translations", ["locale"], :name => "index_draw_translations_on_locale"
 
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
