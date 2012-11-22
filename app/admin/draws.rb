@@ -7,7 +7,8 @@ ActiveAdmin.register Draw do
       f.input :join_type
       f.input :join_min
       f.input :join_max
-      f.input :localization
+      f.input :enable
+      f.input :covering_area
       f.input :price_original
       f.input :price_ticket
       f.input :date_due

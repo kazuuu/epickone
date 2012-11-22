@@ -9,7 +9,8 @@ class CreateDraws < ActiveRecord::Migration
       t.text :instruction
       t.integer :join_min
       t.integer :join_max
-      t.string :localization
+      t.boolean :enable
+      t.string :covering_area
       t.string :join_type
       t.decimal :price_original
       t.decimal :price_ticket

@@ -117,7 +117,8 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.text     "instruction"
     t.integer  "join_min"
     t.integer  "join_max"
-    t.string   "localization"
+    t.boolean  "enable",              :default => false
+    t.string   "covering_area"
     t.string   "join_type"
     t.decimal  "price_original"
     t.decimal  "price_ticket"
@@ -127,8 +128,8 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "draws", ["user_id", "created_at"], :name => "index_draws_on_user_id_and_created_at"
