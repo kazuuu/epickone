@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122014512) do
+ActiveRecord::Schema.define(:version => 20121122032037) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(:version => 20121122014512) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "answer_translations", :force => true do |t|
+    t.integer  "answer_id"
+    t.string   "locale"
+    t.string   "answer_text"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "answer_translations", ["answer_id"], :name => "index_answer_translations_on_answer_id"
+  add_index "answer_translations", ["locale"], :name => "index_answer_translations_on_locale"
 
   create_table "answers", :force => true do |t|
     t.string   "answer_text"
@@ -129,6 +141,18 @@ ActiveRecord::Schema.define(:version => 20121122014512) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  create_table "question_translations", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "question_translations", ["locale"], :name => "index_question_translations_on_locale"
+  add_index "question_translations", ["question_id"], :name => "index_question_translations_on_question_id"
 
   create_table "questions", :force => true do |t|
     t.string   "title"
