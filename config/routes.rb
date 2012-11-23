@@ -8,7 +8,6 @@ Pickone::Application.routes.draw do
 
   resources :user_sessions
 
-
   resources :credits
 
 
@@ -37,7 +36,6 @@ Pickone::Application.routes.draw do
   end
   resources :cartitems
   resources :payment_notifications
-
   
   match '/how_to_win',    to: 'static_pages#how_to_win'
   match '/help',    to: 'static_pages#help'
@@ -63,6 +61,9 @@ Pickone::Application.routes.draw do
     root to: 'static_pages#home'
   end  
   ActiveAdmin.routes(self)  
+  resources :password_resets, :only => [ :new, :create, :edit, :update ]
+#  resources :activations, :only => [ :new, :create, :edit, :update ]
+#  resources :activate '/activate/:activation_code', :controller => 'activations', :action => 'create'
   
   match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
   match '/auth/failure' => 'user_oauth#failure', :as => :failure

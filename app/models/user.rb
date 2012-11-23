@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
                   :password, 
                   :password_salt, 
                   :persistence_token, 
+                  :perishable_token,
                   :current_login_ip, 
                   :first_name, 
                   :last_name, 
@@ -49,7 +50,12 @@ class User < ActiveRecord::Base
     c.login_field = :email 
     c.require_password_confirmation = false
   end 
-
+      
+  def deliver_password_reset_instructions!  
+    reset_perishable_token!  
+    Notifier.password_reset_instructions(self).deliver 
+  end
+  
   def free_credits_load
     free_draws = Draw.find(:all, :conditions => "join_type = 'questions'")
     

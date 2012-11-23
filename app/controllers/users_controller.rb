@@ -78,6 +78,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        Notifier.welcome(@user).deliver
         format.html { redirect_to @user, notice: 'Registration successfull.' }
         format.json { render json: @user, status: :created, location: @user }
       else

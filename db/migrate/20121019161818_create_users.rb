@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :crypted_password
       t.string :password_salt
       t.string :persistence_token
-
+      t.string :perishable_token, :default => "", :null => false      
       t.string :current_login_ip
 
       t.string :first_name
@@ -34,5 +34,6 @@ class CreateUsers < ActiveRecord::Migration
             
       t.timestamps
     end
+    add_index :users, [:perishable_token, :email]    
   end
 end

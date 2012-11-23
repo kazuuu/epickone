@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
+    t.string   "perishable_token",    :default => "",    :null => false
     t.string   "current_login_ip"
     t.string   "first_name"
     t.string   "last_name"
