@@ -4,11 +4,10 @@ Pickone::Application.routes.draw do
     get 'credits', :on => :member 
     get 'wincredits', :on => :member 
     get 'facebook_share_draw', :on => :member 
+    get 'resend_activation', :on => :member     
   end
 
   resources :password_resets, :only => [ :new, :create, :edit, :update ]
-#  resource :activation, :only =>  [ :new, :create, :edit, :update ]
-#  activate '/activate/:activation_code', :controller => 'activations', :action => 'create'
   resources :user_sessions
 
   resources :credits

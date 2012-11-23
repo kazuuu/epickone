@@ -24,10 +24,17 @@ class UserSessionsController < ApplicationController
       if @user_session.save        
         format.html { redirect_to(root_path, :notice => 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
-      end
+      elsif @user_session.attempted_record &&
+          !@user_session.invalid_password? &&
+          !@user_session.attempted_record.active?
+          @user = User.find_by_email(@user_session.email)
+          @user.deliver_activation!
+          format.html { redirect_to(root_path, :notice => 'Sorry, before you can sign in you need to confirm your email address. We have just sent a confirmation again.') }
+          format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
+          
+        else
+          redirect_to root_url
+        end
     end
   end
 

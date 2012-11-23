@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_filter :require_no_user,  :only => [:new]
   before_filter :require_user,  :only => [:show, :edit, :update]
   before_filter :require_user_admin,  :only => [:index]
-  
+
+    
   def facebook_share_draw()  
     begin
       draw = Draw.find(params[:draw_id])
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
 
     redirect_to root_path
   end
+
   
   def wincredits
     @user = current_user
