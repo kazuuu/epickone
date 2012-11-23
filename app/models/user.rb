@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
                   :password_salt, 
                   :persistence_token, 
                   :perishable_token,
+                  :active,
                   :current_login_ip, 
                   :first_name, 
                   :last_name, 
@@ -50,6 +51,21 @@ class User < ActiveRecord::Base
     c.login_field = :email 
     c.require_password_confirmation = false
   end 
+
+  def activate!
+    self.active = true
+    save
+  end
+  
+  def deliver_activation!
+    reset_perishable_token!
+    Notifier.activation(self).deliver
+  end
+
+  def deliver_welcome!
+    reset_perishable_token!
+    Notifier.welcome(self).deliver
+  end  
       
   def deliver_password_reset_instructions!  
     reset_perishable_token!  

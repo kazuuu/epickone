@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_no_user,  :only => [:new]
-  before_filter :correct_user,  :only => [:show, :edit, :update]
+  before_filter :require_user,  :only => [:show, :edit, :update]
   before_filter :require_user_admin,  :only => [:index]
   
   def facebook_share_draw()  
@@ -77,10 +77,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])      
 
     respond_to do |format|
-      if @user.save
-        Notifier.welcome(@user).deliver
-        format.html { redirect_to @user, notice: 'Registration successfull.' }
-        format.json { render json: @user, status: :created, location: @user }
+      if @user.save_without_session_maintenance
+        @user.deliver_activation!
+        format.html { redirect_to root_path, notice: 'Your account has been created. Please check your e-mail for your account activation instructions!' }
+        format.json { render json: root_path, status: :created, location: root_path }
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
