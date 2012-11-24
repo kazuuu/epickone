@@ -2,17 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  notifier:
-    activation:
-      subject: "Activation Instructions"
-      body_paragraph1: "Thank you for creating an account! Click the url below to activate your account!"
-      body_paragraph2: "If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us."
-
-  translation:
+  main:
     en: "English"
     pt: "Portuguese"
-    
-  main:
     home: "Home"
     how_to_win: "How to Win"
     games: "Games"
@@ -22,21 +14,32 @@ en:
     now: "now"
     join: "Join"
     how_to_win: "How it Works"
-    
-    
 
-  page:
+  notifier:
+    activation:
+      subject: "Activation Instructions"
+      body_paragraph1: "Thank you for creating an account! Click the url below to activate your account!"
+      body_paragraph2: "If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us."
+    welcome:
+      subject: "Welcome to ePickOne.com!"
+      body_paragraph1: "Welcome to ePick One"
+      body_paragraph2: "Your account has been activated."
+      body_paragraph3: "To login to the site, just follow this link"
+      body_paragraph4: "If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us."
+      body_paragraph5: "Thanks for joining and have a great day!"
+    password_reset:
+      subject: "Password Reset Instructions"
+      body_paragraph1: "Password Reset Instructions"
+      body_paragraph2: "A request to reset your password has been made. If you did not make this request, simply ignore this email. If you did make this request, please follow the link below." 
+      body_button: "Reset Password!"      
+
+  static_pages:
      home:
        headline1_welcome: "Welcome to the ePick One"
        headline2_1_win_prizes: "Win prizes"
        headline2_2_win_prizes: "at ePick One"
        headline2_3_win_prizes: "right now"
        headline3_first_game: "Inaugural game!"
-    
-  static_pages:
-    index:
-      title: "Hello world"
-      
       
   date:
     abbr_day_names:

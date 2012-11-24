@@ -17,6 +17,7 @@ ActiveAdmin.register User do
           f.input :country
           f.input :address1
           f.input :address2
+          f.input :locale
           f.input :zipcode
           f.input :phone_mobile
           f.input :admin_flag

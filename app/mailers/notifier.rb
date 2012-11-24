@@ -16,7 +16,7 @@ class Notifier < ActionMailer::Base
     @url  = root_url
     mail(
         :to => user.email,
-        :subject => "Welcome to ePickOne.com!"  
+        :subject => t("notifier.welcome.subject")   
       )
   end
 
@@ -25,7 +25,7 @@ class Notifier < ActionMailer::Base
     @url = edit_password_reset_url(@user.perishable_token)
     mail(
         :to => user.email,
-        :subject => "Password Reset Instructions"  
+        :subject => t("notifier.password_reset.subject") 
       )
   end
 

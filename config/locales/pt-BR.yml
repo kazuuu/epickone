@@ -1,15 +1,7 @@
 pt:
-  notifier:
-    activation:
-      subject: "Ative a sua conta"
-      body_paragraph1: "Obrigado pelo seu cadastro! Clique no link abaixo para ativar sua conta!"
-      body_paragraph2: "Se o link abaixo não funcionar, tente copiar e colar no seu navegador. Se continuar tendo problemas, por favor, entre em contato conosco."
-
-  translation:
+  main:
     en: "Inglês"
     pt: "Português"
-
-  main:
     home: "Home"
     how_to_win: "Como Ganhar"
     games: "Jogos"
@@ -19,7 +11,14 @@ pt:
     now: "agora"
     join: "Participe"
     how_to_win: "Como funciona"
-  page:
+
+  notifier:
+    activation:
+      subject: "Ative a sua conta"
+      body_paragraph1: "Obrigado pelo seu cadastro! Clique no link abaixo para ativar sua conta!"
+      body_paragraph2: "Se o link abaixo não funcionar, tente copiar e colar no seu navegador. Se continuar tendo problemas, por favor, entre em contato conosco."
+
+  static_pages:
      home:
        headline1_welcome: "Bem vindo ao ePick One"
        headline2_1_win_prizes: "Ganhe prêmios"

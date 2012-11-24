@@ -4,14 +4,14 @@
       <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     </head>
     <body>
-      <h1>Welcome to ePick One, <%= @user.first_name %></h1>
+      <h1><%= t("notifier.welcome.body_paragraph1") %>, <%= @user.first_name %></h1>
       <p>
-        Your account has been activated.
+        <%= t("notifier.welcome.body_paragraph2") %>
       </p>
       <p>
-        To login to the site, just follow this link: <%= @url %>.
+       <%= t("notifier.welcome.body_paragraph3") %>: <%= @url %>.
       </p>
-      <p>If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us.</p>
-      <p>Thanks for joining and have a great day!</p>
+      <p><%= t("notifier.welcome.body_paragraph4") %></p>
+      <p><%= t("notifier.welcome.body_paragraph5") %></p>
     </body>
   </html>
