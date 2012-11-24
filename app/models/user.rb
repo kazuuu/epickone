@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
       :avatar_url => auth_hash.info.image,
       :first_name => auth_hash.info.first_name,
       :last_name => auth_hash.info.last_name,
-      :active => true;
+      :active => true,
 
       :provider => auth_hash.provider,
       :oauth_token => auth_hash.credentials.token,
