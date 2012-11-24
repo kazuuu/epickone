@@ -150,7 +150,6 @@ class User < ActiveRecord::Base
       :first_name => auth_hash.info.first_name,
       :last_name => auth_hash.info.last_name,
       :active => true,
-
       :provider => auth_hash.provider,
       :oauth_token => auth_hash.credentials.token,
       :oauth_expires_at => Time.at(auth_hash.credentials.expires_at),
@@ -161,7 +160,6 @@ class User < ActiveRecord::Base
       :password_salt => "facebook",
       :persistence_token => "facebook"
     })
-#    self.deliver_welcome!
   end
   def update_user_from_facebook(auth_hash)
     if auth_hash.extra.raw_info.birthday != ""
