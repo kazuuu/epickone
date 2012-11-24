@@ -138,8 +138,8 @@ class User < ActiveRecord::Base
           current_city = auth_hash.extra.location.name
         end
       end
-    end   
-    session[:new_user]=true
+    end
+    Notifier.welcome(self).deliver       
     self.create({
       :city => current_city,
 #      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
