@@ -8,8 +8,6 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
-gem 'activeadmin'
-gem 'ActiveAdmin-Globalize3-inputs'
 gem 'country-select', '1.1.1'
 gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-twitter'
@@ -17,6 +15,8 @@ gem 'koala'
 gem 'unicorn', '4.4.0'
 gem 'rails-translate-routes'
 gem 'globalize3'
+gem 'activeadmin'
+gem 'ActiveAdmin-Globalize3-inputs'
 
 
 # Bundle edge Rails instead:
