@@ -161,7 +161,7 @@ class User < ActiveRecord::Base
       :password_salt => "facebook",
       :persistence_token => "facebook"
     })
-    self.deliver_welcome!
+#    self.deliver_welcome!
   end
   def update_user_from_facebook(auth_hash)
     if auth_hash.extra.raw_info.birthday != ""
