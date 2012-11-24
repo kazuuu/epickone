@@ -17,6 +17,18 @@ pt:
       subject: "Ative a sua conta"
       body_paragraph1: "Obrigado pelo seu cadastro! Clique no link abaixo para ativar sua conta!"
       body_paragraph2: "Se o link abaixo não funcionar, tente copiar e colar no seu navegador. Se continuar tendo problemas, por favor, entre em contato conosco."
+    welcome:
+      subject: "Welcome to ePickOne.com!"
+      body_paragraph1: "Welcome to ePick One"
+      body_paragraph2: "Your account has been activated."
+      body_paragraph3: "To login to the site, just follow this link"
+      body_paragraph4: "If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us."
+      body_paragraph5: "Thanks for joining and have a great day!"
+    password_reset:
+      subject: "Password Reset Instructions"
+      body_paragraph1: "Password Reset Instructions"
+      body_paragraph2: "A request to reset your password has been made. If you did not make this request, simply ignore this email. If you did make this request, please follow the link below." 
+      body_button: "Reset Password!"      
 
   static_pages:
      home:
