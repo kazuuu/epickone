@@ -13,7 +13,7 @@ class UserOauthController < ApplicationController
     I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
           
     if current_user
-      if session["new_user"]
+      if session["new_user"] == true
         current_user.deliver_activation!
       end
       UserSession.create(current_user, true)
