@@ -18,7 +18,6 @@ gem 'globalize3'
 gem 'activeadmin'
 gem 'ActiveAdmin-Globalize3-inputs'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 
 
 # Bundle edge Rails instead:
@@ -43,6 +42,7 @@ group :assets do
   # gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '1.2.3'
+  gem 'jquery-ui-rails'
 end
 
 
