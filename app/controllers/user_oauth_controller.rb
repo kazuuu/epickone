@@ -9,7 +9,9 @@ class UserOauthController < ApplicationController
       flash[:notice] = "[Error] " + ex.message 
       logger.error "[Error] " + ex.message      
     end
-    I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
+    lang = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
+    lang = :"pt-BR" if lang == "pt"
+    I18n.locale = lang
           
     if current_user
       UserSession.create(current_user, true)
