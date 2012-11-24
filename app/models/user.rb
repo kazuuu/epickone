@@ -112,9 +112,7 @@ class User < ActiveRecord::Base
         elsif user = self.find_by_facebook_uid(uid)
           return user
         else
-          user = self.create_user_from_facebook(auth_hash)
-          Notifier.welcome(self).deliver
-          return user
+          return self.create_user_from_facebook(auth_hash)
         end
     end
   end
