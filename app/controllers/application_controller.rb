@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     if lang = request.env['HTTP_ACCEPT_LANGUAGE']
       lang = lang[/^[a-z]{2}/]
-#      lang = :"pt-BR" if lang == "pt"
+      lang = :"pt-BR" if lang == "pt"
     end
     I18n.locale = params[:locale] || lang || I18n.default_locale
   end

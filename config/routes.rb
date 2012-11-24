@@ -64,7 +64,6 @@ Pickone::Application.routes.draw do
     root to: 'static_pages#home'
   end  
   ActiveAdmin.routes(self)  
-#  resources :activations, :only => [ :new, :create, :edit, :update ]
   
   match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
   match '/auth/failure' => 'user_oauth#failure', :as => :failure
