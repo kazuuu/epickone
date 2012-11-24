@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
         end
       end
     end   
-    
+    @new_user=true
     self.create({
       :city => current_city,
 #      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
@@ -159,9 +159,7 @@ class User < ActiveRecord::Base
       :crypted_password => "facebook",
       :password_salt => "facebook",
       :persistence_token => "facebook"
-    })
-    deliver_activation!
-    
+    })    
   end
   def update_user_from_facebook(auth_hash)
     if auth_hash.extra.raw_info.birthday != ""

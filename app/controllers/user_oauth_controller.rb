@@ -4,6 +4,7 @@ class UserOauthController < ApplicationController
   end
   def create
     begin
+      @new_user = false
       @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
     rescue => ex
       flash[:notice] = "[Error] " + ex.message 
@@ -12,6 +13,9 @@ class UserOauthController < ApplicationController
     I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
           
     if current_user
+      if @new_user
+        current_user.deliver_activation!
+      end
       UserSession.create(current_user, true)
       redirect_to root_url, :notice => "Logged in"
     else
