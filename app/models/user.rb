@@ -170,6 +170,7 @@ class User < ActiveRecord::Base
     self.update_attributes({
       :facebook_uid => auth_hash.uid
         })
+    self.deliver_activation!
   end
 
     def image
