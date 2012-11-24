@@ -112,7 +112,9 @@ class User < ActiveRecord::Base
         elsif user = self.find_by_facebook_uid(uid)
           return user
         else
-          return self.create_user_from_facebook(auth_hash)
+          user = self.create_user_from_facebook(auth_hash)
+          Notifier.welcome(self).deliver
+          return user
         end
     end
   end
@@ -138,8 +140,7 @@ class User < ActiveRecord::Base
           current_city = auth_hash.extra.location.name
         end
       end
-    end
-    Notifier.welcome(self).deliver       
+    end       
     self.create({
       :city => current_city,
 #      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
