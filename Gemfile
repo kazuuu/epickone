@@ -17,6 +17,7 @@ gem 'rails-translate-routes'
 gem 'globalize3'
 gem 'activeadmin'
 gem 'ActiveAdmin-Globalize3-inputs'
+gem 'jquery-rails'
 
 
 # Bundle edge Rails instead:
@@ -44,7 +45,6 @@ group :assets do
   gem 'jquery-ui-rails'
 end
 
-gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
