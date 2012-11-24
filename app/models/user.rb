@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
         end
       end
     end   
-    @new_user=true
+    session["new_user"]=true
     self.create({
       :city => current_city,
 #      :state => auth_hash.extra.fetch('location', []).fetch('name', nil),
