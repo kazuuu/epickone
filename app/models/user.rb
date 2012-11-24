@@ -112,7 +112,8 @@ class User < ActiveRecord::Base
         elsif user = self.find_by_facebook_uid(uid)
           return user
         else
-          return self.create_user_from_facebook(auth_hash)
+          user=self.create_user_from_facebook(auth_hash) 
+          return user
         end
     end
   end
