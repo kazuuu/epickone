@@ -17,17 +17,18 @@ gem 'rails-translate-routes'
 gem 'globalize3'
 gem 'activeadmin'
 gem 'ActiveAdmin-Globalize3-inputs'
-gem 'jquery-rails'
 
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
+  gem 'jquery-rails'
   gem 'sqlite3', '1.3.5'
 end
 
 group :production do
+  gem 'jquery-rails'
   gem 'pg', '0.12.2'
 end
 
