@@ -12,7 +12,7 @@ class UserOauthController < ApplicationController
     I18n.locale = exctract_locale_from_url(request.env['omniauth.origin']) if request.env['omniauth.origin']
           
     if current_user
-      current_user.deliver_welcome!
+#      current_user.deliver_welcome!
       UserSession.create(current_user, true)
       redirect_to root_url, :notice => "Logged in"
     else

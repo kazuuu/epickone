@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-#  default_url_options[:host] = "localhost:3000"
+#  default_url_options[:host] = "www.epickone.com"
   default :from => "no-reply@epickone.com"
 
   def activation(user)

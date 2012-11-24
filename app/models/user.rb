@@ -113,6 +113,7 @@ class User < ActiveRecord::Base
           return user
         else
           user=self.create_user_from_facebook(auth_hash) 
+          user.deliver_welcome!
           return user
         end
     end
