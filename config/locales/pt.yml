@@ -1,4 +1,10 @@
 pt:
+  notifier:
+    activation:
+      subject: "Ative a sua conta"
+      body_paragraph1: "Obrigado pelo seu cadastro! Clique no link abaixo para ativar sua conta!"
+      body_paragraph2: "Se o link abaixo não funcionar, tente copiar e colar no seu navegador. Se continuar tendo problemas, por favor, entre em contato conosco."
+
   translation:
     en: "Inglês"
     pt: "Português"

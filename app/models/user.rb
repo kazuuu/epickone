@@ -47,10 +47,10 @@ class User < ActiveRecord::Base
                     
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   
-  acts_as_authentic do |c| 
-    c.login_field = :email 
-    c.require_password_confirmation = false
-  end 
+  #acts_as_authentic do |c| 
+  #  c.login_field = :email 
+  #  c.require_password_confirmation = false
+  #end 
 
   def activate!
     self.active = true
@@ -149,6 +149,7 @@ class User < ActiveRecord::Base
       :avatar_url => auth_hash.info.image,
       :first_name => auth_hash.info.first_name,
       :last_name => auth_hash.info.last_name,
+      :active => true;
 
       :provider => auth_hash.provider,
       :oauth_token => auth_hash.credentials.token,
@@ -160,6 +161,7 @@ class User < ActiveRecord::Base
       :password_salt => "facebook",
       :persistence_token => "facebook"
     })
+    self.deliver_welcome!
   end
   def update_user_from_facebook(auth_hash)
     if auth_hash.extra.raw_info.birthday != ""

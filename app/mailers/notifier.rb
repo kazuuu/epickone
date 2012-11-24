@@ -5,10 +5,9 @@ class Notifier < ActionMailer::Base
   def activation(user)
     @user = user    
     @url  = activation_url(@user.perishable_token)
-#    @url  = how_to_win_url
     mail(
         :to => user.email,
-        :subject => "Activation Instructions"  
+        :subject => t("notifier.activation.subject")  
       )
   end
 

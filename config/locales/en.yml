@@ -2,6 +2,12 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  notifier:
+    activation:
+      subject: "Activation Instructions"
+      body_paragraph1: "Thank you for creating an account! Click the url below to activate your account!"
+      body_paragraph2: "If the above URL does not work try copying and pasting it into your browser. If you continue to have problem, please feel free to contact us."
+
   translation:
     en: "English"
     pt: "Portuguese"
