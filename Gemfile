@@ -10,15 +10,15 @@ gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
 gem 'country-select', '1.1.1'
 gem 'omniauth-facebook', '1.4.0'
-gem 'omniauth-twitter'
-gem 'koala'
+gem 'omniauth-twitter', '0.0.13' #? 
+gem 'koala', '1.5.0' #?
 gem 'unicorn', '4.4.0'
 gem 'rails-translate-routes'
-gem 'globalize3'
-gem 'activeadmin'
-gem 'ActiveAdmin-Globalize3-inputs'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'globalize3', '0.2.0' #?
+gem 'activeadmin', '0.5.0' #?
+gem 'ActiveAdmin-Globalize3-inputs', '0.0.1' #?
+gem 'jquery-rails', '2.1.3' #? 
+gem 'jquery-ui-rails', '2.0.2' #?
 
 
 # Bundle edge Rails instead:
