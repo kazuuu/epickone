@@ -1,30 +1,60 @@
-<div>
-<% @cart.cartitems.each do |item| %>
+<div class="row">
+  <div class="span10 offset1">  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="span3">
+            Draw
+          </th>
+          <th class="span2">
+            Pick #
+          </th>
+          <th class="span2">
+            Quantity
+          </th>
+          <th class="span2">
+            Unit Price
+          </th>
+          <th class="span1">
+            Action
+          </th>
+        </tr>
+      </thead>
 
-<fieldset>
-  <div style="float:left;width:50px;">
-    <%= item.picked_number %>
-  </div>
-  <div style="float:left;width:100px;">
-    <%= item.draw.title%>
-  </div>
-  <div style="float:left;width:50px;">
-    <%= item.quantity%>
-  </div>
-  <div style="float:left;width:50px;">
-    <%= number_to_currency(item.unit_price)%>
-  </div>
-  <div style="float:left">
-    <%= link_to 'Remove', item, confirm: 'Are you sure?', method: :delete %></td>
-  </div>
-  </fieldset>
-<% end %>
+      <tbody>
+        <% @cart.cartitems.each do |item| %>
+        <tr>
+          <td>
+            <%= item.draw.title%>
+          </td>
+          <td>
+            <%= item.picked_number %>
+          </td>
+          <td>
+            <%= item.quantity%>
+          </td>
+          <td>
+            <%= number_to_currency(item.unit_price)%>
+          </td>
+          <td>
+            <%= link_to 'Remove', item, confirm: 'Are you sure?', method: :delete %></td>
+          </td>
+        </tr>
+        <% end %>
 
-
-TOTAL: <%= number_to_currency(@cart.total_price)%>
-</div>
-<% if @cart.total_price > 0 %>
-  <%= link_to "Check out", @cart.paypal_url(user_url(current_user), payment_notifications_url), :class => "btn btn-large btn-primary" %>
-<% else %>
-  <%= link_to "Your cart is empty", "#", :class => "btn btn-large btn-primary" %>
-<% end %>
+        <tr>
+          <td>
+            TOTAL: <%= number_to_currency(@cart.total_price)%>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row-fluid">
+    <% if @cart.total_price > 0 %>
+      <%= link_to "Check out", @cart.paypal_url(user_url(current_user), payment_notifications_url), :class => "btn btn-large btn-primary" %>
+    <% else %>
+      <%= link_to "Your cart is empty", "#", :class => "btn btn-large btn-primary" %>
+    <% end %> 
+    <p><small>For your security, we use PayPal to checkout. It's a trustful way to do it.</small></p>
+    </div> 
+</div> <!-- class row -->

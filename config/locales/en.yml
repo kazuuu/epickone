@@ -15,6 +15,10 @@ en:
     join: "Join"
     how_to_win: "How it Works"
 
+  translation:
+    en: "English"
+    pt-BR: "Portuguese"
+
   notifier:
     activation:
       subject: "Activation Instructions"

@@ -91,9 +91,17 @@ class User < ActiveRecord::Base
     if draw_id.nil?
       credits.to_a.sum(&:value)    
     else  
-      credits.find(:all, :conditions => "draw_id=" + draw_id.to_s).to_a.sum(&:value)
+      credits.find(:all, :conditions => "is_used='f' and draw_id=" + draw_id.to_s).to_a.sum(&:value)
     end
   end
+  
+  def total_free_credits(draw_id)
+    if draw_id.nil?
+      credits.to_a.sum(&:value)    
+    else  
+      credits.find(:all, :conditions => "credit_type='free' and draw_id=" + draw_id.to_s).to_a.sum(&:value)
+    end
+  end    
   
   def all_draws
     (self.draws + self.draw_owners).uniq

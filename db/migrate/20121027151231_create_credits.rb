@@ -6,6 +6,8 @@ class CreateCredits < ActiveRecord::Migration
       t.decimal :value
       t.string :credit_type
       t.string :comment
+      t.boolean :is_used, :default => false, :null => false   
+      t.datetime :used_at
 
       t.timestamps
     end

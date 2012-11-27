@@ -37,9 +37,8 @@
 
 <% end %>
 
-
-<div style="display:block;height:350px;">
-  <div class="cycle-slideshow"data-cycle-fx="fade" 
+<div class="row" style="height:350px;">
+  <div class="cycle-slideshow" data-cycle-fx="fade" 
     data-cycle-timeout="3000"
     data-cycle-slides="> div"
      >
@@ -53,13 +52,13 @@
          <%= link_to t("main.sign_up") + " " + t("main.now") + "!", new_user_path, class: "btn btn-large btn-primary" %>
          </div>
      </div>
- 
-       
+
+     
     <% @promo_draws.each do |promo_draw| 
        promo_image = promo_draw.draw_images.find(:first, :conditions => "image_type='main_banner'")
     %>
     	<div class="slide">
-        <%= link_to(image_tag(promo_image.image.url(:original), :style => "width:1000px;height:300px;" ), promo_draw) if !promo_image.nil? %>
+        <%= link_to(image_tag(promo_image.image.url(:original), :style => "width:940px;height:300px;" ), promo_draw) if !promo_image.nil? %>
         <h1><span style="color:yellow;top:50px;position:absolute;left:50px;"><%= t("page.home.headline3_first_game")%></span></h1>
         <span style="position:absolute;top:225px;left:50px;"><%= link_to t("main.join"), promo_draw, class: "btn btn-large btn-primary" %></span>
         <span style="position:absolute;top:225px;left:160px;"><%= link_to t("main.how_it_works"), how_to_win_path, class: "btn btn-large btn-primary" %></span>
@@ -69,27 +68,27 @@
 </div>
 
 
-
 <div class="row">
-    <% @draws.each_slice(3) do |row| %>
-      <% row.each do |col| %>
-      <div class="span4 center">
-        <div style="border-style:solid;border-width:1px;">
-          <h2><%= link_to(col.title, col) %></h2>
-          <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
-          <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
-          <p>
-          <% if  Time.now <= col.date_due %>
-            <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
-          <% else %>
-            <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
-          <% end %>
-          </p>
-        </div>
+  <div class="span12">
+    <% @draws_medium_banner.each_slice(3) do |row| %>
+      <div class="row-fluid">
+        <% row.each do |col| %>
+          <div class="span4 center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
+            <h2><%= link_to(col.title, col) %></h2>
+            <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+            <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
+            <p>
+            <% if  Time.now <= col.date_due %>
+              <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+            <% else %>
+              <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+            <% end %>
+            </p>
+          </div>
+        <% end %>
       </div>
-      
-      <% end%>
     <% end %>
+  </div>
 </div>
 
 

@@ -1,7 +1,5 @@
 pt:
   main:
-    en: "Inglês"
-    pt: "Português"
     home: "Home"
     how_to_win: "Como Ganhar"
     games: "Jogos"
@@ -11,6 +9,10 @@ pt:
     now: "agora"
     join: "Participe"
     how_to_win: "Como funciona"
+    
+  translation:
+    en: "Inglês"
+    pt-BR: "Português"
 
   notifier:
     activation:

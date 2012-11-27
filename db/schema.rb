@@ -79,8 +79,10 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.decimal  "value"
     t.string   "credit_type"
     t.string   "comment"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.boolean  "is_used",     :default => false, :null => false
+    t.datetime "used_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "draw_images", :force => true do |t|

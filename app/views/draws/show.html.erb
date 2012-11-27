@@ -9,7 +9,7 @@
 
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <div>  
+  <div class="span3">  
     <aside style="float:left;">
       <section>
         <%= image_tag @draw.avatar.url(:thumb) %>
@@ -23,19 +23,32 @@
         </p>
         <p>
           <b>Credits available:</b>
-          <% 
-          credits = nil
-          credits = current_user.credits.find(:first, :joins => :draw, :conditions => "credit_type= 'free' and draw_id="+@draw.id.to_s, :select => "sum(value) as value", :group => "draw_id") if !current_user.nil?
-          %>
-          
-          <%= credits.value.to_s if !credits.nil? %>
+          <%= current_user.total_credits(@draw.id.to_s)%>
 
         </p>
         
       </section>
     </aside>
+    <% if  Time.now <= @draw.date_due %>
+      <% if @draw.join_type == "questions" %>
+        <%= link_to "Click to Answer and Join", join_questions_draw_path(), :class => "btn btn-large btn-primary" %>    
+      <% else %>
+        <p><%= link_to "Click to Join",  pick_a_number_draw_path, :class => "btn btn-large btn-primary" %></p>
+        
+        <p>
+        </p>
+        <p><%= link_to "Buy credits",  pick_a_number_draw_path, :class => "btn btn-large btn-primary" %></p>
+      <% end %>
+      
+      
+      
+      
+    <% else %>
+      <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+    <% end %>
+    
   </div>
-  <div>
+  <div class="span9">
     <p>
       <b>Title:</b>
       <%= @draw.title %>
@@ -44,29 +57,9 @@
     <p>
       <b>Description:</b>
       <%= simple_format(@draw.description) %>
-    </p>  
-    <p style="text-align:right;">
-      <% if  Time.now <= @draw.date_due %>
-
-<% if @draw.join_type == "questions" %>
-    <%= link_to "Click to Answer and Join", join_questions_draw_path(), :class => "btn btn-large btn-primary" %>    
-
-
-
-<% else %>
-  <%= link_to "Click to Join",  pick_a_number_draw_path, :class => "btn btn-large btn-primary" %>      
-<% end %>
-
-<% else %>
-  <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
-<% end %>
-
     </p>
-
-  </div
-</div>
-
-
+  </div>  
+</div>  
 
 
 
