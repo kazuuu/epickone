@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.text     "instruction"
     t.integer  "join_min"
     t.integer  "join_max"
-    t.boolean  "enable",              :default => false
+    t.boolean  "enable"
     t.string   "covering_area"
     t.string   "join_type"
     t.decimal  "price_original"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "draws", ["user_id", "created_at"], :name => "index_draws_on_user_id_and_created_at"
@@ -211,5 +211,8 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
+
+  add_index "users", ["perishable_token", "email"], :name => "index_users_on_perishable_token_and_email"
+  add_index "users", ["phone_mobile"], :name => "index_users_on_phone_mobile", :unique => true
 
 end

@@ -35,6 +35,7 @@ class CreateUsers < ActiveRecord::Migration
             
       t.timestamps
     end
-    add_index :users, [:perishable_token, :email]    
+    add_index :users, [:perishable_token, :email]  
+    add_index :users, :phone_mobile, :unique => true  
   end
 end
