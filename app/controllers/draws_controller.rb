@@ -1,4 +1,6 @@
 class DrawsController < ApplicationController
+  before_filter :require_user,  :only => [:join_questions, :questions_check, :pick_a_number, :add_cart, :results]
+
   require 'will_paginate/array'
 
   #before_filter :require_user
@@ -27,78 +29,11 @@ class DrawsController < ApplicationController
     end
   end
 
-  # GET /draws/new
-  # GET /draws/new.json
-  def new
-    @draw = Draw.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @draw }
-    end
-  end
-
-  # GET /draws/1/edit
-  def edit
-    @draw = Draw.find(params[:id])
-  end
-
-  # POST /draws
-  # POST /draws.json
-  def create
-    # @draw = Draw.new(params[:draw])    
- 
-    @draw = current_user.draws.build(params[:draw]) 
-
- 
-    respond_to do |format|
-      if @draw.save
-        format.html { redirect_to @draw, notice: 'Registration successfull.' }
-        format.json { render json: @draw, status: :created, location: @draw }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @draw.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-
-  # PUT /draws/1
-  # PUT /draws/1.json
-  def update
-    @draw = Draw.find(params[:id])
-
-    respond_to do |format|
-      if @draw.update_attributes(params[:draw])
-        format.html { redirect_to @draw, notice: 'Draw was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @draw.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /draws/1
-  # DELETE /draws/1.json
-  def destroy
-    @draw = Draw.find(params[:id])
-    @draw.destroy
-
-    respond_to do |format|
-      format.html { redirect_to draws_url }
-      format.json { head :no_content }
-    end
-  end
 
   def join_questions
     @draw = Draw.find(params[:id])
   end
 
-  def join_paid
-    @draw = Draw.find(params[:id])
-  end
-  
   def questions_check
     @draw = Draw.find(params[:id])
     @bOk = true;
@@ -134,13 +69,6 @@ class DrawsController < ApplicationController
     @draw = Draw.find(params[:id])
     @cartitems_already = current_user.cartitems.find(:all, :joins => :cart, :conditions => 'carts.purchased_at is not null and draw_id=' + @draw.id.to_s, :order => "picked_number ASC")
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
-    @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
-  end
-  def pick_a_number_promo
-    session[:draw_id] = params[:id]
-    @draw = Draw.find(params[:id])
-    @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
-
     @cartitems = current_cart.cartitems.find(:all, :conditions => 'draw_id = ' + params[:id])
   end
   def add_cart
@@ -186,30 +114,6 @@ class DrawsController < ApplicationController
       end
     end
   end    
-  def join_promo
-    @draw = Draw.find(params[:id])
-
-    @new_cart = current_user.carts.build()
-    @new_cart.purchased_at = Time.now
-    @new_cart.save
-    
-    @cartitem = @new_cart.cartitems.build(:draw_id => params[:id])
-    @cartitem.user_id = current_user.id
-    @cartitem.quantity = 1
-    @cartitem.unit_price = 0
-    @cartitem.picked_number = params[:number]
-    @cartitem.save
-    
-    @credit = current_user.credits.find(:first, :conditions => "is_used = 'f' and draw_id =" + params[:id])
-    @credit.update_attributes({
-      :used_at => Time.now,
-      :is_used => true
-        })    
-            
-    flash[:success] = "Congratulations! You've joined."
-    redirect_to root_path
-  end
-
   def results
     @draw = Draw.find(params[:id])
     @max_number = @draw.cartitems.maximum(:picked_number)

@@ -23,7 +23,7 @@
         </p>
         <p>
           <b>Credits available:</b>
-          <%= current_user.total_credits(@draw.id.to_s)%>
+          <%= current_user.total_credits(@draw.id.to_s) if current_user%>
 
         </p>
         

@@ -4,18 +4,6 @@ ActiveAdmin.register Draw do
       f.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => f.object.avatar.nil? ? f.template.content_tag(:span, "No Image Yet") : f.template.image_tag(f.object.avatar.url(:thumb)) 
       f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 
-      f.input :join_type
-      f.input :join_min
-      f.input :join_max
-      f.input :enable
-      f.input :covering_area
-      f.input :price_original
-      f.input :price_ticket
-      f.input :date_due
-      f.input :date_start
-      f.input :site_position
-      f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
-
       f.globalize_inputs :translations do |lf|
         lf.inputs do
           lf.input :title
@@ -25,7 +13,20 @@ ActiveAdmin.register Draw do
 
           lf.input :locale, :as => :hidden
         end
-      end      
+      end
+      f.input :enable
+      f.input :join_type
+      f.input :site_position
+      f.input :date_due
+      f.input :date_start
+      f.input :price_ticket
+      f.input :price_original
+
+      f.input :join_min
+      f.input :join_max
+      f.input :covering_area
+      f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
+
     end
     
     f.has_many :draw_images do |di|
@@ -45,11 +46,9 @@ ActiveAdmin.register Draw do
         q.input :_destroy, :as => :boolean, :label => "delete"
       end
       q.inputs "Question", :multipart => true do
-        q.input :position         
-        q.input :style         
         q.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => q.object.avatar.nil? ? q.template.content_tag(:span, "No Image Yet") : q.template.image_tag(q.object.avatar.url(:thumb)) 
         q.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
-        
+
         q.globalize_inputs :translations do |qt|
           qt.inputs do
             qt.input :title
@@ -58,6 +57,9 @@ ActiveAdmin.register Draw do
             qt.input :locale, :as => :hidden
           end
         end      
+        q.input :position         
+        q.input :style         
+        
       end
 
 
@@ -66,8 +68,6 @@ ActiveAdmin.register Draw do
           a.input :_destroy, :as => :boolean, :label => "delete"
         end
         a.inputs "Answer", :multipart => true do
-          a.input :iscorrect
-          a.input :position
           a.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => a.object.avatar.nil? ? a.template.content_tag(:span, "No Image Yet") : a.template.image_tag(a.object.avatar.url(:thumb)) 
           a.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 
@@ -80,6 +80,8 @@ ActiveAdmin.register Draw do
             end
           end      
 
+          a.input :iscorrect
+          a.input :position
         end
       end
     end
