@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
                   :zipcode,
                   :phone_mobile,
                   :admin_flag,
+                  :avatar_url,
                   :avatar,
                   :avatar_delete,
                   :facebook_uid,
