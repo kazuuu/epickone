@@ -5,6 +5,7 @@ ActiveAdmin.register User do
             f.template.content_tag(:span, "No Image Yet") : 
             f.template.image_tag(f.object.avatar.url(:thumb)) 
             f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
+          f.input :avatar_url
           f.input :email
           f.input :first_name
           f.input :last_name
