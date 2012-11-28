@@ -1,6 +1,11 @@
 <div class="row">
   <aside class="span4">
     <section>
+      <p>
+      <% unless @user.avatar_url.blank? %>
+        Avatar: <%= image_tag @user.avatar_url %>
+      <% end %>
+      </p>
       <h1>
         <%= image_tag @user.avatar.url(:thumb) %>
         <%= @user.first_name %> <br>
@@ -14,6 +19,3 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
-<% unless @user.avatar_url.blank? %>
-  Avatar: <%= image_tag @user.avatar_url %>
-<% end %>

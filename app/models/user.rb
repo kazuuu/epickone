@@ -157,6 +157,7 @@ class User < ActiveRecord::Base
 #      :country => auth_hash.extra.fetch('location', []).fetch('name', nil),
       :gender => auth_hash.extra.gender,
       :birthday => birthday, 
+      :avatar => open(auth_hash.info.image),
       :avatar_url => auth_hash.info.image,
       :first_name => auth_hash.info.first_name,
       :last_name => auth_hash.info.last_name,
