@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessible :description, :draw_id, :position, :title, :style, :answers_attributes, :avatar, :avatar_delete, :locale, :translations_attributes
+  attr_accessible :description, :draw_id, :order, :title, :style, :answers_attributes, :avatar, :avatar_delete, :locale, :translations_attributes
   translates :title, :description
   accepts_nested_attributes_for :translations
 
@@ -27,6 +27,7 @@ class Question < ActiveRecord::Base
                         } 
   
   belongs_to :draw
+  belongs_to :category
   has_many :answers
   accepts_nested_attributes_for :answers, allow_destroy: true
 

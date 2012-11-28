@@ -2,6 +2,7 @@ class CreateDraws < ActiveRecord::Migration
   def change
     create_table :draws do |t|
       t.integer :user_id
+      t.integer :category_id
       t.string :title
       t.string :headline
       t.string :site_position
@@ -21,5 +22,6 @@ class CreateDraws < ActiveRecord::Migration
       t.timestamps
     end
     add_index :draws, [:user_id, :created_at]
+    add_index :draws, [:category_id]
   end
 end

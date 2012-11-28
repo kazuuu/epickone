@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122032037) do
+ActiveRecord::Schema.define(:version => 20121128183831) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
   create_table "answers", :force => true do |t|
     t.string   "answer_text"
     t.text     "description"
-    t.integer  "position"
+    t.integer  "order"
     t.integer  "iscorrect"
     t.integer  "question_id"
     t.string   "avatar_file_name"
@@ -72,6 +72,26 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "order"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "category_translations", :force => true do |t|
+    t.integer  "category_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
+  add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
 
   create_table "credits", :force => true do |t|
     t.integer  "draw_id"
@@ -112,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
 
   create_table "draws", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "category_id"
     t.string   "title"
     t.string   "headline"
     t.string   "site_position"
@@ -134,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
     t.datetime "updated_at",          :null => false
   end
 
+  add_index "draws", ["category_id"], :name => "index_draws_on_category_id"
   add_index "draws", ["user_id", "created_at"], :name => "index_draws_on_user_id_and_created_at"
 
   create_table "payment_notifications", :force => true do |t|
@@ -160,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20121122032037) do
   create_table "questions", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "position"
+    t.integer  "order"
     t.string   "style"
     t.integer  "draw_id"
     t.string   "avatar_file_name"

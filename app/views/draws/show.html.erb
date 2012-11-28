@@ -14,6 +14,10 @@
       <section>
         <%= image_tag @draw.avatar.url(:thumb) %>
         <p>
+          <b>Category:</b>
+          <%= @draw.category.title %>
+        </p>
+        <p>
           <b>Owner Id:</b>
           <%= @draw.user_id %>
         </p>
@@ -37,7 +41,6 @@
         
         <p>
         </p>
-        <p><%= link_to "Buy credits",  pick_a_number_draw_path, :class => "btn btn-large btn-primary" %></p>
       <% end %>
       
       

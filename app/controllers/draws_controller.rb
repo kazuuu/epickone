@@ -21,7 +21,7 @@ class DrawsController < ApplicationController
   # GET /draws/1
   # GET /draws/1.json
   def show
-    @draw = Draw.find(params[:id])
+    @draw = Draw.find(params[:id], :joins => :category)
 
     respond_to do |format|
       format.html # show.html.erb

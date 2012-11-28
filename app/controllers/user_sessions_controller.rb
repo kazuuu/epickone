@@ -33,10 +33,10 @@ class UserSessionsController < ApplicationController
           @user.deliver_activation!
           format.html { redirect_to(root_path, :notice => 'Sorry, before you can sign in you need to confirm your email address. We have just sent a confirmation again.') }
           format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
-          
-        else
-          redirect_to root_url
-        end
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
+      end
     end
   end
 

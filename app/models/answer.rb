@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :description, :iscorrect, :position, :question_id, :answer_text, :avatar, :avatar_delete, :locale, :translations_attributes
+  attr_accessible :description, :iscorrect, :order, :question_id, :answer_text, :avatar, :avatar_delete, :locale, :translations_attributes
   before_save :destroy_avatar?
   translates :answer_text, :description
   accepts_nested_attributes_for :translations

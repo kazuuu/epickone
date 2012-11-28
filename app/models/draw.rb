@@ -2,7 +2,7 @@ class Draw < ActiveRecord::Base
   #  default_scope order: 'draws.created_at DESC'
 
   attr_accessible :headline, :description, :instruction, :title, :avatar, :join_type, :join_min, :join_max, :enable, :covering_area, :price_original, :price_ticket, :date_due, :date_start, :user_id, :questions_attributes,
-                  :avatar, :avatar_delete, :site_position, :draw_images_attributes, :locale, :translations_attributes
+                  :avatar, :avatar_delete, :site_position, :draw_images_attributes, :locale, :translations_attributes, :category_id
 
   translates :title, :headline, :description, :instruction                  
   accepts_nested_attributes_for :translations
@@ -29,6 +29,7 @@ class Draw < ActiveRecord::Base
   before_save :destroy_avatar?
   
   belongs_to :user
+  belongs_to :category
     
   has_many :carts
   has_many :cartitems

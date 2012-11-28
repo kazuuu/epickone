@@ -25,6 +25,7 @@ ActiveAdmin.register Draw do
       f.input :join_min
       f.input :join_max
       f.input :covering_area
+      f.input :category_id, :as => :select, :collection => Category.all.map {|u| [u.title, u.id]}, :include_blank => false
       f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
 
     end
@@ -57,7 +58,7 @@ ActiveAdmin.register Draw do
             qt.input :locale, :as => :hidden
           end
         end      
-        q.input :position         
+        q.input :order         
         q.input :style         
         
       end
@@ -81,7 +82,7 @@ ActiveAdmin.register Draw do
           end      
 
           a.input :iscorrect
-          a.input :position
+          a.input :order
         end
       end
     end
