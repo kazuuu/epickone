@@ -2,10 +2,6 @@
   <aside class="span4">
     <section>
       <p>
-      <% unless @user.avatar_url.blank? %>
-        Avatar: <%= image_tag @user.avatar_url + ".jpg" %>
-      <% end %>
-      </p>
       <h1>
         <%= image_tag(@user.avatar.url(:thumb), :style => "width:100px;height:100px;" ) %>
         <%= @user.first_name %> <br>
