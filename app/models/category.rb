@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  attr_accessible :description, :order, :title, :translations_attributes
+  attr_accessible :description, :order, :title, :translations_attributes, :site_position
   has_many :draws
 
   translates :title, :description

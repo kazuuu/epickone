@@ -67,28 +67,66 @@
   </div>
 </div>
 
-
 <div class="row">
-  <div class="span12">
-    <% @draws_medium_banner.each_slice(3) do |row| %>
-      <div class="row-fluid">
-        <% row.each do |col| %>
-          <div class="span4 center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
-            <h2><%= link_to(col.title, col) %></h2>
-            <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
-            <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
-            <p>
-            <% if  Time.now <= col.date_due %>
-              <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
-            <% else %>
-              <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
-            <% end %>
-            </p>
-          </div>
+  <div class="span4">
+    <h2>
+      Promocionais
+    </h2>
+    <% @draws_promos.each do |col| %>
+      <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
+        <h2><%= link_to(col.title, col) %></h2>
+        <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+        <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
+        <p>
+        <% if  Time.now <= col.date_due %>
+          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+        <% else %>
+          <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
         <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+  <div class="span4">
+    <h2>
+      Bolsas
+    </h2>
+    <% @draws_purses.each do |col| %>
+      <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
+        <h2><%= link_to(col.title, col) %></h2>
+        <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+        <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
+        <p>
+        <% if  Time.now <= col.date_due %>
+          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+        <% else %>
+          <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+        <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+  <div class="span4">
+    <h2>
+      Eletronicos
+    </h2>
+    <% @draws_eletronics.each do |col| %>
+      <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
+        <h2><%= link_to(col.title, col) %></h2>
+        <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+        <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
+        <p>
+        <% if  Time.now <= col.date_due %>
+          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+        <% else %>
+          <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+        <% end %>
+        </p>
       </div>
     <% end %>
   </div>
 </div>
+
+
 
 
