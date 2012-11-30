@@ -62,6 +62,9 @@ ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.y
 Pickone::Application.routes.draw do
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
     root to: 'static_pages#home'
+    
+    # handles /valid-locale/fake-path
+    match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
   end  
 
   ActiveAdmin.routes(self)  

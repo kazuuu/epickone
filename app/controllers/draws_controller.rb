@@ -98,7 +98,7 @@ class DrawsController < ApplicationController
         flash[:notice] = "You have no more free credits for this draw"
         redirect_to pick_a_number_draw_path        
       end
-    elsif 'paid'
+    elsif @draw.join_type == 'paid'
       @cartitem = current_cart.cartitems.build(:draw_id => params[:id])
       @cartitem.user_id = current_user.id
       @cartitem.quantity = 1
@@ -112,6 +112,8 @@ class DrawsController < ApplicationController
         flash[:notice] = "error!."
         redirect_to pick_a_number_draw_path
       end
+    else
+      raise "draw.join_type is missing"
     end
   end    
   def results

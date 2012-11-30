@@ -20,6 +20,7 @@ gem 'activeadmin', '0.5.0'
 gem 'ActiveAdmin-Globalize3-inputs', '0.0.1' 
 gem 'jquery-rails', '2.1.3' 
 gem 'jquery-ui-rails', '2.0.2' 
+gem 'exception_notification', '3.0.0'
 
 
 # Bundle edge Rails instead:

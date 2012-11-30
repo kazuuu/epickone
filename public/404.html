@@ -12,14 +12,58 @@
       border-right-color: #999;
       border-bottom-color: #999;
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    h1 { font-size: 150px; color: #000; line-height: 1em; }
+
+    .e404 {
+      background-repeat:no-repeat;
+      background-position:center;
+      background-image: url(/assets/404.jpg);
+    }
+    
+    .header {
+      position:absolute;
+      top:0px;
+      left:0px;
+      height:50px;
+      width:100%;
+      background-color:#000;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;      
+    }
+    
+    .logo {
+      float:left;
+      margin-top:12px;
+      margin-left:20px;
+      color: #fff;
+      
+      font-size: 20px;
+      font-weight:bold;
+    }
+    
+    .logo a:hover {
+      color: #fff;      
+    }
+    .logo a {
+      text-decoration:none;
+      color: #fff;      
+    }
+
   </style>
 </head>
 
 <body>
+    <header class="header"> 
+    <div class="logo">
+      <div class="container">
+        <a href="http://www.epickone.com" id="logo">ePick One</a> 
+      </div>
+    </div>
+  </header>
+  
+  
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
+  <div class="dialog e404">
+    <h1>404</h1>
     <p>You may have mistyped the address or the page may have moved.</p>
   </div>
 </body>

@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
     
   private
-  
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -97,5 +97,18 @@ class ApplicationController < ActionController::Base
       @current_cart
     
     end
-  end  
+  end 
+  
+  protected
+  
+  def rescue_action_in_public(exception)
+    case exception
+    when ActiveRecord::RecordNotFound
+      render :file => "#{RAILS_ROOT}/puclic/404.html", :status => 404
+    else
+      super
+    end
+  end
+    
+     
 end

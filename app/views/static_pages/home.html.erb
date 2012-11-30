@@ -37,6 +37,8 @@
 
 <% end %>
 
+<% content_for :wide do %>
+
 <div class="row" style="height:500px;">
   <div class="cycle-slideshow" data-cycle-fx="fade" 
     data-cycle-timeout="3000"
@@ -49,12 +51,14 @@
     %>
     	<div class="slide">
         <%= link_to(image_tag(promo_image.image.url(:original), :style => "width:100%;height:450px;", :width => "100%" ), promo_draw) if !promo_image.nil? %>
+        <span style="position:absolute;top400px;left:100px;">
+          <%= link_to "CONCORRA AGORA MESMO!", promo_draw, :class => "btn btn-black btn-bigger btn-primary" %>
+        </span>
       </div>
     <% end %>  
   </div>
 </div>
-
-<div class="container">
+<% end %>
 <div class="row">
   <div class="span4">
     <h2>
@@ -67,9 +71,9 @@
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
-          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+          <%= link_to "Join this draw", col, :class => "btn btn-black btn-large btn-primary" %>
         <% else %>
-          <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
         <% end %>
         </p>
       </div>
@@ -86,9 +90,9 @@
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
-          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+          <%= link_to "Join this draw", col, :class => "btn btn-black btn-large btn-primary" %>
         <% else %>
-          <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
         <% end %>
         </p>
       </div>
@@ -105,15 +109,14 @@
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
-          <%= link_to "Join this draw", col, :class => "btn btn-large btn-primary" %>
+          <%= link_to "Join this draw", col, :class => "btn btn-black btn-large btn-primary" %>
         <% else %>
-          <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
         <% end %>
         </p>
       </div>
     <% end %>
   </div>
-</div>
 </div>
 
 
