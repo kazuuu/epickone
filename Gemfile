@@ -8,7 +8,11 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
-gem 'country-select', '1.1.1'
+gem 'carmen'
+gem 'i18n_country_select'
+
+# gem "localized_country_select", "~> 0.0.1"
+# gem "country-select", "~> 1.1.1"
 gem 'omniauth-facebook', '1.4.0'
 
 gem 'omniauth-twitter', '0.0.13' 

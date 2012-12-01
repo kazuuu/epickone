@@ -52,7 +52,7 @@
     	<div class="slide">
         <%= link_to(image_tag(promo_image.image.url(:original), :style => "width:100%;height:450px;", :width => "100%" ), promo_draw) if !promo_image.nil? %>
         <span style="position:absolute;top400px;left:100px;">
-          <%= link_to "CONCORRA AGORA MESMO!", promo_draw, :class => "btn btn-black btn-bigger btn-primary" %>
+          <% # link_to "CONCORRA AGORA MESMO!", promo_draw, :class => "btn btn-black btn-bigger btn-primary" %>
         </span>
       </div>
     <% end %>  
