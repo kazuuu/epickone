@@ -18,7 +18,6 @@ class UserSessionsController < ApplicationController
   def create
     session[:cart_id] = nil
     session[:cart_count] = nil
-    session[:free_credits] = nil
     @user_session = UserSession.new(params[:user_session])
     respond_to do |format|
       if @user_session.save

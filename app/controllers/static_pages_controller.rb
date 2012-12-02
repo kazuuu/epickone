@@ -1,5 +1,20 @@
 class StaticPagesController < ApplicationController
   def home
+      if !params[:country].nil?
+        
+        if session[:country_code_alpha2] != params[:country][:code_alpha2]
+          session[:country_code_alpha2] = params[:country][:code_alpha2]
+          if params[:country][:code_alpha2] =="BR"
+            I18n.locale = :"pt-BR"
+          elsif params[:country][:code_alpha2] =="US"
+            I18n.locale = :en
+          end
+          # redirect_to root_path
+        end
+      end
+    
+    
+    
     unless params[:locale]
       # it takes I18n.locale from the previous example set_locale as before_filter in application controller
 #      redirect_to eval("root_#{I18n.locale}_path")

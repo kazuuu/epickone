@@ -40,7 +40,7 @@
           <% @cartitems_already.each do |item| %>
           <tr>
             <td><%= item.picked_number %></td>
-            <td><%= item.unit_price %></td>
+            <td><%= number_to_currency(item.unit_price) %></td>
             <td></td>
           </tr>
           <% end%>
@@ -116,7 +116,7 @@
           <% cart_total = cart_total + (item.unit_price * item.quantity) %>
           <tr>
             <td><%= item.picked_number %></td>
-            <td><%= item.unit_price %></td>
+            <td><%= number_to_currency(item.unit_price) %></td>
             <td><%= link_to 'Remove', item, confirm: 'Are you sure?', method: :delete %></td>
           </tr>
         <% end %>
@@ -127,15 +127,15 @@
         <tbody>
           <tr>
             <td>Full price</td>
-            <td><%= cart_total %></td>
+            <td><%= number_to_currency(cart_total) %></td>
           </tr>
           <tr>
             <td>Discount</td>
-            <td><%= discount%></td>
+            <td><%= number_to_currency(discount)%></td>
           </tr>
           <tr>
             <th>Grand Total</th>
-            <td><%= cart_total - discount %></td>
+            <td><%= number_to_currency(cart_total - discount) %></td>
           </tr>
           <tr>
             <td colspan="2">

@@ -1,7 +1,7 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
+ie:
   main:
     en: "English"
     pt: "Portuguese"
@@ -328,4 +328,4 @@ en:
         submit: "Change my password"
       links:
         sign_in: "Sign in"
-        forgot_your_password: "Forgot your password?"      
+        forgot_your_password: "Forgot your password?"

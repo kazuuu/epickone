@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128183831) do
+ActiveRecord::Schema.define(:version => 20121201180636) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -94,6 +94,17 @@ ActiveRecord::Schema.define(:version => 20121128183831) do
 
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.string   "code_alpha2"
+    t.string   "code_alpha3"
+    t.string   "code_numeric"
+    t.string   "code_language"
+    t.string   "currency"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "credits", :force => true do |t|
     t.integer  "draw_id"
@@ -193,6 +204,14 @@ ActiveRecord::Schema.define(:version => 20121128183831) do
     t.datetime "avatar_updated_at"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.integer  "country_id"
+    t.string   "code_alpha2"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "user_sessions", :force => true do |t|

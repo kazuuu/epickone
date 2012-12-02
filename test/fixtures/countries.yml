@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  code_alpha2: MyString
+  code_alpha3: MyString
+  code_numeric: MyString
+  code_language: MyString
+  currency: MyString
+
+two:
+  name: MyString
+  code_alpha2: MyString
+  code_alpha3: MyString
+  code_numeric: MyString
+  code_language: MyString
+  currency: MyString
