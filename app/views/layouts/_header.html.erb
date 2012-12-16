@@ -8,14 +8,6 @@
       </a>      
       <%= link_to "ePick One", root_path, id: "logo" %>
 
-      <%= form_tag root_path do %>
-        <% # text_field_tag "account", "default info" %>
-        <%= collection_select(:country, :code_alpha2, Country.order(:name), :code_alpha2, :name, params[:country].nil? ? {:prompt => "Selecione"} : {:selected => params[:country][:code_alpha2]}, {:onchange => 'this.form.submit()'}) %>
-        <% # select_tag("country", options_from_collection_for_select(Country.order(:name), :code_alpha2, :name), {:selected => "US", :onchange => 'this.form.submit()'} ) %>
-        <%= collection_select(:state, :state_id, State.order(:name), :id, :name, :prompt => 'Please select State') %>
-
-        <% # submit_tag "Save" %>
-      <% end %>
       
       
       <nav>
@@ -28,7 +20,16 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to t("countries.BR"), locale: "pt-BR" %></li>
-              <li><%= link_to t("countries.US"), locale: "en" %></li> 
+              <li><%= link_to t("countries.US"), locale: "en-US" %></li> 
+              <li><%= link_to t("countries.IE"), locale: "en-IE" %></li> 
+            </ul>
+          </li>
+          <li id="fat-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+              <%= t "main.city" %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t("cities.sao_paulo"), session["city"] = "Sao Paulo"  %></li>
             </ul>
           </li>
         </ul>

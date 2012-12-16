@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
-
+  
   private
   def set_locale
     if lang = request.env['HTTP_ACCEPT_LANGUAGE']
@@ -22,8 +22,7 @@ class ApplicationController < ActionController::Base
       lang = :"pt-BR" if lang == "pt"
     end
     I18n.locale = params[:locale] || lang || I18n.default_locale
-  end
-    
+  end    
   def default_url_options(options = {})
     {locale: I18n.locale}
   end

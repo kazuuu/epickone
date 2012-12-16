@@ -34,15 +34,15 @@ class User < ActiveRecord::Base
   has_many :cartitems
                   
   before_save :destroy_avatar?
-  has_attached_file :avatar, 
-                    :styles => { :medium => "200x200>", :thumb => "100x100>" }, 
-                    :default_url => '/images/missing.png',
-                    :storage => :s3,
-                    :bucket => 'pkone',
-                    :s3_credentials => {
-                    :access_key_id => 'AKIAJX6GVL3O5HFMIBJA',
-                          :secret_access_key => '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'
-                        } 
+  has_attached_file  :avatar, 
+                     :styles => { :thumb => "100x100>" }, 
+                     :storage => :s3,
+                     :bucket => 'pkone',
+                     :s3_credentials => {
+                         :access_key_id => 'AKIAJX6GVL3O5HFMIBJA',
+                         :secret_access_key => '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'
+                       },
+                     :default_url => '/images/missing.png'
                     
                     
                     

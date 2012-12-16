@@ -1,7 +1,7 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
+en-IE:
   main:
     en: "English"
     pt: "Portuguese"
@@ -11,12 +11,14 @@ en:
     sign_up: "Sign Up"
     login: "Login"
     country: "Country"
+    city: "City"
     now: "now"
     join: "Join"
     how_to_win: "How it Works"
 
   translation:
-    en: "English"
+    en-US: "United States"
+    en-IE: "Ireland"
     pt-BR: "Portuguese"
 
   notifier:
@@ -328,4 +330,7 @@ en:
         submit: "Change my password"
       links:
         sign_in: "Sign in"
-        forgot_your_password: "Forgot your password?"      
+        forgot_your_password: "Forgot your password?"
+  cities:
+    sao_paulo: "Sao Paulo"
+        

@@ -1,70 +1,79 @@
 Pickone::Application.routes.draw do
-#  scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
-  resources :users do
-    get 'credits', :on => :member 
-    get 'wincredits', :on => :member 
-    get 'facebook_share_draw', :on => :member 
-    get 'resend_activation', :on => :member     
-  end
+  # scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
+  # scope ":locale_city", site_city: /#{LOCALE_CITY_AVAILABLE.join("|")}/ do
+    resources :users do
+      get 'credits', :on => :member 
+      get 'wincredits', :on => :member 
+      get 'facebook_share_draw', :on => :member 
+      get 'resend_activation', :on => :member     
+    end
 
-  resources :password_resets, :only => [ :new, :create, :edit, :update ]
-  resources :user_sessions
+    resources :password_resets, :only => [ :new, :create, :edit, :update ]
+    resources :user_sessions
 
-  resources :credits
-
-
-  resources :answers
-
-  resources :questions
-
-  resources :draw_images
-
-  get "account/account"
-
-  resources :draws do
-    get 'results', :on => :member 
-    get 'join_promo', :on => :member 
-    get 'join_paid', :on => :member 
-    get 'join_questions', :on => :member
-    post 'questions_check', :on => :member
-    get 'pick_a_number', :on => :member
-    get 'pick_a_number_promo', :on => :member
-    get 'add_cart', :on => :member
-  end
-
-  resources :carts do
-    get 'checkout', :on => :member
-    get 'payment_not_needed', :on => :member
-  end
-  resources :cartitems
-  resources :payment_notifications
-
-  
-  match '/how_to_win',    to: 'static_pages#how_to_win'
-  match '/help',    to: 'static_pages#help'
-  match '/about',   to: 'static_pages#about'
-  match '/contact', to: 'static_pages#contact'
-  match '/admin', to: 'admin#admin'
-
-  match 'login' => 'user_sessions#new', :as => :login
-  match 'logout' => 'user_sessions#destroy', :as => :logout
-  match '/activation/:activation_code', to: 'activation#create', :as => 'activation'
-
-#  end  
+    resources :credits
 
 
-#  match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
-#  match '', to: redirect("/#{I18n.default_locale}")
+    resources :answers
+
+    resources :questions
+
+    resources :draw_images
+    
+    resources :lacale_city do
+      get 'sao_paulo', :on => :member 
+      get 'rio_de_janeiro', :on => :member 
+    end
+    
+    get "account/account"
+
+    resources :draws do
+      get 'results', :on => :member 
+      get 'join_promo', :on => :member 
+      get 'join_paid', :on => :member 
+      get 'join_questions', :on => :member
+      post 'questions_check', :on => :member
+      get 'pick_a_number', :on => :member
+      get 'pick_a_number_promo', :on => :member
+      get 'add_cart', :on => :member
+    end
+
+    resources :carts do
+      get 'checkout', :on => :member
+      get 'payment_not_needed', :on => :member
+    end
+    resources :cartitems
+    resources :payment_notifications
+
+
+    match '/how_to_win',    to: 'static_pages#how_to_win'
+    match '/help',    to: 'static_pages#help'
+    match '/about',   to: 'static_pages#about'
+    match '/contact', to: 'static_pages#contact'
+
+    match '/admin', to: 'admin#admin'
+
+    match 'login' => 'user_sessions#new', :as => :login
+    match 'logout' => 'user_sessions#destroy', :as => :logout
+    match '/activation/:activation_code', to: 'activation#create', :as => 'activation'
+
+  # end
+  # end
+#   match '*path', to: redirect("/#{I18n.default_locale}/rio_de_janeiro/%{path}")
+#   match '', to: redirect("/#{I18n.default_locale}/rio_de_janeiro")
 end
 
 ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.yml', { :prefix_on_default_locale => true })
 
 Pickone::Application.routes.draw do
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
-    root to: 'static_pages#home'
+  #scope ":site_city", site_city: /sao_paulo|rio_de_janeiro/, :defaults => {:site_city => "sao_paulo"} do
+      root to: 'static_pages#home'
     
-    # handles /valid-locale/fake-path
-    match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
+      # handles /valid-locale/fake-path
+      #match '*path', to: redirect { |params, request| "/#{params[:locale]}/#{params[:site_city]}" }
+      match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
+    #end
   end  
 
   ActiveAdmin.routes(self)  
@@ -77,5 +86,7 @@ Pickone::Application.routes.draw do
 
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
   match '', to: redirect("/#{I18n.default_locale}")
+  #match '*path', to: redirect("/#{I18n.default_locale}/sao_paulo/%{path}")
+  #match '', to: redirect("/#{I18n.default_locale}/sao_paulo")
 end
 

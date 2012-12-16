@@ -6,12 +6,14 @@ pt-BR:
     sign_up: "Cadastre-se"
     login: "Login"
     country: "País"
+    city: "Cidade"
     now: "agora"
     join: "Participe"
     how_to_win: "Como funciona"
     
   translation:
-    en: "Inglês"
+    en-US: "Estados Unidos"
+    en-IE: "Irlanda"
     pt-BR: "Português"
 
   notifier:
@@ -327,6 +329,8 @@ pt-BR:
       links:
         sign_in: "Entrar"
         forgot_your_password: "Esqueceu sua senha?"      
+  cities:
+    sao_paulo: "São Paulo"
   countries: 
     AF: "Afeganistão"
     ZA: "África do Sul"

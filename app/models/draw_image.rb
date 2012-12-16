@@ -4,15 +4,15 @@ class DrawImage < ActiveRecord::Base
   before_save :destroy_image?
   
   belongs_to :draw
-  has_attached_file :image, 
-                    :styles => { :thumb => "100x100>" }, 
-                    :default_url => '/images/missing.png',
-                    :storage => :s3,
-                    :bucket => 'pkone',
-                    :s3_credentials => {
-                    :access_key_id => 'AKIAJX6GVL3O5HFMIBJA',
-                          :secret_access_key => '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'
-                        }
+  has_attached_file  :image, 
+                     :styles => { :thumb => "100x100>" }, 
+                     :storage => :s3,
+                     :bucket => 'pkone',
+                     :s3_credentials => {
+                         :access_key_id => 'AKIAJX6GVL3O5HFMIBJA',
+                         :secret_access_key => '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'
+                       },
+                     :default_url => '/images/missing.png'
 
   # Paperclip for Images
 
