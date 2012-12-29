@@ -118,14 +118,6 @@
     <% end %>
   </div>
 </div>
-<%= form_tag root_path do %>
-  <% # text_field_tag "account", "default info" %>
-  <%= collection_select(:country, :code_alpha2, Country.order(:name), :code_alpha2, :name, params[:country].nil? ? {:prompt => "Selecione"} : {:selected => params[:country][:code_alpha2]}, {:onchange => 'this.form.submit()'}) %>
-  <% # select_tag("country", options_from_collection_for_select(Country.order(:name), :code_alpha2, :name), {:selected => "US", :onchange => 'this.form.submit()'} ) %>
-  <%= collection_select(:state, :state_id, State.order(:name), :id, :name, :prompt => 'Please select State') %>
-
-  <% # submit_tag "Save" %>
-<% end %>
 
 
 

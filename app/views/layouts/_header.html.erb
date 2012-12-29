@@ -24,14 +24,6 @@
               <li><%= link_to t("countries.IE"), locale: "en-IE" %></li> 
             </ul>
           </li>
-          <li id="fat-menu" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-              <%= t "main.city" %> <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to t("cities.sao_paulo"), session["city"] = "Sao Paulo"  %></li>
-            </ul>
-          </li>
         </ul>
         <ul class="nav pull-right">
         <% if current_user %>
