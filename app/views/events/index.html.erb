@@ -1,0 +1,27 @@
+<h1>Listing events</h1>
+
+<table>
+  <tr>
+    <th>Image</th>
+    <th>User</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @events.each do |event| %>
+  <tr>
+    <td><%= image_tag event.avatar.url(:medium) %><td>
+      <td><%= event.user_id %></td>
+      <td><%= event.title %></td>
+    <td><%= event.description %></td>
+  
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event', new_event_path %>

@@ -1,24 +1,24 @@
 Pickone::Application.routes.draw do
+  resources :products do
+    resources :photos
+  end
+
   # scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
   # scope ":locale_city", site_city: /#{LOCALE_CITY_AVAILABLE.join("|")}/ do
     resources :users do
-      get 'credits', :on => :member 
-      get 'wincredits', :on => :member 
-      get 'facebook_share_draw', :on => :member 
+      get 'wintickets', :on => :member 
+      get 'facebook_share_event', :on => :member 
       get 'resend_activation', :on => :member     
     end
 
     resources :password_resets, :only => [ :new, :create, :edit, :update ]
     resources :user_sessions
 
-    resources :credits
 
 
     resources :answers
 
     resources :questions
-
-    resources :draw_images
     
     resources :lacale_city do
       get 'sao_paulo', :on => :member 
@@ -27,7 +27,8 @@ Pickone::Application.routes.draw do
     
     get "account/account"
 
-    resources :draws do
+    resources :events do
+      resources :photos
       get 'results', :on => :member 
       get 'join_promo', :on => :member 
       get 'join_paid', :on => :member 
@@ -42,7 +43,7 @@ Pickone::Application.routes.draw do
       get 'checkout', :on => :member
       get 'payment_not_needed', :on => :member
     end
-    resources :cartitems
+    resources :tickets
     resources :payment_notifications
 
 
@@ -66,6 +67,8 @@ end
 ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.yml', { :prefix_on_default_locale => true })
 
 Pickone::Application.routes.draw do
+  resources :products
+
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
   #scope ":site_city", site_city: /sao_paulo|rio_de_janeiro/, :defaults => {:site_city => "sao_paulo"} do
       root to: 'static_pages#home'

@@ -28,10 +28,9 @@ class User < ActiveRecord::Base
                   :oauth_expires_at,
                   :locale,
                   :provider
-  has_many :draws                 
-  has_many :credits
+  has_many :events                 
   has_many :carts
-  has_many :cartitems
+  has_many :tickets
                   
   before_save :destroy_avatar?
   has_attached_file  :avatar, 
@@ -74,39 +73,8 @@ class User < ActiveRecord::Base
     Notifier.password_reset_instructions(self).deliver 
   end
   
-  def free_credits_load
-    free_draws = Draw.find(:all, :conditions => "join_type = 'questions'")
-    
-    free_draws.each do |draw|
-      if !credits.find(:first, :conditions => "comment = 'answered' and draw_id = " + draw.id.to_s)
-        credit = credits.build(:draw_id => draw.id)
-        credit.comment = "answered"
-        credit.value = 1
-        credit.credit_type = "free"
-        credit.save
-      end
-    end
-  end
-
-  def total_credits(draw_id)
-    # convert to array so it doesn't try to do sum on database directly
-    if draw_id.nil?
-      credits.to_a.sum(&:value)    
-    else  
-      credits.find(:all, :conditions => "is_used='f' and draw_id=" + draw_id.to_s).to_a.sum(&:value)
-    end
-  end
-  
-  def total_free_credits(draw_id)
-    if draw_id.nil?
-      credits.to_a.sum(&:value)    
-    else  
-      credits.find(:all, :conditions => "credit_type='free' and draw_id=" + draw_id.to_s).to_a.sum(&:value)
-    end
-  end    
-  
-  def all_draws
-    (self.draws + self.draw_owners).uniq
+  def all_events
+    (self.events + self.event_owners).uniq
   end  
     
 # OMNIAUTH  GEM    
@@ -211,9 +179,9 @@ def friends_count
   facebook { |fb| fb.get_connection("me", "friends").size }
 end
 
-def post_join(user_id, draw_url)
+def post_join(user_id, event_url)
   user = User.find(user_id)
-  user.facebook.put_connections("me", "epickone:joined", :game => draw_url)
+  user.facebook.put_connections("me", "epickone:joined", :game => event_url)
 end
 
 # End Koala

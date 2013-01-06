@@ -22,7 +22,6 @@ class UserSessionsController < ApplicationController
     respond_to do |format|
       if @user_session.save
         @user = User.find_by_email(@user_session.email)
-        @user.free_credits_load
         format.html { redirect_to(root_path, :notice => 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       elsif @user_session.attempted_record &&
@@ -46,8 +45,6 @@ class UserSessionsController < ApplicationController
     @user_session.destroy
     session[:cart_id] = nil
     session[:cart_count] = nil
-    session[:free_credits] = nil
-    
 
     respond_to do |format|
       format.html { redirect_to(root_path, :notice => 'Goodbye!') }

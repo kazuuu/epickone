@@ -1,0 +1,15 @@
+<% if @bOk %>
+    You have joined in this Event!!!
+    <br>
+    <br>
+    <%= link_to "Finish", root_path, :class => "btn btn-large btn-primary" %>
+  <% else %>
+    Too bad, you have to study more!
+    <br>
+    <br>
+    <%= link_to "Try it again", join_questions_event_path, :class => "btn btn-large btn-primary" %>
+    
+  <% end %>
+  
+
+

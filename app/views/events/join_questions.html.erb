@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div style="display:block;float:left;">
+    <aside style="float:left;">
+      <section>
+        <%= image_tag @event.avatar.url(:thumb) %>
+        <p>
+          <b>Owner Id:</b>
+          <%= @event.user_id %>
+        </p>
+      </section>
+    </aside>
+  </div>
+  <%= form_tag questions_check_event_path do |f| %>
+  <div style="float:left;display:block">
+    <p>
+      <b>Title:</b>
+      <%= @event.title %>
+    </p>
+
+    <ol class="questions">
+    <% @event.questions.each do |question| %>
+      <li>
+        <%= question.title %>
+        <ol class="answers">
+          <% question.answers.each do |answer| %>
+            <%= radio_button question.id, "answer", answer.id %> <%= answer.answer_text %> <br>
+              
+          <% end %>
+        </ol>
+      </li>
+    <% end %>
+    </ol>
+    <%= submit_tag "Check Answers" %>
+  </div
+  <% end %>
+</div>
+
+<hr>
+

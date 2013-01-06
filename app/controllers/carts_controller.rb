@@ -3,7 +3,7 @@ class CartsController < ApplicationController
   def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
-    redirect_to pick_a_number_draw_path
+    redirect_to pick_a_number_event_path
   end
 
   def new
@@ -29,8 +29,8 @@ class CartsController < ApplicationController
     end
   end
   
-  # GET /draws
-  # GET /draws.json
+  # GET /events
+  # GET /events.json
   def index
     @carts = Cart.all
 
@@ -40,8 +40,8 @@ class CartsController < ApplicationController
     end
   end
 
-  # GET /draws/1
-  # GET /draws/1.json
+  # GET /events/1
+  # GET /events/1.json
   def show
     @cart = Cart.find(params[:id])
 
@@ -51,8 +51,8 @@ class CartsController < ApplicationController
     end
   end
 
-  # GET /draws/new
-  # GET /draws/new.json
+  # GET /events/new
+  # GET /events/new.json
   def new
     @cart = Cart.new
 
@@ -62,12 +62,12 @@ class CartsController < ApplicationController
     end
   end
 
-  # GET /draws/1/edit
+  # GET /events/1/edit
   def edit
     @cart = Cart.find(params[:id])
   end
-  # PUT /draws/1
-  # PUT /draws/1.json
+  # PUT /events/1
+  # PUT /events/1.json
   def update
     @cart = Cart.find(params[:id])
 

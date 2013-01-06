@@ -1,0 +1,65 @@
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
+  <%= tag :meta, property: "og:site_name", content: "ePick One" %>
+  <%= tag :meta, property: "og:type", content: "epickone:game" %>
+  <%= tag :meta, property: "og:title", content: @event.title %>
+  <%= tag :meta, property: "og:url", content: event_url(@event) %>
+  <%= tag :meta, property: "og:image", content: @event.avatar.url(:medium)  %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="span3">  
+    <aside style="float:left;">
+      <section>
+        <%= image_tag @event.avatar.url(:thumb) %>
+        <p>
+          <b>Category:</b>
+          <%= @event.category.title %>
+        </p>
+        <p>
+          <b>Owner Id:</b>
+          <%= @event.user_id %>
+        </p>
+        <p>
+          <b>Joined:</b>
+          <%= @event.tickets.find(:all, :joins => :cart, :conditions => "carts.purchased_at is null").count %>
+        </p>
+        
+      </section>
+    </aside>
+    <% if  Time.now <= @event.date_due %>
+      <% if @event.join_type == "questions" %>
+        <%= link_to "Click to Answer and Join", join_questions_event_path(), :class => "btn btn-large btn-primary" %>    
+      <% else %>
+        <p><%= link_to "Click to Join",  pick_a_number_event_path, :class => "btn btn-large btn-primary" %></p>
+        
+        <p>
+        </p>
+      <% end %>
+      
+      
+      
+      
+    <% else %>
+      <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+    <% end %>
+    
+  </div>
+  <div class="span9">
+    <p>
+      <b>Title:</b>
+      <%= @event.title %>
+    </p>
+
+    <p>
+      <b>Description:</b>
+      <%= simple_format(@event.description) %>
+    </p>
+  </div>  
+</div>  
+
+
+
+
+

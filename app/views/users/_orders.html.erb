@@ -3,8 +3,8 @@
     <% if cart.purchased_at != nil %>
       <p>
       Day: <%= cart.purchased_at %> <br>
-      <% cart.cartitems.each do |item| %>
-        <%= item.draw.title %> <%= item.picked_number %> <%= item.quantity %> <%= number_to_currency(item.unit_price) %><br>
+      <% cart.tickets.each do |item| %>
+        <%= item.event.title %> <%= item.picked_number %> <%= item.quantity %> <%= number_to_currency(item.unit_price) %><br>
         
       <% end %>
       TOTAL: <%= number_to_currency(cart.total_price)%>

@@ -1,6 +1,5 @@
 <% 
 provide(:title, @user.first_name) 
-session[:free_credits] = current_user.total_credits(nil) if session[:free_credits].nil?
 %>
 <p id="notice"><%= notice %></p>
 
@@ -15,7 +14,7 @@ session[:free_credits] = current_user.total_credits(nil) if session[:free_credit
       <li class="active"><a href="#tab1" data-toggle="tab">My Details</a></li>
       <li>
         <a href="#tab2" data-toggle="tab">
-           Free Credits(<%= session[:free_credits].to_i.to_s %>) 
+           Free(0)
         </a>
       </li>
       <li><a href="#tab3" data-toggle="tab">Statement</a></li>
@@ -26,10 +25,10 @@ session[:free_credits] = current_user.total_credits(nil) if session[:free_credit
         <%= render 'users/details' %>  
       </div>
       <div class="tab-pane" id="tab2">  
-        <%= render 'users/credit_available' %>  
+        <%= render 'users/temp' %>  
       </div>
       <div class="tab-pane" id="tab3">
-        <%= render 'users/credit_statement' %>  
+        <%= render 'users/temp' %>  
       </div>      
     </div>
   </div>

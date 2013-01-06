@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th class="span3">
-            Draw
+            Event
           </th>
           <th class="span2">
             Pick #
@@ -22,10 +22,10 @@
       </thead>
 
       <tbody>
-        <% @cart.cartitems.each do |item| %>
+        <% @cart.tickets.each do |item| %>
         <tr>
           <td>
-            <%= item.draw.title%>
+            <%= item.event.title%>
           </td>
           <td>
             <%= item.picked_number %>

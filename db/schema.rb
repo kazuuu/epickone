@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201180636) do
+ActiveRecord::Schema.define(:version => 20130105222531) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -54,18 +54,6 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.datetime "updated_at",          :null => false
   end
 
-  create_table "cartitems", :force => true do |t|
-    t.integer  "draw_id"
-    t.decimal  "unit_price"
-    t.integer  "quantity"
-    t.string   "comment"
-    t.integer  "cart_id"
-    t.integer  "user_id"
-    t.integer  "picked_number"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
   create_table "carts", :force => true do |t|
     t.integer  "user_id"
     t.datetime "purchased_at"
@@ -74,12 +62,17 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
   end
 
   create_table "categories", :force => true do |t|
+    t.integer  "parent_id"
     t.string   "title"
     t.string   "site_position"
     t.text     "description"
     t.integer  "order"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "category_translations", :force => true do |t|
@@ -87,50 +80,15 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.string   "locale"
     t.string   "title"
     t.text     "description"
-    t.string   "site_position"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
 
-  create_table "countries", :force => true do |t|
-    t.string   "name"
-    t.string   "code_alpha2"
-    t.string   "code_alpha3"
-    t.string   "code_numeric"
-    t.string   "code_language"
-    t.string   "currency"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "credits", :force => true do |t|
-    t.integer  "draw_id"
-    t.integer  "user_id"
-    t.decimal  "value"
-    t.string   "credit_type"
-    t.string   "comment"
-    t.boolean  "is_used",     :default => false, :null => false
-    t.datetime "used_at"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-  end
-
-  create_table "draw_images", :force => true do |t|
-    t.integer  "draw_id"
-    t.string   "image_type"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "draw_translations", :force => true do |t|
-    t.integer  "draw_id"
+  create_table "event_translations", :force => true do |t|
+    t.integer  "event_id"
     t.string   "locale"
     t.string   "title"
     t.string   "headline"
@@ -140,12 +98,12 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "draw_translations", ["draw_id"], :name => "index_draw_translations_on_draw_id"
-  add_index "draw_translations", ["locale"], :name => "index_draw_translations_on_locale"
+  add_index "event_translations", ["event_id"], :name => "index_event_translations_on_event_id"
+  add_index "event_translations", ["locale"], :name => "index_event_translations_on_locale"
 
-  create_table "draws", :force => true do |t|
+  create_table "events", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "category_id"
+    t.integer  "product_id"
     t.string   "title"
     t.string   "headline"
     t.string   "site_position"
@@ -156,7 +114,6 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.boolean  "enable"
     t.string   "covering_area"
     t.string   "join_type"
-    t.decimal  "price_original"
     t.decimal  "price_ticket"
     t.datetime "date_due"
     t.datetime "date_start"
@@ -168,8 +125,8 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "draws", ["category_id"], :name => "index_draws_on_category_id"
-  add_index "draws", ["user_id", "created_at"], :name => "index_draws_on_user_id_and_created_at"
+  add_index "events", ["product_id"], :name => "index_events_on_product_id"
+  add_index "events", ["user_id", "created_at"], :name => "index_events_on_user_id_and_created_at"
 
   create_table "payment_notifications", :force => true do |t|
     t.text     "params"
@@ -178,6 +135,46 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.string   "transaction_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "photos", :force => true do |t|
+    t.string   "image_type"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "photable_id"
+    t.string   "photable_type"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "photos", ["photable_id", "photable_type"], :name => "index_photos_on_photable_id_and_photable_type"
+
+  create_table "product_translations", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "product_translations", ["locale"], :name => "index_product_translations_on_locale"
+  add_index "product_translations", ["product_id"], :name => "index_product_translations_on_product_id"
+
+  create_table "products", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "category_id"
+    t.integer  "order"
+    t.decimal  "price_original"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "question_translations", :force => true do |t|
@@ -197,7 +194,7 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.text     "description"
     t.integer  "order"
     t.string   "style"
-    t.integer  "draw_id"
+    t.integer  "event_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -206,12 +203,16 @@ ActiveRecord::Schema.define(:version => 20121201180636) do
     t.datetime "updated_at",          :null => false
   end
 
-  create_table "states", :force => true do |t|
-    t.string   "name"
-    t.integer  "country_id"
-    t.string   "code_alpha2"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "tickets", :force => true do |t|
+    t.integer  "event_id"
+    t.decimal  "unit_price"
+    t.integer  "quantity"
+    t.string   "comment"
+    t.integer  "cart_id"
+    t.integer  "user_id"
+    t.integer  "picked_number"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "user_sessions", :force => true do |t|

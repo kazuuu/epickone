@@ -1,16 +1,16 @@
 <%
-  @cartitems_draws = current_user.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at Is Null", :select => "draw_id", :group => "draw_id")
+  @tickets_events = current_user.tickets.find(:all, :joins => :cart, :conditions => "carts.purchased_at Is Null", :select => "event_id", :group => "event_id")
  
  
-  @cartitems_draws.each do |draw_cart| 
+  @tickets_events.each do |event_cart| 
 %>
 
-    <b><%= draw_cart.draw.title%> </b><br>
+    <b><%= event_cart.event.title%> </b><br>
 
 <%    
-    @cartitems = current_user.cartitems.find(:all, :joins => :cart, :conditions => "carts.purchased_at Is Null and draw_id=" + draw_cart.draw.id.to_s)
+    @tickets = current_user.tickets.find(:all, :joins => :cart, :conditions => "carts.purchased_at Is Null and event_id=" + event_cart.event.id.to_s)
     
-    @cartitems.each do |item|
+    @tickets.each do |item|
       %>
       <%=item.picked_number%> <br>
     

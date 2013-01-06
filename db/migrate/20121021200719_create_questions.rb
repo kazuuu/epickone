@@ -5,7 +5,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.text :description
       t.integer :order
       t.string :style
-      t.integer :draw_id
+      t.integer :event_id
       t.has_attached_file :avatar
 
       t.timestamps

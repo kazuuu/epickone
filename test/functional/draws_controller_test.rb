@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class DrawsControllerTest < ActionController::TestCase
+class EventsControllerTest < ActionController::TestCase
   setup do
-    @draw = draws(:one)
+    @event = event(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:draws)
+    assert_not_nil assigns(:events)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class DrawsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create draw" do
-    assert_difference('Draw.count') do
-      post :create, draw: { description: @draw.description, title: @draw.title, user_id: @draw.user_id }
+  test "should create event" do
+    assert_difference('Event.count') do
+      post :create, draw: { description: @event.description, title: @event.title, user_id: @event.user_id }
     end
 
-    assert_redirected_to draw_path(assigns(:draw))
+    assert_redirected_to event_path(assigns(:event))
   end
 
-  test "should show draw" do
-    get :show, id: @draw
+  test "should show event" do
+    get :show, id: @event
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @draw
+    get :edit, id: @event
     assert_response :success
   end
 
-  test "should update draw" do
-    put :update, id: @draw, draw: { description: @draw.description, title: @draw.title, user_id: @draw.user_id }
-    assert_redirected_to draw_path(assigns(:draw))
+  test "should update event" do
+    put :update, id: @event, event: { description: @event.description, title: @event.title, user_id: @event.user_id }
+    assert_redirected_to event_path(assigns(:event))
   end
 
-  test "should destroy draw" do
-    assert_difference('Draw.count', -1) do
-      delete :destroy, id: @draw
+  test "should destroy event" do
+    assert_difference('Event.count', -1) do
+      delete :destroy, id: @event
     end
 
-    assert_redirected_to draws_path
+    assert_redirected_to events_path
   end
 end
