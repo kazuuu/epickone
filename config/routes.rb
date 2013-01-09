@@ -13,8 +13,7 @@ Pickone::Application.routes.draw do
 
     resources :password_resets, :only => [ :new, :create, :edit, :update ]
     resources :user_sessions
-
-
+    resources :products
 
     resources :answers
 
@@ -69,7 +68,7 @@ end
 ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.yml', { :prefix_on_default_locale => true })
 
 Pickone::Application.routes.draw do
-  resources :products
+  resources :payment_notifications
 
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
   #scope ":site_city", site_city: /sao_paulo|rio_de_janeiro/, :defaults => {:site_city => "sao_paulo"} do
@@ -82,8 +81,6 @@ Pickone::Application.routes.draw do
   end  
 
   ActiveAdmin.routes(self)  
-
-  resources :payment_notifications
   
   match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
   match '/auth/failure' => 'user_oauth#failure', :as => :failure
