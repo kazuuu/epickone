@@ -47,7 +47,6 @@ Pickone::Application.routes.draw do
 
     resources :tickets
     
-    resources :payment_notifications
 
 
     match '/how_to_win',    to: 'static_pages#how_to_win'
@@ -83,6 +82,8 @@ Pickone::Application.routes.draw do
   end  
 
   ActiveAdmin.routes(self)  
+
+  resources :payment_notifications
   
   match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
   match '/auth/failure' => 'user_oauth#failure', :as => :failure
