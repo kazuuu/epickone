@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
       set_translations new_translations
   end  
   has_attached_file  :avatar, 
-                     :styles => { :thumb => "100x100>" }, 
+                     :styles => { :thumb => "100x100>", :medium => "300x300>" }, 
                      :storage => :s3,
                      :bucket => 'pkone',
                      :s3_credentials => {
