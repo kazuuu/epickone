@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
   <%= tag :meta, property: "og:site_name", content: "ePick One" %>
-  <%= tag :meta, property: "og:type", content: "epickone:game" %>
+  <%= tag :meta, property: "og:type", content: "epickone:evento" %>
   <%= tag :meta, property: "og:title", content: @event.title %>
   <%= tag :meta, property: "og:url", content: event_url(@event) %>
   <%= tag :meta, property: "og:image", content: @event.avatar.url(:medium)  %>
