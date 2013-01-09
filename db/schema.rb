@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130105222531) do
+ActiveRecord::Schema.define(:version => 20130108112237) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(:version => 20130105222531) do
     t.datetime "avatar_updated_at"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "cart_products", :force => true do |t|
+    t.integer  "cart_id"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.decimal  "unit_price"
+    t.integer  "quantity"
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "carts", :force => true do |t|
@@ -190,11 +201,12 @@ ActiveRecord::Schema.define(:version => 20130105222531) do
   add_index "question_translations", ["question_id"], :name => "index_question_translations_on_question_id"
 
   create_table "questions", :force => true do |t|
+    t.integer  "event_id"
     t.string   "title"
     t.text     "description"
     t.integer  "order"
     t.string   "style"
-    t.integer  "event_id"
+    t.string   "question_type"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -207,7 +219,7 @@ ActiveRecord::Schema.define(:version => 20130105222531) do
     t.integer  "event_id"
     t.decimal  "unit_price"
     t.integer  "quantity"
-    t.string   "comment"
+    t.string   "origin"
     t.integer  "cart_id"
     t.integer  "user_id"
     t.integer  "picked_number"

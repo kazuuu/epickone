@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cart_id: 1
+  user_id: 1
+  unit_price: 9.99
+  quantity: 1
+  comment: MyString
+
+two:
+  cart_id: 1
+  user_id: 1
+  unit_price: 9.99
+  quantity: 1
+  comment: MyString

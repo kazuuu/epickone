@@ -8,5 +8,12 @@ class Ticket < ActiveRecord::Base
   def full_price
     unit_price * quantity
   end
-  
+  def add_number(number)
+    if picked_number.nil?
+      update_attribute(:picked_number, number)
+      true
+    else
+      false
+    end
+  end
 end

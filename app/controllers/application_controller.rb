@@ -85,16 +85,12 @@ class ApplicationController < ActionController::Base
     
       if @current_cart.nil?
         @current_cart = current_user.carts.build()
-        if !@current_cart.save
-          flash[:notice] = "error!."
-          redirect_to pick_a_number_event_path
-        end
+        @current_cart.save
       end
       
       session[:cart_id] = @current_cart.id
       session[:cart_count] = @current_cart.tickets.count
       @current_cart
-    
     end
   end 
   

@@ -62,12 +62,12 @@
 <div class="row">
   <div class="span4">
     <h2>
-      Promocionais
+      <%= @events_first[0].category.title if @events_first.count > 0 %>
     </h2>
-    <% @events_promos.each do |col| %>
+    <% @events_first.each do |col| %>
       <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
         <h2><%= link_to(col.title, col) %></h2>
-        <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
@@ -81,12 +81,12 @@
   </div>
   <div class="span4">
     <h2>
-      Bolsas
+      <%= @events_second[0].category.title if @events_second.count > 0 %>
     </h2>
-    <% @events_purses.each do |col| %>
+    <% @events_second.each do |col| %>
       <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
         <h2><%= link_to(col.title, col) %></h2>
-        <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
@@ -100,12 +100,12 @@
   </div>
   <div class="span4">
     <h2>
-      Eletronicos
+      <%= @events_third[0].category.title if @events_third.count > 0 %>
     </h2>
-    <% @events_eletronics.each do |col| %>
+    <% @events_third.each do |col| %>
       <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
         <h2><%= link_to(col.title, col) %></h2>
-        <p><%= link_to(image_tag(col.avatar.url(:medium)), col) %></p>
+        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>

@@ -4,7 +4,7 @@ class CreateTickets < ActiveRecord::Migration
       t.integer  :event_id
       t.decimal  :unit_price
       t.integer  :quantity
-      t.string   :comment
+      t.string   :origin
       t.integer  :cart_id
       t.integer  :user_id
       t.integer  :picked_number

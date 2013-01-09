@@ -6,9 +6,9 @@ class StaticPagesController < ApplicationController
     end
     @user = User.new
      
-    @events_promos = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'first_line'", :order => "date_due asc") 
-    @events_eletronics = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'second_line'", :order => "date_due asc") 
-    @events_purses = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'third_line'", :order => "date_due asc") 
+    @events_first = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'first_row'", :order => "date_due asc") 
+    @events_second = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'second_row'", :order => "date_due asc") 
+    @events_third = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'third_row'", :order => "date_due asc") 
 
 
 

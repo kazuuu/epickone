@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
-  before_filter :require_user,  :only => [:join_questions, :questions_check, :pick_a_number, :add_cart, :results]
+  before_filter :require_user,  :only => [:join_questions, :quiz_result, :pick_a_number, :add_cart, :results]
 
   require 'will_paginate/array'
 
   #before_filter :require_user
-  #before_filter :require_user_admin,  :except => [:join_promo, :join_paid, :join_questions, :questions_check, :pick_a_number, :pick_a_number_promo, :show, :add_cart ]
+  #before_filter :require_user_admin,  :except => [:join_promo, :join_paid, :join_questions, :quiz_result, :pick_a_number, :pick_a_number_promo, :show, :add_cart ]
   
   # GET /events
   # GET /events.json
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id], :joins => :category)
-
+    @quantity = ['1','2', '3', '4', '5', '6', '7', '8', '9', '10']
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
@@ -29,11 +29,11 @@ class EventsController < ApplicationController
   end
 
 
-  def join_questions
+  def quiz
     @event = Event.find(params[:id])
   end
 
-  def questions_check
+  def quiz_result
     @event = Event.find(params[:id])
     @bOk = true;
     
@@ -51,16 +51,20 @@ class EventsController < ApplicationController
       end
     end
     if @bOk
-      redirect_to pick_a_number_event_path
+      cart = current_cart
+      origin = "answered"
+      already_ticket = Ticket.find(:all, :conditions => 'origin="' + origin + '" and event_id=' +  params[:id] + " and user_id=" + cart.user_id.to_s).count      
+      total_win = 2 - already_ticket
+      
+      if total_win > 0
+        (1..total_win).each do
+          cart.add_ticket(current_user.id, params[:id], origin)
+        end
+        flash[:success] = "Congratulations! You won a ticket jo join this event!."
+      else
+        flash[:notice] = "You have already won this ticket. Try to share this event to win more tickets."
+      end
     end    
-  end
-
-  def pick_a_number
-    session[:event_id] = params[:id]
-    @event = Event.find(params[:id])
-    @tickets_already = current_user.tickets.find(:all, :joins => :cart, :conditions => 'carts.purchased_at is not null and event_id=' + @event.id.to_s, :order => "picked_number ASC")
-    @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
-    @tickets = current_cart.tickets.find(:all, :conditions => 'event_id = ' + params[:id])
   end
   def add_cart
     @ticket = Ticket.find(params[:id])

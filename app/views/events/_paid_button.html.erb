@@ -1,0 +1,10 @@
+<%= form_tag(add_tickets_cart_path) do %>
+  <%= label_tag "Quantos Tickets" %>
+  <% # text_field_tag :quantity %>
+  <%= select_tag :quantity, options_for_select(@quantity) %>
+  <%= hidden_field_tag 'event_id',  @event.id %>
+  <%= hidden_field_tag 'origin', 'paid' %>
+ 
+ 
+  <%= submit_tag "Add to Cart", class: "btn btn-large btn-primary" %>
+<% end %>

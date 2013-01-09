@@ -98,5 +98,27 @@ class CartsController < ApplicationController
   end  
   def checkout
     @cart = current_cart
-  end   
+  end  
+  def add_tickets
+    cart=current_cart
+    (1..params[:quantity].to_i).each do |i| 
+      cart.add_ticket(current_user.id, params[:event_id].to_s, params[:origin].to_s)
+    end
+    cart.add_product(current_user.id, "1", "Urgente")       
+    redirect_to checkout_cart_path
+  end
+  def pick_a_number
+    @ticket = Ticket.find(params[:ticket_id])
+    
+    session[:event_id] = @ticket.event_id
+    @event = Event.find(@ticket.event_id)
+    @tickets_already = current_user.tickets.find(:all, :joins => :cart, :conditions => 'carts.purchased_at is not null and event_id=' + @event.id.to_s, :order => "picked_number ASC")
+    @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
+    @tickets = current_cart.tickets.find(:all, :conditions => 'event_id = ' + @event.id.to_s)
+  end
+  def add_ticket_number
+    @ticket = Ticket.find(params[:ticket_id])
+    @ticket.add_number(params[:number].to_i)
+    redirect_to checkout_cart_path(params[:id])
+  end
 end

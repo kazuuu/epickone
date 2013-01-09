@@ -1,5 +1,5 @@
 <h1>Pick a number</h1>
-<h2>The smallest uniq picked number will win!</h2>
+<h2>The smallest uniq picked number will win!<%= params[:event_id]%></h2>
 <div class="row">
   <div class="span7">  
     <div class="row-fluid">
@@ -9,7 +9,7 @@
           <tr>
             <% row.each do |i| %>
               <td>
-                <%= link_to(i, add_cart_event_path(:number => i))  %>
+                <%= link_to(i, add_ticket_number_cart_path(:ticket_id => params[:ticket_id], :number => i))  %>
               </td>
             <% end %>
           </tr>  

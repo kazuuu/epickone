@@ -22,13 +22,25 @@
       </thead>
 
       <tbody>
-        <% @cart.tickets.each do |item| %>
+        <% 
+        bNeed_number = false
+        @cart.tickets.each do |item| 
+        %>
         <tr>
           <td>
             <%= item.event.title%>
           </td>
           <td>
-            <%= item.picked_number %>
+            <% if item.picked_number.nil? 
+               bNeed_number = true
+              %>
+            
+              Not Played<br><%= link_to '(click here to play)', pick_a_number_cart_path(:ticket_id => item.id) %>
+            <% else %>
+              <%= item.picked_number %>
+              
+              
+            <% end %>
           </td>
           <td>
             <%= item.quantity%>
@@ -44,17 +56,35 @@
 
         <tr>
           <td>
-            TOTAL: <%= number_to_currency(@cart.total_price)%>
+            TOTAL:
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            <%= number_to_currency(@cart.total_price)%>
+          </td>
+          <td>
           </td>
         </tr>
+
       </tbody>
     </table>
     <div class="row-fluid">
-    <% if @cart.total_price > 0 %>
-      <%= link_to "Check out", @cart.paypal_url(user_url(current_user), payment_notifications_url), :class => "btn btn-large btn-primary" %>
-    <% else %>
-      <%= link_to "Your cart is empty", "#", :class => "btn btn-large btn-primary" %>
-    <% end %> 
+      <% if bNeed_number %>
+        <%= link_to "You need to number all your tickets before Check out", "#", :class => "btn btn-large btn-primary" %>      
+      <% else %>
+        <% if @cart.tickets.count > 0 %>
+          <% if @cart.total_price > 0 %>
+            <%= link_to "Check out with paypal", @cart.paypal_url(user_url(current_user), payment_notifications_url), :class => "btn btn-large btn-primary" %>
+          <% else %>
+            <%= link_to "Checkout", payment_not_needed_cart_path, :class => "btn btn-large btn-primary" %>
+          <% end %>
+        <% else %>
+          <%= link_to "Your cart is empty", "#", :class => "btn btn-large btn-primary" %>
+        <% end %>
+      <% end %>
     <p><small>For your security, we use PayPal to checkout. It's a trustful way to do it.</small></p>
     </div> 
 </div> <!-- class row -->

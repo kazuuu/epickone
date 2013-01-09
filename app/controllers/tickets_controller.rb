@@ -3,6 +3,6 @@ class TicketsController < InheritedResources::Base
     @ticket = Ticket.find(params[:id])
     @ticket.destroy
     session[:cart_count] = current_cart.tickets.count
-    redirect_to pick_a_number_event_path(:id => session[:event_id])
+    redirect_to checkout_cart_path(:id => session[:event_id])
   end
 end

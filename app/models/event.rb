@@ -55,7 +55,9 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
 
-
+  def joined
+    self.tickets.find(:all, :joins => :cart, :conditions => "carts.purchased_at is not null").count
+  end
 
   def avatar_delete
     @avatar_delete ||= "0"
