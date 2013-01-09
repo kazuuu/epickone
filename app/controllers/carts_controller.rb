@@ -86,8 +86,6 @@ class CartsController < ApplicationController
     
     respond_to do |format|
       if @cart.update_attribute(:purchased_at, Time.now)
-        session[:cart_id] = nil
-        session[:cart_count] = nil
         format.html { redirect_to root_path, notice: 'Successful.' }
         format.json { head :no_content }
       else

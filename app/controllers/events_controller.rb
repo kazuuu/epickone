@@ -92,7 +92,6 @@ class EventsController < ApplicationController
 
       if @ticket.save
         redirect_to pick_a_number_event_path
-        session[:cart_count] = current_cart.tickets.count
       else
         flash[:notice] = "error!."
         redirect_to pick_a_number_event_path

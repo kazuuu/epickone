@@ -88,8 +88,6 @@ class ApplicationController < ActionController::Base
         @current_cart.save
       end
       
-      session[:cart_id] = @current_cart.id
-      session[:cart_count] = @current_cart.tickets.count
       @current_cart
     end
   end 

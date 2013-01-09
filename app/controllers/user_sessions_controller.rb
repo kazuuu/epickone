@@ -16,8 +16,6 @@ class UserSessionsController < ApplicationController
   # POST /user_sessions
   # POST /user_sessions.xml
   def create
-    session[:cart_id] = nil
-    session[:cart_count] = nil
     @user_session = UserSession.new(params[:user_session])
     respond_to do |format|
       if @user_session.save
@@ -43,8 +41,6 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = UserSession.find
     @user_session.destroy
-    session[:cart_id] = nil
-    session[:cart_count] = nil
 
     respond_to do |format|
       format.html { redirect_to(root_path, :notice => 'Goodbye!') }
