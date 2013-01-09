@@ -181,7 +181,7 @@ end
 
 def post_join(user_id, event_url)
   user = User.find(user_id)
-  if (user.facebook.put_connections("me", "epickone:joined", :evento => event_url))
+  if (user.facebook.put_connections("me", "epickone:join", :evento => event_url))
     origin = "shared_fb"
     already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" +  params[:id] + " and user_id=" + cart.user_id.to_s).count
     total_win = 2 - already_ticket

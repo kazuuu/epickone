@@ -54,7 +54,6 @@ class EventsController < ApplicationController
       cart = current_cart
       origin = "answered"
       already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" +  params[:id] + " and user_id=" + cart.user_id.to_s).count
-      already_ticket = 0
       total_win = 2 - already_ticket
       
       if total_win > 0
