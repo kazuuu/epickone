@@ -8,6 +8,18 @@ class UsersController < ApplicationController
     begin
       event = Event.find(params[:event_id])
       current_user.post_join(current_user.id, event_url(event))
+      origin = "shared_fb"
+      already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" + event.id.to_s + " and user_id=" + cart.user_id.to_s).count
+      total_win = 2 - already_ticket
+
+      if total_win > 0
+        (1..total_win).each do
+          cart.add_ticket(current_user.id, params[:id], origin)
+        end
+        flash[:success] = "Congratulations! You won a ticket jo join this event!."
+      else
+        flash[:notice] = "You have already won this ticket. Try to share this event to win more tickets."
+      end      
     rescue => ex
       flash[:notice] = "TESTE Log " + ex.message 
       logger.error "TESTE Log " + ex.message
