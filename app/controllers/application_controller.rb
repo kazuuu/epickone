@@ -75,12 +75,8 @@ class ApplicationController < ActionController::Base
     if current_user    
       @current_cart = nil
     
-      if session[:cart_id]
-        @current_cart ||= current_user.carts.find(session[:cart_id])
-      else
-        current_user.carts.each do |cart|
-          @current_cart = cart if cart.purchased_at.nil?
-        end
+      current_user.carts.each do |cart|
+        @current_cart = cart if cart.purchased_at.nil?
       end
     
       if @current_cart.nil?
