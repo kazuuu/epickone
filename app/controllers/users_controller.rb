@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     begin
       event = Event.find(params[:event_id])
       current_user.post_join(current_user.id, event_url(event))
+      cart = current_cart
       origin = "shared_fb"
       already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" + event.id.to_s + " and user_id=" + cart.user_id.to_s).count
       total_win = 2 - already_ticket
