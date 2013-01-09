@@ -10,6 +10,7 @@ Pickone::Application.routes.draw do
       get 'facebook_share_event', :on => :member 
       get 'resend_activation', :on => :member     
     end
+    resources :payment_notifications
 
     resources :password_resets, :only => [ :new, :create, :edit, :update ]
     resources :user_sessions
@@ -68,8 +69,6 @@ end
 ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.yml', { :prefix_on_default_locale => true })
 
 Pickone::Application.routes.draw do
-  resources :payment_notifications
-
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
   #scope ":site_city", site_city: /sao_paulo|rio_de_janeiro/, :defaults => {:site_city => "sao_paulo"} do
       root to: 'static_pages#home'
