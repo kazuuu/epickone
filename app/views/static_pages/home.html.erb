@@ -68,7 +68,8 @@
       <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
         <h2><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
-        <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
+        <p>Due Date: <%= l col.date_due, :format => :simple_date if !col.date_due.nil? %></p>
+        <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due, true) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
@@ -87,7 +88,8 @@
       <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
         <h2><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
-        <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
+        <p>Due Date: <%= l col.date_due, :format => :simple_date if !col.date_due.nil? %></p>
+        <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
@@ -106,6 +108,7 @@
       <div class="row center" style="border-style:solid;border-width:1px;margin:5px;padding-top:25px;padding-bottom:25px;">
         <h2><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
+        <p>Due Date: <%= l col.date_due, :format => :simple_date if !col.date_due.nil? %></p>
         <p>Time left: <%= time_ago_in_words(col.date_due) %></p>
         <p>
         <% if  Time.now <= col.date_due %>

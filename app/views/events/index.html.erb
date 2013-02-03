@@ -13,7 +13,7 @@
 
 <% @events.each do |event| %>
   <tr>
-    <td><%= image_tag event.avatar.url(:medium) %><td>
+    <td><%= image_tag event.avatar.url(:thumb) %><td>
       <td><%= event.user_id %></td>
       <td><%= event.title %></td>
     <td><%= event.description %></td>

@@ -1,5 +1,10 @@
-pt-BR:
+pt-BR:    
   main:
+    Checkout: "CheckOut"
+    cart: "Tickets Pendentes"
+    events: "Eventos"
+    store: "Loja"
+    language: "Idioma"
     en: "Inglês"
     pt: "Português"
     home: "Home"
@@ -11,7 +16,7 @@ pt-BR:
     city: "Cidade"
     now: "agora"
     join: "Participe"
-    how_to_win: "Como funciona"
+    how_it_works: "Como funciona"
     
   translation:
     en-US: "Estados Unidos"
@@ -242,6 +247,8 @@ pt-BR:
       default: ! '%A, %d de %B de %Y, %H:%M h'
       long: ! '%A, %d de %B de %Y, %H:%M h'
       short: ! '%d/%m, %H:%M h'
+      simple_date: ! '%d/%B/%Y'
+      
     pm: ''
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

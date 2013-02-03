@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_filter :require_user,  :only => [:join_questions, :quiz_result, :pick_a_number, :add_cart, :results]
+  before_filter :require_user,  :only => [:join_questions, :quiz_result, :pick_a_number, :add_cart, :results, :quiz]
 
   require 'will_paginate/array'
 
@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Events.paginate(page: params[:page]) # willpaginate
+    @events = Event.paginate(page: params[:page]) # willpaginate
 
     respond_to do |format|
       format.html # index.html.erb

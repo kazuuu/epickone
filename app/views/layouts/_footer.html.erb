@@ -3,57 +3,42 @@
       <div class="row">
           <div class="span12">
               ePick One
-              <p>Our mission is bring your material dreams closer.</p>
+              <p>Não custa nada tentar.</p>
           </div>
       </div>
-      <div class="row links-horizontal">
-          <div class="span12">
-              <ul>
-                  <li>Product</li>
-                  <li><a href="//gathercontent.com/">Home</a></li>
-                  <li><a href="//gathercontent.com/features">Features</a></li>
-                  <li><a href="//gathercontent.com/how-it-works">How It Works</a></li>
-                  <li><a href="//gathercontent.com/pricing">Pricing</a></li>
-                  <li><a href="http://gathercontent.helpjuice.com/">Help &amp; Support</a></li>
-                  <li><a href="http://gathercontent.helpjuice.com/questions/26611-How-do-I-use-the-API" target="_blank">API</a></li>
-                  <li><a href="http://getsatisfaction.com/gathercontent" target="_blank">Community &amp; Feedback</a></li>
-              </ul>
-          </div>
-          
-          <div class="span12">
-              <ul>
-                  <li>Company</li>
-                  <li><a href="//gathercontent.com/about">About Us</a></li>
-                  <li><a href="mailto:support@gathercontent.com">Contact Us</a></li>
-                  <li><a href="//gathercontent.com/press">Press</a></li>
-                  <li><a href="http://blog.gathercontent.com">Blog</a></li>
-                  <li><a href="http://www.trello.com/board/product-roadmap/4fdb32ea92d2163a183b89c6" target="_blank">Product Roadmap</a></li>
-              </ul>
-          </div>
-          
-          <div class="span12">
-              <a href="http://twitter.com/gathercontent" class="twitter-link">Follow us on Twitter</a>
-          </div>
-          
-          <!-- <div class="span3">
-              <ul>
-                  <li>GatherContent to:</li>
-                  <li><a href="#">Optimize agency processes</a></li>
-                  <li><a href="#">Gather client content</a></li>
-                  <li><a href="#">Collect content</a></li>
-                  <li><a href="#">Manage editorial process</a></li>
-              </ul>
-          </div>
-          
-          <div class="span3">
-              <ul>
-                  <li>GatherContent for:</li>
-                  <li><a href="#">Optimize agency processes</a></li>
-                  <li><a href="#">Gather client content</a></li>
-                  <li><a href="#">Collect content</a></li>
-                  <li><a href="#">Manage editorial process</a></li>
-              </ul>
-          </div> -->
+      <div class="row links-vertical" style="visited">
+        <div class="span3">
+            <ul>
+                <li>Empresa</li>
+                <li><%= link_to "Quem somos", about_path %></li>                  
+                <!--<li><a href="">Imprensa</a></li> -->
+                <li><%= link_to "Contact us", contact_path %></li>                  
+            </ul>
+        </div>
+        
+        <div class="span3">
+          <ul>
+              <li>Ajuda</li>
+              <li><%= link_to "Como funciona", how_it_works_path %></li>                  
+              <li><%= link_to "Termos de uso", term_path %></li>                  
+              <li><%= link_to "Política de privacidade", privacy_path %></li>                  
+          </ul>
+        </div>
+        <div class="span3">
+          <ul>
+              <li>Follow Us / Connect</li>
+              <li><a href="">Twitter</a></li>
+              <li><a href="">Facebook</a></li>
+              <li><a href="">Google +</a></li>
+          </ul>
+        </div>
+        <div class="span3">
+          <ul>
+              <li>Parceiros</li>
+              <li><a href="">Parceiro 1</a></li>
+              <li><a href="">Empresa 2</a></li>
+          </ul>
+        </div>          
       </div>
       
       <p>Copyright ePick One Ltda. All rights reserved. Proudly made in Brazil.</p>

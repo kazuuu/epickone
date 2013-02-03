@@ -14,7 +14,6 @@ Pickone::Application.routes.draw do
 
     resources :password_resets, :only => [ :new, :create, :edit, :update ]
     resources :user_sessions
-    resources :products
 
     resources :answers
 
@@ -46,11 +45,17 @@ Pickone::Application.routes.draw do
     end
 
     resources :tickets
-    
 
+    resource :store, :controller => 'store' do
+      resources :categories
+      resources :products
+    end
 
-    match '/how_to_win',    to: 'static_pages#how_to_win'
+    match '/how_it_works',    to: 'static_pages#how_it_works'
     match '/help',    to: 'static_pages#help'
+    match '/faq',    to: 'static_pages#faq'
+    match '/privacy',    to: 'static_pages#privacy'
+    match '/term',    to: 'static_pages#term'
     match '/about',   to: 'static_pages#about'
     match '/contact', to: 'static_pages#contact'
 

@@ -22,8 +22,14 @@ class StaticPagesController < ApplicationController
 
   def help
   end
+  def faq
+  end
+  def privacy
+  end
+  def term
+  end
 
-  def how_to_win
+  def how_it_works
   end
 
   def about

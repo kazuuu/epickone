@@ -21,19 +21,10 @@
 </p>
 
 <p>
-  <b>Ticket price:</b>
-  <%= @product.ticket_price %>
-</p>
-
-<p>
   <b>Original price:</b>
-  <%= @product.original_price %>
+  <%= @product.price_original %>
 </p>
 
-<p>
-  <b>Fidelity price:</b>
-  <%= @product.fidelity_price %>
-</p>
 
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
