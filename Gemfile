@@ -25,7 +25,7 @@ gem 'ActiveAdmin-Globalize3-inputs', '0.0.1'
 gem 'jquery-rails', '2.1.3' 
 gem 'jquery-ui-rails', '2.0.2' 
 gem 'exception_notification', '3.0.0'
-
+gem 'simple_form', '2.0.4'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

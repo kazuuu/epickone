@@ -1,3 +1,4 @@
+/* Bootstrap: Define variables customs before loading bootsrap */
 @import "bootstrap";
 
 /* mixins, variables, etc. */
@@ -7,6 +8,43 @@ $grayMediumLight: #eaeaea;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+
+div.buttonbox_out {
+  /* background-color:rgba(226,226,226,0.1); */
+  background-image:url("/assets/bg_btn.png");
+  padding-left:5px;
+  padding-right:5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border-width:1px;
+  border-color:black;
+  border-style:solid;
+  color:white;
+}
+div.buttonbox_in {
+  padding:10px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border-width:1px;
+  border-color:black;
+  border-style:solid;
+  color:white;
+}
+
+div.homebox {
+  /* background-color:#e2e2e2; */
+  background-image:url("/assets/bg_box.png");
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color:black;
+  padding-left:0px;
+  padding-right:0px;
 }
 
 .btn-black {
@@ -20,7 +58,7 @@ $grayMediumLight: #eaeaea;
   background-image: -webkit-linear-gradient(top, #5b5b5b, #282828);
   background-image: -o-linear-gradient(top, #5b5b5b, #282828);
   background-image: linear-gradient(#5b5b5b, #282828);
-  border-color: #282828 #282828 hsl(0, 0%, 11%);
+  border-color: #282828 #282828 hsl(0, 0%, 11%);  
 }  
 
 .btn-bigger {
@@ -41,6 +79,7 @@ $grayMediumLight: #eaeaea;
 
 /* universal */
 a.btn:hover:visited {
+  background-color:transparent;
   color:white;
 }
 
@@ -80,7 +119,7 @@ overflow-y: scroll;
 }
 
 body {
-padding-top: 60px;
+padding-top: 41px;
 }
 
 
@@ -108,6 +147,7 @@ line-height: 1;
     letter-spacing: -2px;
     margin-bottom: 30px;
     text-align: center;
+    margin-top:20px;
   }
   h2 {
     font-size: 1.7em;
@@ -152,8 +192,6 @@ footer a{color:#bdbdbd;}
 footer a:visited { color:#bdbdbd;}
 
 footer {padding-left:30px;background-position:left center;margin-left:0px;color:#BDBDBD;opacity:1;}
-footer {font-family:'Helvetica Nueve', Helvetica, sans-serif;}
-
 
 
 /* sidebar */

@@ -1,37 +1,14 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>          
+      <%=  f.input :email %>
+      <%=  f.input :first_name %>
+      <%=  f.input :last_name %>
+      <%=  f.input :gender %>
+      <%=  f.input :phone_mobile %>
+      <%=  f.input :password %>
 
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-          
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
-    
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
-    
-      <%= f.label :gender %>
-      <%= f.text_field :gender %>
-
-      <%= f.label :phone_mobile %>
-      <%= f.text_field :phone_mobile %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <br>
+      <div class="form-actions">
       <%= f.submit "Sign Up", class: "btn btn-large btn-primary" %>
       <p><%= link_to 'Login with Facebook', fb_login_path, id: "fb_sign_in", :class => "fbSignInButton" %></p>
-      
+      </div>
       
 <% end %>
