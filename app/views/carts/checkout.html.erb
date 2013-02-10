@@ -73,18 +73,19 @@
     </table>
     <div class="row-fluid">
       <% if bNeed_number %>
-        <%= link_to "You need to number all your tickets before Check out", "#", :class => "btn btn-large btn-primary" %>      
+        <%= link_to "You need to number all your tickets before Check out", "#", :class => "btn btn-black btn-large btn-primary" %>      
       <% else %>
         <% if @cart.tickets.count > 0 %>
           <% if @cart.total_price > 0 %>
             <%= link_to "Check out with paypal", @cart.paypal_url(user_url(current_user), payment_notifications_url), :class => "btn btn-large btn-primary" %>
           <% else %>
-            <%= link_to "Checkout", payment_not_needed_cart_path, :class => "btn btn-large btn-primary" %>
+            <%= link_to "Checkout", payment_not_needed_cart_path, :class => "btn btn-black btn-large btn-primary" %>
           <% end %>
         <% else %>
-          <%= link_to "Your cart is empty", "#", :class => "btn btn-large btn-primary" %>
+          <%= link_to "Your cart is empty", "#", :class => "btn btn-black btn-large btn-primary" %>
         <% end %>
       <% end %>
-    <p><small>For your security, we use PayPal to checkout. It's a trustful way to do it.</small></p>
+      <p><small>For your security, we use PayPal to checkout. It's a trustful way to do it.</small></p>
     </div> 
+  </div> 
 </div> <!-- class row -->

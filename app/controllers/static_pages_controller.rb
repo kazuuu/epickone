@@ -6,11 +6,15 @@ class StaticPagesController < ApplicationController
     end
     @user = User.new
      
-    @events_first = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'second_row'", :order => "date_due asc") 
-    @events_second = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'first_row'", :order => "date_due asc") 
-    @events_third = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'third_row'", :order => "date_due asc") 
+#    @events_first = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'second_row'", :order => "date_due asc") 
+#    @events_second = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'first_row'", :order => "date_due asc") 
+#    @events_third = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'third_row'", :order => "date_due asc") 
+#    @promo_events = Event.find(:all, :conditions => "site_position='main_banner'", :order => "date_due asc")
 
-    @promo_events = Event.find(:all, :conditions => "site_position='main_banner'", :order => "date_due asc")
+    @man = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'man'", :order => "date_due asc") 
+    @woman = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'woman'", :order => "date_due asc") 
+    @promo_events = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'promo'", :order => "date_due asc") 
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }

@@ -1,4 +1,10 @@
 /* Bootstrap: Define variables customs before loading bootsrap */
+
+$sansFontFamily: 'Calibri', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$baseFontFamily: $sansFontFamily;
+$baseFontSize: 16px;
+$linkColor: #fff;
+$linkColorHover: #fff;
 @import "bootstrap";
 
 /* mixins, variables, etc. */
@@ -10,6 +16,183 @@ $grayMediumLight: #eaeaea;
   box-sizing: border-box;
 }
 
+/* SCAFFOLD */
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 41px;
+}
+
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+  margin-top:20px;
+}
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  a, a:visited, a:hover, a:hover:visited {
+    color: $grayDark;
+  }
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* END SCAFFOLD */
+
+/* SCAFFOLD LEVEL 2 */
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: lightgray;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+/* END SCAFFOLD LEVEL 2 */
+
+/* header */
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+#text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+header {
+  letter-spacing:1px;
+  .nav {
+    ul li {
+      a {
+        color: #666;
+        &:visited {
+          color: #666;
+        }
+        &:hover {
+          color: #fff;
+          background-color: #999;
+        }
+      }
+    }
+  }
+}
+
+/* footer */
+footer {
+  letter-spacing:1px;
+  color:#FFF;
+  font-size: $baseFontSize;
+  background-color:#252525;
+  padding:45px 0px;
+  margin:0;
+  border:0;
+  vertical-align:baseline;
+  display:block;
+  background-position:left center;
+  margin-left:0px;
+  opacity:1;
+  
+  h3 {
+    font-size: 18px;
+    color:#fff;
+    font-weight: bold;
+    line-height:20px;
+  }
+  
+  p {
+    margin-top:10px;
+    color:#FFF;
+  }
+  
+  ul {
+    list-style:none;
+    margin:0px;
+    li {
+      margin-bottom:10px;
+    }
+    .links-horizontal li{
+      float:left;margin-left:20px;
+    }
+    li:first-child{
+      margin-bottom:15px;
+      margin-left:0px;
+    }
+  }
+
+  .row {
+    margin-bottom:20px;
+  }
+  a, a:visited {
+    color:#bdbdbd;
+  }
+}
 
 div.buttonbox_out {
   /* background-color:rgba(226,226,226,0.1); */
@@ -78,17 +261,11 @@ div.homebox {
 }
 
 /* universal */
-a.btn:hover:visited {
-  background-color:transparent;
+
+a.btn:hover:visited, a.btn:visited {
+  background-color:none;
   color:white;
 }
-
-a.btn:visited {
-  color:white;
-}
-
-
-
 
 .fbSignInButton {
 	background: url("/assets/facebookButton.png") no-repeat scroll center center transparent;
@@ -113,85 +290,6 @@ a.fbSignInButton:hover:visited {
 a.fbSignInButton:hover {
   color:yellow;
 }  
-
-html {
-overflow-y: scroll;
-}
-
-body {
-padding-top: 41px;
-}
-
-
-section {
-overflow: auto;
-}
-
-textarea {
-resize: vertical;
-}
-
-.center {
-  text-align: center;
-  h1 {
-    margin-bottom: 10px;
-  }
-}
-
-/* typography */
-h1, h2, h3, h4, h5, h6 {
-line-height: 1;
-}
-  h1 {
-    font-size: 3em;
-    letter-spacing: -2px;
-    margin-bottom: 30px;
-    text-align: center;
-    margin-top:20px;
-  }
-  h2 {
-    font-size: 1.7em;
-    letter-spacing: -1px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-weight: normal;
-    color: $grayLight;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
-/* header */
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: white;
-#text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  line-height: 1;
-  &:hover {
-    color: white;
-    text-decoration: none;
-  }
-}
-
-/* footer */
-footer {margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
-footer {display:block;}
-footer {background-color:#252525;padding:45px 0px;}
-footer p{color:#bababa;padding:15px 0px;}
-footer ul{list-style:none;margin:0px;color:#6a6a6a;font-size:13px;}
-footer ul li{margin-bottom:10px;}.footer .links-horizontal li{float:left;margin-left:20px;}
-footer ul li:first-child{margin-bottom:15px;margin-left:0px;}.footer .row{margin-bottom:20px;}
-footer a{color:#bdbdbd;}
-footer a:visited { color:#bdbdbd;}
-
-footer {padding-left:30px;background-position:left center;margin-left:0px;color:#BDBDBD;opacity:1;}
 
 
 /* sidebar */
