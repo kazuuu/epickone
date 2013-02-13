@@ -30,8 +30,6 @@
     
   </style>
 
-  <!-- include jQuery library -->
-  <%= javascript_include_tag ['jquery-1.8.3', 'application'] %>
   <!-- include Cycle plugin -->
   <%= javascript_include_tag ['jquery.cycle2', 'application'] %>
 
@@ -39,11 +37,47 @@
 
 <%= session[:site_country] %>
 <% content_for :wide do %>
-<div class="row" style="">
+<div class="row" style="height:450px;">
   <div class="cycle-slideshow" data-cycle-fx="fade" 
     data-cycle-timeout="3000"
     data-cycle-slides="> div"
      >
+    <% @promo_events.each do |promo_event| 
+      promo_bg = promo_event.photos.find(:first, :conditions => "image_type='banner_bg'")
+      promo_photo = promo_event.photos.find(:first, :conditions => "image_type='banner_photo'")
+    %>
+    	<div class="slide" style="position:relative;">
+    	  <div style="clear: both;width:100%;height:450px;background:#232323 url(<%= promo_bg.image.url(:original) %>) no-repeat center; background-size:100% 450px;">
+        </div>
+        <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;background:transparent url(<%= promo_photo.image.url(:original) %>) no-repeat center;">
+        </div>
+        <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;text-align:center;">
+          <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
+        </div>
+ 
+        <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:100px;left:100px;z-index:7500;">
+          <div style="font-weight:bold;"><%= link_to(promo_event.title, promo_event) %></div>
+          <div style="margin-top:40px;font-weight:bold;"><%= link_to('ePick One', promo_event) %></div>
+          <div style="font-size:80%;font-style:italic;"><%= link_to('Não custa nada tentar.', promo_event) %></div>
+        </div>
+
+        <div class="buttonbox_out" style="position:absolute;top:300px;left:100px;z-index:7500;">
+          <div class="buttonbox_in">
+          <%=link_to "Participar", promo_event, :class => "btn btn-black btn-bigger btn-primary" %>
+          </div>
+        </div>
+        <div class="buttonbox_out" style="position:absolute;top:300px;left:250px;z-index:7500;">
+          <div class="buttonbox_in">
+          <%=link_to "Como concorrer", how_it_works_path, :class => "btn btn-black btn-bigger btn-primary" %>
+          </div>
+        </div>
+        <div class="buttonbox_out" style="position:absolute;top:300px;left:450px;z-index:7500;">
+          <div class="buttonbox_in">
+          <%=link_to "Cadastre-se", new_user_path, :class => "btn btn-black btn-bigger btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>  
     <% @promo_events.each do |promo_event| 
       promo_bg = promo_event.photos.find(:first, :conditions => "image_type='banner_bg'")
       promo_photo = promo_event.photos.find(:first, :conditions => "image_type='banner_photo'")
