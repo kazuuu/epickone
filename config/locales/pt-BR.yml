@@ -1,6 +1,6 @@
-pt-BR:    
+pt-BR:
   main:
-    Checkout: "CheckOut"
+    checkout: "CheckOut"
     cart: "Tickets Pendentes"
     events: "Eventos"
     store: "Loja"
@@ -20,7 +20,6 @@ pt-BR:
     
   translation:
     en-US: "Estados Unidos"
-    en-IE: "Irlanda"
     pt-BR: "Português"
 
   notifier:
@@ -248,7 +247,6 @@ pt-BR:
       long: ! '%A, %d de %B de %Y, %H:%M h'
       short: ! '%d/%m, %H:%M h'
       simple_date: ! '%d/%B/%Y'
-      
     pm: ''
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
@@ -257,7 +255,6 @@ pt-BR:
   activerecord:
     errors:
       <<: *errors
-
 
   active_admin:
     dashboard: "Painel Administrativo"
