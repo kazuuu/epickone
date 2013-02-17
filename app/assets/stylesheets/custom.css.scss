@@ -51,17 +51,17 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 h1 {
-  font-size: 3em;
+  font-size: 200%;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
   margin-top:20px;
 }
 h2 {
-  font-size: 1.7em;
+  font-size: 150%;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
   font-weight: normal;
   a, a:visited, a:hover, a:hover:visited {
     color: $grayDark;
