@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 gem 'authlogic', '3.1.3'
-gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-sass', '2.3.0'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
@@ -20,12 +20,12 @@ gem 'koala', '1.5.0'
 gem 'unicorn', '4.4.0'
 gem 'rails-translate-routes', '0.1.3'
 gem 'globalize3', '0.2.0' 
-gem 'activeadmin', '0.5.1' 
+gem 'activeadmin', '0.5.0' 
 gem 'ActiveAdmin-Globalize3-inputs', '0.0.1' 
 gem 'jquery-rails', '2.2.1'
 gem 'jquery-ui-rails', '4.0.1' 
 gem 'exception_notification', '3.0.0'
-gem 'simple_form', '2.0.4'
+gem 'formtastic', '2.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -42,7 +42,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '3.2.4'
+  gem 'sass-rails',   '3.2.6' # 16.02.2013
   gem 'coffee-rails', '3.2.2'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
