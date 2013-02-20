@@ -26,6 +26,7 @@ gem 'jquery-rails', '2.2.1'
 gem 'jquery-ui-rails', '4.0.1' 
 gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
+gem 'simple_form'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

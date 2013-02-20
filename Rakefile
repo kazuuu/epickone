@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pickone::Application.load_tasks
+Epickone::Application.load_tasks
