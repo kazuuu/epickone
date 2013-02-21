@@ -1,0 +1,173 @@
+/* Bootstrap: Define variables customs before loading bootsrap */
+$sansFontFamily: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$baseFontFamily: $sansFontFamily;
+$baseFontSize: 15px;
+$dropdownLinkBackgroundHover: #999;
+$grayMediumLight: #eaeaea;
+
+@import "bootstrap";
+
+/* BOOTSTRAP CUSTOM */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+
+.btn-black {
+  background-color: hsl(0, 0%, 16%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5b5b5b", endColorstr="#282828");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#5b5b5b), to(#282828));
+  background-image: -moz-linear-gradient(top, #5b5b5b, #282828);
+  background-image: -ms-linear-gradient(top, #5b5b5b, #282828);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b5b5b), color-stop(100%, #282828));
+  background-image: -webkit-linear-gradient(top, #5b5b5b, #282828);
+  background-image: -o-linear-gradient(top, #5b5b5b, #282828);
+  background-image: linear-gradient(#5b5b5b, #282828);
+  border-color: #282828 #282828 hsl(0, 0%, 11%);  
+}  
+
+.btn-bigger {
+  height:30px;
+  font-size:120%;
+  padding-top:15px;
+
+}
+/* END BOOTSTRAP CUSTOM */
+  
+/* SCAFFOLD LEVEL 1*/
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 41px;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 170%;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: left;
+  margin-top:20px;
+}
+
+h2 {
+  font-size: 140%;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: normal;
+  a, a:visited, a:hover, a:hover:visited {
+    color: #999;
+  }
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+/* END SCAFFOLD LEVEL 1 */
+
+/* SCAFFOLD LEVEL 2 */
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: lightgray;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+/* END SCAFFOLD LEVEL 2 */
+
+/* miscellaneous */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+
+.fbSignInButton {
+	background: url("/assets/facebookButton.png") no-repeat scroll center center transparent;
+	width: 195px;
+	height: 26px;
+	overflow: hidden;
+	padding-top:7px;
+	padding-left:30px;
+	text-align: center;
+	text-decoration: none !important;
+	text-transform: none;
+	color: #FFFFFF;
+	display: block;
+}
+.fbSignInButton:visited {
+	color: #FFFFFF;
+}
+
+a.fbSignInButton:hover:visited {
+  color:yellow;
+}  
+a.fbSignInButton:hover {
+  color:yellow;
+}  
+
+
+
+
+

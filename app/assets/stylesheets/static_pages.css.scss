@@ -15,3 +15,48 @@
     text-align:center;
   }
 }
+
+div.buttonbox_out {
+  /* background-color:rgba(226,226,226,0.1); */
+  background-image:url("/assets/bg_btn.png");
+  padding-left:5px;
+  padding-right:5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border-width:1px;
+  border-color:black;
+  border-style:solid;
+  color:white;
+}
+div.buttonbox_in {
+  padding:10px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border-width:1px;
+  border-color:black;
+  border-style:solid;
+  color:white;
+}
+
+.slide {
+  a {
+    &:visited {
+      color: #fff;
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.banner_medium
+{
+  float:left;
+  width:265px;
+  margin:10px;
+  padding:15px;
+	border-style:solid;
+	border-width:1px;
+}
