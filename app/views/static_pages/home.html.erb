@@ -38,7 +38,7 @@
 <%= session[:site_country] %>
 <% content_for :wide do %>
 <div class="row" style="height:450px;">
-  <div class="cycle-slideshow" data-cycle-fx="fade" 
+  <div class="cycle-slideshow" style="height:450px;" data-cycle-fx="fade" 
     data-cycle-timeout="3000"
     data-cycle-slides="> div"
      >
@@ -144,7 +144,7 @@
   <div class="span4 homebox">
     <% @man.each do |col| %>
     <div class="row-fluid center">
-        <h2><%= link_to(col.title, col) %></h2>
+        <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Due Date: <%= l col.date_due, :format => :simple_date if !col.date_due.nil? %></p>
         <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due) %></p>

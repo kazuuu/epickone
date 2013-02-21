@@ -49,7 +49,8 @@
       <b>Description:</b>
       <%= simple_format(@event.description) %>
     </p>
-  </div>  
+    <%= link_to "Answering this quiz and get a free ticket!", quiz_event_path(), :class => "btn btn-black btn-large btn-primary" %>
+  </div>    
 </div>  
 
 

@@ -72,6 +72,9 @@
       </tbody>
     </table>
     <div class="row-fluid">
+      <%= link_to "Add more tickets before checkout", root_path, :class => "btn btn-black btn-large btn-primary" %>
+      <br>
+      <br>
       <% if bNeed_number %>
         <%= link_to "You need to number all your tickets before Check out", "#", :class => "btn btn-black btn-large btn-primary" %>      
       <% else %>

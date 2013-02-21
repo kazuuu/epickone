@@ -1,9 +1,14 @@
-GEM
-  remote: https://rubygems.org/
+GIT
+  remote: https://github.com/mimimi/ActiveAdmin-Globalize3-inputs.git
+  revision: 68b21081cb1574476a48b60fe52ad90995a8e290
   specs:
     ActiveAdmin-Globalize3-inputs (0.0.1)
       activeadmin
       globalize3
+
+GEM
+  remote: https://rubygems.org/
+  specs:
     actionmailer (3.2.12)
       actionpack (= 3.2.12)
       mail (~> 2.4.4)
@@ -59,7 +64,7 @@ GEM
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.6)
       will_paginate
-    bourbon (3.1.0)
+    bourbon (3.1.1)
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
@@ -264,7 +269,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ActiveAdmin-Globalize3-inputs (= 0.0.1)
+  ActiveAdmin-Globalize3-inputs!
   activeadmin (= 0.5.0)
   authlogic (= 3.1.3)
   aws-sdk (~> 1.7.1)
