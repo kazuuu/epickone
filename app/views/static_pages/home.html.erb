@@ -119,7 +119,11 @@
 <div style="height:20px">
 </div>
 <% end %>
-
+<div class="row">
+  <div class="span12">
+    <h2>Você pode tentar também:</h2>
+  </div>
+</div>
 <div class="row">
   <div class="span4 homebox" style="position:relative;">
     <% @woman.each do |col| %>
@@ -165,6 +169,54 @@
         <p>Due Date: </p>
         <p>Time left: </p>
       </div>
+  </div>
+</div>
+
+<!-- Clone abaixo apenas para testte -->
+<div class="row">
+  <div class="span12">
+    <h2>&nbsp;</h2>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="span4 homebox" style="position:relative;">
+    <% @woman.each do |col| %>
+      <div class="row-fluid center">
+        <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
+        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
+        <p>Due Date: <%= l col.date_due, :format => :simple_date if !col.date_due.nil? %></p>
+        <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due, true) %></p>
+        <p>
+        <% if  Time.now <= col.date_due %>
+          <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
+        <% else %>
+          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
+        <% end %>
+        </p>
+      </div>
+    <% end %>
+    <div style="position:absolute;top:0px;left:-30px;">
+      <%= image_tag("stamp_heart.png") %>
+    </div>
+  </div>
+  <div class="span4 homebox">
+    <% @man.each do |col| %>
+    <div class="row-fluid center">
+        <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
+        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
+        <p>Due Date: <%= l col.date_due, :format => :simple_date if !col.date_due.nil? %></p>
+        <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due) %></p>
+        <p>
+        <% if  Time.now <= col.date_due %>
+          <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
+        <% else %>
+          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
+        <% end %>
+        </p>
+      </div>
+    <% end %>
   </div>
 </div>
 

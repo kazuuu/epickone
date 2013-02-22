@@ -60,28 +60,26 @@ ActiveAdmin.register Event do
         q.input :order         
         q.input :style         
         
-      end
+        q.has_many :answers do |a|
+          if !a.object.id.nil?
+            a.input :_destroy, :as => :boolean, :label => "delete"
+          end
+          a.inputs "Answer", :multipart => true do
+            a.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => a.object.avatar.nil? ? a.template.content_tag(:span, "No Image Yet") : a.template.image_tag(a.object.avatar.url(:thumb)) 
+            a.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 
+            a.globalize_inputs :translations do |at|
+              at.inputs do
+                at.input :answer_text
+                at.input :description, :as => :text
 
-      q.has_many :answers do |a|
-        if !a.object.id.nil?
-          a.input :_destroy, :as => :boolean, :label => "delete"
-        end
-        a.inputs "Answer", :multipart => true do
-          a.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => a.object.avatar.nil? ? a.template.content_tag(:span, "No Image Yet") : a.template.image_tag(a.object.avatar.url(:thumb)) 
-          a.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
+                at.input :locale, :as => :hidden
+              end
+            end      
 
-          a.globalize_inputs :translations do |at|
-            at.inputs do
-              at.input :answer_text
-              at.input :description, :as => :text
-
-              at.input :locale, :as => :hidden
-            end
-          end      
-
-          a.input :iscorrect
-          a.input :order
+            a.input :iscorrect
+            a.input :order
+          end
         end
       end
     end
