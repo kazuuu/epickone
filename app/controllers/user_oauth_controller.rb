@@ -4,7 +4,14 @@ class UserOauthController < ApplicationController
   end
   def create
     begin
-      @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
+      aTeste = env["omniauth.auth"]
+      if aTeste.provider == 'facebook'
+        @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
+      elsif aTeste.provider == 'twitter'
+        current_user.update_attributes({
+          :facebook_uid => "teste"
+            })
+      end
     rescue => ex
       flash[:notice] = "[Error] " + ex.message 
       logger.error "[Error] " + ex.message      
@@ -14,7 +21,6 @@ class UserOauthController < ApplicationController
     I18n.locale = lang
           
     if current_user
-      aTeste = env["omniauth.auth"]
       UserSession.create(current_user, true)
       redirect_to root_url, :notice => "Logged in" + aTeste["credentials"]["token"] + " Secret: " + aTeste["credentials"]["secret"]
     else
