@@ -94,8 +94,27 @@ class User < ActiveRecord::Base
           user.deliver_welcome!
           return user
         end
+      when 'twitter'
+        if user = self.find_by_twitter_uid(uid)
+          return user
+        else
+          return self.create_user_from_twitter(auth_hash)
+        end        
     end
   end
+  
+  def self.create_user_from_twitter(auth_hash)
+    self.create({
+      :twitter_uid => auth_hash["uid"],
+      :name => auth_hash["info"]["name"],
+      :avatar_url => auth_hash["info"]["image"],
+      :crypted_password => "twitter",
+      :password_salt => "twitter",
+      :persistence_token => "twitter"
+    })
+    
+  end
+
 
   def self.create_user_from_facebook(auth_hash)
     birthday = ""

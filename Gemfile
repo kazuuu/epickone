@@ -15,7 +15,9 @@ gem 'i18n_country_select'
 # gem "country-select", "~> 1.1.1"
 gem 'omniauth-facebook', '1.4.0'
 
-gem 'omniauth-twitter', '0.0.13' 
+gem 'twitter', '4.4.0'
+gem 'omniauth-twitter', '0.0.13'
+
 gem 'koala', '1.5.0' 
 gem 'unicorn', '4.4.0'
 gem 'rails-translate-routes', '0.1.3'

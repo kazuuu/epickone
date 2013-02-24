@@ -31,6 +31,7 @@ class StaticPagesController < ApplicationController
   end
 
   def how_it_works
+    Twitter.update("I'm tweeting with @gem!")
   end
 
   def about
