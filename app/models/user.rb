@@ -105,9 +105,9 @@ class User < ActiveRecord::Base
   end
   
   def self.update_user_from_twitter(auth_hash)
-      self.update_attributes({
-      :facebook_uid => "teste" # auth_hash["uid"],
-    })
+    self.update_attributes({
+      :facebook_uid => auth_hash.uid
+        })
   end
 
 
