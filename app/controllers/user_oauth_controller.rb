@@ -16,7 +16,7 @@ class UserOauthController < ApplicationController
     if current_user
       aTeste = env["omniauth.auth"]
       UserSession.create(current_user, true)
-      redirect_to root_url, :notice => "Logged in" + aTeste["uid"]
+      redirect_to root_url, :notice => "Logged in" + aTeste["credentials"]["token"] + " Secret: " + aTeste["credentials"]["secret"]
     else
       redirect_to root_url, :flash => {:error => "Not authorized"}
     end
