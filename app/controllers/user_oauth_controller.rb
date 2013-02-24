@@ -9,7 +9,9 @@ class UserOauthController < ApplicationController
         @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
       elsif aTeste.provider == 'twitter'
         current_user.update_attributes({
-          :facebook_uid => "teste"
+          :twitter_uid => aTeste["uid"],
+          :twitter_oauth_token => aTeste["credentials"]["token"],
+          :twitter_oauth_secret => aTeste["credentials"]["secret"]
             })
       end
     rescue => ex
@@ -22,7 +24,7 @@ class UserOauthController < ApplicationController
           
     if current_user
       UserSession.create(current_user, true)
-      redirect_to root_url, :notice => "Logged in" + aTeste["credentials"]["token"] + " Secret: " + aTeste["credentials"]["secret"]
+      redirect_to root_url, :notice => "Logged in"
     else
       redirect_to root_url, :flash => {:error => "Not authorized"}
     end

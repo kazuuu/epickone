@@ -24,7 +24,10 @@ ActiveAdmin.register User do
       f.input :admin_flag
       f.input :password
       f.input :facebook_uid
-#      f.input :twitter_uid
+      f.input :twitter_uid
+      f.input :twitter_oauth_token
+      f.input :twitter_oauth_secret
+      f.input :twitter_oauth_expires_at
       f.input :provider
       f.input :oauth_token
       f.input :oauth_expires_at

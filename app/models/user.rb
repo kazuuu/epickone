@@ -24,9 +24,12 @@ class User < ActiveRecord::Base
                   :avatar,
                   :avatar_delete,
                   :facebook_uid,
-                  :twitter_uid,
                   :oauth_token,
                   :oauth_expires_at,
+                  :twitter_uid,
+                  :twitter_oauth_token,
+                  :twitter_oauth_secret,
+                  :twitter_oauth_expires_at,
                   :locale,
                   :provider
   has_many :events                 
