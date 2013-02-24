@@ -96,11 +96,7 @@ class User < ActiveRecord::Base
           return user
         end
       when 'twitter'
-        if user = self.find_by_twitter_uid(uid)
-          return user
-        else
-          return self.update_user_from_twitter(auth_hash)
-        end        
+        return self.update_user_from_twitter(auth_hash)
     end
   end
   
