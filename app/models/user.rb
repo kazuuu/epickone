@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
                   :avatar,
                   :avatar_delete,
                   :facebook_uid,
+                  :twitter_uid,
                   :oauth_token,
                   :oauth_expires_at,
                   :locale,
@@ -98,21 +99,15 @@ class User < ActiveRecord::Base
         if user = self.find_by_twitter_uid(uid)
           return user
         else
-          return self.create_user_from_twitter(auth_hash)
+          return self.update_user_from_twitter(auth_hash)
         end        
     end
   end
   
-  def self.create_user_from_twitter(auth_hash)
-    self.create({
-      :twitter_uid => auth_hash["uid"],
-      :name => auth_hash["info"]["name"],
-      :avatar_url => auth_hash["info"]["image"],
-      :crypted_password => "twitter",
-      :password_salt => "twitter",
-      :persistence_token => "twitter"
+  def self.update_user_from_twitter(auth_hash)
+      self.update_attributes({
+      :facebook_uid => "teste" # auth_hash["uid"],
     })
-    
   end
 
 

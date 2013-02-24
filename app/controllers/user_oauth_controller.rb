@@ -14,8 +14,9 @@ class UserOauthController < ApplicationController
     I18n.locale = lang
           
     if current_user
+      aTeste = env["omniauth.auth"]
       UserSession.create(current_user, true)
-      redirect_to root_url, :notice => "Logged in"
+      redirect_to root_url, :notice => "Logged in" + aTeste["uid"]
     else
       redirect_to root_url, :flash => {:error => "Not authorized"}
     end

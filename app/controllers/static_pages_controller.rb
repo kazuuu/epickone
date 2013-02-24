@@ -31,7 +31,11 @@ class StaticPagesController < ApplicationController
   end
 
   def how_it_works
-    Twitter.update("I'm tweeting with @gem!")
+    twitter_user = Twitter::Client.new(
+      :oauth_token => "John's access token",
+      :oauth_token_secret => "John's access secret"
+    )
+    twitter_user.update("Teste")
   end
 
   def about
