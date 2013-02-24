@@ -35,7 +35,7 @@ class StaticPagesController < ApplicationController
       :oauth_token => current_user.twitter_oauth_token,
       :oauth_token_secret => current_user.twitter_oauth_secret
     )
-    twitter_user.update("Teste")
+    twitter_user.update("Acabou de entrar em um evento do #epickone.")
   end
 
   def about
