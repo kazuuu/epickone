@@ -90,8 +90,8 @@ Epickone::Application.routes.draw do
   match '/auth/:provider/callback' => 'user_oauth#create', :as => :callback
   match '/auth/failure' => 'user_oauth#failure', :as => :failure
 
-  match '/auth/facebook' => 'user_oauth#create', :as => :fb_login
-  match '/auth/twitter' => 'user_oauth#create', :as => :tw_login
+  match '/auth/facebook' => 'user_oauth#create', :as => :facebook_login
+  match '/auth/twitter' => 'user_oauth#create', :as => :twitter_login
 
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}")
   match '', to: redirect("/#{I18n.default_locale}")
