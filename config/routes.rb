@@ -8,6 +8,7 @@ Epickone::Application.routes.draw do
     resources :users do
       get 'wintickets', :on => :member 
       get 'facebook_share_event', :on => :member 
+      get 'twitter_share_event', :on => :member 
       get 'resend_activation', :on => :member     
     end
     resources :payment_notifications

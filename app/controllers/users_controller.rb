@@ -28,6 +28,18 @@ class UsersController < ApplicationController
     
     redirect_to root_path
   end
+
+  def twitter_share_event()  
+    begin
+      event = Event.find(params[:event_id])
+      current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
+    rescue => ex
+      flash[:notice] = ex.message 
+      logger.error ex.message
+    end
+    redirect_to root_path
+  end
+
   
   # GET /users
   # GET /users.json

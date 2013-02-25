@@ -197,6 +197,16 @@ def post_join(user_id, event_url)
   user.facebook.put_connections("me", "epickone:join", :evento => event_url)
 end
 
+def post_twitter(msg)
+  
+  twitter_user = Twitter::Client.new(
+    :oauth_token => self.twitter_oauth_token,
+    :oauth_token_secret => self.twitter_oauth_secret
+  )
+  twitter_user.update(msg)
+end
+
+
 # End Koala
 
 # Paperclip for Images
