@@ -58,7 +58,7 @@ module Epickone
     config.assets.enabled = true
     
     # Linha colocada para o ActiveAdmin globalization tabs com jQuery
-    config.assets.precompile += %w(active_admin.js active_admin.css)
+#    config.assets.precompile += %w(active_admin.js active_admin.css)
     
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
