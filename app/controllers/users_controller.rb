@@ -5,6 +5,11 @@ class UsersController < ApplicationController
 
     
   def facebook_share_event()  
+    if current_user.oauth_expires_at.nil?
+      flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."
+      redirect_to user_path(current_user) + "#t_tab2"
+      return
+    end
     begin
       event = Event.find(params[:event_id])
       current_user.post_join(current_user.id, event_url(event))
@@ -22,7 +27,7 @@ class UsersController < ApplicationController
         flash[:notice] = "You have already won this ticket. Try to share this event to win more tickets."
       end      
     rescue => ex
-      flash[:notice] = "TESTE Log " + ex.message 
+      flash[:error] = "TESTE Log " + ex.message 
       logger.error "TESTE Log " + ex.message
     end
     
@@ -30,9 +35,15 @@ class UsersController < ApplicationController
   end
 
   def twitter_share_event()  
+    if current_user.twitter_oauth_expires_at.nil?
+      flash[:notice] = "Antes, conecte sua conta com seu Twitter para poder compartilhar."
+      redirect_to user_path(current_user) + "#t_tab2"
+      return
+    end
     begin
       event = Event.find(params[:event_id])
       current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
+      current_user.ticket_add("share_twitter")
     rescue => ex
       flash[:notice] = ex.message 
       logger.error ex.message

@@ -198,13 +198,26 @@ def post_join(user_id, event_url)
 end
 
 def post_twitter(msg)
-  
   twitter_user = Twitter::Client.new(
     :oauth_token => self.twitter_oauth_token,
     :oauth_token_secret => self.twitter_oauth_secret
   )
   twitter_user.update(msg)
 end
+
+
+def ticket_add(origin, max_number_tickets)
+  cart = current_cart
+  already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" + event.id.to_s + " and user_id=" + cart.user_id.to_s).count
+  total_win = max_number_tickets - already_ticket
+
+  if total_win > 0
+    (1..total_win).each do
+      cart.add_ticket(self.id, params[:id], origin)
+    end
+  end
+end
+
 
 
 # End Koala

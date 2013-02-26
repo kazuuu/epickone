@@ -1,9 +1,9 @@
+<div style="height:15px;">
+</div>
+
 <% 
-provide(:title, @user.first_name) 
+  provide(:title, @user.first_name) 
 %>
-<p id="notice"><%= notice %></p>
-
-
 <div class="row">
   <div class="span2">
       <%= image_tag(@user.avatar.url(:thumb), :style => "width:100px;height:100px;" ) %>
@@ -33,3 +33,16 @@ provide(:title, @user.first_name)
   </div>
 </div>
 
+<script type="text/javascript">
+  // Javascript to enable link to tab
+  var hash = document.location.hash;
+  var prefix = "t_";
+  if (hash) {
+      $('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
+  } 
+
+  // Change hash for page-reload
+  $('.nav-tabs a').on('shown', function (e) {
+      window.location.hash = e.target.hash.replace("#", "#" + prefix);
+  });
+</script>
