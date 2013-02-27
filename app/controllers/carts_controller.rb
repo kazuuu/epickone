@@ -100,7 +100,7 @@ class CartsController < ApplicationController
   def add_tickets
     cart=current_cart
     (1..params[:quantity].to_i).each do |i| 
-      cart.add_ticket(current_user.id, params[:event_id].to_s, params[:origin].to_s)
+      cart.ticket_add(params[:event_id], params[:origin].to_s)
     end
     cart.add_product(current_user.id, "1", "Urgente")       
     redirect_to checkout_cart_path

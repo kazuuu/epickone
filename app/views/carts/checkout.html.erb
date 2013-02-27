@@ -16,7 +16,6 @@
             Unit Price
           </th>
           <th class="span1">
-            Action
           </th>
         </tr>
       </thead>
@@ -49,7 +48,11 @@
             <%= number_to_currency(item.unit_price)%>
           </td>
           <td>
-            <%= link_to 'Remove', item, confirm: 'Are you sure?', method: :delete %></td>
+            <% if item.origin == "paid" %>
+              <%= link_to 'Remover', item, confirm: 'Tem certeza?', method: :delete %>
+            <% else %>
+              
+            <% end%>
           </td>
         </tr>
         <% end %>
