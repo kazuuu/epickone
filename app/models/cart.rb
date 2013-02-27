@@ -8,6 +8,24 @@ class Cart < ActiveRecord::Base
   
   validates :user_id, presence: true  
 
+  def ticket_add(event_id, origin)
+    new_ticket = tickets.build(:event_id => event_id)
+    new_ticket.user_id = self.user_id
+    new_ticket.quantity = 1
+    if origin == 'paid'
+      event = Event.find(event_id)
+      new_ticket.unit_price = event.price_ticket
+    else
+      new_ticket.unit_price = 0
+    end
+    new_ticket.origin = origin
+    if new_ticket.save
+      true
+    else
+      false
+    end
+  end
+
   def total_price
     # convert to array so it doesn't try to do sum on database directly
     tickets.to_a.sum(&:full_price)

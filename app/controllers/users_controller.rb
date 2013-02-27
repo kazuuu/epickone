@@ -5,32 +5,31 @@ class UsersController < ApplicationController
 
     
   def facebook_share_event()  
-    if current_user.oauth_expires_at.nil?
+    if current_user.twitter_oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."
       redirect_to user_path(current_user) + "#t_tab2"
       return
     end
+
     begin
       event = Event.find(params[:event_id])
-      current_user.post_join(current_user.id, event_url(event))
-      cart = current_cart
-      origin = "shared_fb"
-      already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" + event.id.to_s + " and user_id=" + cart.user_id.to_s).count
-      total_win = 2 - already_ticket
+      already_ticket = Ticket.find(:all, :conditions => "origin='share_facebook' and event_id=" + event.id.to_s + " and user_id=" + current_user.id.to_s).count
+      total_win = 1 - already_ticket
 
       if total_win > 0
+        current_user.post_facebook(event_url(event))
         (1..total_win).each do
-          cart.add_ticket(current_user.id, params[:id], origin)
+          current_cart.ticket_add(params[:event_id], "share_facebook")
         end
-        flash[:success] = "Congratulations! You won a ticket jo join this event!."
+        
+        flash[:success] = "Voce ganhou um ticket! Nao se esqueca de numera-lo e dar checkout nele!"
       else
-        flash[:notice] = "You have already won this ticket. Try to share this event to win more tickets."
+        flash[:notice] = "Opa! Voce ja ganhou este ticket. Tente outro."
       end      
     rescue => ex
-      flash[:error] = "TESTE Log " + ex.message 
-      logger.error "TESTE Log " + ex.message
+      flash[:error] = ex.message 
+      logger.error ex.message
     end
-    
     redirect_to root_path
   end
 
@@ -40,12 +39,24 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user) + "#t_tab2"
       return
     end
+
     begin
       event = Event.find(params[:event_id])
-      current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
-      current_user.ticket_add("share_twitter", 1)
+      already_ticket = Ticket.find(:all, :conditions => "origin='share_twitter' and event_id=" + event.id.to_s + " and user_id=" + current_user.id.to_s).count
+      total_win = 1 - already_ticket
+
+      if total_win > 0
+        current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
+        (1..total_win).each do
+          current_cart.ticket_add(params[:event_id], "share_twitter")
+        end
+        
+        flash[:success] = "Voce ganhou um ticket! Nao se esqueca de numera-lo e dar checkout nele!"
+      else
+        flash[:notice] = "Opa! Voce ja ganhou este ticket. Tente outro."
+      end      
     rescue => ex
-      flash[:notice] = ex.message 
+      flash[:error] = ex.message 
       logger.error ex.message
     end
     redirect_to root_path
