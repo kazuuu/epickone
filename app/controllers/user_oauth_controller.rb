@@ -12,7 +12,7 @@ class UserOauthController < ApplicationController
         current_user.update_attributes({
           :twitter_uid => aTeste["uid"],
           :twitter_oauth_token => aTeste["credentials"]["token"],
-          :twitter_oauth_secret => aTeste["credentials"]["secret"]
+          :twitter_oauth_secret => aTeste["credentials"]["secret"],
           :twitter_oauth_expires_at => 30.day.from_now
             })
       end
