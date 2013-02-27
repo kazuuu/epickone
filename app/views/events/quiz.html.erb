@@ -1,36 +1,43 @@
-<p id="notice"><%= notice %></p>
 <div class="row">
-  <div style="display:block;float:left;">
-    <aside style="float:left;">
-      <section>
-        <%= image_tag @event.avatar.url(:thumb) %>
-      </section>
-    </aside>
+  <div class="span2">
+    <%= image_tag @event.avatar.url(:thumb) %>
   </div>
-  <%= form_tag quiz_result_event_path do |f| %>
-  <div style="float:left;display:block">
-    <p>
-      <b>Title:</b>
-      <%= @event.title %>
-    </p>
-
-    <ol class="questions">
-    <% @event.questions.each do |question| %>
-      <li>
-        <%= question.title %>
-        <ol class="answers">
-          <% question.answers.each do |answer| %>
-            <%= radio_button question.id, "answer", answer.id %> <%= answer.answer_text %> <br>
-              
-          <% end %>
-        </ol>
-      </li>
+  <div class="span10">
+    <%= form_tag quiz_result_event_path do |f| %>
+    <table class="table table-striped">
+       <thead>
+         <tr>
+           <th class="span12">
+             <%= @event.title %>
+           </th>
+         </tr>
+       </thead>
+       <tbody>
+         <% @event.questions.each do |question| %>     
+         <tr>
+           <td>
+             <%= question.title %>
+             <% if question.description != '' %>
+                <p>
+               <%= question.description %>
+               </p>
+             <% end %>
+             <ol class="answers">
+               <% question.answers.each do |answer| %>
+                 <%= radio_button question.id, "answer", answer.id %> <%= answer.id %> <%= answer.answer_text %> <%= answer.iscorrect %>  <br>
+               <% end %>
+             </ol>         
+           </td>
+         </tr>
+         <% end %>
+         <tr>
+           <td>
+         <%= submit_tag "Check Answers" %>
+         </td>
+       </tr>
+          
+       </tbody>
+    </table>
     <% end %>
-    </ol>
-    <%= submit_tag "Check Answers" %>
-  </div
-  <% end %>
+  </div>
 </div>
-
-<hr>
-

@@ -9,6 +9,31 @@
     <br>
     <%= link_to "Try it again", quiz_event_path, :class => "btn btn-large btn-primary" %>
   <% end %>
+
   
-
-
+<%  
+    @event.questions.each do |question|
+      @ans = question.answers.find(:first, :conditions => 'iscorrect = 1')
+      
+      if !@ans.nil?
+        if !params[question.id.to_s].nil? 
+          if !params[question.id.to_s][:answer].nil? 
+            if params[question.id.to_s][:answer] != @ans.id.to_s
+              if @bOk == true %>
+                Falso1
+<%                
+              end
+            end
+          else 
+            %>
+            falso2
+            <%
+          end
+        else
+          %>
+          falso3
+          <%
+        end
+      end
+    end
+%>

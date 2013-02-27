@@ -35,37 +35,50 @@ class EventsController < ApplicationController
 
   def quiz_result
     @event = Event.find(params[:id])
-    @bOk = true;
+    @bOk = true
     
     @event.questions.each do |question|
-      @ans = question.answers.find(:all, :conditions => 'iscorrect = 1')
-
-      if !@ans.empty?
-        if params[question.id.to_s].nil? || params[question.id.to_s][:answer] != @ans[0]['id'].to_s
-          if @bOk == true
+      @ans = question.answers.find(:first, :conditions => 'iscorrect = 1')
+      
+      if !@ans.nil?
+        if !params[question.id.to_s].nil? 
+          if !params[question.id.to_s][:answer].nil? 
+            if params[question.id.to_s][:answer] != @ans.id.to_s
+              if @bOk == true
+                @bOk = false
+              end
+            end
+          else
             @bOk = false
           end
+        else
+          @bOk = false
         end
-      else
-        @bOk = false
       end
     end
+    
     if @bOk
       cart = current_cart
       origin = "answered"
       already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" +  params[:id] + " and user_id=" + cart.user_id.to_s).count
-      total_win = 2 - already_ticket
+      total_win = 1 - already_ticket
       
       if total_win > 0
         (1..total_win).each do
-          cart.add_ticket(current_user.id, params[:id], origin)
+          cart.ticket_add(params[:id], origin)
         end
         flash[:success] = "Congratulations! You won a ticket jo join this event!."
+        redirect_to event_path(params[:id])
       else
         flash[:notice] = "You have already won this ticket. Try to share this event to win more tickets."
+        redirect_to event_path(params[:id])
       end
+    else
+      flash[:notice] = "Algumas respostas estao erradas. E preciso acertar 100% para ganhar o ticket."
+      redirect_to quiz_event_path(params[:id])
     end    
   end
+  
   def add_cart
     @ticket = Ticket.find(params[:id])
     

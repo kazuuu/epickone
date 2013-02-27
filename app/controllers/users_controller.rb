@@ -48,6 +48,7 @@ class UsersController < ApplicationController
 
       if total_win > 0
         current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
+        
         (1..total_win).each do
           current_cart.ticket_add(params[:event_id], "share_twitter")
         end

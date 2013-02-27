@@ -1,11 +1,14 @@
-Você ainda não respondeu o QUIZ, ganhe tickets respondendo agora mesmo!
+Você pode ganhar um Ticket respondendo o QUIZ!
 <br>
-<%= link_to "Get a free ticket answering this quiz!", quiz_event_path(), :class => "btn btn-black btn-large btn-primary" %>    
+<%= link_to "Responder o Quiz!", quiz_event_path(), :class => "btn btn-black btn-large btn-primary" %>    
 <br>
 <br>
-Você pode ganhar tickets compartilhando este evento no seu Facebook!
+Você pode ganhar um Ticket compartilhando este evento no seu Facebook!
 <br>
 <%= link_to "Ganhe um Ticket comparilhando este evento no Facebook", facebook_share_event_user_path(:event_id => params[:id]),:class => "btn btn-black btn-large btn-primary" %>
+<br>
+<br>
+Você pode ganhar um Ticket compartilhando este evento no seu Twitter!
 <br>
 <%= link_to "Ganhe um Ticket comparilhando este evento no Twitter", twitter_share_event_user_path(:event_id => params[:id]),:class => "btn btn-black btn-large btn-primary" %>
 
