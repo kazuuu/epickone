@@ -7,7 +7,7 @@ class UserOauthController < ApplicationController
       aTeste = env["omniauth.auth"]
       
       if aTeste.provider == 'facebook'
-        @current_user = User.find_or_create_from_oauth(env["omniauth.auth"].to_utf8)
+        @current_user = User.find_or_create_from_oauth(env["omniauth.auth"])
       elsif aTeste.provider == 'twitter'
         current_user.update_attributes({
           :twitter_uid => aTeste["uid"],
