@@ -52,22 +52,7 @@ class Cart < ActiveRecord::Base
     end
     "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
-  
-  def add_ticket(user_id, event_id, origin)
-    event = Event.find(event_id)
-    new_ticket = tickets.build(:event_id => event_id)
-    new_ticket.user_id = user_id
-    new_ticket.quantity = 1
-    if origin == 'paid'
-      new_ticket.unit_price = event.price_ticket
-    else
-      new_ticket.unit_price = 0
-    end
-    new_ticket.origin = origin
-    new_ticket.save
-    true
-  end
-  
+    
   def add_product(user_id, product_id, comment)
       product = Product.find(product_id)
       new_item = cart_products.build(:product_id => product_id)

@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
                     
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
   validates_uniqueness_of :phone_mobile
-#  validates_presence_of :phone_mobile
+  validates_presence_of :phone_mobile
   acts_as_authentic do |c| 
     c.login_field = :email 
     c.require_password_confirmation = false
@@ -190,11 +190,6 @@ end
 
 def friends_count
   facebook { |fb| fb.get_connection("me", "friends").size }
-end
-
-def post_join(user_id, event_url)
-  user = User.find(user_id)
-  user.facebook.put_connections("me", "epickone:join", :evento => event_url)
 end
 
 def post_facebook(event_url)
