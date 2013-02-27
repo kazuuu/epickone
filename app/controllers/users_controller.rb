@@ -17,7 +17,8 @@ class UsersController < ApplicationController
       total_win = 1 - already_ticket
 
       if total_win > 0
-        current_user.post_facebook(event_url(event))
+        # current_user.post_facebook(event_url(event))
+        current_user.post_join(current_user.id, event_url(event))
         (1..total_win).each do
           current_cart.ticket_add(params[:event_id], "share_facebook")
         end
