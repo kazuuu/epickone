@@ -5,7 +5,7 @@ class Hash
         if (v.respond_to?(:to_utf8))
           [ k, v.to_utf8 ]
         elsif (v.respond_to?(:encoding))
-          [ k, v.dup.force_encode('UTF-8') ]
+          [ k, v.dup.encode('UTF-8') ]
         else
           [ k, v ]
         end
