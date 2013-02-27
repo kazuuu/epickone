@@ -1,4 +1,17 @@
-<h1><%= @user.title + ' ' +@user.first_name + ' ' %></h1>
+<h1><%= @user.title + ' ' +@user.first_name + ' ' + @user.last_name %></h1>
+<h2>Informações Básicas</h2>
+Documento: <%= @user.document %> <br>
+Sexo: <%= @user.gender %> <br>
+Data de Nascimento: <%= @user.birthday %> <br>
+Cidade: <%= @user.city %> <br>
+Estado: <%= @user.state %> <br>
+País: <%= @user.country %> <br>
+Endereco 1: <%= @user.address1 %> <br>
+Endereco 2: <%= @user.address2 %> <br>
+CEP: <%= @user.zipcode %> <br>
+<h2>Dados de Contato</h2>
+Email: <%= @user.email %> <br>
+Celular: <%= @user.phone_mobile %> <br>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
