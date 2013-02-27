@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
     
   def facebook_share_event()  
-    if current_user.twitter_oauth_expires_at.nil?
+    if current_user.oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."
       redirect_to user_path(current_user) + "#t_tab2"
       return

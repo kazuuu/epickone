@@ -7,6 +7,7 @@ ActiveAdmin.register User do
         f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
       f.input :avatar_url
       f.input :email
+      f.input :active
       f.input :first_name
       f.input :last_name
       f.input :document
