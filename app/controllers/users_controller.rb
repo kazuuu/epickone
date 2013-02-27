@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     begin
       event = Event.find(params[:event_id])
       current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
-      current_user.ticket_add("share_twitter")
+      current_user.ticket_add("share_twitter", 1)
     rescue => ex
       flash[:notice] = ex.message 
       logger.error ex.message
