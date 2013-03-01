@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user, :cart_count, :current_cart
 
+  before_filter :beta_login_required
+
+
 
   def store_location
     #session[:return_to] = request.request_uri
@@ -88,16 +91,22 @@ class ApplicationController < ActionController::Base
     end
   end 
   
-  protected
-  
-  def rescue_action_in_public(exception)
-    case exception
-    when ActiveRecord::RecordNotFound
-      render :file => "#{RAILS_ROOT}/puclic/404.html", :status => 404
-    else
-      super
+  protected  
+    def rescue_action_in_public(exception)
+      case exception
+      when ActiveRecord::RecordNotFound
+        render :file => "#{RAILS_ROOT}/puclic/404.html", :status => 404
+      else
+        super
+      end
     end
-  end
     
+  protected
+
+      def beta_login_required
+        authenticate_or_request_with_http_basic do |username, password|
+          username == "guest" && password == "1010"
+        end
+      end
      
 end

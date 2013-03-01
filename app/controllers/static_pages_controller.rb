@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
 
     @man = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'man'", :order => "date_due asc") 
     @woman = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'woman'", :order => "date_due asc") 
-    @promo_events = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'promo'", :order => "date_due asc") 
+    @promo_events = Event.find(:all, :joins => :category, :conditions => "categories.site_position = 'promo'", :order => "date_due asc") 
 
     respond_to do |format|
       format.html # new.html.erb
