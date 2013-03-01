@@ -13,10 +13,9 @@ gem 'i18n_country_select'
 
 # gem "localized_country_select", "~> 0.0.1"
 # gem "country-select", "~> 1.1.1"
-gem 'omniauth-facebook'
-
-gem 'twitter', '4.4.0'
+gem 'omniauth-facebook', '1.4.1'
 gem 'omniauth-twitter', '0.0.13'
+gem 'twitter', '4.4.0'
 
 gem 'koala', '1.5.0' 
 gem 'unicorn', '4.4.0'
