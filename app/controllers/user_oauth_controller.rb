@@ -1,4 +1,6 @@
 class UserOauthController < ApplicationController
+  skip_before_filter :site_lock
+  
   def exctract_locale_from_url(url)
     url[/^([^\/]*\/\/)?[^\/]+\/(\w{2})(\/.*)?/,2]
   end
