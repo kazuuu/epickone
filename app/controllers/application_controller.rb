@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user, :cart_count, :current_cart
 
-  before_filter :beta_login_required
-
+# Para trancar o site
+  before_filter :site_lock 
 
 
   def store_location
@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
     
   protected
 
-      def beta_login_required
+      def site_lock
         authenticate_or_request_with_http_basic do |username, password|
           username == "guest" && password == "1010"
         end
