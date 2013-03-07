@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @tickets = @user.tickets.find(:all, :joins => :cart, :conditions => ['carts.purchased_at is not null'])
+    @tickets = @user.tickets.find(:all, :joins => :cart,  :conditions => ['carts.purchased_at is not null'], :select => 'tickets.*, carts.*')
 
     respond_to do |format|
       format.html # show.html.erb

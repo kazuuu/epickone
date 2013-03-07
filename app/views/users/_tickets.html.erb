@@ -1,21 +1,19 @@
 <div class="row-fluid">
-  <div class="span10 offset1">  
+  <div class="span12">  
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="span3">
-            Event
-          </th>
           <th class="span2">
-            Pick #
+            Data
           </th>
-          <th class="span2">
-            Quantity
-          </th>
-          <th class="span2">
-            Unit Price
+          <th class="span7">
+            Evento
           </th>
           <th class="span1">
+            Número
+          </th>
+          <th class="span2">
+            Preço
           </th>
         </tr>
       </thead>
@@ -26,18 +24,16 @@
         %>
         <tr>
           <td>
-            <%= item.event.title%>
+              <%= l item.purchased_at.to_date, :format => :simple_date if !item.purchased_at.nil? %> 
           </td>
           <td>
-              <%= item.picked_number if !item.picked_number? %>
+            <%= link_to item.event.title, item.event %>
           </td>
           <td>
-            <%= item.quantity%>
+            <%= item.picked_number.to_s if !item.picked_number.nil? %>
           </td>
           <td>
             <%= number_to_currency(item.unit_price)%>
-          </td>
-          <td>
           </td>
         </tr>
         <% end %>

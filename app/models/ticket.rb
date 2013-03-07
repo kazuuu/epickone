@@ -1,5 +1,5 @@
 class Ticket < ActiveRecord::Base
-  attr_accessible :cart_id, :comment, :event_id, :picked_number, :quantity, :unit_price, :user_id
+  attr_accessible :cart_id, :comment, :event_id, :picked_number, :quantity, :unit_price, :user_id, :origin
   #belongs_to :cart
   belongs_to :event
   belongs_to :user
