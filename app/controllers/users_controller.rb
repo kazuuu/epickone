@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def facebook_share_event()  
     if current_user.oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."
-      redirect_to user_path(current_user) + "#t_tab2"
+      redirect_to user_path(current_user) + "/#t_tab2"
       return
     end
 
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def twitter_share_event()  
     if current_user.twitter_oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Twitter para poder compartilhar."
-      redirect_to user_path(current_user) + "#t_tab2"
+      redirect_to user_path(current_user) + "/#t_tab2"
       return
     end
 
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    # @events = @user.events.paginate(page: params[:page])
+    @tickets = @user.tickets.find(:all, :joins => :cart, :conditions => ['carts.purchased_at is not null'])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,0 +1,47 @@
+<div class="row-fluid">
+  <div class="span10 offset1">  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="span3">
+            Event
+          </th>
+          <th class="span2">
+            Pick #
+          </th>
+          <th class="span2">
+            Quantity
+          </th>
+          <th class="span2">
+            Unit Price
+          </th>
+          <th class="span1">
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% 
+        @tickets.each do |item| 
+        %>
+        <tr>
+          <td>
+            <%= item.event.title%>
+          </td>
+          <td>
+              <%= item.picked_number if !item.picked_number? %>
+          </td>
+          <td>
+            <%= item.quantity%>
+          </td>
+          <td>
+            <%= number_to_currency(item.unit_price)%>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div> 
+</div> <!-- class row -->

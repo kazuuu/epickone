@@ -35,7 +35,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Sua Conta", current_user %></li> 
-              <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
+              <li><%= link_to "Seus Tickets", user_path(current_user.id) + "/#t_tab3" %></li>
               <li class="divider"></li>
               <li><%= link_to "Logout", :logout %></li>
             </ul>
