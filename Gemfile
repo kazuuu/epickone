@@ -8,8 +8,8 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
-gem 'carmen'
-gem 'i18n_country_select'
+gem 'carmen', '0.2.13'
+gem 'i18n_country_select', '1.0.16'
 
 # gem "localized_country_select", "~> 0.0.1"
 # gem "country-select", "~> 1.1.1"
@@ -27,13 +27,17 @@ gem 'jquery-rails', '2.2.1'
 gem 'jquery-ui-rails', '4.0.1' 
 gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
-gem 'simple_form'
+gem 'simple_form', '2.0.4'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
   gem 'sqlite3', '1.3.5'
+  gem 'rspec-rails', '2.13.1'
+end
+group :development do
+  gem 'rspec-rails', '2.13.1'
 end
 
 group :production do
