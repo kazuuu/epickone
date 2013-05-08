@@ -23,3 +23,9 @@ doc/
 *~
 .project
 .DS_Store
+
+# Other files by kazuuu 09.05.2013
+doc/api
+doc/app
+*.swp
+*~
