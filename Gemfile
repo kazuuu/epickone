@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'authlogic', '3.1.3'
 gem 'bootstrap-sass', '2.3.0'
 gem 'faker', '1.0.1'
@@ -36,8 +36,9 @@ group :development do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.13.1'
 end
-group :development do
+group :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'capybara'
 end
 
 group :production do

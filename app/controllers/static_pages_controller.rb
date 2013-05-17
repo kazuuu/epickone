@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
       # it takes I18n.locale from the previous example set_locale as before_filter in application controller
 #      redirect_to eval("root_#{I18n.locale}_path")
     end
+    @title = "home"
     @user = User.new
      
 #    @events_first = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'second_row'", :order => "date_due asc") 
@@ -22,20 +23,27 @@ class StaticPagesController < ApplicationController
   end
 
   def help
+    @title = "help"
   end
   def faq
+    @title = "faq"
   end
   def privacy
+    @title = "privacy"
   end
   def term
+    @title = "term"
   end
 
   def how_it_works
+    @title = "How it works"
   end
 
   def about
+    @title = "about"
   end
 
   def contact
-  end
+    @title = "contact"
+  end  
 end
