@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'authlogic', '3.1.3'
+gem 'authlogic', '3.3.0'
 gem 'bootstrap-sass', '2.3.0'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'

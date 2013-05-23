@@ -17,11 +17,11 @@ describe StaticPagesController do
           response.should be_success
         end
 
-        it 'should have right title' do
-          get 'about'
-          response.should have_selector("title", 
-            :content => "ePickOne | About")
-        end # it
+        # it 'should have right title' do
+        #   get 'about'
+        #   response.should have_selector("title", 
+        #     :content => "ePickOne | About")
+        # end # it
       end
   #    
   #    it 'should have a non-blank body' do
