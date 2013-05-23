@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :cart_count, :current_cart
 
 # Para trancar o site
-#  before_filter :site_lock 
+  before_filter :site_lock 
 
 
   def store_location
