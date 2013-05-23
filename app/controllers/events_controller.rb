@@ -68,7 +68,7 @@ class EventsController < ApplicationController
         (1..total_win).each do
           cart.ticket_add(params[:id], origin)
         end
-        flash[:msgbox] = "Parabéns! Você ganhou um ticket. Mas você precisa numerál-lo para poder validar!"
+        flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
         redirect_to checkout_cart_path(current_cart)
       else
         flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
