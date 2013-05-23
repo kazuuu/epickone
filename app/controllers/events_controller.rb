@@ -75,7 +75,7 @@ class EventsController < ApplicationController
         redirect_to event_path(params[:id])
       end
     else
-      flash[:msgbox] = "Algumas respostas estão erradas. É preciso acertar 100% para ganhar o ticket."
+      flash[:msgbox] = "Algumas respostas estao erradas. E preciso acertar 100% para ganhar o ticket."
       redirect_to quiz_event_path(params[:id])
     end    
   end
