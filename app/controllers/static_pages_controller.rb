@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_filter :require_user_admin,  :only => [:control]
+
   def home
     unless params[:locale]
       # it takes I18n.locale from the previous example set_locale as before_filter in application controller
@@ -6,15 +8,13 @@ class StaticPagesController < ApplicationController
     end
     @title = "home"
     @user = User.new
-     
-#    @events_first = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'second_row'", :order => "date_due asc") 
-#    @events_second = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'first_row'", :order => "date_due asc") 
-#    @events_third = Event.find(:all, :limit => 3, :joins => :category, :conditions => "categories.site_position = 'third_row'", :order => "date_due asc") 
-#    @promo_events = Event.find(:all, :conditions => "site_position='main_banner'", :order => "date_due asc")
 
-    @man = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'man'", :order => "date_due asc") 
-    @woman = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'woman'", :order => "date_due asc") 
-    @promo_events = Event.find(:all, :joins => :category, :conditions => "categories.site_position = 'promo'", :order => "date_due asc") 
+    # @man = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'man'", :order => "date_due asc") 
+    # @woman = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'woman'", :order => "date_due asc") 
+
+    @events_outros1 =  Event.find(:all, :conditions => ["category_id = 1 and date(date_start) <= ? and date(date_due) >= ?", Time.now, Time.now], :order => "date_due asc") 
+    @events_outros2 =  Event.find(:all, :conditions => ["category_id = 2 and date(date_start) <= ? and date(date_due) >= ?", Time.now, Time.now], :order => "date_due asc") 
+    @events_promo = Event.find(:all, :conditions => ["category_id = 3 and date(date_start) <= ? and date(date_due) >= ?", Time.now, Time.now], :order => "date_due asc") 
 
     respond_to do |format|
       format.html # new.html.erb
@@ -30,9 +30,11 @@ class StaticPagesController < ApplicationController
   end
   def privacy
     @title = "privacy"
+    render :layout => false
   end
   def term
     @title = "term"
+    render :layout => false
   end
 
   def how_it_works
@@ -45,5 +47,13 @@ class StaticPagesController < ApplicationController
 
   def contact
     @title = "contact"
+  end  
+
+  def control
+    @title = "control"
+  end  
+  def msgbox
+    @title = "Message Box"
+    render :layout => false
   end  
 end

@@ -42,20 +42,25 @@
     data-cycle-timeout="3000"
     data-cycle-slides="> div"
      >
-    <% @promo_events.each do |promo_event| 
+    <% @events_promo.each do |promo_event| 
       promo_bg = promo_event.photos.find(:first, :conditions => "image_type='banner_bg'")
-      promo_photo = promo_event.photos.find(:first, :conditions => "image_type='banner_photo'")
+      promo_photo = promo_event.photos.find(:first, :conditions => "image_type='banner_image'")
     %>
     	<div class="slide slide_banner" style="position:relative;">
-    	  <div style="clear: both;width:100%;height:450px;background:#232323 url(<%= promo_bg.image.url(:original) %>) no-repeat center; background-size:100% 450px;">
+    	  <div style="clear: both;width:100%;height:450px;background:#232323 url(<%= promo_bg.image.url(:original) if !promo_bg.nil? %>) no-repeat center; background-size:100% 450px;">
         </div>
-        <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;background:transparent url(<%= promo_photo.image.url(:original) %>) no-repeat center;">
+        <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;background:transparent url(<%= promo_photo.image.url(:original) if !promo_photo.nil? %>) no-repeat center;">
         </div>
         <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;text-align:center;">
           <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
         </div>
+        <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:400px;left:103px;z-index:7500;">
+				Fatam: <%= distance_of_time_in_words_to_now(promo_event.date_due) %>
+        </div>
+
+
  
-        <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:100px;left:100px;z-index:7500;">
+        <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:100px;left:103px;z-index:7500;">
 <!--          <div style="font-weight:bold;"><%= link_to(promo_event.headline, promo_event) %></div> -->
           <div style="margin-top:90px;font-weight:bold;"><%= link_to(promo_event.headline, promo_event) %></div>
           <div style="font-size:80%;font-style:italic;"><%= link_to(promo_event.title, promo_event) %></div>
@@ -85,12 +90,12 @@
 <% end %>
 <div class="row">
   <div class="span12">
-    <h2>Você pode tentar também:</h2>
+    <h2>Você também pode tentar outros concursos e fazer uma boa ação ao mesmo tempo:</h2>
   </div>
 </div>
 <div class="row">
   <div class="span4 homebox" style="position:relative;">
-    <% @woman.each do |col| %>
+    <% @events_outros1.each do |col| %>
       <div class="row-fluid center">
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
@@ -105,12 +110,14 @@
         </p>
       </div>
     <% end %>
+<!--
     <div style="position:absolute;top:0px;left:-30px;">
       <%= image_tag("stamp_heart.png") %>
     </div>
+-->
   </div>
   <div class="span4 homebox">
-    <% @man.each do |col| %>
+    <% @events_outros2.each do |col| %>
     <div class="row-fluid center">
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>

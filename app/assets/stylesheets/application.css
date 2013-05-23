@@ -12,6 +12,7 @@
  *= require custom
  *= require formtastic
  *= require my_formtastic_changes
+ *= require fancybox
  *= require_self
 */
 

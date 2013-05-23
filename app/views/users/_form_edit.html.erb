@@ -11,62 +11,157 @@
     </div>
   <% end %>
 
+<!--	
+	<div class="row">
+		<div class="span2 offset1">
+      	<%= image_tag @user.avatar.url(:thumb) %>
+      	<%= f.file_field :avatar %>
+
+	      <%- unless @user.new_record? || !@user.avatar? -%>
+	      <br>
+	          <%= f.check_box :avatar_delete, :label => 'Delete Avatar' %>
+	      <%- end -%>
+			</div>
+			<div class="span9">
+			</div>
+		</div>
+-->            
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :email %> 
+		</div>
+		<div class="span9">
+			<%= f.text_field :email %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :first_name %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :first_name %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :last_name %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :last_name %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :document %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :document %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :title %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :title %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :gender %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :gender %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :birthday %>
+		</div>
+		<div class="span9">
+	      <%= f.date_select :birthday %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :city %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :city %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :state %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :state %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :country %>
+		</div>
+		<div class="span9">
+	      <%= country_code_select(:user, :country, [[t("countries.BR"), "BR"], [ t("countries.US"), "US" ]]) %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :address1 %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :address1 %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :address2 %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :address2 %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :zipcode %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :zipcode %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :phone_mobile %>
+		</div>
+		<div class="span9">
+	      <%= f.text_field :phone_mobile %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+	      <%= f.label :password %>
+		</div>
+		<div class="span9">
+	      <%= f.password_field :password %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2 offset0">
+		</div>
+		<div class="span9">
+	      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+	      <%= link_to "Cancelar", user_path(current_user), class: "btn btn-large btn-primary" %>
+		</div>
+	</div>
+	
+
   <div class="row">
     <div class="span6 offset3">
-      <%= image_tag @user.avatar.url(:thumb) %>
-      <%= f.file_field :avatar %>
-      
-      <%- unless @user.new_record? || !@user.avatar? -%>
-      <br>
-          <%= f.check_box :avatar_delete, :label => 'Delete Avatar' %>
-      <%- end -%>
-            
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
     
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
     
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-    
-      <%= f.label :document %><br />
-      <%= f.text_field :document %>
 
-      <%= f.label :title %><br />
-      <%= f.text_field :title %>
-    
-      <%= f.label :gender %><br />
-      <%= f.text_field :gender %>
-    
-      <%= f.label :birthday %><br />
-      <%= f.date_select :birthday %>
-    
-      <%= f.label :city %><br />
-      <%= f.text_field :city %>
-    
-      <%= f.label :state %><br />
-      <%= f.text_field :state %>
-    
-      <%= f.label :country %><br />
-      <%= country_code_select(:user, :country, [[t("countries.BR"), "BR"], [ t("countries.US"), "US" ]]) %>
-    
-      <%= f.label :address1 %><br />
-      <%= f.text_field :address1 %>
-    
-      <%= f.label :address2 %><br />
-      <%= f.text_field :address2 %>
-    
-      <%= f.label :zipcode %><br />
-      <%= f.text_field :zipcode %>
-    
-      <%= f.label :phone_mobile %><br />
-      <%= f.text_field :phone_mobile %>
-    
-      <%= f.label :password %><br />
-      <%= f.password_field :password %>
       <br>
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
       
     </div>
   </div>  

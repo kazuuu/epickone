@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_filter :require_user,  :only => [:join_questions, :quiz_result, :pick_a_number, :add_cart, :results, :quiz]
+  before_filter :require_user_admin,  :only => [:results]
 
   require 'will_paginate/array'
 
@@ -37,7 +38,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @bOk = true
     
-    @event.questions.each do |question|
+    @event.quiz.questions.each do |question|
       @ans = question.answers.find(:first, :conditions => 'iscorrect = 1')
       
       if !@ans.nil?
@@ -67,14 +68,14 @@ class EventsController < ApplicationController
         (1..total_win).each do
           cart.ticket_add(params[:id], origin)
         end
-        flash[:success] = "Congratulations! You won a ticket jo join this event!."
-        redirect_to event_path(params[:id])
+        flash[:msgbox] = "Parabéns! Você ganhou um ticket. Mas você precisa numerál-lo para poder validar!"
+        redirect_to checkout_cart_path(current_cart)
       else
-        flash[:notice] = "You have already won this ticket. Try to share this event to win more tickets."
+        flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
         redirect_to event_path(params[:id])
       end
     else
-      flash[:notice] = "Algumas respostas estao erradas. E preciso acertar 100% para ganhar o ticket."
+      flash[:msgbox] = "Algumas respostas estão erradas. É preciso acertar 100% para ganhar o ticket."
       redirect_to quiz_event_path(params[:id])
     end    
   end

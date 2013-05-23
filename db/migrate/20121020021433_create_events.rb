@@ -1,10 +1,11 @@
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
-      t.integer :user_id
-      t.integer :product_id
+      t.integer :category_id
+      t.integer :quiz_id
       t.string :title
       t.string :headline
+      t.string :prize      
       t.string :site_position
       t.text :description
       t.text :instruction
@@ -20,7 +21,6 @@ class CreateEvents < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :events, [:user_id, :created_at]
-    add_index :events, [:product_id]
+    add_index :events, [:category_id, :created_at]
   end
 end

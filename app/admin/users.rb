@@ -22,6 +22,7 @@ ActiveAdmin.register User do
       f.input :locale
       f.input :zipcode
       f.input :phone_mobile
+      f.input :newsletter
       f.input :admin_flag
       f.input :password
       f.input :facebook_uid

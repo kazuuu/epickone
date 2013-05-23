@@ -3,12 +3,20 @@ Você pode ganhar um Ticket respondendo o QUIZ!
 <%= link_to "Responder o Quiz!", quiz_event_path(), :class => "btn btn-black btn-large btn-primary" %>    
 <br>
 <br>
-Você pode ganhar um Ticket compartilhando este evento no seu Facebook!
+Você pode ganhar mais Tickets compartilhando este evento em suas redes sociais!
 <br>
-<%= link_to "Ganhe um Ticket comparilhando este evento no Facebook", facebook_share_event_user_path(:event_id => params[:id]),:class => "btn btn-black btn-large btn-primary" %>
+<% if @event.ticket_exist(current_user.id, "answered") > 0 %>
+	<%= link_to image_tag("fb_icon.png", :style => "height:50px;width:50px;", :alt => "Ganhe um Ticket comparilhando este evento no Facebook"), facebook_share_event_user_path(:event_id => params[:id]) %>
+
+	<%= link_to image_tag("twitter_icon.png", :style => "height:50px;width:50px;", :alt => "Ganhe um Ticket comparilhando este evento no Twitter"), twitter_share_event_user_path(:event_id => params[:id]) %>
+<% else %>
+	<%
+		msg = "Responda o Quiz antes para poder ganhar mais tickets."
+	%>
+
+	<%= link_to image_tag("fb_icon.png", :style => "height:50px;width:50px;", :alt => "Ganhe um Ticket comparilhando este evento no Facebook"), msgbox_path, :class=>"fancybox" %>
+
+	<%= link_to image_tag("twitter_icon.png", :style => "height:50px;width:50px;", :alt => "Ganhe um Ticket comparilhando este evento no Twitter"), msgbox_path + "?msgbox=" + msg, :class=>"fancybox" %>
+<% end %>
 <br>
-<br>
-Você pode ganhar um Ticket compartilhando este evento no seu Twitter!
-<br>
-<%= link_to "Ganhe um Ticket comparilhando este evento no Twitter", twitter_share_event_user_path(:event_id => params[:id]),:class => "btn btn-black btn-large btn-primary" %>
 

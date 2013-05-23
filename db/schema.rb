@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224222630) do
+ActiveRecord::Schema.define(:version => 20130520180100) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -54,17 +54,6 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
     t.datetime "updated_at",          :null => false
   end
 
-  create_table "cart_products", :force => true do |t|
-    t.integer  "cart_id"
-    t.integer  "user_id"
-    t.integer  "product_id"
-    t.decimal  "unit_price"
-    t.integer  "quantity"
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "carts", :force => true do |t|
     t.integer  "user_id"
     t.datetime "purchased_at"
@@ -75,7 +64,6 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
     t.string   "title"
-    t.string   "site_position"
     t.text     "description"
     t.integer  "order"
     t.string   "avatar_file_name"
@@ -103,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
     t.string   "locale"
     t.string   "title"
     t.string   "headline"
+    t.string   "prize"
     t.text     "description"
     t.text     "instruction"
     t.datetime "created_at",  :null => false
@@ -113,10 +102,11 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
   add_index "event_translations", ["locale"], :name => "index_event_translations_on_locale"
 
   create_table "events", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "product_id"
+    t.integer  "category_id"
+    t.integer  "quiz_id"
     t.string   "title"
     t.string   "headline"
+    t.string   "prize"
     t.string   "site_position"
     t.text     "description"
     t.text     "instruction"
@@ -136,8 +126,7 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "events", ["product_id"], :name => "index_events_on_product_id"
-  add_index "events", ["user_id", "created_at"], :name => "index_events_on_user_id_and_created_at"
+  add_index "events", ["category_id", "created_at"], :name => "index_events_on_category_id_and_created_at"
 
   create_table "payment_notifications", :force => true do |t|
     t.text     "params"
@@ -162,32 +151,6 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
 
   add_index "photos", ["photable_id", "photable_type"], :name => "index_photos_on_photable_id_and_photable_type"
 
-  create_table "product_translations", :force => true do |t|
-    t.integer  "product_id"
-    t.string   "locale"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "product_translations", ["locale"], :name => "index_product_translations_on_locale"
-  add_index "product_translations", ["product_id"], :name => "index_product_translations_on_product_id"
-
-  create_table "products", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.integer  "category_id"
-    t.integer  "order"
-    t.decimal  "price_original"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
   create_table "question_translations", :force => true do |t|
     t.integer  "question_id"
     t.string   "locale"
@@ -201,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
   add_index "question_translations", ["question_id"], :name => "index_question_translations_on_question_id"
 
   create_table "questions", :force => true do |t|
-    t.integer  "event_id"
+    t.integer  "quiz_id"
     t.string   "title"
     t.text     "description"
     t.integer  "order"
@@ -213,6 +176,12 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
     t.datetime "avatar_updated_at"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "quizzes", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tickets", :force => true do |t|
@@ -264,12 +233,13 @@ ActiveRecord::Schema.define(:version => 20130224222630) do
     t.datetime "oauth_expires_at"
     t.string   "provider"
     t.string   "avatar_url"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
     t.string   "twitter_uid"
     t.string   "twitter_oauth_token"
     t.string   "twitter_oauth_secret"
     t.datetime "twitter_oauth_expires_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "newsletter",               :default => true
   end
 
   add_index "users", ["perishable_token", "email"], :name => "index_users_on_perishable_token_and_email"

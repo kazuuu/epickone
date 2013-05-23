@@ -3,11 +3,13 @@ ActiveAdmin.register Event do
     f.inputs "Events", :multipart => true do
       f.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => f.object.avatar.nil? ? f.template.content_tag(:span, "No Image Yet") : f.template.image_tag(f.object.avatar.url(:thumb)) 
       f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
-
+      f.input :category_id, :as => :select, :collection => Category.all.map {|u| [u.title, u.id]}, :include_blank => false
+      f.input :quiz_id, :as => :select, :collection => Quiz.all.map {|u| [u.title, u.id]}, :include_blank => false
       f.globalize_inputs :translations do |lf|
         lf.inputs do
           lf.input :title
           lf.input :headline
+          lf.input :prize
           lf.input :description, :as => :text
           lf.input :instruction, :as => :text
 
@@ -24,9 +26,6 @@ ActiveAdmin.register Event do
       f.input :join_min
       f.input :join_max
       f.input :covering_area
-      f.input :product_id, :as => :select, :collection => Product.all.map {|u| [u.title, u.id]}, :include_blank => false
-      f.input :user_id, :as => :select, :collection => User.all.map {|u| [u.email, u.id]}, :include_blank => false
-
     end
     
     f.has_many :photos do |p|
@@ -41,27 +40,6 @@ ActiveAdmin.register Event do
     end
     
         
-    f.has_many :questions do |q|
-      if !q.object.id.nil?
-        q.input :_destroy, :as => :boolean, :label => "delete"
-      end
-      q.inputs "Question", :multipart => true do
-        q.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => q.object.avatar.nil? ? q.template.content_tag(:span, "No Image Yet") : q.template.image_tag(q.object.avatar.url(:thumb)) 
-        q.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
-
-        q.globalize_inputs :translations do |qt|
-          qt.inputs do
-            qt.input :title
-            qt.input :description, :as => :text
-
-            qt.input :locale, :as => :hidden
-          end
-        end      
-        q.input :order         
-        q.input :style         
-      end
-    end
-             
     f.buttons
   end    
 
@@ -79,7 +57,7 @@ ActiveAdmin.register Event do
     
     div :class => "panel" do
       h3 "Questions"
-      if event.questions and event.questions.count > 0
+      if event.quiz.questions and event.quiz.questions.count > 0
         div :class => "panel_contents" do
           div :class => "attributes_table" do
             table do
@@ -90,7 +68,7 @@ ActiveAdmin.register Event do
               end
               tbody do
                 
-                event.questions.each do |question|
+                event.quiz.questions.each do |question|
                   div :class => "panel_contents" do
                     div :class => "attributes_table" do
                       table do

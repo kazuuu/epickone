@@ -1,14 +1,34 @@
 class Event < ActiveRecord::Base
   #  default_scope order: 'events.created_at DESC'
 
-  attr_accessible :headline, :description, :instruction, :title, :join_type, :join_min, :join_max, :enable, :covering_area, :price_ticket, :date_due, :date_start, :user_id, :questions_attributes,
-                  :avatar, :avatar_delete, :site_position, :photos_attributes, :locale, :translations_attributes, :product_id
+  attr_accessible :category_id, 
+                  :quiz_id, 
+                  :headline, 
+                  :description, 
+                  :prize, 
+                  :instruction, 
+                  :title, 
+                  :join_type, 
+                  :join_min, 
+                  :join_max, 
+                  :enable, 
+                  :covering_area, 
+                  :price_ticket, 
+                  :date_due, 
+                  :date_start, 
+                  :questions_attributes,
+                  :avatar, 
+                  :avatar_delete, 
+                  :site_position, 
+                  :photos_attributes, 
+                  :locale, 
+                  :translations_attributes
 
-  translates :title, :headline, :description, :instruction                  
+  translates :title, :headline, :description, :instruction, :prize                  
   accepts_nested_attributes_for :translations
   
   class Translation
-    attr_accessible :locale, :headline, :title, :description, :instruction
+    attr_accessible :locale, :headline, :title, :description, :instruction, :prize
   end
   def translations_attributes=(attributes)
     new_translations = attributes.values.reduce({}) do |new_values, translation|
@@ -28,7 +48,8 @@ class Event < ActiveRecord::Base
 
   before_save :destroy_avatar?
   
-  belongs_to :user
+  belongs_to :category
+  belongs_to :quiz
     
   has_many :carts
   has_many :tickets
@@ -36,25 +57,22 @@ class Event < ActiveRecord::Base
   has_many :photos, as: :photable
   accepts_nested_attributes_for :photos, allow_destroy: true   
   
-  has_many :questions
-  accepts_nested_attributes_for :questions, allow_destroy: true   
-
-  belongs_to :product
-  has_one :category, :through => :product
 
         
   # presence
-  validates :user_id, presence: true  
   validates :title, presence: true
-  validates :avatar, presence: true
-  validates :description, presence: true
+#  validates :avatar, presence: true
+#  validates :description, presence: true
 
-  validates :title, :length => { :maximum => 25 }
+#  validates :title, :length => { :maximum => 25 }
 
   #validates_attachment_presence :avatar
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
-
+  def ticket_exist(user_id, origin)
+    self.tickets.find(:all, :conditions => ["user_id = ? and origin = ?", user_id, origin]).count
+  end
+  
   def joined
     self.tickets.find(:all, :joins => :cart, :conditions => "carts.purchased_at is not null").count
   end

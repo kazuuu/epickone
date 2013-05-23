@@ -32,6 +32,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string   :provider    
       t.string  :avatar_url
       
+      t.string :twitter_uid
+      t.string :twitter_oauth_token
+      t.string :twitter_oauth_secret
+      t.datetime :twitter_oauth_expires_at
+      
             
       t.timestamps
     end

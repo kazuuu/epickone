@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
                   :address2,
                   :zipcode,
                   :phone_mobile,
+                  :newsletter,
                   :admin_flag,
                   :avatar_url,
                   :avatar,
@@ -32,7 +33,6 @@ class User < ActiveRecord::Base
                   :twitter_oauth_expires_at,
                   :locale,
                   :provider
-  has_many :events                 
   has_many :carts
   has_many :tickets
                   

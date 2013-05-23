@@ -9,7 +9,6 @@ ActiveAdmin.register Category do
           lf.input :locale, :as => :hidden
         end
       end
-      f.input :site_position
     end 
     f.buttons
   end

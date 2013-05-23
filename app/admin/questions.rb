@@ -1,7 +1,7 @@
 ActiveAdmin.register Question do
   form :html => { :enctype => "multipart/form-data" }  do |q|
     q.inputs "Question", :multipart => true do
-      q.input :event_id, :as => :select, :collection => Event.all.map {|u| [u.title, u.id]}, :include_blank => false
+      q.input :quiz_id, :as => :select, :collection => Quiz.all.map {|u| [u.title, u.id]}, :include_blank => false
       q.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => q.object.avatar.nil? ? q.template.content_tag(:span, "No Image Yet") : q.template.image_tag(q.object.avatar.url(:thumb)) 
       q.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
 

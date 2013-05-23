@@ -1,4 +1,7 @@
 Epickone::Application.routes.draw do
+  resources :quizzes
+
+
   resources :products do
     resources :photos
   end
@@ -56,6 +59,8 @@ Epickone::Application.routes.draw do
   match '/term',         to: 'static_pages#term'
   match '/about',        to: 'static_pages#about'
   match '/contact',      to: 'static_pages#contact'
+  match '/control',      to: 'static_pages#control'
+  match '/msgbox',          to: 'static_pages#msgbox'
   match '/admin',        to: 'admin#admin'
 
   match 'login' => 'user_sessions#new', :as => :login
@@ -66,6 +71,9 @@ end
 ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.yml', { :prefix_on_default_locale => true })
 
 Epickone::Application.routes.draw do
+  resources :quizzes
+
+
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
     root to: 'static_pages#home'
   

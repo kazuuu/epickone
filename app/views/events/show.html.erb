@@ -9,26 +9,12 @@
 
 <div class="row">
   <div class="span3">  
-    <aside style="float:left;">
-      <section>
         <%= image_tag @event.avatar.url(:thumb) %>
-        <p>
-          <b>Category:</b>
-          <%= @event.category.title %>
-        </p>
-        <!---        
-
-        <p>
-          <b>Owner Id:</b>
-          <%= @event.user_id %>
-        </p>
-        <p>
-          <b>Joined:</b>
-          <%= @event.joined %>
-        </p>
--->
-      </section>
-    </aside>
+		<br>
+		Faltam: <%= distance_of_time_in_words_to_now(@event.date_due) %>
+		<br>
+		Data final: <%= l @event.date_due.to_date, :format => :simple_date if !@event.date_due.nil? %>
+		<br><br>
     <% if  Time.now <= @event.date_due %>
       <% if @event.join_type == "promo" %>
         <%= render 'events/promo_button' %>

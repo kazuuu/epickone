@@ -1,0 +1,15 @@
+
+<div class="row-fluid" style="width:300px;">
+  	<div class="span12">
+		<%= session[:msgbox]%>
+		<% session[:msgbox] = nil %>
+		
+		<%= params[:msgbox]%>
+		<div class="row-fluid">
+		  	<div class="span12 center">
+				<br>
+				<a href="javascript:void(0)" onclick="parent.$.fancybox.close();" class ="btn btn-black btn-large btn-primary">OK</a>
+			</div>
+		</div>
+	</div>
+</div>
