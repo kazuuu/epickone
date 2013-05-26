@@ -29,7 +29,9 @@ gem 'fancybox-rails'
 gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
 gem 'simple_form', '2.0.4'
-
+gem 'capistrano-db-tasks', require: false
+ 
+ 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
