@@ -15,7 +15,7 @@ require 'capistrano-db-tasks'
 set :rails_env, "production"
 
 # if you want to remove the dump file after loading
-set :db_local_clean, true
+# set :db_local_clean, true
 
 # If you want to import assets, you can change default asset dir (default = system)
 # This directory must be in your shared directory on the server
