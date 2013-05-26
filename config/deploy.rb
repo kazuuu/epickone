@@ -47,7 +47,7 @@ namespace :db do
   desc "Snapshots production db and dumps into local development db"
   task :pull, roles: :db, only: { primary: true } do
     # adjust prod_config to point to your database.yml
-    prod_config = capture "cat #{shared_path}/config/database.yml"
+    prod_config = capture "cat /home/#{user}/#{application}/current/config/database.yml"
 
     prod = YAML::load(prod_config)["production"]
     dev  = YAML::load_file("config/database.yml")["development"]
