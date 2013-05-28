@@ -56,8 +56,11 @@ namespace :db do
     run %{pg_dump -x -Fc #{prod["database"]} -f #{dump}}
     get dump, dump
     run "rm #{dump}"
+    run %{pg_restore -O -U #{dev["username"]} -d #{dev["database"]} #{dump}}
 
-    system %{dropdb #{dev["database"]}}
+    #system %{dropdb #{dev["database"]}}
+    system "rm #{dev["database"]}"
+    system "sqlite3 #{dev["database"]}"
     system %{createdb #{dev["database"]} -O #{dev["username"]}}
     system %{pg_restore -O -U #{dev["username"]} -d #{dev["database"]} #{dump}}
     system "rm #{dump}"

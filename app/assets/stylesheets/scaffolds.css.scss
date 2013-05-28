@@ -1,4 +1,4 @@
-/* Bootstrap: Define variables customs before loading bootsrap */
+// Bootstrap: Define variables customs before loading bootsrap 
 $sansFontFamily: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $baseFontFamily: $sansFontFamily;
 $baseFontSize: 15px;
@@ -7,7 +7,7 @@ $grayMediumLight: #eaeaea;
 
 @import "bootstrap";
 
-/* BOOTSTRAP CUSTOM */
+// BOOTSTRAP CUSTOM 
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -37,9 +37,9 @@ $grayMediumLight: #eaeaea;
   padding-top:15px;
 
 }
-/* END BOOTSTRAP CUSTOM */
+// END BOOTSTRAP CUSTOM 
   
-/* SCAFFOLD LEVEL 1*/
+// SCAFFOLD LEVEL 1
 html {
   overflow-y: scroll;
 }
@@ -96,9 +96,9 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
-/* END SCAFFOLD LEVEL 1 */
+// END SCAFFOLD LEVEL 1
 
-/* SCAFFOLD LEVEL 2 */
+// SCAFFOLD LEVEL 2 
 #notice {
   color: green;
 }
@@ -131,9 +131,9 @@ p {
     list-style: square;
   }
 }
-/* END SCAFFOLD LEVEL 2 */
+// END SCAFFOLD LEVEL 2
 
-/* miscellaneous */
+// miscellaneous 
 .debug_dump {
   clear: both;
   float: left;
