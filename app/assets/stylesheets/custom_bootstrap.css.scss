@@ -29,6 +29,12 @@ $gridGutterWidth:         20px;
   @include box_sizing;
 }
 
+.vertical-align-middle {
+	vertical-align: middle;
+}
+.margin-bottom {
+	margin-bottom: 10px;
+}
 
 
 .btn-black {
