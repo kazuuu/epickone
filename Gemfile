@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'authlogic', '3.3.0'
-gem 'bootstrap-sass', '2.3.0'
+gem 'bootstrap-sass', '2.3.1.2'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
-gem 'bootstrap-will_paginate', '0.0.6'
+gem 'bootstrap-will_paginate', '0.0.9'
 gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
 gem 'carmen', '0.2.13'

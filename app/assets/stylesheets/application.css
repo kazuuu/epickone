@@ -10,7 +10,7 @@
  *
  *= require formtastic
  *= require my_formtastic_changes
- *= require fancybox
  *= require_self
+ *= require fancybox
  *= require_tree .
 */
