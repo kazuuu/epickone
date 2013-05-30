@@ -2,8 +2,8 @@ ActiveAdmin.register Event do
   index do 
     column :id
     column :title
-    column("Date Start") { |task| task.date_start? ? l(task.date_start, :format => :simple) : '-' }    
-    column("Date Due") { |task| task.date_due? ? l(task.date_due, :format => :simple) : '-' }
+    column("Date Start", :sortable => :date_start) { |task| task.date_start? ? l(task.date_start, :format => :simple) : '-' }    
+    column("Date Due", :sortable => :date_due) { |task| task.date_due? ? l(task.date_due, :format => :simple) : '-' }
     column :category, :sortable => :category_id
     column :quiz, :sortable => :quiz_id
     default_actions
