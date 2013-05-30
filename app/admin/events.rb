@@ -1,4 +1,14 @@
 ActiveAdmin.register Event do
+  index do 
+    column :id
+    column :title
+    column("Date Start") { |task| task.date_start? ? l(task.date_start, :format => :simple) : '-' }    
+    column("Date Due") { |task| task.date_due? ? l(task.date_due, :format => :simple) : '-' }
+    column :category, :sortable => :category_id
+    column :quiz, :sortable => :quiz_id
+    default_actions
+  end
+  
   form :html => { :enctype => "multipart/form-data" }  do |f|
     f.inputs "Events", :multipart => true do
       f.input :avatar, :as => :file, :multipart => true, :label => "Avatar", :hint => f.object.avatar.nil? ? f.template.content_tag(:span, "No Image Yet") : f.template.image_tag(f.object.avatar.url(:thumb)) 
@@ -19,8 +29,8 @@ ActiveAdmin.register Event do
       f.input :enable
       f.input :join_type
       f.input :site_position
-      f.input :date_due
       f.input :date_start
+      f.input :date_due
       f.input :price_ticket
 
       f.input :join_min
@@ -160,8 +170,5 @@ ActiveAdmin.register Event do
 
     end
   end
-
-
-
 end
 

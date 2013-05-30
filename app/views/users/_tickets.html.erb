@@ -24,7 +24,7 @@
         %>
         <tr>
           <td>
-              <%= l item.purchased_at.to_date, :format => :simple_date if !item.purchased_at.nil? %> 
+              <%= l item.purchased_at.to_date, :format => :simple if !item.purchased_at.nil? %> 
           </td>
           <td>
             <%= link_to item.event.title, item.event %>
