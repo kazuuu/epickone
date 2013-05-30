@@ -2,6 +2,12 @@ Epickone::Application.routes.draw do
   resources :quizzes
 
 
+  resource :tools do
+    post 'event_clone', :on => :member 
+  end
+    
+
+
   resources :products do
     resources :photos
   end
@@ -59,7 +65,6 @@ Epickone::Application.routes.draw do
   match '/term',         to: 'static_pages#term'
   match '/about',        to: 'static_pages#about'
   match '/contact',      to: 'static_pages#contact'
-  match '/control',      to: 'static_pages#control'
   match '/msgbox',          to: 'static_pages#msgbox'
   match '/admin',        to: 'admin#admin'
 

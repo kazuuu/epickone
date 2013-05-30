@@ -1,4 +1,6 @@
 ActiveAdmin.register Event do
+  filter :enable, :as => :select
+
   index do 
     column :id
     column :title

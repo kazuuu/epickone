@@ -19,7 +19,7 @@
 <body>	
   <%= render 'layouts/header' %>
   <div class="container">
-    <% flash.each do |key, value| %>
+   <% flash.each do |key, value| %>
 		<% if key.to_s == "msgbox" %>
 			<% session[:msgbox]=  value.to_s %>
 			<%= link_to('', msgbox_path, :class=>"fancybox", :id => "linkfancy", :style=>"display:none;")  %>
@@ -36,7 +36,7 @@
         <a class="close" data-dismiss="alert">x</a>
       </div>
     	<% end %> 
-    <% end %> 
+    <% end %>
   </div>
   <div class="container" style="width:100%;">
     <%= yield :wide %>
