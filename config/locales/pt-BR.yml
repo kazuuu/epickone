@@ -48,6 +48,14 @@ pt-BR:
        headline2_3_win_prizes: "agora mesmo"
        headline3_first_game: "Jogo de Inauguração!"
   
+  simple_form:
+    labels:
+      user:
+        first_name: 'Primeiro nome'
+      tasks:
+        task_name:  'Nome compito'
+  
+  
   date:
     abbr_day_names:
     - Dom

@@ -1,16 +1,4 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>          
 <!--	
 	<div class="row">
 		<div class="span2 offset1">
@@ -26,143 +14,24 @@
 			</div>
 		</div>
 -->            
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :email %> 
-		</div>
-		<div class="span9">
-			<%= f.text_field :email %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :first_name %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :first_name %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :last_name %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :last_name %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :document %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :document %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :title %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :title %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :gender %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :gender %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :birthday %>
-		</div>
-		<div class="span9">
-	      <%= f.date_select :birthday %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :city %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :city %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :state %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :state %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :country %>
-		</div>
-		<div class="span9">
-	      <%= country_code_select(:user, :country, [[t("countries.BR"), "BR"], [ t("countries.US"), "US" ]]) %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :address1 %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :address1 %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :address2 %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :address2 %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :zipcode %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :zipcode %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :phone_mobile %>
-		</div>
-		<div class="span9">
-	      <%= f.text_field :phone_mobile %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-	      <%= f.label :password %>
-		</div>
-		<div class="span9">
-	      <%= f.password_field :password %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span2 offset0">
-		</div>
-		<div class="span9">
-	      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-	      <%= link_to "Cancelar", user_path(current_user), class: "btn btn-large btn-primary" %>
-		</div>
-	</div>
-	
-
-  <div class="row">
-    <div class="span6 offset3">
-    
-    
-
-      <br>
-      
-    </div>
-  </div>  
+	      <%= f.input :first_name %>
+	      <%= f.input :last_name %>
+	      <%= f.input :document %>
+	      <%= f.input :title %>
+	      <%= f.input :gender %>
+	      <%= f.input :birthday, as: :date, start_year: Date.today.year - 90,
+			                              end_year: Date.today.year, discard_day: false,
+			                              order: [:day, :month, :year] %>
+			
+	      <%= f.input :city %>
+	      <%= f.input :state %>
+	      <%= f.input :country %>
+	      <%= f.input :address1 %>
+	      <%= f.input :address2 %>
+	      <%= f.input :zipcode %>
+	      <%= f.input :phone_mobile %>
+	      <%= f.input :password %>
+      <div class="form-actions">
+	      <%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
+      </div>
 <% end %>
