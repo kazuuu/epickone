@@ -10,7 +10,7 @@ class ToolsController < ApplicationController
     event_original = Event.find(params[:event_id])
     event_clone = Event.new
     event_clone.enable        = false
-    event_clone.title         = event_original.title
+    event_clone.title         = event_original.title + " - Copy"
     event_clone.category_id   = event_original.category_id
     event_clone.quiz_id       = event_original.quiz_id
     event_clone.headline      = event_original.headline
