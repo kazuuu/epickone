@@ -14,6 +14,7 @@
 <!--          <li class="<%= 'active' if current_page?(store_path) %>"><%= link_to t("main.store"), store_path %></li> -->
         </ul>
         <ul class="nav pull-right">
+<!--
           <li id="fat-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
               <%= t "main.language" %> <b class="caret"></b>
@@ -23,6 +24,7 @@
               <li><%= link_to t("main.en"), locale: "en-US" %></li> 
             </ul>
           </li>
+-->
         <% if current_user %>
           <%
             cart = current_cart
