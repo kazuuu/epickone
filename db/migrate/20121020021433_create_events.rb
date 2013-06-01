@@ -15,8 +15,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :covering_area
       t.string :join_type
       t.decimal :price_ticket
-      t.datetime :date_due
       t.datetime :date_start
+      t.datetime :date_due
       t.has_attached_file :avatar
 
       t.timestamps

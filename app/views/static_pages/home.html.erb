@@ -52,7 +52,7 @@
           <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
         </div>
         <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:400px;left:103px;z-index:7500;">
-				Fatam: <%= distance_of_time_in_words(Time.now, @event.date_due + 1.days, false) %>
+				Faltam: <%= distance_of_time_in_words(Time.now, promo_event.date_due + 1.days, false) %>
         </div>
 
 

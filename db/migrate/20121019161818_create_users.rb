@@ -23,6 +23,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :zipcode
       t.string :phone_mobile
       t.boolean :admin_flag, :default => false
+      t.boolean :newsletter, :default => true
       t.has_attached_file :avatar
 
       t.string  :locale
