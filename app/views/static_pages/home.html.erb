@@ -33,7 +33,7 @@
 
 <%= session[:site_country] %>
 <% content_for :wide do %>
-ULA ULA    <%= @events_promo.count %><br>
+<br>
 <div class="row" style="height:450px;">
   <div class="cycle-slideshow" style="height:450px;" data-cycle-fx="fade" 
     data-cycle-timeout="3000"
@@ -52,7 +52,7 @@ ULA ULA    <%= @events_promo.count %><br>
           <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
         </div>
         <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:400px;left:103px;z-index:7500;">
-				Fatam: <%= distance_of_time_in_words_to_now(promo_event.date_due) %>
+				Fatam: <%= distance_of_time_in_words(Time.now, @event.date_due + 1.days, false) %>
         </div>
 
 
@@ -97,7 +97,7 @@ ULA ULA    <%= @events_promo.count %><br>
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due, true) %></p>
+        <p>Time left: Fatam: <%= distance_of_time_in_words(Time.now, col.date_due.date_due + 1.days, false) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
@@ -119,7 +119,7 @@ ULA ULA    <%= @events_promo.count %><br>
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Time left: <%= distance_of_time_in_words_to_now(col.date_due) %></p>
+        <p>Time left: <%= distance_of_time_in_words(Time.now, col.date_due + 1.days, false) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>

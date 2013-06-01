@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
 
     @events_outros1 =  Event.find(:all, :conditions => ["category_id = 1 and date(date_start) <= date(?) and date(date_due) >= date(?)", Time.now, Time.now], :order => "date_due asc") 
     @events_outros2 =  Event.find(:all, :conditions => ["category_id = 2 and date(date_start) <= date(?) and date(date_due) >= date(?)", Time.now, Time.now], :order => "date_due asc") 
-    @events_promo = Event.find(:all, :conditions => ["category_id = 3 and date(date_start) <= date(?) and date(date_due) >= date(?)", Time.now, Time.now], :order => "date_due asc") 
+    @events_promo = Event.find(:all, :conditions => ["category_id = 3 and date(?) >= date(date_start) and date(?) <= date(date_due)", Time.now, Time.now], :order => "date_due asc") 
 
     respond_to do |format|
       format.html # new.html.erb

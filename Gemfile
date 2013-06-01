@@ -28,7 +28,7 @@ gem 'fancybox-rails'
 gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
 gem 'simple_form', '2.0.4'
- 
+gem "dotiw", "~> 1.1.1" 
  
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

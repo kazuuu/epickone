@@ -1,4 +1,10 @@
 pt-BR:
+  months: meses
+  weeks: semanas
+  days: dias
+  hours: horas
+  minutes: minutos
+  seconds: segundos
   main:
     checkout: "CheckOut"
     cart: "Tickets Pendentes"
@@ -121,22 +127,22 @@ pt-BR:
         other: aproximadamente %{count} meses
       about_x_years:
         one: aproximadamente 1 ano
-        other: aproximadamente %{count} anos
+        other: ! 'aproximadamente %{count} anos'
       almost_x_years:
         one: quase 1 ano
-        other: quase %{count} anos
+        other: ! 'quase %{count} anos'
       half_a_minute: meio minuto
       less_than_x_minutes:
         one: menos de um minuto
-        other: menos de %{count} minutos
+        other: ! 'menos de %{count} minutos'
       less_than_x_seconds:
         one: menos de 1 segundo
-        other: menos de %{count} segundos
+        other: ! 'menos de %{count} segundos'
       over_x_years:
         one: mais de 1 ano
-        other: mais de %{count} anos
+        other: ! 'mais de %{count} anos'
       x_days:
-        one: 1 dia
+        one: '1 dia'
         other: ! '%{count} dias'
       x_minutes:
         one: 1 minuto

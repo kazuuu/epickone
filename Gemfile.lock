@@ -87,6 +87,8 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.2.4)
+    dotiw (1.1.1)
+      actionpack (~> 3)
     erubis (2.7.0)
     eventmachine (1.0.3)
     exception_notification (3.0.0)
@@ -295,6 +297,7 @@ DEPENDENCIES
   carmen (= 0.2.13)
   coffee-rails (= 3.2.2)
   country_select
+  dotiw (~> 1.1.1)
   exception_notification (= 3.0.0)
   faker (= 1.0.1)
   fancybox-rails
