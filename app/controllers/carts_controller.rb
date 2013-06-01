@@ -102,7 +102,6 @@ class CartsController < ApplicationController
     (1..params[:quantity].to_i).each do |i| 
       cart.ticket_add(params[:event_id], params[:origin].to_s)
     end
-    cart.add_product(current_user.id, "1", "Urgente")       
     redirect_to checkout_cart_path
   end
   def pick_a_number

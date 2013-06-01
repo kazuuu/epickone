@@ -96,7 +96,7 @@
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Time left: Fatam: <%= distance_of_time_in_words(Time.now, col.date_due.date_due + 1.days, false) %></p>
+        <p>Time left: Fatam: <%= distance_of_time_in_words(Time.now, col.date_due + 1.days, false) %></p>
         <p>
         <% if  Time.now <= col.date_due %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
