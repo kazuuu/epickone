@@ -1,17 +1,121 @@
 <% provide(:title, 'Como Funciona') %>
 
 <h1>Como funciona</h1>
-<p>Para participar é muito fácil, basta você possuir um número válido de celular e se cadastrar para poder adquirir tickets. Mas atenção, para você validar seu ticket é preciso numerá-lo. Se seu ticket não estiver numerado, ele não valerá e a sua chance será desperdiçada.</p>
 
-<p>Caso você seja o vencedor do evento, nós entraremos em contato através do número de celular fornecido. Por isso, forneça um número válido de celular e fique atento.</p>
+<div class="row">
+	<div class="span6">
 
-<h2>Tipos de eventos</h2>
-<p>Os eventos se dividem em duas categorias:</p>
+		<div class="row-fluid">
+			<div class="span1" style="padding-top:39px;">
+				<%= image_tag("dotted-arc-left.png")%>
+			</div>
+			<div class="span11">
+				<h2 style="color:green;">Passo 1</h2>
+				<p>
+				Faça seu cadastro. Ainda não? <%= link_to "Clique aqui", new_user_path %>
+				</p>
 
-<p>Promocional, em que os usuários receberão tickets gratuitamente após responder corretamente todas as perguntas de um questionário / quiz sobre algum breafing que será mostrado. Normalmente, este breafing será patrocinado por alguma empresa que deseja informar algo ao mercado.</p>
+				<p>
+				Já tem cadastro? Que bom! Agora é só começar a participar.
+				</p>
 
-<p>E os Pagos, o qual os usuários precisarão comprar tickets para participar do evento. Estes eventos terão o número de participantes limitados de forma que as chances de ganhar o prêmio seja pré-determinado.</p>
+				<div class="row-fluid">
+					<div class="span8">
+						<h2 style="color:pink;">Passo 2</h2>
+						<p>
+						Escolha o evento que deseja participar.
+						</p>
+					</div>
+					<div class="span1" style="padding-top:30px;">
+						<%= image_tag("dotted-arc-right.png")%>
+					</div>			
+				</div>
+		
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="row-fluid">
+							<div class="span12 box_curved_gray center">
+								 Promocional
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12 center" style="padding-top:10px;">
+								<%= image_tag("dotted-vert.png")%>
+							</div>
+						</div>
+					</div>
+					<div class="span3">
+						<div class="row-fluid">
+							<div class="span12 box_curved_gray center">
+								 Social
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12 center" style="padding-top:10px;">
+								<%= image_tag("dotted-vert.png")%>
+							</div>
+						</div>
+					</div>
+				</div>			
 
-<p>Todos os eventos terão as datas de encerramentos em algum dia em que há um sorteio da mega-sena da loteria federal brasileira. E o resultado será baseado na soma desses 6 números sorteados. O objetivo é acertar o número dessa soma. Caso sejam sorteados os números: 10, 20, 30, 40, 50, 60, vence quem acertar a soma desses números que é 210.</p>
+				<h2 style="color:red;">Passo 3</h2>
+				<p>
+				Adquire tickets do evento. Nos eventos promocionais, será necessário responder corretamente um Quiz!
+				</p>
+				<%= render 'dotted_vert' %>
 
-<p>Entretanto, só pode haver um vencedor, e sempre terá que ter um vencedor. Para isso, caso este número seja escolhido por mais de uma pessoa, ou não seja escolhido por ninguém, vale o menor número mais perto desta soma em que foi escolhido por apenas 1 pessoa.</p>
+				<h2 style="color:lightblue;">Passo 4</h2>
+				<p>
+					Numere todos seus tickets.
+				</p>
+				<%= render 'dotted_vert' %>
+
+				<h2 style="color:orange;">Passo 5</h2>
+				<p>
+					Clique em Validar! Caso você tenha tickets de eventos sociais, será necessário efetuar o pagamento do valor total dos seus tickets!
+				</p>
+				<%= render 'dotted_vert' %>
+
+				<h2 style="color:brown;">Passo 6</h2>
+				<p>
+				Parabéns! Você está participando dos eventos escolhidos.
+				</p>
+			</div>
+		</div>
+
+	</div>
+	<div class="box_curved_gray" style="padding:30px;width:45%-60px;margin-left:55%;margin-top:-30px;">
+		<p>
+		Existem dois tipos de eventos, os Promocionais e os Sociais. E cada evento, possuirá um prêmio diferente.
+		</p>
+
+		<p>
+		<em style="font-weight:bold;">Os eventos Promocionais não custa nada tentar.</em> São eventos patrocinados por empresas que desejam apresentar alguma novidade.
+		</p>
+		<p>
+		E para adiquirir tickets destes eventos, basta voce responder corretamente um pequeno Quiz sobre o que a empresa quer transmitir e pronto. Você receberá um ticket para poder participar do evento sem nenhum custo!
+		<p>
+		
+			<p>
+			Os Eventos Sociais, tem o objetivo de arrecadar fundos para entidades carentes por N motivos que estarão descritos em cada evento. Para isso, é cobrado um pequeno valor por ticket. Mas nada melhor do que juntar o útil com o agradável. Então por que não ajudar entidades que precisam de ajuda e ao mesmo tempo se divertir ao participar dos eventos podendo ganhar ótimos premios? Neste evento você já sai ganhando com o prazer de estar ajudando. Para adquirir tickets deste evento, basta voce escolher a quantidade de tickets que deseja e pronto, você receberá os tickets para poder participar. Atenção, cada evento poderá possuir tickets com valores diferentes.
+			</p>
+			
+
+			<p>
+			Agora é preciso numerá-los e e validá-los. Na hora de validar, se houver tickets dos eventos sociais, será necessário efetuar o pagamento referente a esses tickets. Nós utlizamos o PayPal para garantir a segurança de suas informações.
+			</p>
+
+			<p>
+			Pronto, clicou em Validar? Parabéns, Você já está concorrendo aos premios. Agora é só aguardar o evento terminar, e nós iremos te comunicar caso você seja vencedor ou não através de seu celular ou email.
+		</p>
+
+
+	</div>	
+</div>
+
+
+
+
+
+
+	
