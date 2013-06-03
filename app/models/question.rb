@@ -1,5 +1,8 @@
 class Question < ActiveRecord::Base
-  attr_accessible :description, :quiz_id, :order, :title, :style, :answers_attributes, :avatar, :avatar_delete, :locale, :translations_attributes
+  attr_accessible :description, :quiz_id, :sort_order, :title, :style, :answers_attributes, :avatar, :avatar_delete, :locale, :translations_attributes
+
+  default_scope order: 'sort_order ASC'
+
   translates :title, :description
   accepts_nested_attributes_for :translations
 

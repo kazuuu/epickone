@@ -4,7 +4,7 @@ class CreateCategories < ActiveRecord::Migration
       t.integer :parent_id
       t.string :title
       t.text :description
-      t.integer :order
+      t.integer :sort_order
       t.has_attached_file :avatar      
       t.timestamps
     end

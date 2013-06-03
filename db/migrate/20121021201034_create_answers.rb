@@ -3,7 +3,7 @@ class CreateAnswers < ActiveRecord::Migration
     create_table :answers do |t|
       t.string :answer_text
       t.text :description
-      t.integer :order
+      t.integer :sort_order
       t.integer :iscorrect
       t.integer :question_id
       t.has_attached_file :avatar

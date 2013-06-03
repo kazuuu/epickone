@@ -12,7 +12,7 @@ ActiveAdmin.register Question do
           qt.input :locale, :as => :hidden
         end
       end      
-      q.input :order         
+      q.input :sort_order         
       q.input :style         
       
       q.has_many :answers do |a|
@@ -34,7 +34,7 @@ ActiveAdmin.register Question do
             end      
 
             a.input :iscorrect
-            a.input :order
+            a.input :sort_order
           end
         end
       end

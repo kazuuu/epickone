@@ -4,7 +4,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :quiz_id
       t.string :title
       t.text :description
-      t.integer :order
+      t.integer :sort_order
       t.string :style
       t.string :question_type
       t.has_attached_file :avatar

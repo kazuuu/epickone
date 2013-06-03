@@ -1,5 +1,8 @@
 class Category < ActiveRecord::Base
-  attr_accessible :description, :order, :title, :translations_attributes, :site_position, :avatar, :avatar_delete
+  attr_accessible :description, :sort_order, :title, :translations_attributes, :site_position, :avatar, :avatar_delete
+
+  default_scope order: 'sort_order ASC'
+
   has_many :events
   belongs_to :categories, :foreign_key => "parent_id"
   has_many :categories

@@ -1,6 +1,4 @@
 class Event < ActiveRecord::Base
-  #  default_scope order: 'events.created_at DESC'
-
   attr_accessible :category_id, 
                   :quiz_id, 
                   :headline, 
