@@ -34,10 +34,12 @@ gem "dotiw", "~> 1.1.1"
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
-  gem 'sqlite3', '1.3.5'
+  gem 'pg', '0.12.2'
+#  gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.13.1'
 end
 group :test do
+  gem 'pg', '0.12.2'
   gem 'rspec-rails', '2.13.1'
 #  gem 'capybara'
 end
