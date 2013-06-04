@@ -1,6 +1,6 @@
 class Notifier < ActionMailer::Base
-#  default_url_options[:host] = "www.epickone.com"
-  default :from => "ePick One <epickone-noreply@epickone.com>"
+#  default_url_options[:host] = "www.epickone.com.br"
+  default :from => "ePick One <epickone-noreply@epickone.com.br>"
 
   def activation(user)
     @user = user    
@@ -31,7 +31,7 @@ class Notifier < ActionMailer::Base
 
   def welcome(user)
     @user = user    
-    @url  = "http://epickone.com/login"
+    @url  = "http://epickone.com.br/login"
     mail(
         :to => user.email,
         :subject => "Welcome to ePick One!"  

@@ -11,7 +11,7 @@
   <div class="span3">  
         <%= image_tag @event.avatar.url(:thumb) %>
 		<br>
-		Faltam: <%= distance_of_time_in_words(Time.now, @event.date_due + 1.days, false) %>
+		Faltam: <%= distance_of_time_in_words(Time.now, @event.date_due + 1.days, false, :accumulate_on => :days) %>
 		<br>
 		Data final: <%= l @event.date_due.to_date, :format => :simple if !@event.date_due.nil? %>
 		<br><br>
@@ -35,7 +35,6 @@
       <b>Description:</b>
       <%= simple_format(@event.description) %>
     </p>
-    <%= link_to "Reponser o Quiz!", quiz_event_path(), :class => "btn btn-black btn-large btn-primary" %>
   </div>    
 </div>  
 
