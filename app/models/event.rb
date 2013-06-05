@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
+
   attr_accessible :category_id, 
                   :quiz_id, 
                   :headline, 
@@ -67,6 +69,18 @@ class Event < ActiveRecord::Base
   #validates_attachment_presence :avatar
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
+  def distance_of_time
+    distance_of_time_in_words(Time.now, (self.date_due + 1.day).to_date, false, :accumulate_on => :days)
+  end
+  
+  def expired?
+    if  Date.today <= self.date_due.to_date 
+      false
+    else
+      true
+    end
+  end
+  
   def ticket_exist(user_id, origin)
     self.tickets.find(:all, :conditions => ["user_id = ? and origin = ?", user_id, origin]).count
   end

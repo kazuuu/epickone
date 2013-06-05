@@ -51,7 +51,7 @@
           <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
         </div>
         <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:400px;left:103px;z-index:7500;">
-				Faltam: <%= distance_of_time_in_words(Time.now, promo_event.date_due + 1.days, false, :accumulate_on => :days) %>
+				Faltam: <%= promo_event.distance_of_time %>
         </div>
 
 
@@ -91,14 +91,14 @@
 </div>
 <div class="row">
   <div class="span4 box_curved_gray" style="position:relative;">
-    <% @events_outros1.each do |col| %>
+    <% @events_social.each do |col| %>
       <div class="row-fluid center">
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Time left: Fatam: <%= distance_of_time_in_words(Time.now, col.date_due + 1.days, false, :accumulate_on => :days) %></p>
+        <p>Fatam: <%= col.distance_of_time %></p>
         <p>
-        <% if  Time.now <= col.date_due %>
+        <% if !col.expired? %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
         <% else %>
           <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
@@ -118,9 +118,9 @@
         <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
         <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
         <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Time left: <%= distance_of_time_in_words(Time.now, col.date_due + 1.days, false, :accumulate_on => :days) %></p>
+        <p>Faltam: <%= col.distance_of_time %></p>
         <p>
-        <% if  Time.now <= col.date_due %>
+        <% if !col.expired? %>
           <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
         <% else %>
           <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>

@@ -10,9 +10,9 @@ class StaticPagesController < ApplicationController
     # @man = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'man'", :order => "date_due asc") 
     # @woman = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'woman'", :order => "date_due asc") 
 
-    @events_outros1 =  Event.find(:all, :conditions => ["category_id = 1 and date(date_start) <= date(?) and date(date_due) >= date(?)", Time.now, Time.now], :order => "date_due asc") 
-    @events_outros2 =  Event.find(:all, :conditions => ["category_id = 2 and date(date_start) <= date(?) and date(date_due) >= date(?)", Time.now, Time.now], :order => "date_due asc") 
-    @events_promo = Event.find(:all, :conditions => ["category_id = 3 and date(?) >= date(date_start) and date(?) <= date(date_due)", Time.now, Time.now], :order => "date_due asc") 
+    @events_social = Event.find(:all, :conditions => ["category_id = 1 and date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today], :order => "date_due asc") 
+    @events_outros2 = Event.find(:all, :conditions => ["category_id = 2 and date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today], :order => "date_due asc") 
+    @events_promo = Event.find(:all, :conditions => ["category_id = 3 and date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today], :order => "date_due asc") 
 
     respond_to do |format|
       format.html # new.html.erb
