@@ -5,6 +5,14 @@ bg_box.png: bg_box-54b896fc40c61754ba2521567001e5e6.png
 bg_box/index.png: bg_box-54b896fc40c61754ba2521567001e5e6.png
 bg_btn.png: bg_btn-9da620c2988a4212edcb966d2f04948f.png
 bg_btn/index.png: bg_btn-9da620c2988a4212edcb966d2f04948f.png
+cache/Em-breve.png: cache/Em-breve-a9ccba4372e85ae8aef8f9accf36ace6.png
+cache/Em-breve/index.png: cache/Em-breve-a9ccba4372e85ae8aef8f9accf36ace6.png
+cache/ipad.png: cache/ipad-ececb8147b47abe570d2901eea5068b9.png
+cache/ipad/index.png: cache/ipad-ececb8147b47abe570d2901eea5068b9.png
+cache/iphone.png: cache/iphone-b7bbac44531bd305f20f4dca8fc888eb.png
+cache/iphone/index.png: cache/iphone-b7bbac44531bd305f20f4dca8fc888eb.png
+cache/stamp_heart.png: cache/stamp_heart-371fff00ee44f16fc1449e0346f2a83d.png
+cache/stamp_heart/index.png: cache/stamp_heart-371fff00ee44f16fc1449e0346f2a83d.png
 dotted-arc-left.png: dotted-arc-left-95bc123b297f40134648ff22ed1beed0.png
 dotted-arc-left/index.png: dotted-arc-left-95bc123b297f40134648ff22ed1beed0.png
 dotted-arc-right.png: dotted-arc-right-caa20a9e9f8e93875108ef01f63a3339.png
@@ -27,8 +35,6 @@ seguro100.png: seguro100-fd4d1dc481c37f4b11636ed00d5acb7d.png
 seguro100/index.png: seguro100-fd4d1dc481c37f4b11636ed00d5acb7d.png
 smile.png: smile-d53b95d573202c8f82437ec08bf6241c.png
 smile/index.png: smile-d53b95d573202c8f82437ec08bf6241c.png
-stamp_heart.png: stamp_heart-371fff00ee44f16fc1449e0346f2a83d.png
-stamp_heart/index.png: stamp_heart-371fff00ee44f16fc1449e0346f2a83d.png
 stamp_new.png: stamp_new-5b9a5728902e36304898c11643be2f48.png
 stamp_new/index.png: stamp_new-5b9a5728902e36304898c11643be2f48.png
 transparent.png: transparent-14776bfa23db47cefa145fa325c48302.png

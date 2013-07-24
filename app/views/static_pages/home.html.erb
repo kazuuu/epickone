@@ -51,7 +51,7 @@
           <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
         </div>
         <div style="line-height:30px;font-size:26px;color:white;position:absolute;top:400px;left:103px;z-index:7500;">
-				Faltam: <%= promo_event.distance_of_time %>
+				<%= t("home.time_left")%>: <%= promo_event.distance_of_time %>
         </div>
 
 
@@ -91,55 +91,45 @@
 </div>
 <div class="row">
   <div class="span4 box_curved_gray" style="position:relative;">
-    <% @events_social.each do |col| %>
-      <div class="row-fluid center">
-        <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
-        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
-        <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Fatam: <%= col.distance_of_time %></p>
-        <p>
-        <% if !col.expired? %>
-          <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
-        <% else %>
-          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
-        <% end %>
-        </p>
-      </div>
-    <% end %>
-<!--
-    <div style="position:absolute;top:0px;left:-30px;">
-      <%= image_tag("stamp_heart.png") %>
-    </div>
--->
+    <div class="row-fluid center">
+    	<h2 style="padding-left:0px;">Algo está para acontecer.</h2>
+			<p><%= image_tag('cache/iphone.png', :style => "width:250px;height:250px;") %></p>
+			<p>Due Date: Em Breve</p>
+			<p>Aguarde</p>
+			<p>
+			<%= link_to "Aguarde", '#', :class => "btn btn-black btn-large btn-primary" %>
+			</p>
+			<div style="position:relative;top:-250px;">
+				<%= image_tag('cache/Em-breve.png', :style => "width:250px;") %>
+			</div>
+		</div>
+
   </div>
   <div class="span4 box_curved_gray">
-    <% @events_outros2.each do |col| %>
     <div class="row-fluid center">
-        <h2 style="padding-left:0px;"><%= link_to(col.title, col) %></h2>
-        <p><%= link_to(image_tag(col.avatar.url(:original), :style => "width:250px;height:250px;"), col) %></p>
-        <p>Due Date: <%= l col.date_due.to_date, :format => :simple if !col.date_due.nil? %></p>
-        <p>Faltam: <%= col.distance_of_time %></p>
-        <p>
-        <% if !col.expired? %>
-          <%= link_to "Join this event", col, :class => "btn btn-black btn-large btn-primary" %>
-        <% else %>
-          <%= link_to "Finished", "#", :class => "btn btn-black btn-large btn-primary" %>
-        <% end %>
-        </p>
-      </div>
-    <% end %>
+    	<h2 style="padding-left:0px;">Fique atento e faça parte.</h2>
+			<p><%= image_tag('cache/ipad.png', :style => "width:250px;height:250px;") %></p>
+			<p>Due Date: Em Breve</p>
+			<p>Aguarde</p>
+			<p>
+			<%= link_to "Aguarde", '#', :class => "btn btn-black btn-large btn-primary" %>
+			</p>
+			<div style="position:relative;top:-250px;">
+				<%= image_tag('cache/Em-breve.png', :style => "width:250px;") %>
+			</div>
+		</div>
   </div>
 
   <div class="span4 box_curved_gray">
     <div class="row-fluid center">
 		<div class="span12">
-     		<h2 style="padding-left:0px;">Últimos Vencedores</h2>
+     		<h2 style="padding-left:0px;"><%=t("home.colum3_title")%></h2>
 		</div>
 	 </div>
 
     <div class="row-fluid margin-bottom">
 		<div class="span2 offset1">
-			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/001/thumb/Ipad.jpg?1370255677", :style => "width:50px;height:50px;") %><br>
+			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/002/original/ipad_hand.png?1370347689", :style => "width:50px;height:50px;") %><br>
 		</div>
 		<div class="span8 align-left vertical-align-middle">
 				Evento: ePick One <br>
@@ -149,7 +139,7 @@
 
     <div class="row-fluid margin-bottom">
 		<div class="span2 offset1">
-			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/001/thumb/Ipad.jpg?1370255677", :style => "width:50px;height:50px;") %><br>
+			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/002/original/ipad_hand.png?1370347689", :style => "width:50px;height:50px;") %><br>
 		</div>
 		<div class="span8 align-left vertical-align-middle">
 				Evento: ePick One <br>
@@ -159,7 +149,7 @@
 
     <div class="row-fluid margin-bottom">
 		<div class="span2 offset1">
-			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/001/thumb/Ipad.jpg?1370255677", :style => "width:50px;height:50px;") %><br>
+			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/002/original/ipad_hand.png?1370347689", :style => "width:50px;height:50px;") %><br>
 		</div>
 		<div class="span8 align-left vertical-align-middle">
 				Evento: ePick One <br>

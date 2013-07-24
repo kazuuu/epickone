@@ -7,9 +7,10 @@ en-US:
   hours: hours
   minutes: minutes
   seconds: seconds
+  cart:
+    title: "Cart"
   main:
     checkout: "CheckOut"    
-    cart: "Cart"
     events: "Events"
     store: "Store"
     language: "Language"

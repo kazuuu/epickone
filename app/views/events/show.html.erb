@@ -1,3 +1,5 @@
+<% provide(:title, @event.title) %>
+
 <% content_for :head do %>
   <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
   <%= tag :meta, property: "og:site_name", content: "ePick One" %>
