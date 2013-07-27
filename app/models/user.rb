@@ -193,7 +193,7 @@ def friends_count
 end
 
 def post_facebook(event_url)
-  self.facebook.put_connections("me", "epickone:join", :evento => event_url)
+  self.facebook.put_connections("me", "epickone:participar", :evento => event_url)
 end
 
 def post_twitter(msg)

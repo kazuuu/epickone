@@ -6,7 +6,8 @@
   <%= tag :meta, property: "og:type", content: "epickone:evento" %>
   <%= tag :meta, property: "og:title", content: @event.title %>
   <%= tag :meta, property: "og:url", content: event_url(@event) %>
-  <%= tag :meta, property: "og:image", content: @event.avatar.url(:medium)  %>
+  <%= tag :meta, property: "og:image", content: @event.avatar.url(:medium) %>
+  <%= tag :meta, property: "og:description", content: "Faca parte deste movimento tambem" %>
 <% end %>
 
 <div class="row">

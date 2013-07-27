@@ -9,8 +9,8 @@
       <%= link_to "ePick One", root_path, id: "logo" %>
       <nav>
         <ul class="nav">
-          <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to t("home.about"), about_path %></li>                  
           <li class="<%= 'active' if current_page?(how_it_works_path) %>"><%= link_to t("home.how_it_works"), how_it_works_path %></li>
+          <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to t("home.about"), about_path %></li>                  
         </ul>
         <ul class="nav pull-right">
 <!--

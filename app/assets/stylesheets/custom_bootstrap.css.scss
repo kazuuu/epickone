@@ -9,11 +9,14 @@ $gridColumns:             12;
 $gridColumnWidth:         65px;
 $gridGutterWidth:         20px;
 
+
 @import "bootstrap";
 
 // BOOTSTRAP CUSTOM 
 
-
+.navbar-inverse .nav > li > a, a:visited {
+	color:red;
+}
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -57,5 +60,6 @@ $gridGutterWidth:         20px;
   padding-top:15px;
 
 }
+
 // END BOOTSTRAP CUSTOM 
 
