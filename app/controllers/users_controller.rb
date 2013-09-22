@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_filter :require_no_user,  :only => [:new]
-  before_filter :require_user, :except => [:new, :create]
+#  before_filter :require_user, :except => [:new, :create]
   before_filter :correct_user,  :only => [:show, :edit, :update]
-  before_filter :require_user_admin,  :only => [:index]
+#  before_filter :require_user_admin,  :only => [:index]
 
     
   def facebook_share_event()  

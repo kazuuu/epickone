@@ -14,8 +14,20 @@ $gridGutterWidth:         20px;
 
 // BOOTSTRAP CUSTOM 
 
-.navbar-inverse .nav > li > a, a:visited {
-	color:red;
+.navbar-inverse .nav > li {
+	a, a:visited  {
+		color:white;
+		}
+		a:hover {
+			color:yellow;
+			}
+}
+
+.navbar-inverse .nav > li > ul > li {
+	a, a:visited  {
+		color:black;
+		}
+
 }
 
 @mixin box_sizing {

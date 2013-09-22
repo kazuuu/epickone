@@ -105,6 +105,7 @@ class CartsController < ApplicationController
     redirect_to checkout_cart_path
   end
   def pick_a_number
+    
     @ticket = Ticket.find(params[:ticket_id])
     
     session[:event_id] = @ticket.event_id
@@ -112,6 +113,8 @@ class CartsController < ApplicationController
     @tickets_already = current_user.tickets.find(:all, :joins => :cart, :conditions => 'carts.purchased_at is not null and event_id=' + @event.id.to_s, :order => "picked_number ASC")
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
     @tickets = current_cart.tickets.find(:all, :conditions => 'event_id = ' + @event.id.to_s)
+    render :layout => false
+
   end
   def add_ticket_number
     @ticket = Ticket.find(params[:ticket_id])

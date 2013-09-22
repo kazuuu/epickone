@@ -36,9 +36,10 @@
                bNeed_number = true
               %>
             
-              Não numerado<br><%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item.id) %>
+              Não numerado<br><%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
+
             <% else %>
-              <%= item.picked_number %>
+              <%= item.picked_number %><br><%= link_to '(clique para alterar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
               
               
             <% end %>

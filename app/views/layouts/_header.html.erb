@@ -28,7 +28,9 @@
           <%
             cart = current_cart
           %>
-          <li><%= link_to  t("home.tickets_validate") + " (" + cart.tickets.count.to_s  + ")", checkout_cart_path(cart) %></li> 
+          <li>
+						<%= link_to  t("home.tickets_validate") + " (" + cart.tickets.count.to_s  + ")", checkout_cart_path(cart) %>
+					</li> 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %>
               <b class="caret"></b>
@@ -41,8 +43,12 @@
             </ul>
           </li>
         <% else %>
-          <li class="<%= 'active' if current_page?(new_user_path) %>"><%= link_to t("home.sign_up"), new_user_path %></li>
-          <li class="<%= 'active' if current_page?(:login) %>"><%= link_to t("home.login"), :login %></li>
+          <li class="<%= 'active' if current_page?(new_user_path) %>">
+						<%= link_to t("home.sign_up"), new_user_path %>
+					</li>
+          <li class="<%= 'active' if current_page?(:login) %>">
+						<%= link_to t("home.login"), :login %>
+					</li>
         <% end %>
         </ul>
       </nav><!--/.nav-collapse -->

@@ -1,12 +1,9 @@
 Epickone::Application.routes.draw do
   resources :quizzes
 
-
   resource :tools do
     post 'event_clone', :on => :member 
   end
-    
-
 
   resources :products do
     resources :photos
