@@ -11,8 +11,14 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
 end
 
 class ActionController::TestCase
   setup :activate_authlogic
+end
+
+def user_login(user)
+  UserSession.create(user ? user : nil)
 end

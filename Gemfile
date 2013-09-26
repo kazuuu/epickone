@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
+
 gem 'authlogic', '3.3.0'
 gem 'bootstrap-sass', '2.3.1.2'
 gem 'faker', '1.0.1'
@@ -9,7 +10,6 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
 gem 'carmen', '0.2.13'
-#gem 'i18n_country_select', '1.0.16'
 
 gem 'country_select'
 gem 'omniauth-facebook', '1.4.1'
@@ -29,19 +29,11 @@ gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
 gem 'simple_form', '2.0.4'
 gem "dotiw", "~> 1.1.1" 
- 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development do
+group :development, :test do
   gem 'pg', '0.12.2'
-#  gem 'sqlite3', '1.3.5'
-  gem 'rspec-rails', '2.13.1'
-end
-group :test do
-  gem 'pg', '0.12.2'
-  gem 'rspec-rails', '2.13.1'
-#  gem 'capybara'
+  gem 'rspec-rails'
+  gem 'factory_girl'
 end
 
 group :production do
@@ -61,18 +53,3 @@ group :assets do
   gem 'uglifier', '1.2.3'
 end
 
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

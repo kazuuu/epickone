@@ -1,33 +1,34 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  setup do
-    #@user = users(:ben)
+   setup :activate_authlogic
+
+   test "should get index" do
+     get :index, locale: 'pt-BR'
+     assert_response :success
+     assert_not_nil assigns(:users)
+   end
+
+  test "should get new" do
+    get :new, locale: 'pt-BR'
+    assert_response :success
+  end
+    # 
+    # 
+    # test "should create user" do
+    #   assert_difference('User.count') do
+    #     post :create, locale: 'pt-BR', user: { email: 'marcello@ebocao.com', first_name: 'marcello', phone_mobile: '989989898', password: 'virus' }
+    #   end
+    # 
+    #   assert_redirected_to root_path
+    # end
+  
+  test "should show user" do
+    user_login(users(:ben))
+    get :show, locale: 'pt-BR', id: users(:ben)
+    assert_response :success
   end
 
-   # test "should get index" do
-   #   get :index
-   #   assert_response :success
-   #   assert_not_nil assigns(:users)
-   # end
-
-  # test "should get new" do
-  #   get :new
-  #   assert_response :success
-  # end
-  # 
-  # test "should create user" do
-  #   assert_difference('User.count') do
-  #     user :create, post: { body: @user.body, title: @user.title }
-  #   end
-  # 
-  #   assert_redirected_to user_path(assigns(:user))
-  # end
-  # 
-  # test "should show post" do
-  #   get :show, id: @post
-  #   assert_response :success
-  # end
   # 
   # test "should get edit" do
   #   get :edit, id: @post
