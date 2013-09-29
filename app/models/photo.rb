@@ -13,6 +13,9 @@ class Photo < ActiveRecord::Base
                          :secret_access_key => ENV['S3_ACCESS_KEY']
                        },
                      :default_url => '/images/missing.png'
+                     
+  validates_presence_of :image_file_name
+                     
   # Paperclip for Images
       def image_delete
         @image_delete ||= "0"
@@ -27,5 +30,4 @@ class Photo < ActiveRecord::Base
           self.image.clear if @image_delete == "1"
         end
   # End Paperclip
-
 end
