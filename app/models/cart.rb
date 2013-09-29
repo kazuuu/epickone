@@ -1,12 +1,13 @@
 class Cart < ActiveRecord::Base
   attr_accessible :tickets_attributes, :purchased_at, :user_id
+  
   belongs_to :user
   
   has_many :tickets, :dependent => :destroy
   accepts_nested_attributes_for :tickets, allow_destroy: true
   
-  validates :user_id, presence: true  
-
+  validates_presence_of :user_id
+  
   def ticket_add(event_id, origin)
     new_ticket = tickets.build(:event_id => event_id)
     new_ticket.user_id = self.user_id
