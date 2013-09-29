@@ -1,13 +1,16 @@
 class Ticket < ActiveRecord::Base
-  attr_accessible :cart_id, :comment, :event_id, :picked_number, :quantity, :unit_price, :user_id, :origin
+  attr_accessible :cart_id, 
+                  :event_id,
+                  :picked_number,
+                  :origin
   #belongs_to :cart
   belongs_to :event
-  belongs_to :user
   belongs_to :cart 
 
-  def full_price
-    unit_price * quantity
-  end
+  validates_presence_of :origin,
+                        :cart_id,
+                        :event_id
+                        
   def add_number(number)
       update_attribute(:picked_number, number)
   end
