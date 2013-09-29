@@ -12,7 +12,6 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :join_max
       t.boolean :enable
       t.string :covering_area
-      t.decimal :ticket_price
       t.datetime :start_date
       t.datetime :end_date
       t.has_attached_file :avatar

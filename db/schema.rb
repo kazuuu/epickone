@@ -114,7 +114,6 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.integer  "join_max"
     t.boolean  "enable"
     t.string   "covering_area"
-    t.decimal  "ticket_price"
     t.datetime "start_date"
     t.datetime "end_date"
     t.string   "avatar_file_name"
@@ -188,8 +187,6 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
 
   create_table "tickets", :force => true do |t|
     t.integer  "event_id"
-    t.decimal  "unit_price"
-    t.integer  "quantity"
     t.string   "origin"
     t.integer  "cart_id"
     t.integer  "picked_number"

@@ -11,7 +11,6 @@ class Event < ActiveRecord::Base
                   :title, 
                   :enable, 
                   :covering_area, 
-                  :ticket_price,
                   :start_date,
                   :end_date,
                   :category_id
@@ -25,8 +24,7 @@ class Event < ActiveRecord::Base
                         :headline,
                         :prize_title,
                         :start_date,
-                        :end_date,
-                        :ticket_price
+                        :end_date
 
   translates :title, :headline, :description, :instruction, :prize_title                
   accepts_nested_attributes_for :translations

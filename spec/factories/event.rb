@@ -9,7 +9,6 @@ FactoryGirl.define do
     join_max { 10 }
     enable { true }
     covering_area { 'pt-br' }
-    ticket_price { 10.50 }
     start_date { '10/10/2013' }
     end_date { '10/09/2013' }
   end
