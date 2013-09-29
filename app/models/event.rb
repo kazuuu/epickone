@@ -1,28 +1,32 @@
 class Event < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
 
-  attr_accessible :category_id, 
-                  :quiz_id, 
+  attr_accessible :join_min,
+                  :join_max,
                   :headline, 
                   :description, 
-                  :prize, 
+                  :quiz_id, 
+                  :prize_title, 
                   :instruction, 
                   :title, 
-                  :join_type, 
-                  :join_min, 
-                  :join_max, 
                   :enable, 
                   :covering_area, 
-                  :price_ticket, 
-                  :date_due, 
-                  :date_start, 
-                  :questions_attributes,
-                  :avatar, 
-                  :avatar_delete, 
-                  :site_position, 
-                  :photos_attributes, 
-                  :locale, 
-                  :translations_attributes
+                  :ticket_price,
+                  :start_date,
+                  :end_date,
+                  :category_id
+  #                 :questions_attributes,
+  #                 :avatar, 
+  #                 :avatar_delete, 
+  #                 :photos_attributes, 
+  #                 :translations_attributes
+
+  validates_presence_of :title,
+                        :headline,
+                        :prize_title,
+                        :start_date,
+                        :end_date,
+                        :ticket_price
 
   translates :title, :headline, :description, :instruction, :prize_title                
   accepts_nested_attributes_for :translations
@@ -30,6 +34,7 @@ class Event < ActiveRecord::Base
   class Translation
     attr_accessible :locale, :headline, :title, :description, :instruction, :prize_title
   end
+  
   def translations_attributes=(attributes)
     new_translations = attributes.values.reduce({}) do |new_values, translation|
       new_values.merge! translation.delete("locale") => translation
@@ -50,23 +55,12 @@ class Event < ActiveRecord::Base
   
   belongs_to :category
   belongs_to :quiz
-    
-  has_many :carts
+  
   has_many :tickets
 
   has_many :photos, as: :photable
   accepts_nested_attributes_for :photos, allow_destroy: true   
   
-
-        
-  # presence
-  validates :title, presence: true
-#  validates :avatar, presence: true
-#  validates :description, presence: true
-
-#  validates :title, :length => { :maximum => 25 }
-
-  #validates_attachment_presence :avatar
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
   def distance_of_time
