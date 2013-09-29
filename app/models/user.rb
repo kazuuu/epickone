@@ -1,15 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessible :email, 
                   :password, 
-                  :password_salt, 
-                  :persistence_token, 
-                  :perishable_token,
-                  :active,
-                  :current_login_ip, 
                   :first_name, 
                   :last_name, 
                   :document,
-                  :title,
                   :gender,
                   :birthday,
                   :city,
@@ -17,24 +11,31 @@ class User < ActiveRecord::Base
                   :country,
                   :address1,
                   :address2,
-                  :zipcode,
-                  :phone_mobile,
-                  :newsletter,
-                  :admin_flag,
-                  :avatar_url,
-                  :avatar,
-                  :avatar_delete,
-                  :facebook_uid,
-                  :oauth_token,
-                  :oauth_expires_at,
-                  :twitter_uid,
-                  :twitter_oauth_token,
-                  :twitter_oauth_secret,
-                  :twitter_oauth_expires_at,
-                  :locale,
-                  :provider
+                  :postcode,
+                  :mobile_phone_number
+                
+  attr_accessible :admin_flag, :as => :admin
+  #                 :password_salt, 
+   #                 :persistence_token, 
+   #                 :perishable_token,
+   #                 :active,
+   #                 :current_login_ip, 
+   #                 :newsletter,
+   #                 :avatar_url,
+   #                 :avatar,
+   #                 :avatar_delete,
+   #                 :facebook_uid,
+   #                 :oauth_token,
+   #                 :oauth_expires_at,
+   #                 :twitter_uid,
+   #                 :twitter_oauth_token,
+   #                 :twitter_oauth_secret,
+   #                 :twitter_oauth_expires_at,
+   #                 :locale,
+   #                 :provider, as: [:default, :overlord]
+                  
   has_many :carts
-  has_many :tickets
+  has_many :tickets, through: :carts
                   
   before_save :destroy_avatar?
   has_attached_file  :avatar, 
@@ -48,14 +49,22 @@ class User < ActiveRecord::Base
                      :default_url => '/images/missing.png'
                     
                     
+  validates_presence_of :email, 
+                        :password, 
+                        :first_name, 
+                        :last_name,
+                        :city,
+                        :state,
+                        :country,
+                        :gender,
+                        :birthday
                     
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-  validates_uniqueness_of :phone_mobile
-  validates_presence_of :phone_mobile
-  acts_as_authentic do |c| 
-    c.login_field = :email 
-    c.require_password_confirmation = false
-  end 
+  validates_uniqueness_of :mobile_phone_number
+  # acts_as_authentic do |c| 
+  #   c.login_field = :email 
+  #   c.require_password_confirmation = false
+  # end 
 
   def activate!
     self.active = true

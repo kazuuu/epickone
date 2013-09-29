@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 
 gem 'authlogic', '3.3.0'
 gem 'bootstrap-sass', '2.3.1.2'
-gem 'faker', '1.0.1'
+gem 'ffaker'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'paperclip', '~> 3.0'
@@ -33,7 +33,8 @@ gem "dotiw", "~> 1.1.1"
 group :development, :test do
   gem 'pg', '0.12.2'
   gem 'rspec-rails'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem "shoulda-matchers"
 end
 
 group :production do

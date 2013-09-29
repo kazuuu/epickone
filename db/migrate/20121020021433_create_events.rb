@@ -5,18 +5,16 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :quiz_id
       t.string :title
       t.string :headline
-      t.string :prize      
-      t.string :site_position
+      t.string :prize_title      
       t.text :description
       t.text :instruction
       t.integer :join_min
       t.integer :join_max
       t.boolean :enable
       t.string :covering_area
-      t.string :join_type
-      t.decimal :price_ticket
-      t.datetime :date_start
-      t.datetime :date_due
+      t.decimal :ticket_price
+      t.datetime :start_date
+      t.datetime :end_date
       t.has_attached_file :avatar
 
       t.timestamps

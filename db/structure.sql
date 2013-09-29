@@ -298,8 +298,8 @@ CREATE TABLE events (
     covering_area character varying(255),
     join_type character varying(255),
     price_ticket numeric,
-    date_due timestamp without time zone,
     date_start timestamp without time zone,
+    date_due timestamp without time zone,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
     avatar_file_size integer,
@@ -524,7 +524,6 @@ CREATE TABLE tickets (
     quantity integer,
     origin character varying(255),
     cart_id integer,
-    user_id integer,
     picked_number integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -597,16 +596,16 @@ CREATE TABLE users (
     last_name character varying(255),
     document character varying(255),
     gender character varying(255),
-    title character varying(255),
     birthday timestamp without time zone,
     city character varying(255),
     state character varying(255),
     country character varying(255),
     address1 character varying(255),
     address2 character varying(255),
-    zipcode character varying(255),
-    phone_mobile character varying(255),
+    postcode character varying(255),
+    mobile_phone_number character varying(255),
     admin_flag boolean DEFAULT false,
+    newsletter boolean DEFAULT true,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
     avatar_file_size integer,
@@ -622,8 +621,7 @@ CREATE TABLE users (
     twitter_oauth_secret character varying(255),
     twitter_oauth_expires_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    newsletter boolean DEFAULT true
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -978,17 +976,17 @@ CREATE INDEX index_question_translations_on_question_id ON question_translations
 
 
 --
+-- Name: index_users_on_mobile_phone_number; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_mobile_phone_number ON users USING btree (mobile_phone_number);
+
+
+--
 -- Name: index_users_on_perishable_token_and_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_users_on_perishable_token_and_email ON users USING btree (perishable_token, email);
-
-
---
--- Name: index_users_on_phone_mobile; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_phone_mobile ON users USING btree (phone_mobile);
 
 
 --
@@ -1035,5 +1033,3 @@ INSERT INTO schema_migrations (version) VALUES ('20121128182137');
 INSERT INTO schema_migrations (version) VALUES ('20121128183831');
 
 INSERT INTO schema_migrations (version) VALUES ('20130519114456');
-
-INSERT INTO schema_migrations (version) VALUES ('20130520180100');

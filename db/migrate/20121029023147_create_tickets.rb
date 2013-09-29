@@ -6,7 +6,6 @@ class CreateTickets < ActiveRecord::Migration
       t.integer  :quantity
       t.string   :origin
       t.integer  :cart_id
-      t.integer  :user_id
       t.integer  :picked_number
 
       t.timestamps

@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
                   :quiz_id, 
                   :headline, 
                   :description, 
-                  :prize, 
+                  :prize_title, 
                   :instruction, 
                   :title, 
                   :join_type, 
@@ -14,8 +14,8 @@ class Event < ActiveRecord::Base
                   :enable, 
                   :covering_area, 
                   :price_ticket, 
-                  :date_due, 
-                  :date_start, 
+                  :start_date, 
+                  :end_date, 
                   :questions_attributes,
                   :avatar, 
                   :avatar_delete, 
@@ -24,11 +24,11 @@ class Event < ActiveRecord::Base
                   :locale, 
                   :translations_attributes
 
-  translates :title, :headline, :description, :instruction, :prize                  
+  translates :title, :headline, :description, :instruction, :prize_title
   accepts_nested_attributes_for :translations
   
   class Translation
-    attr_accessible :locale, :headline, :title, :description, :instruction, :prize
+    attr_accessible :locale, :headline, :title, :description, :instruction, :prize_title
   end
   def translations_attributes=(attributes)
     new_translations = attributes.values.reduce({}) do |new_values, translation|
@@ -68,6 +68,14 @@ class Event < ActiveRecord::Base
 
   #validates_attachment_presence :avatar
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+
+  scope :find_by_date_open, lambda { {
+    :conditions => ["date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today],
+    :order => "date_due asc"
+     }
+   }
+  
+
 
   def distance_of_time
     distance_of_time_in_words(Time.now, (self.date_due + 1.day).to_date, false, :accumulate_on => :days)
