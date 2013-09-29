@@ -15,7 +15,5 @@ FactoryGirl.define do
     address2 { Faker::AddressAU.street_address }
     postcode { Faker::AddressAU.postcode }
   end
-  
 
-  
 end

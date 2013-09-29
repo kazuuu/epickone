@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
                         :birthday
                     
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-  validates_uniqueness_of :mobile_phone_number
+  validates_uniqueness_of :mobile_phone_number, :email
   # acts_as_authentic do |c| 
   #   c.login_field = :email 
   #   c.require_password_confirmation = false
