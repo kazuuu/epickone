@@ -16,6 +16,7 @@ describe Event do
 
   describe 'Associations' do
     it { should have_many :tickets }
+    it { should have_many :photos }
     it { should belong_to :quiz }
     it { should belong_to :category }
   end
