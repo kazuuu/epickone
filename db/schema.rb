@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.string   "answer_text"
     t.text     "description"
     t.integer  "sort_order"
-    t.integer  "iscorrect"
+    t.boolean  "right_answer",        :default => false, :null => false
     t.integer  "question_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "carts", :force => true do |t|

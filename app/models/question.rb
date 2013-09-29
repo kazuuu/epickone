@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
 
   translates :title, :description
   accepts_nested_attributes_for :translations
+  
+  validates_presence_of :title
 
   class Translation
     attr_accessible :locale, :title, :description

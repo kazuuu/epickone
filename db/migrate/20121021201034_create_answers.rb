@@ -4,7 +4,7 @@ class CreateAnswers < ActiveRecord::Migration
       t.string :answer_text
       t.text :description
       t.integer :sort_order
-      t.integer :iscorrect
+      t.boolean :right_answer, :default => false, :null => false    
       t.integer :question_id
       t.has_attached_file :avatar
 
