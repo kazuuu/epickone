@@ -24,11 +24,11 @@ class Event < ActiveRecord::Base
                   :locale, 
                   :translations_attributes
 
-  translates :title, :headline, :description, :instruction, :prize                  
+  translates :title, :headline, :description, :instruction, :prize_title                
   accepts_nested_attributes_for :translations
   
   class Translation
-    attr_accessible :locale, :headline, :title, :description, :instruction, :prize
+    attr_accessible :locale, :headline, :title, :description, :instruction, :prize_title
   end
   def translations_attributes=(attributes)
     new_translations = attributes.values.reduce({}) do |new_values, translation|

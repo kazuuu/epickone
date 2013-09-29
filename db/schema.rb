@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "join_type"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
@@ -91,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.string   "locale"
     t.string   "title"
     t.string   "headline"
-    t.string   "prize"
+    t.string   "prize_title"
     t.text     "description"
     t.text     "instruction"
     t.datetime "created_at",  :null => false
@@ -106,18 +107,16 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.integer  "quiz_id"
     t.string   "title"
     t.string   "headline"
-    t.string   "prize"
-    t.string   "site_position"
+    t.string   "prize_title"
     t.text     "description"
     t.text     "instruction"
     t.integer  "join_min"
     t.integer  "join_max"
     t.boolean  "enable"
     t.string   "covering_area"
-    t.string   "join_type"
-    t.decimal  "price_ticket"
-    t.datetime "date_start"
-    t.datetime "date_due"
+    t.decimal  "ticket_price"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -126,7 +125,10 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.datetime "updated_at",          :null => false
   end
 
-  add_index "events", ["category_id", "created_at"], :name => "index_events_on_category_id_and_created_at"
+  add_index "events", ["category_id"], :name => "index_events_on_category_id"
+  add_index "events", ["end_date"], :name => "index_events_on_end_date"
+  add_index "events", ["quiz_id"], :name => "index_events_on_quiz_id"
+  add_index "events", ["start_date"], :name => "index_events_on_start_date"
 
   create_table "payment_notifications", :force => true do |t|
     t.text     "params"
