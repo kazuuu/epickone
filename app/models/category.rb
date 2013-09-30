@@ -1,5 +1,13 @@
 class Category < ActiveRecord::Base
-  attr_accessible :description, :sort_order, :title, :translations_attributes, :site_position, :avatar, :avatar_delete
+  attr_accessible :description,
+                  :parent_id,
+                  :sort_order,
+                  :title,
+                  :join_type,
+                  :translations_attributes,
+                  :avatar,
+                  :avatar_delete
+                  
   validates_presence_of :title
 
   default_scope order: 'sort_order ASC'

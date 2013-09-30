@@ -7,17 +7,9 @@ class StaticPagesController < ApplicationController
     @title = "home"
     @user = User.new
 
-    # @man = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'man'", :order => "date_due asc") 
-    # @woman = Event.find(:all, :limit => 1, :joins => :category, :conditions => "categories.site_position = 'woman'", :order => "date_due asc") 
-
-    @events_social = Event.find(:all, :conditions => ["category_id = 1 and date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today], :order => "date_due asc") 
-    @events_outros2 = Event.find(:all, :conditions => ["category_id = 2 and date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today], :order => "date_due asc") 
-    @events_promo = Event.find(:all, :conditions => ["category_id = 3 and date(?) >= date(date_start) and date(?) <= date(date_due)", Date.today, Date.today], :order => "date_due asc") 
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end      
+    @events_social = Event.find_by_category_id(1).find_by_date_open
+    @events_outros2 = Event.find_by_category_id(2).find_by_date_open
+    @events_promo = Event.find_by_category_id(3).find_by_date_open
   end
 
   def help

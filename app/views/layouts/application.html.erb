@@ -2,39 +2,34 @@
 <html lang='<%= I18n.locale%>'>
 <head>
   <title><%= full_title(yield(:title)) %></title>      
+
+  <%= render 'layouts/fixes' %>  
+  <%= render 'layouts/shiv' %>  
+  <%= render 'layouts/shim' %>  
+	
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
-  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
   <%= javascript_include_tag "application" %>
-  	<%= csrf_meta_tags %>
-  	<!--[if lt IE 9]>
-	<script src="html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+  <%= csrf_meta_tags %>
 
   <%= yield :head %>
-  
-  <%= render 'layouts/shim' %>  
-
 </head>
 <body>	
   <%= render 'layouts/header' %>
   <div class="container">
-   <% flash.each do |key, value| %>
-		<% if key.to_s == "msgbox" %>
-			<% session[:msgbox]=  value.to_s %>
-			<%= link_to('', msgbox_path, :class=>"fancybox", :id => "linkfancy", :style=>"display:none;")  %>
-			<script type="text/javascript">
-			$(document).ready(function(){
-			      $('#linkfancy').fancybox().trigger('click');
-			});
-
-			</script>
-
-		<% else %>
-      <div class="alert alert-<%= key %>" style="margin-top:20px;">
-        <%= value %>
-        <a class="close" data-dismiss="alert">x</a>
-      </div>
+    <% flash.each do |key, value| %>
+			<% if key.to_s == "msgbox" %>
+				<% session[:msgbox]=  value.to_s %>
+				<%= link_to('', msgbox_path, :class=>"fancybox", :id => "linkfancy", :style=>"display:none;")  %>
+				<script type="text/javascript">
+					$(document).ready(function(){
+					      $('#linkfancy').fancybox().trigger('click');
+					});
+				</script>
+			<% else %>
+	      <div class="alert alert-<%= key %>" style="margin-top:20px;">
+	        <%= value %>
+	        <a class="close" data-dismiss="alert">x</a>
+	      </div>
     	<% end %> 
     <% end %>
   </div>

@@ -25,6 +25,20 @@ class Event < ActiveRecord::Base
                         :prize_title,
                         :start_date,
                         :end_date
+  scope :find_by_date_open, lambda { 
+    {
+        :conditions => ["date(?) >= date(start_date) and date(?) <= date(end_date)", Date.today, Date.today],
+        :order => "end_date asc"
+    }
+  }
+
+  scope :find_by_category_id, lambda { |term| 
+    {
+        :conditions => ["category_id = ?", term],
+        :order => "end_date asc"
+    }
+  }
+  
 
   translates :title, :headline, :description, :instruction, :prize_title                
   accepts_nested_attributes_for :translations

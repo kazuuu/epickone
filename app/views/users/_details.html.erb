@@ -1,19 +1,57 @@
-<h1><%= @user.title %>&nbsp;<%= @user.first_name %>&nbsp;<%= @user.last_name %></h1>
+<h1><%= @user.first_name %>&nbsp;<%= @user.last_name %></h1>
 <h2>Informações Básicas</h2>
-Documento: <%= @user.document %> <br>
-Sexo: <%= @user.gender %> <br>
-Data de Nascimento: <%= @user.birthday %> <br>
-Cidade: <%= @user.city %> <br>
-Estado: <%= @user.state %> <br>
-País: <%= @user.country %> <br>
-Endereco 1: <%= @user.address1 %> <br>
-Endereco 2: <%= @user.address2 %> <br>
-CEP: <%= @user.zipcode %> <br>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span2">Sexo:</td>
+			<td class="span3"><%= @user.gender %></td>
+		</tr>
+
+		<tr>
+			<td class="">Data de Nascimento:</td>
+			<td class=""><%= @user.birthday %></td>
+		</tr>
+		<tr>
+			<td class="">Cidade:</td>
+			<td class=""><%= @user.city %></td>
+		</tr>
+		<tr>
+			<td class="">Estado:</td>
+			<td class=""><%= @user.state %></td>
+		</tr>
+		<tr>
+			<td class="">País:</td>
+			<td class=""><%= @user.country %></td>
+		</tr>
+		<tr>
+			<td class="">Endereco 1:</td>
+			<td class=""><%= @user.address1 %></td>
+		</tr>
+		<tr>
+			<td class="">Endereco 2:</td>
+			<td class=""><%= @user.address2 %></td>
+		</tr>
+		<tr>
+			<td class="">CEP:</td>
+			<td class=""><%= @user.postcode %></td>
+		</tr>
+	</tbody>
+</table>
+
 <h2>Dados de Contato</h2>
-Email: <%= @user.email %> <br>
-Celular: <%= @user.phone_mobile %> <br>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span3">Email:</td>
+			<td class=""><%= @user.email %></td>
+		</tr>
+		<tr>
+			<td class="span3">Celular:</td>
+			<td class=""><%= @user.mobile_phone_number %></td>
+		</tr>
+	</tbody>
+</table>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+	<%= link_to 'Edit', edit_user_path(@user) %> |
+	<%= link_to 'Back', users_path %>
 
