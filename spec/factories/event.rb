@@ -10,6 +10,6 @@ FactoryGirl.define do
     enable { true }
     covering_area { 'pt-br' }
     start_date { '10/10/2013' }
-    end_date { '10/09/2013' }
+    end_date { '20/11/2013' }
   end
 end

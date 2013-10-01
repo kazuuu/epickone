@@ -25,8 +25,6 @@ describe Event do
         e.title.should == "Event Title"
       end
     end
-    context 'values' do 
-    end
   end
 
   describe 'Associations' do
@@ -58,5 +56,22 @@ describe Event do
     end
   end
   describe 'scopes' do
+  end
+  
+  describe 'Properties' do
+    context '.expire?' do 
+      e = FactoryGirl.create :event, :end_date => "20/11/2013"
+      
+      it 'should check expired event' do
+        d = Date.parse("21/11/2013")
+        Date.should_receive(:today).and_return(d)
+        e.expired?.should be_true
+      end
+      it 'should check not expired event' do
+        d = Date.parse("19/11/2013")
+        Date.should_receive(:today).and_return(d)
+        e.expired?.should be_false
+      end
+    end
   end
 end

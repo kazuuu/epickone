@@ -80,21 +80,13 @@ class Event < ActiveRecord::Base
   end
   
   def expired?
-    if  Date.today <= self.date_due.to_date 
+    if  Date.today <= self.end_date.to_date 
       false
     else
       true
     end
   end
   
-  def ticket_exist(user_id, origin)
-    self.tickets.find(:all, :conditions => ["user_id = ? and origin = ?", user_id, origin]).count
-  end
-  
-  def joined
-    self.tickets.find(:all, :joins => :cart, :conditions => "carts.purchased_at is not null").count
-  end
-
   def avatar_delete
     @avatar_delete ||= "0"
   end

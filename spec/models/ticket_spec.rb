@@ -24,4 +24,16 @@ describe Ticket do
       it { should allow_mass_assignment_of :picked_number }
     end
   end
+  
+  describe 'scopes' do
+    it 'should find by origin' do
+      answered1 = FactoryGirl.create :ticket, :origin => 'answered'
+      answered2 = FactoryGirl.create :ticket, :origin => 'answered'
+      fb1 = FactoryGirl.create :ticket, :origin => "fb"
+      fb2 = FactoryGirl.create :ticket, :origin => "fb"
+      fb3 = FactoryGirl.create :ticket, :origin => "fb"
+      Ticket.find_by_origin('answered').count.should == 2
+      Ticket.find_by_origin('fb').count.should == 3
+    end
+  end  
 end

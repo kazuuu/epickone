@@ -16,14 +16,10 @@
 		<br>
 		Faltam: <%= @event.distance_of_time %>
 		<br>
-		Último dia: <%= l @event.date_due.to_date, :format => :simple if !@event.date_due.nil? %>
+		Último dia: <%= l @event.end_date.to_date, :format => :simple if !@event.end_date.nil? %>
 		<br><br>
     <% if  !@event.expired? %>
-      <% if @event.join_type == "promo" %>
         <%= render 'events/promo_button' %>
-      <% else %>
-        <%= render 'events/paid_button' %>  
-      <% end %>
     <% else %>
       <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
     <% end %>

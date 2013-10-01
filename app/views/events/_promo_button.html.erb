@@ -6,7 +6,7 @@ Você pode ganhar um Ticket respondendo o QUIZ!
 Você pode ganhar mais Tickets compartilhando este evento em suas redes sociais!
 <br>
 <% if current_user %>
-	<% if @event.ticket_exist(current_user.id, "answered") > 0 %>
+	<% if @event.tickets.find_by_user_id(current_user.id).find_by_origin('answered').count > 0 %>
 		<%= link_to image_tag("fb_icon.png", :style => "height:50px;width:50px;", :alt => "Ganhe um Ticket comparilhando este evento no Facebook"), facebook_share_event_user_path(:event_id => params[:id]) %>
 
 		<%= link_to image_tag("twitter_icon.png", :style => "height:50px;width:50px;", :alt => "Ganhe um Ticket comparilhando este evento no Twitter"), twitter_share_event_user_path(:event_id => params[:id]) %>
