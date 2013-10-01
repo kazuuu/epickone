@@ -29,6 +29,12 @@ class Answer < ActiveRecord::Base
                        },
                      :default_url => '/images/missing.png'
   
+  scope :find_right_answer, lambda {  
+    {
+      :conditions => "right_answer = true"
+    }
+  }
+
   def avatar_delete
     @avatar_delete ||= "0"
   end

@@ -29,50 +29,38 @@ class EventsController < ApplicationController
     end
   end
 
-
   def quiz
     @event = Event.find(params[:id])
+    session[:question_number] = 1 if session[:question_number].nil?
+    @question = @event.quiz.questions.find_by_sort_order(session[:question_number]).first
   end
 
   def quiz_result
     @event = Event.find(params[:id])
-    @bOk = true
+    question = @event.quiz.questions.find_by_sort_order(session[:question_number]).first
+    answer = question.answers.find_right_answer.first
     
-    @event.quiz.questions.each do |question|
-      @ans = question.answers.find(:first, :conditions => 'iscorrect = 1')
-      
-      if !@ans.nil?
-        if !params[question.id.to_s].nil? 
-          if !params[question.id.to_s][:answer].nil? 
-            if params[question.id.to_s][:answer] != @ans.id.to_s
-              if @bOk == true
-                @bOk = false
-              end
-            end
-          else
-            @bOk = false
-          end
-        else
-          @bOk = false
-        end
-      end
-    end
-    
-    if @bOk
-      cart = current_cart
-      origin = "answered"
-      already_ticket = Ticket.find(:all, :conditions => "origin='" + origin + "' and event_id=" +  params[:id] + " and user_id=" + cart.user_id.to_s).count
-      total_win = 1 - already_ticket
-      
-      if total_win > 0
-        (1..total_win).each do
-          cart.ticket_add(params[:id], origin)
-        end
-        flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
-        redirect_to checkout_cart_path(current_cart)
+    if params[question.id.to_s][:answer].to_s == answer.id.to_s
+      if session[:question_number] < @event.quiz.questions.count
+        session[:question_number] = session[:question_number] + 1
+        redirect_to quiz_event_path(params[:id])
       else
-        flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
-        redirect_to event_path(params[:id])
+        origin = "answered"
+        already_ticket = @event.tickets.find_by_user_id(current_user.id).find_by_origin("answered").count
+        total_win = 1 - already_ticket
+      
+        if total_win > 0
+          (1..total_win).each do
+            current_cart.ticket_add(params[:id], origin)
+          end
+          flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
+          session[:question_number] = nil
+          redirect_to checkout_cart_path(current_cart)
+        else
+          flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
+          session[:question_number] = nil
+          redirect_to event_path(params[:id])
+        end
       end
     else
       flash[:msgbox] = "Algumas respostas estao erradas. E preciso acertar 100% para ganhar o ticket."

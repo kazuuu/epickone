@@ -1,46 +1,47 @@
 <% provide(:title, 'Quiz') %>
 
-<div class="row">
-  <div class="span2">
-    <%= image_tag @event.avatar.url(:thumb) %>
+<div class="row margin-top">
+  <div class="span3">
+    <%= image_tag(@event.avatar.url(:original), :style => "height:200px;width:200px;border-style:dotted;border-width:1px;") %>
   </div>
-  <div class="span10">
+  <div class="span9">
     <%= form_tag quiz_result_event_path do |f| %>
-    <table class="table table-striped">
-       <thead>
-         <tr>
-           <th class="span12">
-             <%= @event.title %>
-           </th>
-         </tr>
-       </thead>
-       <tbody>
-         <% @event.quiz.questions.each do |question| %>     
-         <tr>
-           <td>
-             <%= question.sort_order.to_s if !question.sort_order.nil? %>: <%= question.title %>
-             <% if question.description != '' %>
-                <p>
-               <%= question.description %>
-               </p>
-             <% end %>
-             <ol class="answers">
-							<% question.answers.each do |answer| %>
-                <%= radio_button question.id, "answer", answer.id %> 
-								<%= answer.sort_order.to_s if !answer.sort_order.nil? %>) <%= answer.answer_text %><br>
-               <% end %>
-             </ol>         
-           </td>
-         </tr>
-         <% end %>
-         <tr>
-           <td>
-         <%= submit_tag "Check Answers" %>
-         </td>
-       </tr>
-          
-       </tbody>
-    </table>
-    <% end %>
+	    <table class="margin-top">
+				<thead>
+					<tr>
+						<th class="span12" style="text-align:left">
+							<ul class="bullets">
+								<li><a class ="green" href="">Red</a></li>
+								<li><a class ="red" href="">Green</a></li>
+							</ul>
+						</th>
+					</tr>
+					<tr>
+						<th class="span12" style="text-align:left">
+							<%= (@question.sort_order.to_s + ": " + @question.title) if !@question.nil? %>
+						</th>
+					</tr>
+				</thead>
+	      <tbody>
+	        <tr>
+	          <td>
+							<ol class="answers">
+								<% if !@question.nil? %>
+									<% @question.answers.each do |answer| %>
+										<%= radio_button @question.id, "answer", answer.id %> 
+										<%= answer.sort_order.to_s if !answer.sort_order.nil? %>) <%= answer.answer_text %><br>
+									<% end %>
+								<% end %>
+							</ol>
+            </td>
+	        </tr>
+	        <tr>
+	          <td>
+	         		<%= submit_tag "Próxima" %>
+	         	</td>
+	       	</tr>
+	      </tbody>
+	    </table>
+		<% end %>
   </div>
 </div>

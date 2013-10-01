@@ -55,6 +55,7 @@ describe Event do
       it { should allow_mass_assignment_of :photos_attributes }
     end
   end
+  
   describe 'scopes' do
   end
   

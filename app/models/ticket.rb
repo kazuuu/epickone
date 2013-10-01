@@ -18,10 +18,23 @@ class Ticket < ActiveRecord::Base
     }
   }
 
-  scope :find_by_validated, lambda { |term| 
+  scope :find_by_event_id, lambda { |term| 
+    {
+        :conditions => ["event_id = ?", term]
+    }
+  }
+
+  scope :find_by_validated, lambda {
       {
         :joins => :cart,
         :conditions => "carts.purchased_at is not null"
+      }
+    }
+
+  scope :find_by_not_validated, lambda {
+      {
+        :joins => :cart,
+        :conditions => "carts.purchased_at is null"
       }
     }
 
@@ -31,6 +44,8 @@ class Ticket < ActiveRecord::Base
         :conditions => ["carts.user_id = ?", term]
     }
   }
+
+  
 
                         
   def add_number(number)

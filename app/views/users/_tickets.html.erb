@@ -12,9 +12,6 @@
           <th class="span1">
             Número
           </th>
-          <th class="span2">
-            Preço
-          </th>
         </tr>
       </thead>
 
@@ -31,9 +28,6 @@
           </td>
           <td>
             <%= item.picked_number.to_s if !item.picked_number.nil? %>
-          </td>
-          <td>
-            <%= number_to_currency(item.unit_price)%>
           </td>
         </tr>
         <% end %>
