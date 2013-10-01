@@ -1,0 +1,49 @@
+<div class="row-fluid">
+  <div class="span12">  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="span6">
+            Evento
+          </th>
+          <th class="span6">
+            Número Escolhido
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% current_cart.tickets.each do |item| %>
+        <tr>
+          <td>
+              <%= item.event.title %>
+          </td>
+          <td>
+            <% if item.picked_number.nil? %>
+            
+              Não numerado<br><%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
+
+            <% else %>
+              <%= item.picked_number %><br><%= link_to '(clique para alterar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
+              
+              
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div> 
+  <div class="row-fluid">
+    <% if current_cart.tickets.find_unumbered.count > 0 %>
+  	  <% msgbox = "Numere todos os seus tickets antes de validar!" %>
+			<%= link_to "Validar", msgbox_path + "?msgbox=" + msgbox, :class=>"btn btn-black btn-large btn-primary fancybox" %>
+    <% else %>
+      <% if current_cart.tickets.count > 0 %>
+        <%= link_to "Validar", payment_not_needed_cart_path(current_cart), :class => "btn btn-black btn-large btn-primary" %>
+      <% else %>
+        <%= link_to "Your cart is empty", "#", :class => "btn btn-black btn-large btn-primary" %>
+      <% end %>
+    <% end %>
+  </div> 
+</div> <!-- class row -->

@@ -108,7 +108,7 @@ class CartsController < ApplicationController
     @ticket = Ticket.find(params[:ticket_id])
     session[:event_id] = @ticket.event_id
     @event = Event.find(@ticket.event_id)
-    @tickets_already = @event.tickets.find_by_user_id(current_user.id).find_by_validated
+    @tickets_already = @event.tickets.find_by_user_id(current_user.id).find_validated
     
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
     @tickets = current_cart.tickets.find_by_event_id(@event.id)
@@ -118,6 +118,6 @@ class CartsController < ApplicationController
   def add_ticket_number
     @ticket = Ticket.find(params[:ticket_id])
     @ticket.add_number(params[:number].to_i)
-    redirect_to checkout_cart_path(params[:id])
+    redirect_to user_path(current_user.id) + "/#t_tab3"
   end
 end

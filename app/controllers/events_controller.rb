@@ -63,7 +63,8 @@ class EventsController < ApplicationController
         end
       end
     else
-      flash[:msgbox] = "Algumas respostas estao erradas. E preciso acertar 100% para ganhar o ticket."
+      session[:question_number] = nil
+      flash[:msgbox] = "Resposta errada. Tente novamente acertar o Quiz!"
       redirect_to quiz_event_path(params[:id])
     end    
   end

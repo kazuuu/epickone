@@ -6,6 +6,7 @@ describe Question do
     
     context 'Presence' do 
       it { should validate_presence_of :title }
+      it { should validate_presence_of :sort_order }
     end
   end
   

@@ -11,8 +11,12 @@
 					<tr>
 						<th class="span12" style="text-align:left">
 							<ul class="bullets">
-								<li><a class ="green" href="">Red</a></li>
-								<li><a class ="red" href="">Green</a></li>
+								<% @event.quiz.questions.each do |q| %>
+								<li><a class ='<%= (q.sort_order == session[:question_number] ? "red" : "green") %>' href="">Bullet</a></li>
+								<% end%>
+								
+								
+								
 							</ul>
 						</th>
 					</tr>
