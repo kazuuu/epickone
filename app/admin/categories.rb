@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
   form :html => { :enctype => "multipart/form-data" }  do |f|
     f.inputs "Category", :multipart => true do
-      f.input :parent_id, :as => :select, :collection => Category.all.map {|u| [u.title, u.id]}, :include_blank => false
+      f.input :parent_id, :as => :select, :collection => Category.all.map {|u| [u.title, u.id]}, :include_blank => true
       f.input :sort_order
       f.input :join_type
       

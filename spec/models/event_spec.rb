@@ -11,6 +11,22 @@ describe Event do
       it { should validate_presence_of :start_date } 
       it { should validate_presence_of :end_date } 
     end
+    context "translations" do
+      it "should read the correct translation" do
+        I18n.locale = :"pt-BR"
+        e = Event.create title: "Título do Evento"
+        I18n.locale = :"en-US"
+        e.update_attributes(title: "Event Title")
+        
+        I18n.locale = :"pt-BR"
+        e.title.should == "Título do Evento"
+
+        I18n.locale = :"en-US"
+        e.title.should == "Event Title"
+      end
+    end
+    context 'values' do 
+    end
   end
 
   describe 'Associations' do
@@ -35,6 +51,12 @@ describe Event do
       it { should allow_mass_assignment_of :covering_area }
       it { should allow_mass_assignment_of :start_date }
       it { should allow_mass_assignment_of :end_date }
+      it { should allow_mass_assignment_of :avatar }
+      it { should allow_mass_assignment_of :avatar_delete }
+      it { should allow_mass_assignment_of :translations_attributes }
+      it { should allow_mass_assignment_of :photos_attributes }
     end
+  end
+  describe 'scopes' do
   end
 end

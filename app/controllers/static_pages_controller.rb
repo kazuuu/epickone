@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
 
     @events_social = Event.find_by_category_id(1).find_by_date_open
     @events_outros2 = Event.find_by_category_id(2).find_by_date_open
-    @events_promo = Event.find_by_category_id(3).find_by_date_open
+    @events_promo = Event.find_by_category_id(1).find_by_date_open
   end
 
   def help
