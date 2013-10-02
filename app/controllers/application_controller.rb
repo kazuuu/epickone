@@ -9,15 +9,17 @@ class ApplicationController < ActionController::Base
 #  before_filter :site_lock 
 
 
+  # def store_location
+  #   #session[:return_to] = request.request_uri
+  # end
   def store_location
-    #session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath if request.get? and controller_name != "user_sessions" and controller_name != "sessions"
   end
 
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
-    session[:return_to] = nil
   end
-  
+
   private
   def set_locale
     if lang = request.env['HTTP_ACCEPT_LANGUAGE']
@@ -45,8 +47,9 @@ class ApplicationController < ActionController::Base
     return @current_user.admin_flag
   end
   def require_user
-    unless current_user 
-      flash[:notice] = "Please sign in to access this page"
+    unless current_user
+      store_location 
+      flash[:notice] = "Para continuar é necessário se identificar."
       redirect_to :login
       return false
     end

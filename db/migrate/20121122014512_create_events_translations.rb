@@ -15,3 +15,4 @@ class CreateEventsTranslations < ActiveRecord::Migration
     Event.drop_translation_table! migrate_data: true
   end
 end
+

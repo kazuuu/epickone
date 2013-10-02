@@ -1,3 +1,4 @@
+<% if current_cart.tickets.count > 0 %>
 <div class="row-fluid">
   <div class="span12">  
     <table class="table table-striped">
@@ -21,8 +22,8 @@
           <td>
             <% if item.picked_number.nil? %>
             
-              Não numerado<br><%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
-
+              Não numerado<br>
+							<%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
             <% else %>
               <%= item.picked_number %><br><%= link_to '(clique para alterar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
               
@@ -47,3 +48,4 @@
     <% end %>
   </div> 
 </div> <!-- class row -->
+<% end %>

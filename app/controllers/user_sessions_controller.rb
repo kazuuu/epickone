@@ -20,14 +20,14 @@ class UserSessionsController < ApplicationController
     respond_to do |format|
       if @user_session.save
         @user = User.find_by_email(@user_session.email)
-        format.html { redirect_to(root_path, :notice => 'Login Successful') }
+        format.html { redirect_to(session[:return_to] || root_path, :notice => 'Seja bem vindo(a) e tenha uma ótima diversão!') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       elsif @user_session.attempted_record &&
           !@user_session.invalid_password? &&
           !@user_session.attempted_record.active?
           @user = User.find_by_email(@user_session.email)
           @user.deliver_activation!
-          format.html { redirect_to(root_path, :notice => 'Sorry, before you can sign in you need to confirm your email address. We have just sent a confirmation again.') }
+          format.html { redirect_to(root_path, :notice => 'Favor confirmar seu email para prosseguir. Verifique em sua caixa postal o email de confirmação que foi enviado agora.') }
           format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
       else
         format.html { render :action => "new" }

@@ -1,4 +1,18 @@
 <h1><%= @user.first_name %>&nbsp;<%= @user.last_name %></h1>
+<h2>Dados de Contato</h2>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span3">Email:</td>
+			<td class=""><%= @user.email %></td>
+		</tr>
+		<tr>
+			<td class="span3">Celular:</td>
+			<td class=""><%= @user.mobile_phone_number %></td>
+		</tr>
+	</tbody>
+</table>
+
 <h2>Informações Básicas</h2>
 <table class="table table-bordered">
 	<tbody>
@@ -34,20 +48,6 @@
 		<tr>
 			<td class="">CEP:</td>
 			<td class=""><%= @user.postcode %></td>
-		</tr>
-	</tbody>
-</table>
-
-<h2>Dados de Contato</h2>
-<table class="table table-bordered">
-	<tbody>
-		<tr>
-			<td class="span3">Email:</td>
-			<td class=""><%= @user.email %></td>
-		</tr>
-		<tr>
-			<td class="span3">Celular:</td>
-			<td class=""><%= @user.mobile_phone_number %></td>
 		</tr>
 	</tbody>
 </table>

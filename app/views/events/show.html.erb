@@ -11,6 +11,24 @@
 <% end %>
 
 <div class="row">
+  <div class="span9">
+    <p>
+      <b>Title:</b>
+      <%= @event.title %>
+    </p>
+
+    <p>
+      <b>Instruções:</b>
+      <%= simple_format(@event.instruction) %>
+			Passo 1: Assita atentamente o video abaixo. <br>
+			Passo 2: Clique em "Responder o Quiz" no botão ao lado direito do video.<br>
+			Passo 3: Acertou as 3 questões? Legal! Agora númere o ticket que você ganhou. e clique em validar! 
+			<p>Pronto você está participando deste evento!</p>
+			<iframe title="YouTube video player" class="youtube-player" type="text/html" 
+			width="640" height="390" src="http://www.youtube.com/embed/2HUYErnODm0"
+			frameborder="0" allowFullScreen></iframe>
+    </p>
+  </div>    
   <div class="span3">  
         <%= image_tag @event.avatar.url(:thumb) %>
 		<br>
@@ -24,17 +42,6 @@
       <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
     <% end %>
   </div>
-  <div class="span9">
-    <p>
-      <b>Title:</b>
-      <%= @event.title %>
-    </p>
-
-    <p>
-      <b>Description:</b>
-      <%= simple_format(@event.description) %>
-    </p>
-  </div>    
 </div>  
 
 

@@ -54,16 +54,16 @@ class EventsController < ApplicationController
             current_cart.ticket_add(params[:id], origin)
           end
           flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
-          session[:question_number] = nil
+          session.delete(:question_number)
           redirect_to checkout_cart_path(current_cart)
         else
           flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
-          session[:question_number] = nil
+          session.delete(:question_number)
           redirect_to event_path(params[:id])
         end
       end
     else
-      session[:question_number] = nil
+      session.delete(:question_number)
       flash[:msgbox] = "Resposta errada. Tente novamente acertar o Quiz!"
       redirect_to quiz_event_path(params[:id])
     end    
