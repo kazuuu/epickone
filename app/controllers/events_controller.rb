@@ -32,13 +32,13 @@ class EventsController < ApplicationController
   def quiz
     @event = Event.find(params[:id])
     session[:question_number] = 1 if session[:question_number].nil?
-    @question = @event.quiz.questions.find_by_sort_order(session[:question_number]).first
+    @question = @event.quiz.questions.find_by_sort_order(session[:question_number])
   end
 
   def quiz_result
     @event = Event.find(params[:id])
-    question = @event.quiz.questions.find_by_sort_order(session[:question_number]).first
-    answer = question.answers.find_right_answer.first
+    question = @event.quiz.questions.find_by_sort_order(session[:question_number])
+    answer = question.answers.find_by_right_answer(true)
     
     if params[question.id.to_s][:answer].to_s == answer.id.to_s
       if session[:question_number] < @event.quiz.questions.count
@@ -46,7 +46,8 @@ class EventsController < ApplicationController
         redirect_to quiz_event_path(params[:id])
       else
         origin = "answered"
-        already_ticket = @event.tickets.find_by_user_id(current_user.id).find_by_origin("answered").count
+
+        already_ticket = @event.tickets.find_user_id(current_user.id).find_all_by_origin("answered").count
         total_win = 1 - already_ticket
       
         if total_win > 0
@@ -57,7 +58,7 @@ class EventsController < ApplicationController
           session.delete(:question_number)
           redirect_to user_path(current_user.id) + "/#t_tab3"
         else
-          flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
+          flash[:msgbox] = "Você já ganhou este ticket."
           session.delete(:question_number)
           redirect_to event_path(params[:id])
         end

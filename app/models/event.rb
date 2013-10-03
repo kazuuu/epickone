@@ -55,21 +55,14 @@ class Event < ActiveRecord::Base
   before_save :destroy_avatar?
   
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-
-  scope :find_by_date_open, lambda { 
-    {
-        :conditions => ["date(?) >= date(start_date) and date(?) <= date(end_date)", Date.today, Date.today],
-        :order => "end_date asc"
-    }
-  }
   
-  scope :find_by_category_id, lambda { |term| 
-    {
-        :conditions => ["category_id = ?", term],
-        :order => "end_date asc"
-    }
+   
+  scope :find_running, lambda { 
+    { 
+      :conditions => ["date(?) >= date(start_date) and date(?) <= date(end_date)", Date.today, Date.today] 
+    } 
   }
-  
+   
   def translations_attributes=(attributes)
     new_translations = attributes.values.reduce({}) do |new_values, translation|
       new_values.merge! translation.delete("locale") => translation

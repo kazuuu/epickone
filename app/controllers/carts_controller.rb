@@ -108,10 +108,10 @@ class CartsController < ApplicationController
     @ticket = Ticket.find(params[:ticket_id])
     session[:event_id] = @ticket.event_id
     @event = Event.find(@ticket.event_id)
-    @tickets_already = @event.tickets.find_by_user_id(current_user.id).find_validated
+    @tickets_already = @event.tickets.find_user_id(current_user.id).find_validated
     
     @numbers = (1..1000).to_a.paginate(page: params[:page], :per_page => 100)
-    @tickets = current_cart.tickets.find_by_event_id(@event.id)
+    @tickets = current_cart.tickets.find_all_by_event_id(@event.id)
     # render :layout => false
 
   end

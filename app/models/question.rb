@@ -44,13 +44,6 @@ class Question < ActiveRecord::Base
   
   default_scope order: 'sort_order ASC'
 
-  scope :find_by_sort_order, lambda { |term| 
-    {
-        :conditions => ["sort_order = ?", term]
-    }
-  }
-  
-
   def avatar_delete
     @avatar_delete ||= "0"
   end

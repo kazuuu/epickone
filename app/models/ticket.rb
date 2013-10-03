@@ -11,20 +11,8 @@ class Ticket < ActiveRecord::Base
                         :cart_id,
                         :event_id
 
-  
-  scope :find_by_origin, lambda { |term| 
-    {
-        :conditions => ["origin = ?", term],
-    }
-  }
-  
-  scope :find_by_event_id, lambda { |term| 
-    {
-        :conditions => ["event_id = ?", term]
-    }
-  }
-  
-  scope :find_by_user_id, lambda { |term| 
+
+  scope :find_user_id, lambda { |term| 
     {
         :joins => :cart,
         :conditions => ["carts.user_id = ?", term]
@@ -37,7 +25,8 @@ class Ticket < ActiveRecord::Base
         :conditions => "carts.purchased_at is not null"
       }
     }
-  
+
+ 
   scope :find_not_validated, lambda {
       {
         :joins => :cart,
@@ -50,7 +39,7 @@ class Ticket < ActiveRecord::Base
         :conditions => "picked_number is null"
     }
   }
-
+  
   scope :find_running, lambda {
     {
         :joins => :event,
@@ -58,6 +47,7 @@ class Ticket < ActiveRecord::Base
         :select => 'tickets.*, events.start_date, events.end_date'
     }
   }
+
   scope :find_old, lambda {
     {
         :joins => :event,
@@ -65,11 +55,7 @@ class Ticket < ActiveRecord::Base
         :select => 'tickets.*, events.start_date, events.end_date'
     }
   }
-  
-  
-  
-
-                        
+                          
   def add_number(number)
       update_attribute(:picked_number, number)
   end

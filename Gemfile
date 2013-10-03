@@ -32,6 +32,8 @@ gem "dotiw", "~> 1.1.1"
 
 group :development, :test do
   gem 'pg', '0.12.2'
+  gem "capistrano"
+  gem "rvm-capistrano"
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem "shoulda-matchers"

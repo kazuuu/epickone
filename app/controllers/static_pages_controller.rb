@@ -7,9 +7,7 @@ class StaticPagesController < ApplicationController
     @title = "home"
     @user = User.new
 
-    @events_social = Event.find_by_category_id(1).find_by_date_open
-    @events_outros2 = Event.find_by_category_id(2).find_by_date_open
-    @events_promo = Event.find_by_category_id(1).find_by_date_open
+    @events_promo = Event.find_running.find_all_by_category_id(1)
   end
 
   def help
