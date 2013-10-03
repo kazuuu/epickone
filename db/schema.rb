@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019161817) do
+ActiveRecord::Schema.define(:version => 20130519114456) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20121019161817) do
     t.integer  "event_id"
     t.string   "locale"
     t.string   "title"
+    t.string   "promoter"
     t.string   "headline"
     t.string   "prize_title"
     t.text     "description"
@@ -106,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20121019161817) do
     t.integer  "category_id"
     t.integer  "quiz_id"
     t.string   "title"
+    t.string   "promoter"
     t.string   "headline"
     t.string   "prize_title"
     t.text     "description"

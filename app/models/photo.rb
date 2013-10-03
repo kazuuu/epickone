@@ -15,7 +15,7 @@ class Photo < ActiveRecord::Base
                      :default_url => '/images/missing.png'
                      
   validates_presence_of :image_file_name
-
+  
   scope :find_by_image_type, lambda { |term| 
     {
         :conditions => ["image_type = ?", term]

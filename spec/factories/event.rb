@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :event do
     title { Faker::Lorem.sentence }
+    promoter { "Nome da Empresa" }
     headline { Faker::Lorem.sentence }
     prize_title { Faker::Lorem.sentence }
     description  { Faker::Lorem.paragraph }

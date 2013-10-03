@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
                   :prize_title, 
                   :instruction, 
                   :title, 
+                  :promoter, 
                   :enable, 
                   :covering_area, 
                   :start_date,
@@ -20,15 +21,16 @@ class Event < ActiveRecord::Base
                   :photos_attributes
                   
   validates_presence_of :title,
+                        :promoter,
                         :headline,
                         :prize_title,
                         :start_date,
                         :end_date
 
-  translates :title, :headline, :prize_title, :description, :instruction                
+  translates :title, :promoter, :headline, :prize_title, :description, :instruction
   accepts_nested_attributes_for :translations
   class Translation
-    attr_accessible :locale, :title, :headline, :prize_title, :description, :instruction
+    attr_accessible :locale, :title, :promoter, :headline, :prize_title, :description, :instruction
   end
   
   has_attached_file  :avatar, 
@@ -60,7 +62,7 @@ class Event < ActiveRecord::Base
         :order => "end_date asc"
     }
   }
-
+  
   scope :find_by_category_id, lambda { |term| 
     {
         :conditions => ["category_id = ?", term],

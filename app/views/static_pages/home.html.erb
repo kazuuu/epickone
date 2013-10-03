@@ -32,6 +32,14 @@
 <%= javascript_include_tag "jquery.cycle2" %>
 
 <% content_for :wide do %>
+<div class="container">
+	<div class="row">
+	  <div class="span12" style="color:blue;">
+	    <h3>Acerte o quiz e concorra a grandes prêmios!</h3>
+	  </div>
+	</div>
+</div>
+
 <div class="row" style="height:450px;">
   <div class="cycle-slideshow" style="height:450px;" data-cycle-fx="fade" 
     data-cycle-timeout="3000"
@@ -55,11 +63,11 @@
 
 
  
-        <div style="line-height:30px;font-size:26px;color:yellow;position:absolute;top:75px;left:103px;z-index:7500;">
-          <div style="font-weight:bold;">Que concorrer a um iPhone? <br>Acerte este Quiz e Concorra!</div>
-          <div style="font-size:80%;font-style:italic;">ePick One: Não custa nada tentar!</div>
-          <div style="margin-top:50px;font-weight:bold;">Promovido pela: ePickOne</div>
-          <div style="font-size:80%;font-style:italic;"><%= link_to(promo_event.headline, promo_event) %></div>
+        <div style="line-height:30px;font-size:26px;color:yellow;position:absolute;top:180px;left:103px;z-index:7500;color:white;">
+          <div style="font-weight:bold;">Quer concorrer a um <%= promo_event.prize_title %>?</div>
+          <div style="font-size:80%;font-style:italic;">Evento promovido pela: <%= promo_event.promoter %></div>
+          <div style="margin-top:10px;font-weight:bold;">Participe agora do evento: <%= link_to(promo_event.title, promo_event) %></div>
+          <div style="font-size:80%;font-style:italic;"></div>
         </div>
 
         <div class="buttonbox_out" style="position:absolute;top:300px;left:100px;z-index:7500;">
@@ -81,81 +89,32 @@
     <% end %>  
   </div>
 </div>
-<div style="height:20px">
-</div>
 <% end %>
 <div class="row">
   <div class="span12">
-    <h2>Você também pode tentar outros concursos e fazer uma boa ação ao mesmo tempo:</h2>
+    <h1>Veja por que é muito mais fácil concorrer a prêmios aqui...</h1>
   </div>
 </div>
 <div class="row">
   <div class="span4 box_curved_gray" style="position:relative;">
     <div class="row-fluid center">
-    	<h2 style="padding-left:0px;">Algo está para acontecer.</h2>
-			<p><%= image_tag('cache/iphone.png', :style => "width:250px;height:250px;") %></p>
-			<p>Due Date: Em Breve</p>
-			<p>Aguarde</p>
-			<p>
-			<%= link_to "Aguarde", '#', :class => "btn btn-black btn-large btn-primary" %>
+    	<h2 style="padding-left:0px;">Um único cadastro e participe de concursos de diversas empresas.</h2>
+			<p></p>
 			</p>
-			<div style="position:relative;top:-250px;">
-				<%= image_tag('cache/Em-breve.png', :style => "width:250px;") %>
-			</div>
 		</div>
-
   </div>
   <div class="span4 box_curved_gray">
     <div class="row-fluid center">
-    	<h2 style="padding-left:0px;">Fique atento e faça parte.</h2>
-			<p><%= image_tag('cache/ipad.png', :style => "width:250px;height:250px;") %></p>
-			<p>Due Date: Em Breve</p>
-			<p>Aguarde</p>
+    	<h2 style="padding-left:0px;">Fique tranquilo! Não é preciso dar tantas informações pessoais.</h2>
 			<p>
-			<%= link_to "Aguarde", '#', :class => "btn btn-black btn-large btn-primary" %>
 			</p>
-			<div style="position:relative;top:-250px;">
-				<%= image_tag('cache/Em-breve.png', :style => "width:250px;") %>
-			</div>
 		</div>
   </div>
-
   <div class="span4 box_curved_gray">
     <div class="row-fluid center">
-		<div class="span12">
-     		<h2 style="padding-left:0px;"><%=t("home.colum3_title")%></h2>
+    	<h2 style="padding-left:0px;">Participe quando quiser! Afinal, não custa nada tentar!</h2>
+			<p>
+			</p>
 		</div>
-	 </div>
-
-    <div class="row-fluid margin-bottom">
-		<div class="span2 offset1">
-			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/002/original/ipad_hand.png?1370347689", :style => "width:50px;height:50px;") %><br>
-		</div>
-		<div class="span8 align-left vertical-align-middle">
-				Evento: ePick One <br>
-				<em>Jaquim Fernandes Silva</em>
-		</div>
-    </div>
-
-    <div class="row-fluid margin-bottom">
-		<div class="span2 offset1">
-			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/002/original/ipad_hand.png?1370347689", :style => "width:50px;height:50px;") %><br>
-		</div>
-		<div class="span8 align-left vertical-align-middle">
-				Evento: ePick One <br>
-				<em>Marileide Krugman</em>
-		</div>
-    </div>
-
-    <div class="row-fluid margin-bottom">
-		<div class="span2 offset1">
-			<%= image_tag("http://s3.amazonaws.com/epickone_production/events/avatars/000/000/002/original/ipad_hand.png?1370347689", :style => "width:50px;height:50px;") %><br>
-		</div>
-		<div class="span8 align-left vertical-align-middle">
-				Evento: ePick One <br>
-				<em>Ana Maria Benedita</em>
-		</div>
-    </div>
-
   </div> <!-- end span4 homebox -->
 </div>

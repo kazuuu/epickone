@@ -17,6 +17,7 @@ ActiveAdmin.register Event do
       f.globalize_inputs :translations do |lf|
         lf.inputs do
           lf.input :title
+          lf.input :promoter
           lf.input :headline
           lf.input :prize_title
           lf.input :description, :as => :text

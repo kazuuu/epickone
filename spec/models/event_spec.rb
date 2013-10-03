@@ -6,6 +6,7 @@ describe Event do
     
     context 'Presence' do 
       it { should validate_presence_of :title }
+      it { should validate_presence_of :promoter }
       it { should validate_presence_of :headline } 
       it { should validate_presence_of :prize_title } 
       it { should validate_presence_of :start_date } 
@@ -14,15 +15,21 @@ describe Event do
     context "translations" do
       it "should read the correct translation" do
         I18n.locale = :"pt-BR"
-        e = Event.create title: "Título do Evento"
+        e = Event.create title: "Título do Evento", promoter: "Nome da Empresa"
         I18n.locale = :"en-US"
-        e.update_attributes(title: "Event Title")
+        e.update_attributes(title: "Event Title", promoter: "Company Name")
         
         I18n.locale = :"pt-BR"
         e.title.should == "Título do Evento"
 
         I18n.locale = :"en-US"
         e.title.should == "Event Title"
+
+        I18n.locale = :"pt-BR"
+        e.promoter.should == "Nome da Empresa"
+
+        I18n.locale = :"en-US"
+        e.promoter.should == "Company Name"
       end
     end
   end
@@ -43,6 +50,7 @@ describe Event do
       it { should allow_mass_assignment_of :prize_title }
       it { should allow_mass_assignment_of :instruction }
       it { should allow_mass_assignment_of :title }
+      it { should allow_mass_assignment_of :promoter }
       it { should allow_mass_assignment_of :join_min }
       it { should allow_mass_assignment_of :join_max }
       it { should allow_mass_assignment_of :enable }

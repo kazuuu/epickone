@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
        t.integer :category_id
        t.integer :quiz_id
        t.string :title
+       t.string :promoter
        t.string :headline
        t.string :prize_title
        t.text :description

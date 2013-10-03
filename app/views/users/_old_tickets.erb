@@ -1,0 +1,45 @@
+<div class="row-fluid">
+  <div class="span12">  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="span2">
+            Data de Finalização
+          </th>
+          <th class="span7">
+            Evento
+          </th>
+          <th class="span1">
+            Número
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+<% if @tickets_old.count <= 0  %>
+				<tr>
+					<td colspan='2'>
+						Nenhum ticket.
+					</td>
+					<td>
+					</td>
+				</tr>
+<% else %>
+	<% @tickets_old.each do |item| %>
+        <tr>
+          <td>
+              <%= l item.end_date.to_date, :format => :simple if !item.end_date.nil? %> 
+          </td>
+          <td>
+            <%= link_to item.event.title, item.event %>
+          </td>
+          <td>
+            <%= item.picked_number.to_s if !item.picked_number.nil? %>
+          </td>
+        </tr>
+	<% end %>
+<% end %>
+      </tbody>
+    </table>
+  </div> 
+</div> <!-- class row -->

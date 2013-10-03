@@ -1,11 +1,13 @@
-<% if current_cart.tickets.count > 0 %>
 <div class="row-fluid">
   <div class="span12">  
     <table class="table table-striped">
       <thead>
         <tr>
           <th class="span6">
-            Evento
+            Data de Finalização
+          </th>
+          <th class="span6">
+            Nome do Evento
           </th>
           <th class="span6">
             Número Escolhido
@@ -14,38 +16,53 @@
       </thead>
 
       <tbody>
-        <% current_cart.tickets.each do |item| %>
+<% if @tickets_new.count <= 0  %>
         <tr>
           <td>
-              <%= item.event.title %>
+              Não há tickets novos.
           </td>
           <td>
-            <% if item.picked_number.nil? %>
-            
-              Não numerado<br>
-							<%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
-            <% else %>
-              <%= item.picked_number %><br><%= link_to '(clique para alterar)', pick_a_number_cart_path(:ticket_id => item.id), :class => "fancybox" %>
-              
-              
-            <% end %>
+          </td>
+          <td>
           </td>
         </tr>
-        <% end %>
+<% else %>
+	<% @tickets_new.each do |item_new| %>
+        <tr>
+          <td>
+							<%= l item_new.event.end_date.to_date, :format => :simple if !item_new.event.end_date.nil? %> 
+          </td>
+          <td>
+              <%= item_new.event.title %>
+          </td>
+          <td>
+		<% if item_new.picked_number.nil? %>
+           
+	          Não numerado<br>
+				    <%= link_to '(clique aqui para numerar)', pick_a_number_cart_path(:ticket_id => item_new.id), :class => "fancybox" %>
+		<% else %>
+            <%= item_new.picked_number %><br><%= link_to '(clique para alterar)', pick_a_number_cart_path(:ticket_id => item_new.id), :class => "fancybox" %>
+		<% end %>
+          </td>
+        </tr>
+	<% end %>
+<% end %>
       </tbody>
     </table>
   </div> 
+
   <div class="row-fluid">
-    <% if current_cart.tickets.find_unumbered.count > 0 %>
+		<div class="offset9 span3 align-right">
+<% if current_cart.tickets.find_unumbered.count > 0 %>
   	  <% msgbox = "Numere todos os seus tickets antes de validar!" %>
-			<%= link_to "Validar", msgbox_path + "?msgbox=" + msgbox, :class=>"btn btn-black btn-large btn-primary fancybox" %>
-    <% else %>
-      <% if current_cart.tickets.count > 0 %>
-        <%= link_to "Validar", payment_not_needed_cart_path(current_cart), :class => "btn btn-black btn-large btn-primary" %>
-      <% else %>
-        <%= link_to "Your cart is empty", "#", :class => "btn btn-black btn-large btn-primary" %>
-      <% end %>
-    <% end %>
-  </div> 
-</div> <!-- class row -->
+			<%= link_to "Validar Tickets", msgbox_path + "?msgbox=" + msgbox, :class=>"btn btn-black btn-large btn-primary fancybox" %>
+<% else %>
+	<% if current_cart.tickets.count > 0 %>
+      <%= link_to "Validar Tickets", payment_not_needed_cart_path(current_cart), :class => "btn btn-black btn-large btn-primary" %>
+	<% else %>
+      <%= link_to "Validar Tickets", "#", :class => "btn btn-black btn-large btn-primary" %>
+	<% end %>
 <% end %>
+  </div> 
+</div> 
+</div> <!-- class row -->

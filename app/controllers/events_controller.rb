@@ -55,7 +55,7 @@ class EventsController < ApplicationController
           end
           flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
           session.delete(:question_number)
-          redirect_to checkout_cart_path(current_cart)
+          redirect_to user_path(current_user.id) + "/#t_tab3"
         else
           flash[:msgbox] = "You have already won this ticket. Try to share this event to win more tickets."
           session.delete(:question_number)

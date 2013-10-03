@@ -11,46 +11,62 @@ class Ticket < ActiveRecord::Base
                         :cart_id,
                         :event_id
 
-
+  
   scope :find_by_origin, lambda { |term| 
     {
         :conditions => ["origin = ?", term],
     }
   }
-
+  
   scope :find_by_event_id, lambda { |term| 
     {
         :conditions => ["event_id = ?", term]
     }
   }
-
+  
   scope :find_by_user_id, lambda { |term| 
     {
         :joins => :cart,
         :conditions => ["carts.user_id = ?", term]
     }
   }
-
+  
   scope :find_validated, lambda {
       {
         :joins => :cart,
         :conditions => "carts.purchased_at is not null"
       }
     }
-
+  
   scope :find_not_validated, lambda {
       {
         :joins => :cart,
         :conditions => "carts.purchased_at is null"
       }
     }
-
+  
   scope :find_unumbered, lambda { 
     {
         :conditions => "picked_number is null"
     }
   }
 
+  scope :find_running, lambda {
+    {
+        :joins => :event,
+        :conditions => ["date(?) >= events.start_date and date(?) <= date(end_date)", Date.today, Date.today],
+        :select => 'tickets.*, events.start_date, events.end_date'
+    }
+  }
+  scope :find_old, lambda {
+    {
+        :joins => :event,
+        :conditions => ["date(?) > date(end_date)", Date.today],
+        :select => 'tickets.*, events.start_date, events.end_date'
+    }
+  }
+  
+  
   
 
                         

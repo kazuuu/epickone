@@ -1,39 +1,9 @@
-<%= render 'users/new_tickets' %>  
+<% if @tickets_new.count > 0  %>
+	<h1>Novos Tickets</h1>
+	<%= render 'users/new_tickets' %>  
+<% end %>
+<h1>Você está concorrendo em:</h1>
+<%= render 'users/valid_tickets' %>  
+<h1>Eventos Finalizados</h1>
+<%= render 'users/old_tickets' %>  
 
-<div class="row-fluid">
-  <div class="span12">  
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="span2">
-            Data
-          </th>
-          <th class="span7">
-            Evento
-          </th>
-          <th class="span1">
-            Número
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% 
-        @tickets.each do |item| 
-        %>
-        <tr>
-          <td>
-              <%= l item.purchased_at.to_date, :format => :simple if !item.purchased_at.nil? %> 
-          </td>
-          <td>
-            <%= link_to item.event.title, item.event %>
-          </td>
-          <td>
-            <%= item.picked_number.to_s if !item.picked_number.nil? %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div> 
-</div> <!-- class row -->

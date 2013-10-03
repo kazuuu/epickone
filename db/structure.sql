@@ -107,7 +107,7 @@ CREATE TABLE answers (
     answer_text character varying(255),
     description text,
     sort_order integer,
-    iscorrect integer,
+    right_answer boolean DEFAULT false NOT NULL,
     question_id integer,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
@@ -251,6 +251,7 @@ CREATE TABLE event_translations (
     event_id integer,
     locale character varying(255),
     title character varying(255),
+    promoter character varying(255),
     headline character varying(255),
     prize_title character varying(255),
     description text,
@@ -288,6 +289,7 @@ CREATE TABLE events (
     category_id integer,
     quiz_id integer,
     title character varying(255),
+    promoter character varying(255),
     headline character varying(255),
     prize_title character varying(255),
     description text,
@@ -582,36 +584,37 @@ ALTER SEQUENCE user_sessions_id_seq OWNED BY user_sessions.id;
 CREATE TABLE users (
     id integer NOT NULL,
     email character varying(255),
-    crypted_password character varying(255),
-    password_salt character varying(255),
-    persistence_token character varying(255),
-    perishable_token character varying(255) DEFAULT ''::character varying NOT NULL,
-    active boolean DEFAULT false NOT NULL,
-    current_login_ip character varying(255),
     first_name character varying(255),
     last_name character varying(255),
+    password character varying(255),
     document character varying(255),
     gender character varying(255),
-    birthday timestamp without time zone,
     city character varying(255),
     state character varying(255),
     country character varying(255),
     address1 character varying(255),
     address2 character varying(255),
     postcode character varying(255),
+    birthday timestamp without time zone,
     mobile_phone_number character varying(255),
-    admin_flag boolean DEFAULT false,
-    newsletter boolean DEFAULT true,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
     avatar_file_size integer,
     avatar_updated_at timestamp without time zone,
+    active boolean DEFAULT false NOT NULL,
+    admin_flag boolean DEFAULT false,
+    email_confirmed boolean DEFAULT false NOT NULL,
+    newsletter boolean DEFAULT true,
+    current_login_ip character varying(255),
     locale character varying(255),
-    facebook_uid character varying(255),
+    crypted_password character varying(255),
+    password_salt character varying(255),
+    persistence_token character varying(255),
+    perishable_token character varying(255) DEFAULT ''::character varying NOT NULL,
+    provider character varying(255),
     oauth_token character varying(255),
     oauth_expires_at timestamp without time zone,
-    provider character varying(255),
-    avatar_url character varying(255),
+    facebook_uid character varying(255),
     twitter_uid character varying(255),
     twitter_oauth_token character varying(255),
     twitter_oauth_secret character varying(255),
@@ -944,10 +947,31 @@ CREATE INDEX index_event_translations_on_locale ON event_translations USING btre
 
 
 --
--- Name: index_events_on_category_id_and_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_events_on_category_id_and_created_at ON events USING btree (category_id, created_at);
+CREATE INDEX index_events_on_category_id ON events USING btree (category_id);
+
+
+--
+-- Name: index_events_on_end_date; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_end_date ON events USING btree (end_date);
+
+
+--
+-- Name: index_events_on_quiz_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_quiz_id ON events USING btree (quiz_id);
+
+
+--
+-- Name: index_events_on_start_date; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_start_date ON events USING btree (start_date);
 
 
 --
@@ -972,6 +996,13 @@ CREATE INDEX index_question_translations_on_question_id ON question_translations
 
 
 --
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
 -- Name: index_users_on_mobile_phone_number; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -979,10 +1010,10 @@ CREATE UNIQUE INDEX index_users_on_mobile_phone_number ON users USING btree (mob
 
 
 --
--- Name: index_users_on_perishable_token_and_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_perishable_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_users_on_perishable_token_and_email ON users USING btree (perishable_token, email);
+CREATE UNIQUE INDEX index_users_on_perishable_token ON users USING btree (perishable_token);
 
 
 --

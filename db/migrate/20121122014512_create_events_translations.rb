@@ -2,6 +2,7 @@ class CreateEventsTranslations < ActiveRecord::Migration
   def up
     Event.create_translation_table!({
       title: :string,
+      promoter: :string,
       headline: :string,
       prize_title: :string,
       description: :text,
