@@ -17,6 +17,9 @@
 # Ignore files paperclip
 /public/system/*
 
+# Assets compiled: Compila apenas em producao
+/public/assets/*
+
 # Ignore other unneeded files.
 doc/
 *.swp

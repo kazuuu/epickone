@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
     t.string   "address1"
     t.string   "address2"
     t.string   "postcode"
-    t.datetime "birthday"
+    t.date     "birthday"
     t.string   "mobile_phone_number"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"

@@ -246,7 +246,6 @@ pt-BR:
   time:
     am: ''
     formats:
-      basic_date: ! '%m/%d/%Y'
       default: ! '%A, %d de %B de %Y, %H:%M h'
       long: ! '%A, %d de %B de %Y, %H:%M h'
       short: ! '%d/%m, %H:%M h'

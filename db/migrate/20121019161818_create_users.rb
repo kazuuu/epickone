@@ -14,7 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :address1
       t.string :address2
       t.string :postcode
-      t.datetime :birthday
+      t.date :birthday
       t.string :mobile_phone_number
 
       t.has_attached_file :avatar
