@@ -58,6 +58,9 @@ en-US:
        headline3_first_game: "Inaugural game!"
       
   date:
+    datepicker:
+      default: "mm/dd/yyyy"
+      long: "MM dd, yyyy"
     abbr_day_names:
     - Sun
     - Mon
@@ -251,6 +254,7 @@ en-US:
   time:
     am: am
     formats:
+      basic_date: ! '%m/%d/%Y'
       default: ! '%a, %d %b %Y %H:%M:%S %z'
       long: ! '%B %d, %Y %H:%M'
       short: ! '%d %b %H:%M'

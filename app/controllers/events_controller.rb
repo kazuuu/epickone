@@ -37,37 +37,29 @@ class EventsController < ApplicationController
 
   def quiz_result
     @event = Event.find(params[:id])
-    question = @event.quiz.questions.find_by_sort_order(session[:question_number])
-    answer = question.answers.find_by_right_answer(true)
-    
-    if params[question.id.to_s][:answer].to_s == answer.id.to_s
-      if session[:question_number] < @event.quiz.questions.count
-        session[:question_number] = session[:question_number] + 1
-        redirect_to quiz_event_path(params[:id])
-      else
-        origin = "answered"
-
-        already_ticket = @event.tickets.find_user_id(current_user.id).find_all_by_origin("answered").count
-        total_win = 1 - already_ticket
-      
-        if total_win > 0
-          (1..total_win).each do
-            current_cart.ticket_add(params[:id], origin)
-          end
-          flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
-          session.delete(:question_number)
-          redirect_to user_path(current_user.id) + "/#t_tab3"
-        else
-          flash[:msgbox] = "Você já ganhou este ticket."
-          session.delete(:question_number)
-          redirect_to event_path(params[:id])
-        end
-      end
-    else
-      session.delete(:question_number)
-      flash[:msgbox] = "Resposta errada. Tente novamente acertar o Quiz!"
+    if params[@event.quiz.questions.find_by_sort_order(session[:question_number]).id.to_s].nil?
+      flash[:notice] = "Selecione a resposta que você acha correta."
       redirect_to quiz_event_path(params[:id])
-    end    
+    else
+      if params[@event.quiz.questions.find_by_sort_order(session[:question_number]).id.to_s][:answer].to_i == @event.quiz.questions.find_by_sort_order(session[:question_number]).answers.find_by_right_answer(true).id
+        if session[:question_number] < @event.quiz.questions.count
+          session[:question_number] = session[:question_number] + 1
+        else
+          if current_cart.ticket_add(params[:id], "answered")
+            flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
+            session.delete(:question_number)
+            redirect_to user_path(current_user.id) + "/#t_tab3"
+          else
+            flash[:msgbox] = "Você já ganhou este ticket."
+            session.delete(:question_number)
+          end
+        end
+      else
+        session.delete(:question_number)
+        flash[:msgbox] = "Resposta errada. Comece do inicio novamente"
+      end    
+      redirect_to quiz_event_path(params[:id])
+    end
   end
   
   def add_cart

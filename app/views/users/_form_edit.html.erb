@@ -1,23 +1,8 @@
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>          
-<!--	
-	<div class="row">
-		<div class="span2 offset1">
-      	<%= image_tag @user.avatar.url(:thumb) %>
-      	<%= f.file_field :avatar %>
-
-	      <%- unless @user.new_record? || !@user.avatar? -%>
-	      <br>
-	          <%= f.check_box :avatar_delete, :label => 'Delete Avatar' %>
-	      <%- end -%>
-			</div>
-			<div class="span9">
-			</div>
-		</div>
--->            
 	      <%= f.input :first_name %>
 	      <%= f.input :last_name %>
 	      <%= f.input :gender %>
-	      <%= f.input :birthday, :as => :datepicker %>
+				<%= f.input :birthday, as: :bootstrap_datepicker %>
 	      <%= f.input :city %>
 	      <%= f.input :state %>
 	      <%= f.input :country %>

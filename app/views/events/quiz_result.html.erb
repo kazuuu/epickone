@@ -15,7 +15,7 @@
   
 <%  
     @event.questions.each do |question|
-      @ans = question.answers.find(:first, :conditions => 'iscorrect = 1')
+      @ans = question.answers.find(:first, :conditions => 'right_answer = 1')
       
       if !@ans.nil?
         if !params[question.id.to_s].nil? 

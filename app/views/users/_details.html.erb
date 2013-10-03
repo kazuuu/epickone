@@ -23,7 +23,8 @@
 
 		<tr>
 			<td class="">Data de Nascimento:</td>
-			<td class=""><%= @user.birthday %></td>
+			<td class="">
+				<%= l @user.birthday, :format => :basic_date %> 
 		</tr>
 		<tr>
 			<td class="">Cidade:</td>

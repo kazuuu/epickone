@@ -29,6 +29,7 @@ gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
 gem 'simple_form', '2.0.4'
 gem "dotiw", "~> 1.1.1" 
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'pg', '0.12.2'

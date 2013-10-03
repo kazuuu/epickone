@@ -29,6 +29,7 @@ class Answer < ActiveRecord::Base
                        },
                      :default_url => '/images/missing.png'
   
+  
   def avatar_delete
     @avatar_delete ||= "0"
   end
