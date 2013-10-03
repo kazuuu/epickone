@@ -25,8 +25,6 @@ class UserSessionsController < ApplicationController
       elsif @user_session.attempted_record &&
           !@user_session.invalid_password? &&
           !@user_session.attempted_record.active?
-          @user = User.find_by_email(@user_session.email)
-          @user.deliver_activation!
           format.html { redirect_to(root_path, :notice => 'Favor confirmar seu email para prosseguir. Verifique em sua caixa postal o email de confirmação que foi enviado agora.') }
           format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
       else
