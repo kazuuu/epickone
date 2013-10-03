@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
-  before_filter :require_user,  :only => [:join_questions, :quiz_result, :pick_a_number, :add_cart, :results, :quiz]
+  before_filter :require_user,  :only => [:join_questions, :right_answer_check, :pick_a_number, :add_cart, :results, :quiz]
   before_filter :require_user_admin,  :only => [:results]
 
   require 'will_paginate/array'
 
   #before_filter :require_user
-  #before_filter :require_user_admin,  :except => [:join_promo, :join_paid, :join_questions, :quiz_result, :pick_a_number, :pick_a_number_promo, :show, :add_cart ]
+  #before_filter :require_user_admin,  :except => [:join_promo, :join_paid, :join_questions, :right_answer_check, :pick_a_number, :pick_a_number_promo, :show, :add_cart ]
   
   # GET /events
   # GET /events.json
@@ -35,30 +35,34 @@ class EventsController < ApplicationController
     @question = @event.quiz.questions.find_by_sort_order(session[:question_number])
   end
 
-  def quiz_result
-    @event = Event.find(params[:id])
-    if params[@event.quiz.questions.find_by_sort_order(session[:question_number]).id.to_s].nil?
+  def right_answer_check
+    event = Event.find(params[:id])
+    q = event.quiz.questions.find_by_sort_order(session[:question_number])
+    
+    if params[q.id.to_s].nil?
       flash[:notice] = "Selecione a resposta que você acha correta."
       redirect_to quiz_event_path(params[:id])
     else
-      if params[@event.quiz.questions.find_by_sort_order(session[:question_number]).id.to_s][:answer].to_i == @event.quiz.questions.find_by_sort_order(session[:question_number]).answers.find_by_right_answer(true).id
-        if session[:question_number] < @event.quiz.questions.count
+      
+      if q.right_answer_check(params[q.id.to_s][:answer].to_i)
+        if session[:question_number] < event.quiz.questions.count
           session[:question_number] = session[:question_number] + 1
+          redirect_to quiz_event_path(params[:id])
         else
+          session.delete(:question_number)
           if current_cart.ticket_add(params[:id], "answered")
             flash[:msgbox] = "Parabens! Voce ganhou um ticket. Mas voce precisa numera-lo para poder validar!"
-            session.delete(:question_number)
             redirect_to user_path(current_user.id) + "/#t_tab3"
           else
             flash[:msgbox] = "Você já ganhou este ticket."
-            session.delete(:question_number)
+            redirect_to quiz_event_path(params[:id])
           end
         end
       else
         session.delete(:question_number)
         flash[:msgbox] = "Resposta errada. Comece do inicio novamente"
+        redirect_to quiz_event_path(params[:id])
       end    
-      redirect_to quiz_event_path(params[:id])
     end
   end
   

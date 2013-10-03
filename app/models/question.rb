@@ -44,6 +44,14 @@ class Question < ActiveRecord::Base
   
   default_scope order: 'sort_order ASC'
 
+  def right_answer_check(answer_id)
+    if self.answers.find_by_right_answer("true").id == answer_id 
+      true
+    else
+      false
+    end
+  end
+  
   def avatar_delete
     @avatar_delete ||= "0"
   end

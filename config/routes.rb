@@ -36,7 +36,7 @@ Epickone::Application.routes.draw do
     get 'join_promo', :on => :member 
     get 'join_paid', :on => :member 
     get 'quiz', :on => :member
-    post 'quiz_result', :on => :member
+    post 'right_answer_check', :on => :member
     get 'add_cart', :on => :member
   end
 
