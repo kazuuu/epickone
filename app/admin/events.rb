@@ -43,9 +43,10 @@ ActiveAdmin.register Event do
  
   index do 
     column :id
+    column :promoter
     column :title
-    column("Start Date", :sortable => :start_date) { |task| task.start_date? ? l(task.start_date, :format => :simple) : '-' }    
-    column("End Date", :sortable => :end_date) { |task| task.end_date? ? l(task.end_date, :format => :simple) : '-' }
+    column("Start Date", :sortable => :start_date) { |task| task.start_date? ? l(task.start_date, :format => :default) : '-' }    
+    column("End Date", :sortable => :end_date) { |task| task.end_date? ? l(task.end_date, :format => :default) : '-' }
     column :category, :sortable => :category_id
     column :quiz, :sortable => :quiz_id
     default_actions

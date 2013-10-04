@@ -64,7 +64,7 @@
 
  
         <div style="line-height:30px;font-size:26px;color:yellow;position:absolute;top:180px;left:103px;z-index:7500;color:white;">
-          <div style="font-weight:bold;">Quer concorrer a um <%= promo_event.prize_title %>?</div>
+          <div style="font-weight:bold;"><%= promo_event.headline %>?</div>
           <div style="font-size:80%;font-style:italic;">Evento promovido pela: <%= promo_event.promoter %></div>
           <div style="margin-top:10px;font-weight:bold;">Participe agora do evento: <%= link_to(promo_event.title, promo_event) %></div>
           <div style="font-size:80%;font-style:italic;"></div>
