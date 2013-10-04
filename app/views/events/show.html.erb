@@ -36,10 +36,13 @@
   <div class="span3">  
         <%= image_tag @event.avatar.url(:thumb) %>
 		<br>
-		Faltam: <%= @event.distance_of_time %>
+					Data final: <%= l @event.end_date.to_date, :format => :simple if !@event.end_date.nil? %>
 		<br>
-		Último dia: <%= l @event.end_date.to_date, :format => :simple if !@event.end_date.nil? %>
+		<%= t("home.time_left")%>: <%= @event.distance_of_time %>
+		<br>
+		Participantes: <%= @event.tickets.find_validated.count %>
 		<br><br>
+		Seja mais um!
     <% if  !@event.expired? %>
         <%= render 'events/promo_button' %>
     <% else %>

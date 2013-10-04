@@ -69,9 +69,9 @@ class Event < ActiveRecord::Base
     end
       set_translations new_translations
   end
-    
+
   def distance_of_time
-    distance_of_time_in_words(Time.now, (self.end_date + 1.day).to_date, false, :accumulate_on => :days)
+    distance_of_time_in_words(Time.now, (self.end_date + 1.day).to_date, false,  { :accumulate_on => :days, :highest_measure_only => true })
   end
   
   def expired?
