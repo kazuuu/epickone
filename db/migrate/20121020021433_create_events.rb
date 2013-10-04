@@ -13,8 +13,8 @@ class CreateEvents < ActiveRecord::Migration
        t.integer :join_max
        t.boolean :enable
        t.string :covering_area
-       t.datetime :start_date
-       t.datetime :end_date
+       t.date :start_date
+       t.date :end_date
        t.has_attached_file :avatar
        
        t.timestamps
