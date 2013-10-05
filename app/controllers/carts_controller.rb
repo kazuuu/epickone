@@ -86,7 +86,7 @@ class CartsController < ApplicationController
     
     respond_to do |format|
       if @cart.update_attribute(:purchased_at, Time.now)
-        format.html { redirect_to root_path, notice: 'Successful.' }
+        format.html { redirect_to user_path(current_user.id) + "/#t_tab3", notice: 'Parabéns! Você está participando do evendo.' }
         format.json { head :no_content }
       else
         format.html { render action: "payment_not_needed" }

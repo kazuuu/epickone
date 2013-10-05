@@ -45,9 +45,10 @@ class User < ActiveRecord::Base
                         :last_name,
                         :city,
                         :state,
-                        :country,
                         :gender,
-                        :birthday
+                        :birthday,
+                        :mobile_phone_number 
+                        
                         
   validates_presence_of :password, :on => :create
                     
@@ -63,6 +64,8 @@ class User < ActiveRecord::Base
   end 
 
   before_save :destroy_avatar?
+  before_save :format_values
+  
   has_attached_file  :avatar, 
                      :styles => { :thumb => "100x100>" }, 
                      :storage => :s3,
@@ -240,6 +243,9 @@ end
         self.avatar.clear if @avatar_delete == "1"
       end
 # End Paperclip for Images
-    
+
+  def format_values
+    self.country = "BR"
+  end
 end
 
