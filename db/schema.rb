@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519114456) do
+ActiveRecord::Schema.define(:version => 20131005212849) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -86,6 +86,24 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
 
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
+
+  create_table "cities", :force => true do |t|
+    t.string   "name"
+    t.integer  "state_id"
+    t.integer  "phone_code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.string   "iso2"
+    t.string   "iso3"
+    t.string   "phone_code"
+    t.string   "locale"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "event_translations", :force => true do |t|
     t.integer  "event_id"
@@ -183,6 +201,14 @@ ActiveRecord::Schema.define(:version => 20130519114456) do
 
   create_table "quizzes", :force => true do |t|
     t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "name_code"
+    t.integer  "country_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
