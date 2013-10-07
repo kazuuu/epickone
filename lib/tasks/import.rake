@@ -17,8 +17,15 @@ task :import => [:environment] do
   file_countries = "db/countries.csv"
   ActiveRecord::Base.connection.execute("DELETE from countries")
   CSV.foreach(file_countries, encoding:'iso-8859-1:utf-8', headers: true) do |row|
+    words = row[1].split(" ")
+    name_formated =""
+    words.each do |w|
+    	name_formated = name_formated + " " + w.slice(0,1).capitalize + w.slice(1..-1).downcase
+    end
+    name_formated = name_formated.slice(1..-1)
+
     c = Country.new(:id => row[0],
-    :name => row[1],
+    :name => name_formated,
     :iso2 => row[2],
     :iso3 => row[3],
     :phone_code => row[4],
@@ -26,10 +33,17 @@ task :import => [:environment] do
     ) 
     c.save! 
   end
-
+  
   file_states = "db/states.csv"
   ActiveRecord::Base.connection.execute("DELETE from states")
   CSV.foreach(file_states, encoding:'iso-8859-1:utf-8', headers: true) do |row|
+    words = row[1].split(" ")
+    name_formated =""
+    words.each do |w|
+    	name_formated = name_formated + " " + w.slice(0,1).capitalize + w.slice(1..-1).downcase
+    end
+    name_formated = name_formated.slice(1..-1)
+    
     c = State.new(:id => row[0],
     :name => row[1],
     :name_code => row[2],
@@ -41,7 +55,15 @@ task :import => [:environment] do
   file_cities = "db/cities.csv"
   ActiveRecord::Base.connection.execute("DELETE from cities")
   CSV.foreach(file_cities, encoding:'iso-8859-1:utf-8', headers: true) do |row|
-    c = City.new(:name => row[0],
+    
+    words = row[0].split(" ")
+    name_formated =""
+    words.each do |w|
+    	name_formated = name_formated + " " + w.slice(0,1).capitalize + w.slice(1..-1).downcase
+    end
+    name_formated = name_formated.slice(1..-1)
+    
+    c = City.new(:name => name_formated,
     :phone_code => row[1],
     :state_id => row[2],
     ) 

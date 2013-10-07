@@ -27,12 +27,8 @@
 				<%= l @user.birthday, :format => :default %> 
 		</tr>
 		<tr>
-			<td class="">Cidade:</td>
-			<td class=""><%= @user.city %></td>
-		</tr>
-		<tr>
-			<td class="">Estado:</td>
-			<td class=""><%= @user.state %></td>
+			<td class="">Cidade / Estado:</td>
+			<td class=""><%= @user.city.name %> / <%= @user.state.name_code %></td>
 		</tr>
 		<tr>
 			<td class="">Endereco 1:</td>

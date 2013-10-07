@@ -113,12 +113,17 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @states = State.find_all_by_country_id(@user.country_id)
+    @cities = City.find_all_by_state_id(@user.state_id)
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])      
+    @user = User.new(params[:user])
+    @states = State.find_all_by_country_id(1)
+    @cities = City.find_all_by_state_id(0)
+          
 
     respond_to do |format|
       if @user.save_without_session_maintenance

@@ -16,7 +16,13 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+  def javascript(*files)
+    content_for(:head) { javascript_include_tag(*files) }
+  end
 
+  def stylesheet(*files)
+    content_for(:head) { stylesheet_link_tag(*files) }
+  end
   def cities_collection(user, cities)
     "".tap do |pc| 
       # to generate the markup for collection we need a dummy form
