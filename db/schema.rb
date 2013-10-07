@@ -234,9 +234,9 @@ ActiveRecord::Schema.define(:version => 20131005212849) do
     t.string   "password"
     t.string   "document"
     t.string   "gender"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
+    t.integer  "city_id"
+    t.integer  "state_id"
+    t.integer  "country_id"
     t.string   "address1"
     t.string   "address2"
     t.string   "postcode"
@@ -251,7 +251,6 @@ ActiveRecord::Schema.define(:version => 20131005212849) do
     t.boolean  "email_confirmed",          :default => false, :null => false
     t.boolean  "newsletter",               :default => true
     t.string   "current_login_ip"
-    t.string   "locale"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"

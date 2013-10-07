@@ -1,7 +1,4 @@
 module ApplicationHelper
-  def list_cities
-    return "sao_paulo|rio_de_janeiro"
-  end
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -17,6 +14,15 @@ module ApplicationHelper
       base_title
     else
       "#{base_title} | #{page_title}"
+    end
+  end
+
+  def cities_collection(user, cities)
+    "".tap do |pc| 
+      # to generate the markup for collection we need a dummy form
+      simple_form_for(user) do |f| 
+        pc << f.association(:city, collection: cities, :prompt => "Selecione-", :wrapper_html => {:id => 'cities-select-list'})
+      end
     end
   end
 end

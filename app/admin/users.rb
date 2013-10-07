@@ -12,12 +12,11 @@ ActiveAdmin.register User do
       f.input :document
       f.input :gender
       f.input :birthday
-      f.input :city
-      f.input :state
-      f.input :country
+      f.input :city_id, :as => :select, :collection => City.all.map {|u| [u.name, u.id]}, :include_blank => true
+      f.input :state_id, :as => :select, :collection => State.all.map {|u| [u.name, u.id]}, :include_blank => true
+      f.input :country_id, :as => :select, :collection => Country.all.map {|u| [u.name, u.id]}, :include_blank => true
       f.input :address1
       f.input :address2
-      f.input :locale
       f.input :postcode
       f.input :mobile_phone_number
       f.input :newsletter
@@ -59,7 +58,6 @@ ActiveAdmin.register User do
       row :country
       row :address1
       row :address2
-      row :locale
       row :postcode
       row :mobile_phone_number
       row :newsletter

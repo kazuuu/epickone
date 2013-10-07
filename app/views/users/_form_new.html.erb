@@ -1,12 +1,21 @@
-<%= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>          
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#user-form').on("change", "#user-form-state_id", function () {
+    // Access the data-cities-url set in the region field to submit JS request
+    $.getScript($(this).attr('data-cities-url') + '?state_id=' + document.getElementById("user_state_id").value);
+  });
+});
+
+</script>
+<%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
       <%=  f.input :email %>
       <%=  f.input :first_name %>
       <%=  f.input :last_name %>
       <%=  f.input :gender %>
+			<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
+			<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list'} %>
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
       <%=  f.input :mobile_phone_number %>
-      <%=  f.input :city %>
-      <%=  f.input :state %>
 
       <%=  f.input :password %>
 
@@ -14,6 +23,8 @@
       <%= f.submit "Sign Up", class: "btn btn-large btn-primary" %>
       <p><%= link_to 'Login with Facebook', facebook_login_path, id: "fb_sign_in", :class => "fbSignInButton" %></p>
       </div>
-      
 <% end %>
+&lt;
 
+<script type="text/javascript">
+</script>

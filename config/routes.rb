@@ -8,12 +8,17 @@ Epickone::Application.routes.draw do
   resources :products do
     resources :photos
   end
+  
   resources :users do
+    collection do
+      get 'update_city_select'
+    end
     get 'wintickets', :on => :member 
     get 'facebook_share_event', :on => :member 
     get 'twitter_share_event', :on => :member 
     get 'resend_activation', :on => :member     
   end
+  
   resources :payment_notifications
 
   resources :password_resets, :only => [ :new, :create, :edit, :update ]

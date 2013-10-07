@@ -13,8 +13,9 @@ describe User do
       it { should validate_presence_of :gender }
       it { should validate_presence_of :birthday }
       it { should validate_presence_of :mobile_phone_number }
-      it { should validate_presence_of :city }
-      it { should validate_presence_of :state }
+      it { should validate_presence_of :city_id }
+      it { should validate_presence_of :state_id }
+      it { should validate_presence_of :country_id }
       it { should validate_presence_of(:password).on(:create)  }
     end
     
@@ -37,6 +38,9 @@ describe User do
   end
 
   describe 'Associations' do
+    it { should belong_to :country }
+    it { should belong_to :state }
+    it { should belong_to :city }
     it { should have_many :carts }
     it { should have_many(:tickets).through(:carts)  }
   end
@@ -50,9 +54,9 @@ describe User do
       it { should allow_mass_assignment_of :document }
       it { should allow_mass_assignment_of :gender }
       it { should allow_mass_assignment_of :birthday }
-      it { should allow_mass_assignment_of :city }
-      it { should allow_mass_assignment_of :state }
-      it { should allow_mass_assignment_of :country }
+      it { should allow_mass_assignment_of :city_id }
+      it { should allow_mass_assignment_of :state_id }
+      it { should allow_mass_assignment_of :country_id }
       it { should allow_mass_assignment_of :address1 }
       it { should allow_mass_assignment_of :address2 }
       it { should allow_mass_assignment_of :postcode }
@@ -60,7 +64,6 @@ describe User do
       it { should allow_mass_assignment_of :admin_flag }
       it { should allow_mass_assignment_of :active }
       it { should allow_mass_assignment_of :avatar_delete }
-      it { should allow_mass_assignment_of :locale }
       it { should allow_mass_assignment_of :newsletter }
       it { should allow_mass_assignment_of :facebook_uid }
       it { should allow_mass_assignment_of :twitter_uid }

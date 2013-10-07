@@ -6,4 +6,6 @@ class City < ActiveRecord::Base
                         :phone_code
   
   belongs_to :state
+  
+  default_scope order: 'name ASC'
 end

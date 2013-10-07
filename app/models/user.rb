@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
                   :document,
                   :gender,
                   :birthday,
-                  :city,
-                  :state,
-                  :country,
+                  :city_id,
+                  :state_id,
+                  :country_id,
                   :address1,
                   :address2,
                   :postcode,
@@ -43,8 +43,9 @@ class User < ActiveRecord::Base
   validates_presence_of :email, 
                         :first_name, 
                         :last_name,
-                        :city,
-                        :state,
+                        :city_id,
+                        :state_id,
+                        :country_id,
                         :gender,
                         :birthday,
                         :mobile_phone_number 
@@ -55,6 +56,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :mobile_phone_number,
                           :email
 
+  belongs_to :country
+  belongs_to :state
+  belongs_to :city
+  
   has_many :carts
   has_many :tickets, through: :carts
 
@@ -64,7 +69,7 @@ class User < ActiveRecord::Base
   end 
 
   before_save :destroy_avatar?
-  before_save :format_values
+  before_save :default_values
   
   has_attached_file  :avatar, 
                      :styles => { :thumb => "100x100>" }, 
@@ -76,6 +81,10 @@ class User < ActiveRecord::Base
                        },
                      :default_url => '/images/missing.png'
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+
+  def default_values
+    self.country_id = 1
+  end
 
   def activate!
     self.active = true
@@ -244,8 +253,5 @@ end
       end
 # End Paperclip for Images
 
-  def format_values
-    self.country = "BR"
-  end
 end
 

@@ -8,9 +8,9 @@ FactoryGirl.define do
     document { Faker::PhoneNumberAU.phone_number }
     gender { 'Male' }
     birthday { '10/10/1980' }
-    city { Faker::AddressAU.city }
-    state { Faker::AddressAU.state }
-    country { Faker::AddressAU.country }
+    city_id { 1 }
+    state_id { 1 }
+    country_id { 1 }
     address1 { Faker::AddressAU.street_address }
     address2 { Faker::AddressAU.street_address }
     postcode { Faker::AddressAU.postcode }

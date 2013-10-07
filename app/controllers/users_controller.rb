@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 #  before_filter :require_user, :except => [:new, :create]
   before_filter :correct_user,  :only => [:show, :edit, :update]
 #  before_filter :require_user_admin,  :only => [:index]
-
+ 
     
   def facebook_share_event()  
     if current_user.oauth_expires_at.nil?
@@ -90,16 +90,24 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
-
+  
   # GET /users/new
   # GET /users/new.json
   def new
     @user = User.new
-
+    @states = State.find_all_by_country_id(1)
+    @cities = City.find_all_by_state_id(0)
+  
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
     end
+  end
+
+
+  def update_city_select
+      @user =  params[:id].present? ? User.find(params[:id]) : User.new
+      @cities = City.where(:state_id => params[:state_id])
   end
 
   # GET /users/1/edit
@@ -151,5 +159,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end
 
