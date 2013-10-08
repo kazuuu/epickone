@@ -105,7 +105,7 @@ header {
     font-size: 1.7em;
     color: white;
     letter-spacing: -1px;
-    padding-top: 9px;
+    padding-top: 4px;
     font-weight: bold;
     line-height: 1;
     &:hover {
@@ -169,6 +169,9 @@ footer {
 // END SCAFFOLD LEVEL 1
 
 
+.debug {
+ background-color:red;
+}
 .fbSignInButton {
 	background: url("/assets/facebookButton.png") no-repeat scroll center center transparent;
 	width: 195px;
