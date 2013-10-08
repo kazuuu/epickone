@@ -8,7 +8,11 @@
 			<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
 			<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list',  "city_phone_code_url" => update_city_phone_code_users_path() } %>
 			
+			
  			<%=  f.input :mobile_phone_number, as: :phone_number_no_ddd, :ddd => @user.DDD, label: "Celular", input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+			Por que pedimos o celular? <br>
+			O número do celular é uma forma de evitar que as pessoas participem de um evento com múltiplos cadastros diminuindo a sua chance de vencer. Ele servirá como um documento para comprovar a sua pessoa.
+
 
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
       <%=  f.input :password %>
