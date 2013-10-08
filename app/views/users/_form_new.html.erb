@@ -1,5 +1,8 @@
 <% javascript 'dynamic_cities' %>
 
+Por que pedimos o celular? <br>
+O número do celular é uma forma de evitar que uma pessoa participe de um evento com múltiplos cadastros diminuindo a sua chance de vencer. Ele servirá como um documento para comprovar a sua pessoa inclusive na entrega do prêmio ao vencedor.
+
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
       <%=  f.input :email %>
       <%=  f.input :first_name %>
@@ -10,8 +13,6 @@
 			
 			
  			<%=  f.input :mobile_phone_number, as: :phone_number_no_ddd, :ddd => @user.DDD, label: "Celular", input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
-			Por que pedimos o celular? <br>
-			O número do celular é uma forma de evitar que as pessoas participem de um evento com múltiplos cadastros diminuindo a sua chance de vencer. Ele servirá como um documento para comprovar a sua pessoa.
 
 
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
