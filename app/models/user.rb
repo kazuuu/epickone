@@ -54,7 +54,8 @@ class User < ActiveRecord::Base
                     
   validates_uniqueness_of :mobile_phone_number,
                           :email
-  # validates_length_of :foo, :maximum => 9
+
+  validates_length_of :mobile_phone_number, :maximum => 9, :minimum => 9
 
   belongs_to :country
   belongs_to :state
@@ -68,8 +69,8 @@ class User < ActiveRecord::Base
     c.require_password_confirmation = false
   end 
 
+  before_validation :default_values
   before_save :destroy_avatar?
-  before_save :default_values
   
   has_attached_file  :avatar, 
                      :styles => { :thumb => "100x100>" }, 
@@ -84,6 +85,14 @@ class User < ActiveRecord::Base
 
   def default_values
     self.country_id = 1
+  end
+
+  def DDD
+    if self.city_id.nil?
+      "DDD"
+    else
+      self.city.phone_code
+    end
   end
 
   def activate!
@@ -232,8 +241,6 @@ def post_twitter(msg)
   )
   twitter_user.update(msg)
 end
-
-
 
 # End Koala
 

@@ -7,15 +7,13 @@
       <%=  f.input :gender %>
 			<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
 			<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list',  "city_phone_code_url" => update_city_phone_code_users_path() } %>
- 			<%=  f.input :mobile_phone_number, as: :phone_number_no_ddd, label: "Celular", input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+			
+ 			<%=  f.input :mobile_phone_number, as: :phone_number_no_ddd, :ddd => @user.DDD, label: "Celular", input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
 
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
       <%=  f.input :password %>
 
       <div class="form-actions">
-      <%= f.submit "Sign Up", class: "btn btn-large btn-primary" %>
-      <p><%= link_to 'Login with Facebook', facebook_login_path, id: "fb_sign_in", :class => "fbSignInButton" %></p>
+	      <%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
       </div>
 <% end %>
-
-	

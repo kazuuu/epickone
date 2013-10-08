@@ -24,11 +24,9 @@ describe User do
     end
     
     context 'values' do 
-      # it 'should purchased_at be nil' do
-      #   c = Cart.new
-      #   c.user_id = 1
-      #   c.purchased_at.should be_nil
-      # end
+        it { should ensure_length_of(:mobile_phone_number).
+                      is_at_least(9).
+                      is_at_most(9) }
     end
       
     context 'Uniqueness' do
