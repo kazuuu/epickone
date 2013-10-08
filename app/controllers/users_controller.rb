@@ -110,6 +110,10 @@ class UsersController < ApplicationController
       @cities = City.where(:state_id => params[:state_id])
   end
 
+  def update_city_phone_code
+      @city = City.find_by_id(params[:city_id])
+  end
+
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])

@@ -27,8 +27,12 @@ module ApplicationHelper
     "".tap do |pc| 
       # to generate the markup for collection we need a dummy form
       simple_form_for(user) do |f| 
-        pc << f.association(:city, collection: cities, :prompt => "Selecione-", :wrapper_html => {:id => 'cities-select-list'})
+        pc << f.association(:city, collection: cities, :prompt => "Selecione-", :wrapper_html => {:id => 'cities-select-list',  "city_phone_code_url" => update_city_phone_code_users_path() })
       end
     end
+  end
+  
+  def city_phone_code(city)
+    "<label id='city_phone_code' style='display:inline;'>(" + city.phone_code.to_s + ")</label>"
   end
 end

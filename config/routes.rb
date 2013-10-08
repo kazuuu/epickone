@@ -12,6 +12,7 @@ Epickone::Application.routes.draw do
   resources :users do
     collection do
       get 'update_city_select'
+      get 'update_city_phone_code'
     end
     get 'wintickets', :on => :member 
     get 'facebook_share_event', :on => :member 
