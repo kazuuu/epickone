@@ -5,13 +5,23 @@
 	      <%= f.input :last_name %>
 	      <%= f.input :gender %>
 				<%= f.input :birthday, as: :bootstrap_datepicker %>
-				<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
-				<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list'} %>
+				<%=  f.association :state, collection: @states.collect {|e| [e.name + " - " + e.name_code, e.id] }, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
+				<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
+
+				<% if @user.tickets.find_running.count > 0 %>
+	 				<%=  f.input :mobile_phone_number, as: :phone_number_no_ddd, label: "Celular", input_html: { readonly: true, style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+				<% else %>
+ 					<%=  f.input :mobile_phone_number, as: :phone_number_no_ddd, label: "Celular", input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+				<% end %>
+
+
 	      <%= f.input :address1 %>
 	      <%= f.input :address2 %>
 	      <%= f.input :postcode %>
-	      <%= f.input :mobile_phone_number %>
       <div class="form-actions">
 	      <%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
       </div>
 <% end %>
+<script  type="text/javascript">
+$('#city_phone_code').replaceWith("<label id='city_phone_code' style='display:inline;'>(<%= @user.city.phone_code %>)</label>");
+</script>

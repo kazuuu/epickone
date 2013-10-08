@@ -50,11 +50,11 @@ class User < ActiveRecord::Base
                         :birthday,
                         :mobile_phone_number 
                         
-                        
   validates_presence_of :password, :on => :create
                     
   validates_uniqueness_of :mobile_phone_number,
                           :email
+  # validates_length_of :foo, :maximum => 9
 
   belongs_to :country
   belongs_to :state
