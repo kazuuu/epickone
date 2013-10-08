@@ -94,6 +94,16 @@ class User < ActiveRecord::Base
       self.city.phone_code
     end
   end
+  def gender_formatted
+    if self.gender == "F"
+      "Feminino"
+    elsif self.gender == "M"
+      "Masculino"
+    else
+      "N/A"
+    end
+      
+  end
 
   def activate!
     self.active = true
