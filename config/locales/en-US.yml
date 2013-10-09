@@ -57,6 +57,10 @@ en-US:
        headline2_3_win_prizes: "right now"
        headline3_first_game: "Inaugural game!"
       
+      
+  recaptcha:
+    errors:
+      incorrect-captcha-sol: 'Wrong verification code. Try it again.' 
   date:
     datepicker:
       default: "mm/dd/yyyy"

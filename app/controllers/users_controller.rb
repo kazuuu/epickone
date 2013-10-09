@@ -75,10 +75,20 @@ class UsersController < ApplicationController
     @cities = City.find_all_by_state_id(@user.state_id)
 
     respond_to do |format|
-      if @user.save_without_session_maintenance
-        @user.deliver_activation!
-        format.html { redirect_to root_path, notice: 'Your account has been created. Please check your e-mail for your account activation instructions!' }
-        format.json { render json: root_path, status: :created, location: root_path }
+      
+      if @user.valid?
+        if verify_recaptcha then
+          if @user.save_without_session_maintenance
+            @user.deliver_activation!
+            format.html { redirect_to root_path, notice: 'Verifique seu email para ativar a sua conta.' }
+            format.json { render json: root_path, status: :created, location: root_path }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { render action: "new" }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

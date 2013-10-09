@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
 # Para trancar o site
 #  before_filter :site_lock 
 
-
   def store_location
     session[:return_to] = request.fullpath if request.get? and controller_name != "user_sessions" and controller_name != "sessions"
   end
