@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
                   :postcode,
                   :mobile_phone_number,
                   :active,
+                  :valid_email,
+                  :valid_mobile_phone,
                   :admin_flag,
                   :newsletter,
                   :avatar_delete,

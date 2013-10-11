@@ -15,7 +15,6 @@ describe User do
       it { should validate_presence_of :mobile_phone_number }
       it { should validate_presence_of :city_id }
       it { should validate_presence_of :state_id }
-      it { should validate_presence_of :country_id }
       it { should validate_presence_of(:password).on(:create)  }
     end
     
@@ -27,6 +26,28 @@ describe User do
         it { should ensure_length_of(:mobile_phone_number).
                       is_at_least(9).
                       is_at_most(9) }
+
+        it "should have country_id default as 1) Brazil" do
+          u = User.new
+          u.email = "teste@teste.com.br"
+          u.password = 'password' 
+          u.first_name = "Teste"
+          u.last_name = "Teste"
+          u.mobile_phone_number = "999999999" 
+          u.document = Faker::PhoneNumberAU.phone_number 
+          u.gender = 'Male' 
+          u.birthday = '10/10/1980' 
+          u.city_id = 1 
+          u.state_id = 1 
+          u.address1 = Faker::AddressAU.street_address 
+          u.address2 = Faker::AddressAU.street_address 
+          u.postcode = Faker::AddressAU.postcode
+          u.save
+          
+          u.country_id.should be_equal 1
+    
+        end
+
     end
       
     context 'Uniqueness' do
@@ -61,6 +82,8 @@ describe User do
       it { should allow_mass_assignment_of :mobile_phone_number }
       it { should allow_mass_assignment_of :admin_flag }
       it { should allow_mass_assignment_of :active }
+      it { should allow_mass_assignment_of :valid_email }
+      it { should allow_mass_assignment_of :valid_mobile_phone }
       it { should allow_mass_assignment_of :avatar_delete }
       it { should allow_mass_assignment_of :newsletter }
       it { should allow_mass_assignment_of :facebook_uid }

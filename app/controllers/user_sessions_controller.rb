@@ -44,7 +44,7 @@ class UserSessionsController < ApplicationController
     session.clear
     
     respond_to do |format|
-      format.html { redirect_to(root_path, :notice => 'Goodbye!') }
+      format.html { redirect_to(root_path, :notice => 'Volte sempre! Afinal, não custa nada tentar.') }
       format.xml  { head :ok }
     end
   end
