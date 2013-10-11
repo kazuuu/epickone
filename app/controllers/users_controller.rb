@@ -71,16 +71,21 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.password = ('a'..'z').to_a.shuffle.first(8).join
+    @user.active = true
     @states = State.find_all_by_country_id(1)
     @cities = City.find_all_by_state_id(@user.state_id)
 
     respond_to do |format|
-      
       if @user.valid?
         if verify_recaptcha then
           if @user.save_without_session_maintenance
-            @user.deliver_activation!
-            format.html { redirect_to root_path, notice: 'Verifique seu email para ativar a sua conta.' }
+            # Desabilitei o processo de ativacao do usuario durante o cadastro.
+            # @user.deliver_activation!
+            
+             @user.deliver_welcome!
+            
+            format.html { redirect_to root_path, notice: 'Sua senha foi enviada por e-mail!' }
             format.json { render json: root_path, status: :created, location: root_path }
           else
             format.html { render action: "new" }

@@ -20,7 +20,9 @@ class UserSessionsController < ApplicationController
     respond_to do |format|
       if @user_session.save
         @user = User.find_by_email(@user_session.email)
-        format.html { redirect_to(session[:return_to] || root_path, :notice => 'Seja bem vindo(a) e tenha uma ótima diversão!') }
+        back_path = session[:return_to]
+        session.delete(:return_to)
+        format.html { redirect_to(back_path || root_path, :notice => 'Seja bem vindo(a) e tenha uma ótima diversão!') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       elsif @user_session.attempted_record &&
           !@user_session.invalid_password? &&
@@ -39,7 +41,8 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = UserSession.find
     @user_session.destroy
-
+    session.clear
+    
     respond_to do |format|
       format.html { redirect_to(root_path, :notice => 'Goodbye!') }
       format.xml  { head :ok }
