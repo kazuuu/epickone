@@ -48,7 +48,6 @@ en-US:
       body_paragraph1: "Password Reset Instructions"
       body_paragraph2: "A request to reset your password has been made. If you did not make this request, simply ignore this email. If you did make this request, please follow the link below." 
       body_button: "Reset Password!"      
-
   static_pages:
      home:
        headline1_welcome: "Welcome to the ePick One"
@@ -56,8 +55,6 @@ en-US:
        headline2_2_win_prizes: "at ePick One"
        headline2_3_win_prizes: "right now"
        headline3_first_game: "Inaugural game!"
-      
-      
   recaptcha:
     errors:
       incorrect-captcha-sol: 'Wrong verification code. Try it again.' 
