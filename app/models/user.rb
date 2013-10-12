@@ -84,7 +84,11 @@ class User < ActiveRecord::Base
                        },
                      :default_url => '/images/missing.png'
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
-
+  def set_valid_email(valid)
+    self.valid_email = valid
+    self.save
+  end
+  
   def default_values
     self.country_id = 1
   end

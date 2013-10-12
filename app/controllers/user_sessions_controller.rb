@@ -22,6 +22,8 @@ class UserSessionsController < ApplicationController
         @user = User.find_by_email(@user_session.email)
         back_path = session[:return_to]
         session.delete(:return_to)
+        @user.set_valid_email(true) if @user.login_count == 1
+        
         format.html { redirect_to(back_path || root_path, :notice => 'Seja bem vindo(a) e tenha uma ótima diversão!') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       elsif @user_session.attempted_record &&

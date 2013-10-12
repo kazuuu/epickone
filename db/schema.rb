@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(:version => 20131005212849) do
     t.boolean  "email_confirmed",          :default => false, :null => false
     t.boolean  "newsletter",               :default => true
     t.string   "current_login_ip"
+    t.integer  "login_count",              :default => 0
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"

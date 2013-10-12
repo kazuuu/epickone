@@ -25,6 +25,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :email_confirmed, :default => false, :null => false         
       t.boolean :newsletter, :default => true
       t.string :current_login_ip
+      t.integer :login_count, :default => 0, :null => 0         
 
       t.string :crypted_password
       t.string :password_salt
