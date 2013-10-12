@@ -247,6 +247,8 @@ ActiveRecord::Schema.define(:version => 20131005212849) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "active",                   :default => false, :null => false
+    t.boolean  "valid_email",              :default => false, :null => false
+    t.boolean  "valid_mobile_phone",       :default => false, :null => false
     t.boolean  "admin_flag",               :default => false
     t.boolean  "email_confirmed",          :default => false, :null => false
     t.boolean  "newsletter",               :default => true

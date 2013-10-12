@@ -19,6 +19,8 @@ class CreateUsers < ActiveRecord::Migration
 
       t.has_attached_file :avatar
       t.boolean :active, :default => false, :null => false         
+      t.boolean :valid_email, :default => false, :null => false         
+      t.boolean :valid_mobile_phone, :default => false, :null => false         
       t.boolean :admin_flag, :default => false
       t.boolean :email_confirmed, :default => false, :null => false         
       t.boolean :newsletter, :default => true
