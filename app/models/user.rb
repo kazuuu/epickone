@@ -90,6 +90,9 @@ class User < ActiveRecord::Base
   end
   
   def default_values
+    if self.mobile_phone_number_changed? or self.city_id_changed?
+       self.valid_mobile_phone = false
+    end
     self.country_id = 1
   end
 
