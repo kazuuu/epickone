@@ -31,7 +31,6 @@ module ApplicationHelper
       end
     end
   end
-  
   def city_phone_code(city)
     "<label id='city_phone_code' style='display:inline;'>(" + city.phone_code.to_s + ")</label>"
   end
