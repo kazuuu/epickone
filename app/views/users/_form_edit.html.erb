@@ -3,6 +3,12 @@
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
 	      <%= f.input :first_name %>
 	      <%= f.input :last_name %>
+			
+			  <%= f.simple_fields_for :emails do |e| %>
+			      <%= e.input :email %>
+			  <% end %>
+			
+							
 	      <%=  f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
 				<%= f.input :birthday, as: :bootstrap_datepicker %>
 				<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>

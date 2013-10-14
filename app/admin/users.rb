@@ -6,6 +6,17 @@ ActiveAdmin.register User do
         f.template.image_tag(f.object.avatar.url(:thumb)) 
         f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
       f.input :email
+      f.has_many :emails do |e|
+        if !e.object.id.nil?
+          e.input :_destroy, :as => :boolean, :label => "delete"
+        end
+        e.inputs "Email", :multipart => true do
+          e.input :email
+          e.input :valid_email
+          e.input :token
+        end
+      end
+
       f.input :active
       f.input :first_name
       f.input :last_name

@@ -27,21 +27,9 @@ class User < ActiveRecord::Base
                   :twitter_oauth_secret,
                   :twitter_oauth_expires_at,
                   :locale,
-                  :provider
+                  :provider,
+                  :emails_attributes
 
-#*********************************************                  
-# Se desejar configurar  Mass assigmentts para casos específicos ulizar esta linha sendo o campo as: o nome do caso(role)                
-#  attr_accessible :admin_flag, :as => :admin
-#*********************************************
-  #                 :password_salt, 
-   #                 :persistence_token, 
-   #                 :perishable_token,
-   #                 :active,
-   #                 :current_login_ip, 
-   #                 :avatar,
-   
-   
-                  
   validates_presence_of :email, 
                         :first_name, 
                         :last_name,
@@ -54,8 +42,9 @@ class User < ActiveRecord::Base
                         
   validates_presence_of :password, :on => :create
                     
-  validates_uniqueness_of :mobile_phone_number,
-                          :email
+  validates_uniqueness_of :mobile_phone_number
+
+  validates_uniqueness_of :email, :case_sensitive => false
 
   validates_length_of :mobile_phone_number, :maximum => 9, :minimum => 9
 
@@ -66,6 +55,8 @@ class User < ActiveRecord::Base
   has_many :emails
   has_many :carts
   has_many :tickets, through: :carts
+
+  accepts_nested_attributes_for :emails, allow_destroy: true  
 
   acts_as_authentic do |c| 
     c.login_field = :email 
@@ -85,6 +76,7 @@ class User < ActiveRecord::Base
                        },
                      :default_url => '/images/missing.png'
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+  
   def set_valid_email(valid)
     self.valid_email = valid
     self.save

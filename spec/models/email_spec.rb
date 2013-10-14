@@ -9,6 +9,10 @@ describe Email do
       it { should validate_presence_of :email }
       it { should validate_presence_of :token }
     end
+
+    context 'Uniqueness' do
+      it { should validate_uniqueness_of(:email) }
+    end
   end
   
   describe 'Associations' do

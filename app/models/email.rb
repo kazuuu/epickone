@@ -5,6 +5,10 @@ class Email < ActiveRecord::Base
                         :token,  
                         :user_id
 
+  validates_uniqueness_of :email, :case_sensitive => false
+
   belongs_to :user
+  
+  
                           
 end
