@@ -5,7 +5,8 @@ ActiveAdmin.register User do
         f.template.content_tag(:span, "No Image Yet") : 
         f.template.image_tag(f.object.avatar.url(:thumb)) 
         f.input :avatar_delete, :as=>:boolean, :required => false, :label => 'Remove image' 
-      f.input :email
+        f.input :email
+        f.input :valid_email
       f.has_many :emails do |e|
         if !e.object.id.nil?
           e.input :_destroy, :as => :boolean, :label => "delete"
@@ -30,6 +31,7 @@ ActiveAdmin.register User do
       f.input :address2
       f.input :postcode
       f.input :mobile_phone_number
+      f.input :valid_mobile_phone
       f.input :newsletter
       f.input :admin_flag
       f.input :password

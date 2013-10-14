@@ -1,5 +1,7 @@
 Epickone::Application.routes.draw do
-  resources :emails
+  resources :emails do
+    get 'definir_como_principal', :on => :member 
+  end
 
   resources :quizzes
 

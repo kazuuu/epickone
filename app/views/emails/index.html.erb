@@ -3,7 +3,7 @@
 <%= @user.email %> (E-Mail Principal)
 <br>
 <% @user.emails.each do |e| %> 
-	<%= e.email %> <%= link_to "Definir como Pricipal", "" %> <%= link_to 'Remover', e, method: :delete, data: { confirm: 'Tem certeza?' } %>
+	<%= e.email %> <%= link_to "Definir como Pricipal", definir_como_principal_email_path(e), data: { confirm: 'Tem certeza?' } %> <%= link_to 'Remover', e, method: :delete, data: { confirm: 'Tem certeza?' } %>
 	<br>
 <% end %>
 

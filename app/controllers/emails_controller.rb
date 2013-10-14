@@ -35,4 +35,26 @@ class EmailsController < ApplicationController
       format.json { render json: @email }
     end
   end
+
+  def definir_como_principal
+    user = current_user
+    email = Email.find(params[:id])
+    new_email = Email.new
+    
+    new_email.email = email.email
+    new_email.valid_email = email.valid_email
+    
+    
+    email.email = user.email
+    email.valid_email = user.valid_email
+    email.save
+    
+    user.email = new_email.email
+    user.valid_email = new_email.valid_email
+    user.save
+    
+    redirect_to user_path(current_user.id) + "/#t_tab1", notice: 'Email principal alterado.' 
+  end
+
+
 end
