@@ -13,6 +13,6 @@ class Email < ActiveRecord::Base
   before_save :token_generate  
   
   def token_generate
-    self.token = "teste"
+    self.token = Digest::SHA1.hexdigest Time.now.to_s
   end
 end

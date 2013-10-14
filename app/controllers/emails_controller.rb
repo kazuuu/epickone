@@ -41,20 +41,23 @@ class EmailsController < ApplicationController
     email = Email.find(params[:id])
     new_email = Email.new
     
-    new_email.email = email.email
-    new_email.valid_email = email.valid_email
+    if email.valid_email
+      new_email.email = email.email
+      new_email.valid_email = email.valid_email
     
     
-    email.email = user.email
-    email.valid_email = user.valid_email
-    email.save
+      email.email = user.email
+      email.valid_email = user.valid_email
+      email.save
     
-    user.email = new_email.email
-    user.valid_email = new_email.valid_email
-    user.save
+      user.email = new_email.email
+      user.valid_email = new_email.valid_email
+      user.save
     
-    redirect_to user_path(current_user.id) + "/#t_tab1", notice: 'Email principal alterado.' 
+      redirect_to user_path(current_user.id) + "/#t_tab1", notice: 'E-mail principal alterado.' 
+    else
+      flash[:error] = 'Favor confirmar este e-mail antes de defini-lo como seu e-mail principal.' 
+      redirect_to user_path(current_user.id) + "/#t_tab1"
+    end
   end
-
-
 end
