@@ -1,7 +1,6 @@
 Epickone::Application.routes.draw do
   resources :emails
 
-
   resources :quizzes
 
   resource :tools do

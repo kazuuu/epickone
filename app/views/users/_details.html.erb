@@ -4,17 +4,8 @@
 	<tbody>
 		<tr>
 			<td class="span3">Email:</td>
-			<td class=""><%= @user.email %></td>
+			<td class=""><%= @user.email %> <%= link_to "Editar", emails_path, :class=>"fancybox" %></td>
 		</tr>
-
-
-<% @user.emails.each do |e| %>
-		<tr>
-			<td class="span3">Email:</td>
-			<td class=""><%= e.email %></td>
-		</tr>
-<% end %>
-		
 		<tr>
 			<td class="span3">Celular:</td>
 			<td class=""><%= @user.mobile_phone_number %></td>
