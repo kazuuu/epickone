@@ -57,6 +57,7 @@ describe User do
   end
 
   describe 'Associations' do
+    it { should have_many :emails }
     it { should belong_to :country }
     it { should belong_to :state }
     it { should belong_to :city }

@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
   belongs_to :state
   belongs_to :city
   
+  has_many :emails
   has_many :carts
   has_many :tickets, through: :carts
 
