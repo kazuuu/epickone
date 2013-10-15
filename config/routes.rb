@@ -78,6 +78,7 @@ Epickone::Application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match '/activation/:activation_code', to: 'activation#create', :as => 'activation'
+  match '/email_activation/:email_activation_code', to: 'email_activation#create', :as => 'email_activation'
 end
 
 ActionDispatch::Routing::Translator.translate_from_file('config/locales/routes.yml', { :prefix_on_default_locale => true })

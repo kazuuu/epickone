@@ -15,4 +15,11 @@ class Email < ActiveRecord::Base
   def token_generate
     self.token = Digest::SHA1.hexdigest Time.now.to_s
   end
+  def activate!
+    self.valid_email = true
+    save
+  end
+  def deliver_activation!
+    Notifier.email_activation(self).deliver
+  end
 end

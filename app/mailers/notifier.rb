@@ -11,6 +11,16 @@ class Notifier < ActionMailer::Base
       )
   end
 
+  def email_activation(email)
+    @email = email
+    @url  = email_activation_url(@email.token)
+    mail(
+        :to => email.email,
+        :subject => "Confirme seu email"
+      )
+  end
+
+
   def welcome(user)
     @user = user    
     @url  = root_url
