@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
                   :postcode,
                   :mobile_phone_number,
                   :mobile_phone_verification_code,
+                  :mobile_phone_verification_at,
                   :active,
                   :valid_email,
                   :valid_mobile_phone,
@@ -77,6 +78,12 @@ class User < ActiveRecord::Base
                        },
                      :default_url => '/images/missing.png'
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
+
+  
+  def mobile_verification_sent!
+    self.mobile_phone_verification_at = DateTime.now
+    self.save
+  end
   
   def set_valid_email(valid)
     self.valid_email = valid

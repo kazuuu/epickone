@@ -32,6 +32,7 @@ ActiveAdmin.register User do
       f.input :postcode
       f.input :mobile_phone_number
       f.input :mobile_phone_verification_code
+      f.input :mobile_phone_verification_at
       f.input :valid_mobile_phone
       f.input :newsletter
       f.input :admin_flag

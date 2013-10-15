@@ -128,15 +128,17 @@ class UsersController < ApplicationController
   def send_mobile_phone_verification
     @user = current_user
 
-    api = Clickatell::API.authenticate(ENV['clickatell_api_key'], ENV['clickatell_username'], ENV['clickatell_password'])
-    api.send_message("#{@user.country.phone_code.to_s}#{@user.city.phone_code.to_s}#{@user.mobile_phone_number}" , "<ePick One> Codigo de Verificacao: #{@user.mobile_phone_verification_code.to_s} \nSeja bem vindo ao ePick One e boa diversao.")
+    if (5.minute.ago > @user.mobile_phone_verification_at.to_datetime) 
+      api = Clickatell::API.authenticate(ENV['clickatell_api_key'], ENV['clickatell_username'], ENV['clickatell_password'])
+      api.send_message("#{@user.country.phone_code.to_s}#{@user.city.phone_code.to_s}#{@user.mobile_phone_number}" , "<ePick One> Codigo de Verificacao: #{@user.mobile_phone_verification_code.to_s} \nSeja bem vindo ao ePick One e boa diversao.")
+      @user.mobile_verification_sent!
+    end
+
     flash[:notice] = "SMS enviado, favor verificar."
-
-    # flash[:notice] = "#{@user.country.phone_code.to_s}#{@user.city.phone_code.to_s}#{@user.mobile_phone_number} | Codigo: #{@user.mobile_phone_verification_code.to_s}"
-
     redirect_to user_path(@user) + "/#t_tab1"
   rescue Clickatell::API::Error => e
-    flash[:error] = "Clickatell API error: #{e.message}"
+    # flash[:error] = "Clickatell API error: #{e.message}"
+    flash[:error] = "Número de telefone inválido ou estamos com problemas, tente mais tarde."
     redirect_to user_path(@user) + "/#t_tab1"
   end
   

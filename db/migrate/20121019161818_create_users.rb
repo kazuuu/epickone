@@ -17,6 +17,7 @@ class CreateUsers < ActiveRecord::Migration
       t.date :birthday
       t.string :mobile_phone_number
       t.integer :mobile_phone_verification_code
+      t.datetime :mobile_phone_verification_at
 
       t.has_attached_file :avatar
       t.boolean :active, :default => false, :null => false         

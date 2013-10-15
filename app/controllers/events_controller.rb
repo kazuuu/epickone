@@ -30,7 +30,6 @@ class EventsController < ApplicationController
   end
 
   def quiz
-    
     if !current_user.valid_mobile_phone
       flash[:error] = "Para participar é necessário ter um número de celular confirmado. Favor confirmar."
       redirect_to user_path(current_user.id) + "/#t_tab1"
