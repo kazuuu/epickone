@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
                   :address2,
                   :postcode,
                   :mobile_phone_number,
+                  :mobile_phone_verification_code,
                   :active,
                   :valid_email,
                   :valid_mobile_phone,
@@ -81,11 +82,16 @@ class User < ActiveRecord::Base
     self.valid_email = valid
     self.save
   end
-  
+  def set_valid_mobile_phone(valid)
+    self.valid_mobile_phone = valid
+    self.save
+  end
   def default_values
     if self.mobile_phone_number_changed? or self.city_id_changed?
        self.valid_mobile_phone = false
+       self.mobile_phone_verification_code = ([*'0'..'9']).shuffle.take(4).join
     end
+    self.mobile_phone_verification_code = ([*'0'..'9']).shuffle.take(4).join if self.valid_mobile_phone_changed?
     self.country_id = 1
   end
 

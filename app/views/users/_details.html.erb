@@ -8,7 +8,16 @@
 		</tr>
 		<tr>
 			<td class="span3">Celular:</td>
-			<td class=""><%= @user.mobile_phone_number %></td>
+			<td class=""><%= @user.mobile_phone_number %>
+<% if !@user.valid_mobile_phone %>
+				<%= form_tag(mobile_phone_verification_user_path(@user)) do %>
+				  <%= label_tag "Código de Verificação" %>
+				  <%=  text_field_tag :verification_code %>
+				  <%= submit_tag "Verificar" %>
+				<% end %>
+				<%= link_to "Re-enviar código por SMS", emails_path, :class=>"fancybox" %>
+<% end %>
+			</td>
 		</tr>
 	</tbody>
 </table>

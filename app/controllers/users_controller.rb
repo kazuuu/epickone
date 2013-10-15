@@ -121,8 +121,23 @@ class UsersController < ApplicationController
   def update_city_phone_code
       @city = City.find_by_id(params[:city_id])
   end
-
-    
+  
+  def mobile_phone_verification
+    @user = current_user
+    verification_code = params[:verification_code].to_i
+    if verification_code == @user.mobile_phone_verification_code
+      @user.set_valid_mobile_phone(true)
+      @user.save
+      flash[:notice] = "Número de celular confirmado."
+      redirect_to user_path(@user) + "/#t_tab1"
+      true
+    else
+      flash[:error] = "Código errado. Não foi confirmado seu número de celular."
+      redirect_to user_path(@user) + "/#t_tab1"
+      false
+    end
+  end
+  
   def facebook_share_event()  
     if current_user.oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."

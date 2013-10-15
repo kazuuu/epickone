@@ -81,6 +81,7 @@ describe User do
       it { should allow_mass_assignment_of :address2 }
       it { should allow_mass_assignment_of :postcode }
       it { should allow_mass_assignment_of :mobile_phone_number }
+      it { should allow_mass_assignment_of :mobile_phone_verification_code }
       it { should allow_mass_assignment_of :admin_flag }
       it { should allow_mass_assignment_of :active }
       it { should allow_mass_assignment_of :valid_email }

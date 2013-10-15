@@ -59,10 +59,17 @@ class ApplicationController < ActionController::Base
   end
   
   def correct_user
-    @user = User.find(params[:id])
-    unless ((@user.id == current_user.id) || (current_user.admin_flag))
-      flash[:notice] = "Você não tem permissão para acessar esta página."
-      redirect_to root_url 
+    if current_user
+      @user = User.find(params[:id])
+      unless ((@user.id == current_user.id) || (current_user.admin_flag))
+        flash[:notice] = "Você não tem permissão para acessar esta página."
+        redirect_to root_url 
+        return false
+      end
+    else
+      store_location 
+      flash[:notice] = "Para continuar é necessário identificar-se."
+      redirect_to :login
       return false
     end
   end
