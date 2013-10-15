@@ -11,9 +11,19 @@ class Email < ActiveRecord::Base
   belongs_to :user
 
   before_save :token_generate  
+  before_save :email_uniqueness  
 
   default_scope order: 'valid_email desc'
   
+  def email_uniqueness
+    e = User.find(:all, :conditions => ["lower(email) = lower(?)", email])
+    if e.count > 0
+      self.errors.add(:email, "Este e-mail já está em uso.")
+      false
+    else
+      true
+    end
+  end
   def token_generate
     self.token = Digest::SHA1.hexdigest Time.now.to_s
   end
