@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :email do
     user_id 1
-    email "MyString"
+    email "MyString@teste.com.br"
     valid_email false
     token "MyString"
   end
