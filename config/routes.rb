@@ -1,6 +1,7 @@
 Epickone::Application.routes.draw do
   resources :emails do
-    get 'definir_como_principal', :on => :member 
+    get 'set_default', :on => :member 
+    get 'send_confirmation', :on => :member 
   end
 
   resources :quizzes

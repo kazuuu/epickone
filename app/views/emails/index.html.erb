@@ -1,14 +1,35 @@
 <h1>Emails</h1>
 
-<%= @user.email %> (E-Mail Principal)
-<br>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td>
+				<%= @user.email %>
+			</td>
+			<td>
+				(E-Mail Principal)
+			</td>
+		</tr>
 <% @user.emails.each do |e| %> 
-	<%= e.email %> <%= link_to "Definir como Pricipal", definir_como_principal_email_path(e), data: { confirm: 'Tem certeza?' } %> <%= link_to 'Remover', e, method: :delete, data: { confirm: 'Tem certeza?' } %>
-	<br>
+		<tr>
+			<td><%= e.email %></td>
+			<td>
+	<% if e.valid_email %>
+				<%= link_to "Definir como Pricipal", set_default_email_path(e), data: { confirm: 'Tem certeza?' } %> 
+	<% else %>
+				<%= link_to "Confirmar Email", send_confirmation_email_path(e) %> 
+	<% end %>
+	 			| <%= link_to 'Remover', e, method: :delete, data: { confirm: 'Tem certeza?' } %>
+			</td>
 <% end %>
-
-<br>
-<%= link_to "Adicionar novo Email", new_email_path %> 
+		</tr>
+		<tr>
+			<td>
+			  <%= link_to "Adicionar novo Email", new_email_path %> 
+			</td>
+			<td>
+			</td>
+		</tr>
 
 
 

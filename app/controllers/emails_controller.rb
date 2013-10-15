@@ -37,7 +37,7 @@ class EmailsController < ApplicationController
     end
   end
 
-  def definir_como_principal
+  def set_default
     user = current_user
     email = Email.find(params[:id])
     new_email = Email.new
@@ -60,5 +60,10 @@ class EmailsController < ApplicationController
       flash[:error] = 'Favor confirmar este e-mail antes de defini-lo como seu e-mail principal.' 
       redirect_to user_path(current_user.id) + "/#t_tab1"
     end
+  end
+  def send_confirmation
+    email = Email.find(params[:id])
+    email.deliver_activation!
+    redirect_to user_path(current_user.id) + "/#t_tab1", notice: 'Foi enviado um link de confirmação para o e-mail solicitado. Favor verificar.' 
   end
 end

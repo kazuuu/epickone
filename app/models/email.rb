@@ -11,6 +11,8 @@ class Email < ActiveRecord::Base
   belongs_to :user
 
   before_save :token_generate  
+
+  default_scope order: 'valid_email desc'
   
   def token_generate
     self.token = Digest::SHA1.hexdigest Time.now.to_s
