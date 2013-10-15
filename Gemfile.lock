@@ -77,6 +77,7 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     carmen (0.2.13)
+    clickatell (0.8.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -321,6 +322,7 @@ DEPENDENCIES
   bootstrap-will_paginate (= 0.0.9)
   capistrano
   carmen (= 0.2.13)
+  clickatell
   coffee-rails (= 3.2.2)
   country_select
   dotiw (~> 1.1.1)

@@ -23,6 +23,7 @@ Epickone::Application.routes.draw do
     get 'facebook_share_event', :on => :member 
     get 'twitter_share_event', :on => :member 
     get 'resend_activation', :on => :member     
+    get 'send_mobile_phone_verification', :on => :member     
     post 'mobile_phone_verification', :on => :member     
   end
   

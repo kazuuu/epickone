@@ -15,7 +15,7 @@
 				  <%=  text_field_tag :verification_code %>
 				  <%= submit_tag "Verificar" %>
 				<% end %>
-				<%= link_to "Re-enviar código por SMS", emails_path, :class=>"fancybox" %>
+				<%= link_to "Re-enviar código por SMS", send_mobile_phone_verification_user_path %>
 <% end %>
 			</td>
 		</tr>

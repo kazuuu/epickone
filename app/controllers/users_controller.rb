@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'clickatell'
+
 class UsersController < ApplicationController
   before_filter :require_no_user,  :only => [:new]
 #  before_filter :require_user, :except => [:new, :create]
@@ -120,6 +123,21 @@ class UsersController < ApplicationController
 
   def update_city_phone_code
       @city = City.find_by_id(params[:city_id])
+  end
+
+  def send_mobile_phone_verification
+    @user = current_user
+
+    api = Clickatell::API.authenticate(ENV['clickatell_api_key'], ENV['clickatell_username'], ENV['clickatell_password'])
+    api.send_message("#{@user.country.phone_code.to_s}#{@user.city.phone_code.to_s}#{@user.mobile_phone_number}" , "<ePick One> Codigo de Verificacao: #{@user.mobile_phone_verification_code.to_s} \nSeja bem vindo ao ePick One e boa diversao.")
+    flash[:notice] = "SMS enviado, favor verificar."
+
+    # flash[:notice] = "#{@user.country.phone_code.to_s}#{@user.city.phone_code.to_s}#{@user.mobile_phone_number} | Codigo: #{@user.mobile_phone_verification_code.to_s}"
+
+    redirect_to user_path(@user) + "/#t_tab1"
+  rescue Clickatell::API::Error => e
+    flash[:error] = "Clickatell API error: #{e.message}"
+    redirect_to user_path(@user) + "/#t_tab1"
   end
   
   def mobile_phone_verification

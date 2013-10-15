@@ -32,6 +32,7 @@ gem 'formtastic', '2.2.1'
 gem 'simple_form', '2.0.4'
 gem "dotiw", "~> 1.1.1" # Gem de Distance_of_time
 gem 'bootstrap-datepicker-rails'
+gem "clickatell"
 
 group :development, :test do
   gem 'pg', '0.12.2'
