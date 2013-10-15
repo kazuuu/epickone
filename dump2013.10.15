@@ -343,6 +343,44 @@ ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
 
 
 --
+-- Name: emails; Type: TABLE; Schema: public; Owner: kazuuu; Tablespace: 
+--
+
+CREATE TABLE emails (
+    id integer NOT NULL,
+    user_id integer,
+    email character varying(255),
+    valid_email boolean DEFAULT false NOT NULL,
+    token character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.emails OWNER TO kazuuu;
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE; Schema: public; Owner: kazuuu
+--
+
+CREATE SEQUENCE emails_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.emails_id_seq OWNER TO kazuuu;
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kazuuu
+--
+
+ALTER SEQUENCE emails_id_seq OWNED BY emails.id;
+
+
+--
 -- Name: event_translations; Type: TABLE; Schema: public; Owner: kazuuu; Tablespace: 
 --
 
@@ -772,15 +810,19 @@ CREATE TABLE users (
     postcode character varying(255),
     birthday date,
     mobile_phone_number character varying(255),
+    mobile_phone_verification_code integer,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
     avatar_file_size integer,
     avatar_updated_at timestamp without time zone,
     active boolean DEFAULT false NOT NULL,
+    valid_email boolean DEFAULT false NOT NULL,
+    valid_mobile_phone boolean DEFAULT false NOT NULL,
     admin_flag boolean DEFAULT false,
     email_confirmed boolean DEFAULT false NOT NULL,
     newsletter boolean DEFAULT true,
     current_login_ip character varying(255),
+    login_count integer DEFAULT 0,
     crypted_password character varying(255),
     password_salt character varying(255),
     persistence_token character varying(255),
@@ -875,6 +917,13 @@ ALTER TABLE ONLY cities ALTER COLUMN id SET DEFAULT nextval('cities_id_seq'::reg
 --
 
 ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: kazuuu
+--
+
+ALTER TABLE ONLY emails ALTER COLUMN id SET DEFAULT nextval('emails_id_seq'::regclass);
 
 
 --
@@ -1055,9 +1104,13 @@ COPY carts (id, user_id, purchased_at, created_at, updated_at) FROM stdin;
 2	1	2013-10-02 23:48:13.054403	2013-10-02 21:05:11.167633	2013-10-02 23:48:13.055276
 3	1	2013-10-03 00:04:08.48138	2013-10-02 23:48:13.34761	2013-10-03 00:04:08.481909
 4	1	2013-10-03 17:57:20.936404	2013-10-03 00:04:08.751737	2013-10-03 17:57:20.937216
-5	1	\N	2013-10-03 17:57:21.319525	2013-10-03 17:57:21.319525
 6	2	2013-10-04 17:49:23.765974	2013-10-04 17:48:40.963813	2013-10-04 17:49:23.766625
 7	2	\N	2013-10-04 17:49:24.125345	2013-10-04 17:49:24.125345
+8	4	\N	2013-10-09 22:07:55.719728	2013-10-09 22:07:55.719728
+9	8	\N	2013-10-11 01:44:15.730372	2013-10-11 01:44:15.730372
+10	6	\N	2013-10-11 01:54:11.51414	2013-10-11 01:54:11.51414
+5	1	2013-10-13 18:38:04.862019	2013-10-03 17:57:21.319525	2013-10-13 18:38:04.86291
+11	1	\N	2013-10-13 18:38:04.88757	2013-10-13 18:38:04.88757
 \.
 
 
@@ -1065,7 +1118,7 @@ COPY carts (id, user_id, purchased_at, created_at, updated_at) FROM stdin;
 -- Name: carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kazuuu
 --
 
-SELECT pg_catalog.setval('carts_id_seq', 7, true);
+SELECT pg_catalog.setval('carts_id_seq', 11, true);
 
 
 --
@@ -6870,6 +6923,25 @@ SELECT pg_catalog.setval('countries_id_seq', 1, false);
 
 
 --
+-- Data for Name: emails; Type: TABLE DATA; Schema: public; Owner: kazuuu
+--
+
+COPY emails (id, user_id, email, valid_email, token, created_at, updated_at) FROM stdin;
+2	1	rato@teste.com.br	f	teste	2013-10-14 20:59:54.932745	2013-10-14 22:21:48.494503
+12	1	ula@ula.com.br	f	4714bac08ab34ab5e26b642f3b1ef20d82384670	2013-10-14 23:36:21.951719	2013-10-14 23:36:21.951719
+15	1	marcello@keepinvest.com.br	t	e0d86be0382d8f0b70faf8fb19073db3e5439d7a	2013-10-14 23:58:42.038088	2013-10-15 00:11:01.814044
+18	1	marcello1@gmail.com	f	c286026d9c62c6df126c2919abdd2384ca7510b5	2013-10-15 00:45:43.437541	2013-10-15 00:45:43.437541
+\.
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kazuuu
+--
+
+SELECT pg_catalog.setval('emails_id_seq', 18, true);
+
+
+--
 -- Data for Name: event_translations; Type: TABLE DATA; Schema: public; Owner: kazuuu
 --
 
@@ -7020,6 +7092,7 @@ SELECT pg_catalog.setval('quizzes_id_seq', 1, true);
 
 COPY schema_migrations (version) FROM stdin;
 20130519114456
+20121019161818
 20121019163246
 20121021200719
 20121021201034
@@ -7037,8 +7110,8 @@ COPY schema_migrations (version) FROM stdin;
 20121020021433
 20131005212849
 20131005212751
-20121019161818
 20131005212624
+20131014180831
 \.
 
 
@@ -7089,7 +7162,6 @@ SELECT pg_catalog.setval('states_id_seq', 1, false);
 --
 
 COPY tickets (id, event_id, origin, cart_id, picked_number, created_at, updated_at) FROM stdin;
-15	1	answered	5	\N	2013-10-08 14:01:37.908752	2013-10-08 14:01:37.908752
 \.
 
 
@@ -7097,7 +7169,7 @@ COPY tickets (id, event_id, origin, cart_id, picked_number, created_at, updated_
 -- Name: tickets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kazuuu
 --
 
-SELECT pg_catalog.setval('tickets_id_seq', 15, true);
+SELECT pg_catalog.setval('tickets_id_seq', 16, true);
 
 
 --
@@ -7119,9 +7191,8 @@ SELECT pg_catalog.setval('user_sessions_id_seq', 1, false);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: kazuuu
 --
 
-COPY users (id, email, first_name, last_name, password, document, gender, city_id, state_id, country_id, address1, address2, postcode, birthday, mobile_phone_number, avatar_file_name, avatar_content_type, avatar_file_size, avatar_updated_at, active, admin_flag, email_confirmed, newsletter, current_login_ip, crypted_password, password_salt, persistence_token, perishable_token, provider, oauth_token, oauth_expires_at, facebook_uid, twitter_uid, twitter_oauth_token, twitter_oauth_secret, twitter_oauth_expires_at, created_at, updated_at) FROM stdin;
-3	marcello@keepinvest.com.br	Marcello	Miyajima	\N	\N	Male	5274	25	1	\N	\N	\N	1980-10-10	999394663	\N	\N	\N	\N	f	f	f	t	\N	8f7b06eb08d331b2cc62472d0efb903159a4ed45ad76ce7ccf94c2a04aa88a19231d9fb7214ceb0a3540f340d4d71e711a028aa8cf2953045000231229070f96	eYG0Kcxrl1ERegm3Oeh	f4cff8eaf81cb5712aae9d7f2560731957816a361d74b70b560f8eacb80ab4fcdb4cce1459e68a7b6f7a6d115ee8a589d3f4367402d941cba87542d7481e80f5	4BDZgb9k7ekyMqgEUVEh	\N	\N	\N	\N	\N	\N	\N	\N	2013-10-08 13:41:50.171043	2013-10-08 13:41:50.181145
-1	marcello@gmail.com	Marcello	Kazuo	\N		F	2192	12	1				1980-10-10	111111111	\N	\N	\N	\N	t	t	f	t	127.0.0.1	188d27b18fb01c75d99d496a0b6be9691d2561dcd238d9dc2cc7bade103ecea3136c9f8a96d546c945bf9943541a455ddd49735831df35d991a623927eb58714	hedgvipJ8eDofKGsQ5pr	a3a9bafd94d28df46f39b663382ad7c6790b734745210140a35d2ba5970ef0637fe4160e52604fc078be9cee8f073fe2f2ec7559d5d71561a1f625e4474409dd	DlEkvCUbR6296A7qjtN			\N					\N	2013-10-06 02:47:20.443888	2013-10-08 14:01:02.988801
+COPY users (id, email, first_name, last_name, password, document, gender, city_id, state_id, country_id, address1, address2, postcode, birthday, mobile_phone_number, mobile_phone_verification_code, avatar_file_name, avatar_content_type, avatar_file_size, avatar_updated_at, active, valid_email, valid_mobile_phone, admin_flag, email_confirmed, newsletter, current_login_ip, login_count, crypted_password, password_salt, persistence_token, perishable_token, provider, oauth_token, oauth_expires_at, facebook_uid, twitter_uid, twitter_oauth_token, twitter_oauth_secret, twitter_oauth_expires_at, created_at, updated_at) FROM stdin;
+1	marcello@gmail.com	Marcello	Kazuo	\N		Male	5274	25	1				1980-10-10	999394663	2754	\N	\N	\N	\N	t	t	f	t	f	t	127.0.0.1	1	7e44e5e46f6bd5b084a0340edf65e5e166cbd3ff91dc73328cd98ec4fd3fce62f180a5936460995703d1ddd8957b14bd237c30445e4c99462c73028a4259606f	HptkRs97CkTXteksK0K	4b6b6354f78852367077b0b257cac9800c63f1dd08112a45ac2a63e1722df4f0635109993842689a413936a3250c6576fece21aa9442ed174fc95c48fcbb2b3b	f5K763f5DCTmk9eVrfT			\N					\N	2013-10-15 12:36:47.137515	2013-10-15 13:08:54.377374
 \.
 
 
@@ -7129,7 +7200,7 @@ COPY users (id, email, first_name, last_name, password, document, gender, city_i
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kazuuu
 --
 
-SELECT pg_catalog.setval('users_id_seq', 3, true);
+SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
@@ -7194,6 +7265,14 @@ ALTER TABLE ONLY cities
 
 ALTER TABLE ONLY countries
     ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: emails_pkey; Type: CONSTRAINT; Schema: public; Owner: kazuuu; Tablespace: 
+--
+
+ALTER TABLE ONLY emails
+    ADD CONSTRAINT emails_pkey PRIMARY KEY (id);
 
 
 --
