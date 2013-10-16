@@ -16,7 +16,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :postcode
       t.date :birthday
       t.string :mobile_phone_number
-      t.integer :mobile_phone_verification_code
+      t.string :mobile_phone_verification_code
       t.datetime :mobile_phone_verification_at, :null => false, :default => '2000-01-01 00:00:00'
 
       t.has_attached_file :avatar

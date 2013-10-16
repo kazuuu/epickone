@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include CommomFunctions
+ 
   attr_accessible :email, 
                   :password, 
                   :first_name, 

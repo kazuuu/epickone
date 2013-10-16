@@ -251,7 +251,7 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
     t.string   "postcode"
     t.date     "birthday"
     t.string   "mobile_phone_number"
-    t.integer  "mobile_phone_verification_code"
+    t.string   "mobile_phone_verification_code"
     t.datetime "mobile_phone_verification_at",   :default => '2000-01-01 00:00:00', :null => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"

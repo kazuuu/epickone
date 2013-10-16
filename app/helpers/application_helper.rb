@@ -34,12 +34,6 @@ module ApplicationHelper
   def city_phone_code(city)
     "<label id='city_phone_code' style='display:inline;'>(" + city.phone_code.to_s + ")</label>"
   end
-  def number_generator(int)
-    ([*'0'..'9']).shuffle.take(int).join
-  end
-  def char_generator(int)
-    ([*'A'..'Z']).shuffle.take(int).join
-  end
   def formata_telefone(n_telefone)
     tel_formatado = "("
     tel_formatado << n_telefone[0..1]
