@@ -74,8 +74,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.password = ('a'..'z').to_a.shuffle.first(8).join
+    @user.password = char_generator(5)
     @user.active = true
+    @user.mobile_phone_verification_at = 10.minutes.ago
     @states = State.find_all_by_country_id(1)
     @cities = City.find_all_by_state_id(@user.state_id)
 
@@ -134,7 +135,7 @@ class UsersController < ApplicationController
       @user.mobile_verification_sent!
     end
 
-    flash[:notice] = "Em alguns minutos você receberá um SMS, favor verifiacar."
+    flash[:notice] = "Em alguns minutos você receberá um SMS, favor aguardar."
     redirect_to user_path(@user) + "/#t_tab1"
   rescue Clickatell::API::Error => e
     # flash[:error] = "Clickatell API error: #{e.message}"

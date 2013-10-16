@@ -252,23 +252,23 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
     t.date     "birthday"
     t.string   "mobile_phone_number"
     t.integer  "mobile_phone_verification_code"
-    t.datetime "mobile_phone_verification_at",                      :null => false
+    t.datetime "mobile_phone_verification_at",   :default => '2000-01-01 00:00:00', :null => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean  "active",                         :default => false, :null => false
-    t.boolean  "valid_email",                    :default => false, :null => false
-    t.boolean  "valid_mobile_phone",             :default => false, :null => false
+    t.boolean  "active",                         :default => false,                 :null => false
+    t.boolean  "valid_email",                    :default => false,                 :null => false
+    t.boolean  "valid_mobile_phone",             :default => false,                 :null => false
     t.boolean  "admin_flag",                     :default => false
-    t.boolean  "email_confirmed",                :default => false, :null => false
+    t.boolean  "email_confirmed",                :default => false,                 :null => false
     t.boolean  "newsletter",                     :default => true
     t.string   "current_login_ip"
     t.integer  "login_count",                    :default => 0
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.string   "perishable_token",               :default => "",    :null => false
+    t.string   "perishable_token",               :default => "",                    :null => false
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
@@ -277,8 +277,8 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
     t.string   "twitter_oauth_token"
     t.string   "twitter_oauth_secret"
     t.datetime "twitter_oauth_expires_at"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.datetime "created_at",                                                        :null => false
+    t.datetime "updated_at",                                                        :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

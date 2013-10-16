@@ -96,10 +96,10 @@ class User < ActiveRecord::Base
   def default_values
     if self.mobile_phone_number_changed? or self.city_id_changed?
        self.valid_mobile_phone = false
-       self.mobile_phone_verification_code = ([*'0'..'9']).shuffle.take(4).join
+       self.mobile_phone_verification_code = number_generator(4)
        self.mobile_phone_verification_at = 10.minutes.ago
     end
-    self.mobile_phone_verification_code = ([*'0'..'9']).shuffle.take(4).join if self.valid_mobile_phone_changed?
+    self.mobile_phone_verification_code = number_generator(4) if self.valid_mobile_phone_changed?
     self.country_id = 1
   end
 
