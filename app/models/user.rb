@@ -48,7 +48,9 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email, :case_sensitive => false
 
-  validates_length_of :mobile_phone_number, :maximum => 9, :minimum => 9
+  validates_length_of :mobile_phone_number, :minimum => 10, :maximum => 11
+  
+  validates_format_of :mobile_phone_number, :with => /^[\d]+$/, :message => " - Apenas números"
 
   belongs_to :country
   belongs_to :state
@@ -79,6 +81,7 @@ class User < ActiveRecord::Base
                      :default_url => '/images/missing.png'
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
+  
   
   def mobile_verification_sent!
     self.mobile_phone_verification_at = DateTime.now
@@ -285,6 +288,5 @@ end
         self.avatar.clear if @avatar_delete == "1"
       end
 # End Paperclip for Images
-
 end
 
