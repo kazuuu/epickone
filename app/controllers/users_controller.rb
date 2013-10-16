@@ -134,7 +134,7 @@ class UsersController < ApplicationController
       @user.mobile_verification_sent!
     end
 
-    flash[:notice] = "SMS enviado, favor verificar."
+    flash[:notice] = "Em alguns minutos você receberá um SMS, favor verifiacar."
     redirect_to user_path(@user) + "/#t_tab1"
   rescue Clickatell::API::Error => e
     # flash[:error] = "Clickatell API error: #{e.message}"
