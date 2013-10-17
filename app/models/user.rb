@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'clickatell'
+
 class User < ActiveRecord::Base
   include CommomFunctions
  
@@ -151,6 +154,14 @@ class User < ActiveRecord::Base
     (self.events + self.event_owners).uniq
   end  
     
+  def send_sms_mobile_phone_code
+    if (5.minute.ago > self.mobile_phone_verification_at.to_datetime) 
+      # Clickatell::API.debug_mode = true
+      api = Clickatell::API.authenticate(ENV['clickatell_api_key'], ENV['clickatell_username'], ENV['clickatell_password'])
+      api.send_message("#{self.country.phone_code.to_s}#{self.mobile_phone_number}", "<ePick One> Seu Código de Verificação: #{self.mobile_phone_verification_code.to_s}\nSeja bem vindo(a)!")
+      self.mobile_verification_sent!
+    end
+  end
 # OMNIAUTH  GEM    
   def self.find_or_create_from_oauth(auth_hash)    
     provider = auth_hash.provider

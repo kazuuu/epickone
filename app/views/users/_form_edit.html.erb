@@ -1,31 +1,31 @@
-<% javascript 'dynamic_cities' %>
+	<% javascript 'dynamic_cities' %>
+<% if @user.tickets.find_running.count > 0 %>
+	Você está participando de algum evento. Não é possível alterar dados de localidade e contato neste momento.
+<% end %>
 
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
-	      <%= f.input :first_name %>
-	      <%= f.input :last_name %>
-	      <%=  f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
-				<%= f.input :birthday, as: :bootstrap_datepicker %>
-
-				<% if @user.tickets.find_running.count > 0 %>
-				Você está participando de algum evento. Não é possível alterar dados de localidade e contato neste momento.
-					<%=  f.association :state, collection: State.find_all_by_id(@user.state_id), :prompt => "Selecione-", input_html: { readonly: true }, :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
-	      	
-					<%=  f.association :city, collection: City.find_all_by_id(@user.city_id), :prompt => "Selecione-", input_html: { readonly: true }, :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
-	
-	 				<%=  f.input :mobile_phone_number, input_html: { readonly: true, style: 'width:180px;' } %>
-				<% else %>
-					<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
-					<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
- 					<%=  f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
-				<% end %>
-
-
-	      <%= f.input :address1 %>
-	      <%= f.input :address2 %>
-	      <%= f.input :postcode %>
-	      <%= f.input :password %>
-      <div class="form-actions">
-	      <%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
-	      <%= link_to "Cancelar", user_path(current_user.id) + "/#t_tab1", class: "btn btn-large btn-primary" %>
-      </div>
+		<%= f.input :first_name %>
+		<%= f.input :last_name %>
+		<% if @user.tickets.find_running.count > 0 %>
+			<%=  f.input :mobile_phone_number, input_html: { readonly: true, style: 'width:180px;' } %>
+		<% else %>
+			<%=  f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+		<% end %>
+		<%= f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
+		<%= f.input :birthday, as: :bootstrap_datepicker %>
+	<% if @user.tickets.find_running.count > 0 %>
+		<%=  f.association :state, collection: State.find_all_by_id(@user.state_id), :prompt => "Selecione-", input_html: { readonly: true }, :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
+		<%=  f.association :city, collection: City.find_all_by_id(@user.city_id), :prompt => "Selecione-", input_html: { readonly: true }, :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
+	<% else %>
+		<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
+		<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
+	<% end %>
+		<%= f.input :address1 %>
+		<%= f.input :address2 %>
+		<%= f.input :postcode %>
+		<%= f.input :password %>
+		<div class="form-actions">
+			<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
+			<%= link_to "Cancelar", user_path(current_user.id) + "/#t_tab1", class: "btn btn-large btn-primary" %>
+		</div>
 <% end %>
