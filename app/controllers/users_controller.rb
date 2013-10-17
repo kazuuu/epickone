@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'clickatell'
+include CommomFunctions
 
 class UsersController < ApplicationController
   before_filter :require_no_user,  :only => [:new]
@@ -130,22 +131,22 @@ class UsersController < ApplicationController
     @user = current_user
 
     if (5.minute.ago > @user.mobile_phone_verification_at.to_datetime) 
+      Clickatell::API.debug_mode = true
       api = Clickatell::API.authenticate(ENV['clickatell_api_key'], ENV['clickatell_username'], ENV['clickatell_password'])
-      api.send_message("#{@user.country.phone_code.to_s}#{@user.city.phone_code.to_s}#{@user.mobile_phone_number}" , "<ePick One> Codigo de Verificacao: #{@user.mobile_phone_verification_code.to_s} \nSeja bem vindo ao ePick One e boa diversao.")
+      api.send_message("#{@user.country.phone_code.to_s}#{@user.mobile_phone_number}", "<ePick One> Seu Código de Verificação: #{@user.mobile_phone_verification_code.to_s}\nSeja bem vindo!")
       @user.mobile_verification_sent!
     end
-
     flash[:notice] = "Em alguns minutos você receberá um SMS, favor aguardar."
     redirect_to user_path(@user) + "/#t_tab1"
   rescue Clickatell::API::Error => e
-    # flash[:error] = "Clickatell API error: #{e.message}"
     flash[:error] = "Número de telefone inválido ou estamos com problemas, tente mais tarde."
+    # flash[:error] = "Clickatell API error: #{e.message}"
     redirect_to user_path(@user) + "/#t_tab1"
   end
   
   def mobile_phone_verification
     @user = current_user
-    verification_code = params[:verification_code].to_i
+    verification_code = params[:verification_code].to_s
     if verification_code == @user.mobile_phone_verification_code
       @user.set_valid_mobile_phone(true)
       @user.save

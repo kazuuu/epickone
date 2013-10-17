@@ -1,4 +1,7 @@
 require 'csv'
+# para rodar este script utilize o seguinte commando
+# $ rake import
+
 desc "Import countries from csv file"
 task :import => [:environment] do
   # countries migration: 20131005212849

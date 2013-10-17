@@ -106,6 +106,7 @@ class User < ActiveRecord::Base
     end
     self.mobile_phone_verification_code = number_generator(4) if self.valid_mobile_phone_changed?
     self.country_id = 1
+    self.mobile_phone_number = self.mobile_phone_number.scan(/\d/).join('').to_i.to_s
   end
 
   def DDD

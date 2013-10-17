@@ -8,7 +8,7 @@
 		</tr>
 		<tr>
 			<td class="span3">Celular:</td>
-			<td class=""><%= @user.mobile_phone_number %>
+			<td class=""><%= formata_telefone(@user.mobile_phone_number) %>
 <% if !@user.valid_mobile_phone %>
 				<%= form_tag(mobile_phone_verification_user_path(@user)) do %>
 				  <%= label_tag "Código de Verificação" %>
