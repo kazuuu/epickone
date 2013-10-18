@@ -1,32 +1,5 @@
 <% content_for :head do %>
   <style type="text/css">
-    #nav_slide { margin: 20px auto }
-    #nav_slide a { padding: 4px 6px; margin: 3px; border: 1px solid #ccc; text-align: center; text-decoration: none; background-color: #ddd }
-    #nav_slide a.activeSlide { color: #c00 }
-    #nav_slide a:focus { outline: none; }
-
-    .slideshow { }
-    .slide {}
-    .slideshow, .slide { height: 300px; width: 100%;}
-    .slideshow img {  border: 1px solid #ccc; background-color: #eee; margin: 0 }
-    
-    .hero-unit {
-      padding-top: 60px;
-      padding-bottom: 0px;
-      padding-left: 0px;
-      padding-right: 0px;
-      margin-bottom: 0px;
-      height:240px;
-      font-size: 18px;
-      font-weight: 200;
-      line-height: 30px;
-      color: inherit;
-      cursor:pointer
-      background-color: #eeeeee;
-      -webkit-border-radius: 6px;
-      -moz-border-radius: 6px;
-      border-radius: 6px;
-    }
 		.circle_home{
 			position:relative;
 			float:left;
@@ -56,94 +29,198 @@
 			
 		}
 
-		.box_text {
+		div.buttonbox_out {
+		  /* background-color:rgba(226,226,226,0.1); */
+		  background-image:url("/assets/bg_btn.png");
+		  padding-left:5px;
+		  padding-right:5px;
+		  padding-top: 5px;
+		  padding-bottom: 5px;
+		  -moz-border-radius: 5px;
+		  border-radius: 5px;
+		  border-width:1px;
+		  border-color:black;
+		  border-style:solid;
+		  color:white;
 		}
+		div.buttonbox_in {
+		  padding:10px;
+		  -moz-border-radius: 5px;
+		  border-radius: 5px;
+		  border-width:1px;
+		  border-color:black;
+		  border-style:solid;
+		  color:white;
+		}
+		
+		div.home_buttons {
+			position:relative;left:15px;
+		}
+		
   </style>
 <% end %>
-<%= javascript_include_tag "jquery.cycle2" %>
 
 <% content_for :wide do %>
 <div class="container">
 	<div class="row">
-	  <div class="col-lg-12">
+	  <div class="col-lg-12 hidden-xs">
 	    <h3>Acerte o QUIZ e concorra a grandes prêmios!</h3>
+	  </div>
+	  <div class="col-lg-12 visible-xs">
+	    <h5>Acerte o QUIZ e concorra a prêmios!</h5>
 	  </div>
 	</div>
 </div>
 
-<div class="row" style="height:450px;">
-  <div class="cycle-slideshow" style="height:450px;" data-cycle-fx="fade" 
-    data-cycle-timeout="3000"
-    data-cycle-slides="> div" >
-    <% @events_promo.each do |promo_event| 
-			promo_bg = promo_event.photos.find_by_image_type('banner_bg').first
-			promo_photo = promo_event.photos.find_by_image_type('banner_image').first
-    %>
-    	<div class="slide slide_banner" style="position:relative;float:left;">
-    	  <div style="clear: both;width:100%;height:450px;background:#232323 url(<%= promo_bg.image.url(:original) if !promo_bg.nil? %>) no-repeat; background-size:100% 450px;">
-        </div>
-        <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;background:transparent url(<%= promo_photo.image.url(:original) if !promo_photo.nil? %>) no-repeat center;">
-        </div>
-        <div style="position:absolute;top:0px;left:0px;width:100%;height:450px;text-align:center;">
-          <%= link_to(image_tag('transparent.png', :style => "height:100%;width:100%;"), promo_event) %>
-        </div>
- 				<div class="container" style="">
-	        <div style="line-height:30px;font-size:26px;position:relative;top:-275px;left:5px; z-index:7500;color:white;">
-	          <div style="font-weight:bold;"><%= promo_event.headline %>?</div>
-	          <div style="font-size:80%;font-style:italic;">Evento promovido pela: <%= promo_event.promoter %></div>
-	          <div style="margin-top:10px;font-weight:bold;">Participe agora do evento: <%= link_to(promo_event.title, promo_event) %></div>
-	          <div style="font-size:80%;font-style:italic;"></div>
-	        </div>
-	
-					<div class="home_buttons" style="position:relative;top:-270px;left:0px;">
-		        <div class="buttonbox_out" style="position:relative;float:left;width:170px;z-index:7500;">
-		          <div class="buttonbox_in">
-		          <%=link_to "Participar", promo_event, :class => "btn btn-black btn-bigger btn-primary", :style => "width:120px;" %>
-		          </div>
-		        </div>
-		        <div class="buttonbox_out" style="position:relative;float:left;width:230px;z-index:7500;margin-left:10px;">
-		          <div class="buttonbox_in">
-		          <%=link_to "Como concorrer", how_it_works_path, :class => "btn btn-black btn-bigger btn-primary", :style => "width:180px;" %>
-		          </div>
-		        </div>
-		        <div class="buttonbox_out" style="position:relative;float:left;width:170px;z-index:7500;margin-left:10px;">
-		          <div class="buttonbox_in">
-		          <%=link_to "Cadastre-se", new_user_path, :class => "btn btn-black btn-bigger btn-primary" , :style => "width:120px;"%>
-		          </div>
-		        </div>
-	        </div>
-	        <div style="line-height:30px;font-size:21px;color:#FFF;position:relative;top:-180px;left:-520px;z-index:7500;">
-						Data final:	<%= l promo_event.end_date, :format => :simple %><br> 
-						<%= t("home.time_left")%>: <%= promo_event.distance_of_time %>
-	        </div>
-				</div><!-- div Container-->
-      </div> <!-- div Slide Banner-->
-    <% end %>  
-  </div> <!-- div clycle-->
-</div>
+
+<div id="banner_carousel" class="carousel slide" data-interval="2000" style="">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+<%
+	@events_promo.each.with_index do |e, i|
+%>
+   <li data-target="#banner_carousel" class="<%= 'active' if i == 0 %>" data-slide-to="<%= i.to_s %>"></li>
+<% 
+	end 
+%>
+  </ol>
+
+  <!-- Wrapper for slides -->
+	<div class="carousel-inner">
+<% 
+	b = true
+	@events_promo.each do |promo_event| 
+		promo_bg = promo_event.photos.find_by_image_type('banner_bg').first
+		promo_photo = promo_event.photos.find_by_image_type('banner_image').first
+%>
+		<div class="item <%= 'active' if b %>" style="background:#232323 url(<%= promo_bg.image.url(:original) if !promo_bg.nil? %>) no-repeat; background-size:100% 100%;">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+					<% b = false %>
+		    	<img src="<%= promo_photo.image.url(:original) if !promo_photo.nil? %>" class="img-responsive" alt="aa...">
+		    </div> <!-- col image-->
+	    </div> <!-- row image-->
+			<div class="row">
+				<div class="col-lg-12">
+				  <div class="carousel-caption" style="left:0px;right:0px;text-align:left;padding:0px;bottom: 5px;">
+						<div class="hidden-xs">
+							<div class="row">
+								<div class="col-lg-12">
+									<%= promo_event.headline %>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-lg-12">
+									Evento promovido pela: <%= promo_event.promoter %>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									Participe agora do evento: <%= link_to(promo_event.title, promo_event) %>
+								</div>
+							</div>
+
+				      <div class="row home_buttons">
+				        <div class="col_md_12 col_lg_4 buttonbox_out" style="position:relative;float:left;width:155px;z-index:7500;">
+				          <div class="buttonbox_in">
+				          <%=link_to "Participar", promo_event, :class => "btn btn-black btn-bigger btn-primary", :style => "width:120px;" %>
+				          </div>
+				        </div>
+				        <div class="col_md_12 col_lg_4 buttonbox_out" style="position:relative;float:left;width:215px;z-index:7500;margin-left:10px;">
+				          <div class="buttonbox_in">
+				          <%=link_to "Como concorrer", how_it_works_path, :class => "btn btn-black btn-bigger btn-primary", :style => "width:180px;" %>
+				          </div>
+				        </div>
+				        <div class="col_md_12 col_lg_4 buttonbox_out" style="position:relative;float:left;width:155px;z-index:7500;margin-left:10px;">
+				          <div class="buttonbox_in">
+				          <%=link_to "Cadastre-se", new_user_path, :class => "btn btn-black btn-bigger btn-primary" , :style => "width:120px;"%>
+				          </div>
+				        </div>
+							</div>
+						</div> <!-- hidden-xs -->
+
+						<div class="visible-xs" style="margin-left:10%;">
+							<div class="row">
+								<div class="col-lg-12">
+									Promovido pela: <%= promo_event.promoter %>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									Evento: <%= link_to(promo_event.title, promo_event) %>
+								</div>
+							</div>
+				      <div class="row visible-xs">
+				        <div class="col_lg_12" style="margin-left:15px;">
+				          <%=link_to "Participar", promo_event, :class => "btn btn-primary btn-xs", :style => "width:120px;" %>
+				        </div>
+							</div>
+						</div> <!-- visible-xs -->
+
+
+
+
+							<div class="row visible-md visible-lg">
+								<div class="col-lg-12">
+									Data do resultado:        <%= l promo_event.end_date, :format => :simple %>
+								</div>
+							</div>
+							<div class="row visible-md visible-lg">
+								<div class="col-lg-12">
+					        <%= t("home.time_left")%>: <%= promo_event.distance_of_time %>
+								</div>
+							</div>
+			      </div> <!-- carousel-caption -->
+		    	</div> <!--  col caption-->
+	    	</div> <!-- row caption -->
+	    </div> <!-- container -->
+    </div> <!-- item -->
+<% 
+	end 
+%>  
+	</div> <!-- carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span class="icon-next"></span>
+  </a>
+</div> <!-- banner_carousel -->
+
+<script type="text/javascript">
+$('.carousel').carousel()
+</script>
 <% end %>
 <div class="row">
-  <div class="col-lg-12">
-    <h2>Veja por que é muito mais fácil concorrer a prêmios aqui...</h2>
+  <div class="col-lg-12 hidden-xs">
+    <h4>Veja por que é muito mais fácil concorrer a prêmios aqui...</h4>
+  </div>
+  <div class="col-lg-12 visible-xs">
+    <h6>Veja por que é fácil concorrer a prêmios aqui...</h6>
   </div>
 </div>
 <div class="row">
   <div class="col-md-4 margin-top">
-		<div class="box_curved_gray">
-			<div class="circle_home">1</div>
-	    Um único cadastro e participe de eventos de diversas empresas.
-		</div>
+                <div class="box_curved_gray">
+                        <div class="circle_home">1</div>
+            Um único cadastro e participe de eventos de diversas empresas.
+                </div>
   </div>
   <div class="col-md-4 margin-top">
-		<div class="box_curved_gray">
-			<div class="circle_home">2</div>
-    	Fique tranquilo! Não é preciso dar tantas informações pessoais.
-	  </div>
+                <div class="box_curved_gray">
+                        <div class="circle_home">2</div>
+            Fique tranquilo! Não é preciso dar tantas informações pessoais.
+          </div>
   </div>
   <div class="col-md-4 margin-top">
-		<div class="box_curved_gray">
-			<div class="circle_home">3</div>
-	    	Participe quando quiser! Afinal, não custa nada tentar!
-		</div>
+                <div class="box_curved_gray">
+                        <div class="circle_home">3</div>
+                    Participe quando quiser! Afinal, não custa nada tentar!
+                </div>
   </div> <!-- end span4 homebox -->
 </div>
+
