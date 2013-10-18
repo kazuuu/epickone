@@ -2,6 +2,10 @@
 <html lang='<%= I18n.locale%>'>
 <head>
   <title><%= full_title(yield(:title)) %></title>      
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Marcello Kazuo Miyajima">
 
   <%= render 'layouts/fixes' %>  
   <%= render 'layouts/shiv' %>  
@@ -15,8 +19,13 @@
 </head>
 <body>
 	<%= render 'layouts/header' %>
+
   <div class="container">
     <% flash.each do |key, value| %>
+			<%
+				key = "info" if key.to_s == "notice"
+				key = "danger" if key.to_s == "error"
+			%>
 			<% if key.to_s == "msgbox" %>
 				<% session[:msgbox]=  value.to_s %>
 				<%= link_to('', msgbox_path, :class=>"fancybox", :id => "linkfancy", :style=>"display:none;")  %>
@@ -33,9 +42,9 @@
     	<% end %> 
     <% end %>
   </div>
-  <div class="container" style="width:100%;">
-    <%= yield :wide %>
-  </div>
+
+	<%= yield :wide %>
+
   <div class="container">
     <%= yield %>
   </div>

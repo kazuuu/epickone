@@ -28,24 +28,35 @@
       border-radius: 6px;
     }
 		.circle_home{
-			float:left;
 			position:relative;
-			top:-40px;
+			float:left;
+			top:-20px;
 			left:-20px;
-			width:70px;
-			height:47px;
-			padding-top:23px;
+			width:60px;
+			height:60px;
 			border-radius:35px;
-			font-size:50px;
+			font-size:40px;
 			color:#FFF;
 			text-align:center;
 			background:#3c3a3a;
 		}
+		.box_curved_gray {
+		// background-color:#e2e2e2; 
+		  background-image:url("/assets/bg_box.png");
+		  -moz-border-radius: 20px;
+		  border-radius: 20px;
+		  color:black;
+			width:100%;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 0px;
+			padding-right: 20px;
+			font-size: 20px;
+			margin-left:20px;
+			
+		}
+
 		.box_text {
-		font-size: 20px;
-		position:relative;
-		width:300px;
-		left:0px;
 		}
   </style>
 <% end %>
@@ -54,7 +65,7 @@
 <% content_for :wide do %>
 <div class="container">
 	<div class="row">
-	  <div class="span12">
+	  <div class="col-lg-12">
 	    <h3>Acerte o QUIZ e concorra a grandes prêmios!</h3>
 	  </div>
 	</div>
@@ -112,34 +123,27 @@
 </div>
 <% end %>
 <div class="row">
-  <div class="span12">
-    <h1>Veja por que é muito mais fácil concorrer a prêmios aqui...</h1>
+  <div class="col-lg-12">
+    <h2>Veja por que é muito mais fácil concorrer a prêmios aqui...</h2>
   </div>
 </div>
 <div class="row">
-  <div class="span4" style="position:relative;">
+  <div class="col-md-4 margin-top">
 		<div class="box_curved_gray">
 			<div class="circle_home">1</div>
-	    <div class="row-fluid box_text">
-	    	Um único cadastro e participe de eventos de diversas empresas.
-			</div>
+	    Um único cadastro e participe de eventos de diversas empresas.
 		</div>
   </div>
-
-  <div class="span4">
-		<div class="box_curved_gray" style="position:relative;left:10px;">
+  <div class="col-md-4 margin-top">
+		<div class="box_curved_gray">
 			<div class="circle_home">2</div>
-	    <div class="row-fluid box_text">
-	    	Fique tranquilo! Não é preciso dar tantas informações pessoais.
-			</div>
+    	Fique tranquilo! Não é preciso dar tantas informações pessoais.
 	  </div>
   </div>
-  <div class="span4">
-		<div class="box_curved_gray" style="position:relative;left:20px;">
+  <div class="col-md-4 margin-top">
+		<div class="box_curved_gray">
 			<div class="circle_home">3</div>
-	    <div class="row-fluid box_text">
 	    	Participe quando quiser! Afinal, não custa nada tentar!
-			</div>
 		</div>
   </div> <!-- end span4 homebox -->
 </div>
