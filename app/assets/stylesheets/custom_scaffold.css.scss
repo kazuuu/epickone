@@ -1,65 +1,84 @@
-// SCAFFOLD LEVEL 1
-html {
-  overflow-y: scroll;
-}
-
+// Scaffold
 body {
-  padding-top: 41px;
+	margin-top:40px;
+}
+// Generic Classes
+.margin-top {
+	margin-top:20px;
 }
 
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
 
-section {
-  overflow: auto;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.center {
-  text-align: center;
-  h1 {
-    margin-bottom: 10px;
-  }
-}
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 170%;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: left;
-  margin-top:20px;
-
-}
-
-h2 {
-  font-size: 140%;
+// Modules Classes 
+#logo {
+	margin-right: 5px;
+  color: white;
   letter-spacing: -1px;
-  margin-top:20px;
-  margin-bottom: 10px;
-  text-align: left;
-  font-weight: normal;
-  a, a:visited, a:hover, a:hover:visited {
-    color: #999;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: white;
+    text-decoration: none;
+	}
+}
+
+#slogan {
+	font-size: 70%;
+	font-style: italic;
+  color: white;
+  &:hover {
+    color: white;
+    text-decoration: none;
+	}
+}
+
+.footer {
+	margin-top: 50px;
+  color:#FFF;
+  background-color:#252525;
+  opacity:1;
+	letter-spacing:1px;
+  padding:45px 0px;
+  border:0;
+  display:block;
+	margin-bottom: 0px;
+	
+  
+  footer_brand {
+    font-size: 100%px;
+    color:#fff;
+    font-weight: bold;
+    line-height:20px;
+  }
+  
+  p {
+    margin-top:10px;
+    color:#FFF;
+  }
+  
+  ul {
+    list-style:none;
+    margin:0px;
+    li {
+      margin-bottom:10px;
+    }
+    .links-horizontal li {
+      float:left;margin-left:20px;
+    }
+    li:first-child {
+      margin-bottom:15px;
+      margin-left:0px;
+    }
+  }
+
+  .row {
+    margin-bottom:20px;
+  }
+  a, a:visited {
+    color:#bdbdbd;
   }
 }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-// END SCAFFOLD LEVEL 1
 
-// SCAFFOLD LEVEL 2 
 #notice {
   color: green;
 }
@@ -93,82 +112,6 @@ p {
   }
 }
 
-
-
-// header
-header {
-  letter-spacing:1px;
-  
-  #logo {
-    float: left;
-    margin-right: 10px;
-    font-size: 1.7em;
-    color: white;
-    letter-spacing: -1px;
-    padding-top: 4px;
-    font-weight: bold;
-    line-height: 1;
-    &:hover {
-      color: white;
-      text-decoration: none;
-    }
-  }
-}
-
-
-
-
-// footer 
-footer {
-  letter-spacing:1px;
-  color:#FFF;
-  background-color:#252525;
-  padding:45px 0px;
-  margin:0;
-  border:0;
-  vertical-align:baseline;
-  display:block;
-  background-position:left center;
-  margin-left:0px;
-  opacity:1;
-  
-  h3 {
-    font-size: 18px;
-    color:#fff;
-    font-weight: bold;
-    line-height:20px;
-  }
-  
-  p {
-    margin-top:10px;
-    color:#FFF;
-  }
-  
-  ul {
-    list-style:none;
-    margin:0px;
-    li {
-      margin-bottom:10px;
-    }
-    .links-horizontal li{
-      float:left;margin-left:20px;
-    }
-    li:first-child{
-      margin-bottom:15px;
-      margin-left:0px;
-    }
-  }
-
-  .row {
-    margin-bottom:20px;
-  }
-  a, a:visited {
-    color:#bdbdbd;
-  }
-}
-// END SCAFFOLD LEVEL 1
-
-
 .debug {
  background-color:red;
 }
@@ -195,10 +138,6 @@ a.fbSignInButton:hover:visited {
 a.fbSignInButton:hover {
   color:yellow;
 }  
-
-.margin-top {
-	margin-top:20px;
-}
 
 
 
