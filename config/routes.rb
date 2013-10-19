@@ -61,7 +61,9 @@ Epickone::Application.routes.draw do
     get 'payment_not_needed', :on => :member
   end
 
-  resources :tickets
+  resources :tickets do
+    post 'add_number', :on => :member
+  end
 
   resource :store, :controller => 'store' do
     resources :categories
