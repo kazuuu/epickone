@@ -9,7 +9,7 @@ class Cart < ActiveRecord::Base
   validates_presence_of :user_id
   
   def ticket_add(event_id, origin)
-    if !(Event.find(event_id).tickets.find_user_id(user_id).find_all_by_origin(origin).count > 1)
+    if !(Event.find(event_id).tickets.find_user_id(user_id).find_all_by_origin(origin).count >= 1)
       new_ticket = tickets.build(:event_id => event_id)
       new_ticket.origin = origin
       new_ticket.save

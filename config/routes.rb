@@ -54,10 +54,8 @@ Epickone::Application.routes.draw do
   end
 
   resources :carts do
-    get 'add_ticket_number', :on => :member
     post 'add_tickets', :on => :member
     get 'checkout', :on => :member
-    get 'pick_a_number', :on => :member
     get 'payment_not_needed', :on => :member
   end
 

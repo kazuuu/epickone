@@ -38,7 +38,7 @@
           <td>
 						<% if item_new.picked_number.nil? %>
            		<%= form_tag(add_number_ticket_path(item_new)) do %>
-							  <%= label_tag "Número" %>
+							  <%= label_tag "Número da sorte" %>
 							  <%= text_field_tag :number %>
 						    <%= submit_tag "Gravar", class: "btn btn-black btn-large btn-primary" %>
 						  <% end %>
@@ -49,9 +49,13 @@
 						</div>
 						<div class="change_number" style="display:none;">
 	         		<%= form_tag(add_number_ticket_path(item_new)) do %>
-							  <%= label_tag "Número" %>
-							  <%= text_field_tag :number %>
-						    <%= submit_tag "Gravar", class: "btn btn-black btn-large btn-primary" %>
+									<div class="row">
+							  		<%= label_tag "Alterar Número" %>
+									</div>
+									<div class="row">
+						  		<%= text_field_tag :number, '', :class => "col-md-4" %>
+					    		<%= submit_tag "Gravar", class: "btn btn-warning btn-xs col-md-offset-1" %>
+									</div>
 						  <% end %>
 						</div>
 				 <% end %>
@@ -64,12 +68,12 @@
 					<td>
 						<% if current_cart.tickets.find_unumbered.count > 0 %>
 						  	  <% msgbox = "Numere todos os seus tickets antes de validar!" %>
-									<%= link_to "Concluir", msgbox_path + "?msgbox=" + msgbox, :class=>"btn btn-black btn-large btn-primary fancybox" %>
+									<%= link_to "Concluir", msgbox_path + "?msgbox=" + msgbox, :class=>"btn btn-black btn-large btn-primary fancybox", :id => "concluir" %>
 						<% else %>
 							<% if current_cart.tickets.count > 0 %>
-						      <%= link_to "Concluir", payment_not_needed_cart_path(current_cart), :class => "btn btn-black btn-large btn-primary" %>
+						      <%= link_to "Concluir", payment_not_needed_cart_path(current_cart), :class => "btn btn-black btn-large btn-primary", :id => "concluir" %>
 							<% else %>
-						      <%= link_to "Concluir", "#", :class => "btn btn-black btn-large btn-primary" %>
+						      <%= link_to "Concluir", "#", :class => "btn btn-black btn-large btn-primary", :id => "concluir" %>
 							<% end %>
 						<% end %>
 					</td>

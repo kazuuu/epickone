@@ -75,7 +75,7 @@
 
 <div id="banner_carousel" class="carousel slide" data-interval="2000" style="">
   <!-- Indicators -->
-  <ol class="carousel-indicators">
+  <ol class="carousel-indicators" style="bottom:-10px;">
 <%
 	@events_promo.each.with_index do |e, i|
 %>
@@ -182,13 +182,6 @@
 %>  
 	</div> <!-- carousel-inner -->
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    <span class="icon-prev"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    <span class="icon-next"></span>
-  </a>
 </div> <!-- banner_carousel -->
 
 <script type="text/javascript">
