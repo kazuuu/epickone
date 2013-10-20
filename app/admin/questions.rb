@@ -42,7 +42,16 @@ ActiveAdmin.register Question do
              
     q.buttons
   end    
+
+ index do 
+   column :id
+   column :quiz, :sortable => :quiz_id
+   column :sort_order
+   column :title
+   default_actions
+ end
 end
+
 # 
 # div :class => "panel" do
 #   h3 "Questions"

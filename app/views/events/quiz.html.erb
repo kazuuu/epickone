@@ -1,48 +1,65 @@
 <% provide(:title, 'Quiz') %>
 
+<%= form_tag right_answer_check_event_path do |f| %>
+
 <div class="row margin-top">
   <div class="col-md-3">
     <%= image_tag(@event.avatar.url(:original), :style => "height:200px;width:200px;border-style:dotted;border-width:1px;") %>
   </div>
   <div class="col-md-9">
-    <%= form_tag right_answer_check_event_path do |f| %>
-	    <table class="margin-top">
-				<thead>
-					<tr>
-						<th class="span12" style="text-align:left">
-							<ul class="bullets">
-								<% @event.quiz.questions.each do |q| %>
-								<li><a class ='<%= (q.sort_order == session[:question_number] ? "red" : "green") %>' href="">Bullet</a></li>
-								<% end%>
-								
-								
-								
-							</ul>
-						</th>
-					</tr>
-					<tr>
-						<th class="span12" style="text-align:left">
-							<%= (@question.sort_order.to_s + ": " + @question.title) if !@question.nil? %>
-						</th>
-					</tr>
-				</thead>
-	      <tbody>
-	        <tr>
-	          <td>
-							<ol class="answers">
-								<% if !@question.nil? %>
-									<% @question.answers.each do |answer| %>
-										<%= radio_button @question.id, "answer", answer.id %> 
-										<%= answer.sort_order.to_s if !answer.sort_order.nil? %>) <%= answer.answer_text %><br>
-									<% end %>
-								<% end %>
+		<div class="row margin-top">
+			<ul class="bullets">
+<% @event.quiz.questions.each do |q| %>
+				<li><a class ='<%= (q.sort_order == session[:question_number] ? "red" : "green") %>' href="">&nbsp;</a></li>
+<% end%>
+			</ul>
+		</div>
+		<div class="row">
+			<%= (@question.sort_order.to_s + ": " + @question.title) if !@question.nil? %>
+		</div>
+		
+<% if !@question.nil? %>
+	<% @question.answers.each do |answer| %>
+		<div class="row">
+			<div class="col-xs-1 text-right">
+				<%= radio_button @question.id, "answer", answer.id %> 
+			</div>
+			<div class="col-xs-9">
+				<div class="row">
+					<div class="col-md-12">
+				<%= answer.sort_order.to_s + ") " + simple_format_clean(answer.answer_text).html_safe unless answer.answer_text.blank? %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<%= simple_format_clean(answer.description).html_safe unless answer.description.blank?  %>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	<% end %>
+<% end %>
+<div class="row margin-top">
+	<%= link_to "Assistir novamente", event_path(@event), :class => "btn btn-black btn-primary" %>
+	<%= submit_tag "Ir para a próxima questão", :class => "btn btn-black btn-primary"  %>
+ 	</div>
+
+		
+	</div>
+</div>
+
+
+
+
+
+							
+							
 							</ol>
             </td>
 	        </tr>
 	        <tr>
 	          <td>
-						 	<%= link_to "Assistir novamente", event_path(@event), :class => "btn btn-black btn-primary" %>
-	         		<%= submit_tag "Ir para a próxima questão", :class => "btn btn-black btn-primary"  %>
 	         	</td>
 	       	</tr>
 	      </tbody>

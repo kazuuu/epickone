@@ -62,6 +62,12 @@ class Event < ActiveRecord::Base
       :conditions => ["date(?) >= date(start_date) and date(?) <= date(end_date)", Date.today, Date.today] 
     } 
   }
+
+  scope :find_enabled, lambda {
+    {
+        :conditions => ["enable = true"]
+    }
+  }
    
   def translations_attributes=(attributes)
     new_translations = attributes.values.reduce({}) do |new_values, translation|

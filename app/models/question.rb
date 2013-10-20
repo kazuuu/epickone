@@ -10,7 +10,7 @@ class Question < ActiveRecord::Base
                   :locale,
                   :translations_attributes
 
-  validates_presence_of :title, :sort_order
+  validates_presence_of :sort_order
 
   translates :title, :description
   accepts_nested_attributes_for :translations

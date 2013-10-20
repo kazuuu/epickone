@@ -58,4 +58,7 @@ module ApplicationHelper
       tel_formatado
     end
   end
+  def simple_format_clean(s)
+    simple_format(s).gsub("<p>","").gsub("</p>","")
+  end
 end

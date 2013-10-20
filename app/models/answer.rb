@@ -1,7 +1,6 @@
 class Answer < ActiveRecord::Base
   attr_accessible :description, :right_answer, :sort_order, :question_id, :answer_text, :avatar, :avatar_delete, :locale, :translations_attributes
 
-  validates_presence_of :answer_text
   default_scope order: 'sort_order ASC'  
 
   before_save :destroy_avatar?

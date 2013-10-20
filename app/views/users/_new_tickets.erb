@@ -37,11 +37,18 @@
           </td>
           <td>
 						<% if item_new.picked_number.nil? %>
-           		<%= form_tag(add_number_ticket_path(item_new)) do %>
-							  <%= label_tag "Número da sorte" %>
-							  <%= text_field_tag :number %>
-						    <%= submit_tag "Gravar", class: "btn btn-black btn-large btn-primary" %>
+	         		<%= form_tag(add_number_ticket_path(item_new)) do %>
+									<div class="row">
+							  		<%= label_tag "Alterar Número" %>
+									</div>
+									<div class="row">
+						  		<%= text_field_tag :number, '', :class => "col-md-4" %>
+					    		<%= submit_tag "Escolher", class: "btn btn-warning btn-xs col-md-offset-1" %>
+									</div>
 						  <% end %>
+						
+						
+						
 				  <% else %>
 						<div class="fields">
             	<%= item_new.picked_number %>
@@ -54,7 +61,7 @@
 									</div>
 									<div class="row">
 						  		<%= text_field_tag :number, '', :class => "col-md-4" %>
-					    		<%= submit_tag "Gravar", class: "btn btn-warning btn-xs col-md-offset-1" %>
+					    		<%= submit_tag "Escolher", class: "btn btn-warning btn-xs col-md-offset-1" %>
 									</div>
 						  <% end %>
 						</div>

@@ -4,9 +4,6 @@ describe Answer do
   describe 'Validations' do
     let!(:instance) { FactoryGirl.create :answer }
     
-    context 'Presence' do 
-      it { should validate_presence_of :answer_text }
-    end
   end
   
   describe 'Associations' do

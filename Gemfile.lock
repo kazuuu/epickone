@@ -352,6 +352,7 @@ DEPENDENCIES
   jquery-rails (= 2.2.1)
   jquery-ui-rails (= 4.0.1)
   koala (= 1.5.0)
+  meta_search (>= 1.1.0.pre)
   omniauth-facebook (= 1.4.1)
   omniauth-twitter (= 0.0.13)
   paperclip (~> 3.0)

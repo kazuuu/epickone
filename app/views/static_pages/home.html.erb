@@ -19,14 +19,12 @@
 		  -moz-border-radius: 20px;
 		  border-radius: 20px;
 		  color:black;
-			width:100%;
 			padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 0px;
 			padding-right: 20px;
 			font-size: 20px;
-			margin-left:20px;
-			
+			margin-left:20px;			
 		}
 
 		div.buttonbox_out {
@@ -72,16 +70,17 @@
 	</div>
 </div>
 
-
-<div id="banner_carousel" class="carousel slide" data-interval="2000" style="">
+<div id="banner_carousel" class="carousel slide" data-interval="3000" style="">
+<% if @events_promo.count > 1 %>
   <!-- Indicators -->
-  <ol class="carousel-indicators" style="bottom:-10px;">
-<%
-	@events_promo.each.with_index do |e, i|
-%>
+  <ol class="carousel-indicators visible-lg visible-md" style="bottom:-10px;">
+	<%
+		@events_promo.each.with_index do |e, i|
+	%>
    <li data-target="#banner_carousel" class="<%= 'active' if i == 0 %>" data-slide-to="<%= i.to_s %>"></li>
 <% 
 	end 
+end
 %>
   </ol>
 
@@ -110,15 +109,14 @@
 									<%= promo_event.headline %>
 								</div>
 							</div>
-
 							<div class="row">
 								<div class="col-lg-12">
-									Evento promovido pela: <%= promo_event.promoter %>
+									Participe agora do evento: <%= promo_event.title %>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-12">
-									Participe agora do evento: <%= link_to(promo_event.title, promo_event) %>
+									Evento promovido por: <%= promo_event.promoter %>
 								</div>
 							</div>
 
@@ -144,12 +142,12 @@
 						<div class="visible-xs" style="margin-left:10%;">
 							<div class="row">
 								<div class="col-lg-12">
-									Promovido pela: <%= promo_event.promoter %>
+									Evento: <%= promo_event.title %>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-12">
-									Evento: <%= link_to(promo_event.title, promo_event) %>
+									Promovido por: <%= promo_event.promoter %>
 								</div>
 							</div>
 				      <div class="row visible-xs">
