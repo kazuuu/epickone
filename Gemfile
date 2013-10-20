@@ -30,7 +30,7 @@ gem 'jquery-ui-rails', '4.0.1'
 gem 'fancybox-rails'
 gem 'exception_notification', '3.0.0'
 gem 'formtastic', '2.2.1'
-gem 'simple_form', '2.0.4'
+gem 'simple_form'
 gem "dotiw", "~> 1.1.1" # Gem de Distance_of_time
 gem 'bootstrap-datepicker-rails'
 gem "clickatell", :git => 'https://github.com/edsonlima/clickatell.git'
