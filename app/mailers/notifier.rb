@@ -20,16 +20,6 @@ class Notifier < ActionMailer::Base
       )
   end
 
-
-  def welcome(user)
-    @user = user    
-    @url  = root_url
-    mail(
-        :to => user.email,
-        :subject => t("notifier.welcome.subject")   
-      )
-  end
-
   def password_reset_instructions(user)
     @user = user
     @url = edit_password_reset_url(@user.perishable_token)
@@ -44,7 +34,7 @@ class Notifier < ActionMailer::Base
     @url  = "http://epickone.com.br/login"
     mail(
         :to => user.email,
-        :subject => "Welcome to ePick One!"  
+        :subject => "Sua senha, lembre-se de trocar."
       )
   end   
 end
