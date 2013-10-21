@@ -94,7 +94,7 @@ class UsersController < ApplicationController
               # flash[:error] = "Clickatell API error: #{e.message}"
             end
             
-            flash[:notice] = "Favor validar seu número de celular através do código que você recebeu por SMS."
+            flash[:notice] = "Em alguns minutos você receberá um SMS com um código para validar seu celular abaixo."
             flash[:warning] = "Sua senha foi enviada por e-mail!"
 
             format.html { redirect_to user_path(@user) }
