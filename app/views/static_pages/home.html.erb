@@ -13,6 +13,21 @@
 			text-align:center;
 			background:#3c3a3a;
 		}
+
+		.circle_home_xs {
+			position:relative;
+			float:left;
+			top:-20px;
+			left:-10px;
+			width:40px;
+			height:40px;
+			border-radius:35px;
+			font-size:25px;
+			color:#FFF;
+			text-align:center;
+			background:#3c3a3a;
+		}
+
 		.box_curved_gray {
 		// background-color:#e2e2e2; 
 		  background-image:url("/assets/bg_box.png");
@@ -24,6 +39,19 @@
 			padding-left: 0px;
 			padding-right: 20px;
 			font-size: 20px;
+			margin-left:20px;			
+		}
+		.box_curved_gray_xs {
+		// background-color:#e2e2e2; 
+		  background-image:url("/assets/bg_box.png");
+		  -moz-border-radius: 20px;
+		  border-radius: 20px;
+		  color:black;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 0px;
+			padding-right: 20px;
+			font-size: 15px;
 			margin-left:20px;			
 		}
 
@@ -194,7 +222,9 @@ $('.carousel').carousel()
     <h6>Veja por que é fácil concorrer a prêmios aqui...</h6>
   </div>
 </div>
-<div class="row">
+
+
+<div class="row hidden-xs">
   <div class="col-md-4 margin-top">
                 <div class="box_curved_gray">
                         <div class="circle_home">1</div>
@@ -214,4 +244,23 @@ $('.carousel').carousel()
                 </div>
   </div> <!-- end span4 homebox -->
 </div>
-
+<div class="row visible-xs">
+  <div class="col-md-4 margin-top">
+                <div class="box_curved_gray_xs">
+                        <div class="circle_home_xs">1</div>
+            Um único cadastro e participe de eventos de diversas empresas.
+                </div>
+  </div>
+  <div class="col-md-4 margin-top">
+                <div class="box_curved_gray_xs">
+                        <div class="circle_home_xs">2</div>
+            Fique tranquilo! Não é preciso dar tantas informações pessoais.
+          </div>
+  </div>
+  <div class="col-md-4 margin-top">
+                <div class="box_curved_gray_xs">
+                        <div class="circle_home_xs">3</div>
+                    Participe quando quiser! Afinal, não custa nada tentar!
+                </div>
+  </div> <!-- end span4 homebox -->
+</div>
