@@ -39,7 +39,7 @@
 						<% if item_new.picked_number.nil? %>
 	         		<%= form_tag(add_number_ticket_path(item_new)) do %>
 									<div class="row">
-							  		<%= label_tag "Alterar Número" %>
+							  		<%= label_tag "Escolha um Número entre 0 e 999" %>
 									</div>
 									<div class="row">
 						  		<%= text_field_tag :number, '', :class => "col-md-4" %>
@@ -57,7 +57,7 @@
 						<div class="change_number" style="display:none;">
 	         		<%= form_tag(add_number_ticket_path(item_new)) do %>
 									<div class="row">
-							  		<%= label_tag "Alterar Número" %>
+							  		<%= label_tag "Escolha um Número entre 0 e 999" %>
 									</div>
 									<div class="row">
 						  		<%= text_field_tag :number, '', :class => "col-md-4" %>
