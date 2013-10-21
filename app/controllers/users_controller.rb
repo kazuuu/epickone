@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.password = char_generator(5)
+    @user.password = char_generator(4)
     @user.active = true
     @user.mobile_phone_verification_at = 10.minutes.ago
     @states = State.find_all_by_country_id(1)
@@ -82,14 +82,22 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.valid?
         if verify_recaptcha then
-          if @user.save_without_session_maintenance
-            # Desabilitei o processo de ativacao do usuario durante o cadastro.
-            # @user.deliver_activation!
-            
+          # if @user.save_without_session_maintenance
+          if @user.save
             @user.deliver_welcome!
+
+            @user.set_valid_email(true) 
+            begin
+              result = @user.send_sms_mobile_phone_code
+            rescue Clickatell::API::Error => e
+              flash[:error] = "Número de telefone inválido. Favor corrigir."
+              # flash[:error] = "Clickatell API error: #{e.message}"
+            end
             
-            format.html { redirect_to root_path, notice: 'Sua senha foi enviada por e-mail!' }
-            format.json { render json: root_path, status: :created, location: root_path }
+            flash[:notice] = "Favor validar seu número de celular através do código que você recebeu por SMS."
+            flash[:warning] = "Sua senha foi enviada por e-mail!"
+
+            format.html { redirect_to user_path(@user) }
           else
             format.html { render action: "new" }
             format.json { render json: @user.errors, status: :unprocessable_entity }
