@@ -1,7 +1,7 @@
 <% javascript 'dynamic_cities' %>
 
 
-<%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
+<%= simple_form_for(@user, :html => { :id  => "user-form" } ) do |f| %>          
       <%=  f.input :email %>
       <%=  f.input :first_name %>
       <%=  f.input :last_name %>
@@ -14,7 +14,5 @@
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
 
  			<%= recaptcha_tags %>			
-      <div class="form-actions">
-	      <%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
-      </div>
+      <%= f.submit "Salvar" %>
 <% end %>
