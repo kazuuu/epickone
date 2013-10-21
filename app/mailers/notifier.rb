@@ -31,7 +31,7 @@ class Notifier < ActionMailer::Base
 
   def welcome(user)
     @user = user    
-    @url  = "http://epickone.com.br/login"
+    @url  = "http://www.epickone.com.br/login"
     mail(
         :to => user.email,
         :subject => "Sua senha, lembre-se de trocar."
