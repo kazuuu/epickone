@@ -48,7 +48,6 @@ pt-BR:
         address2: 'Complemento'
         postcode: 'CEP'
         password: 'Senha'
-        
       tasks:
         task_name:  'Nome compito'
   recaptcha:
