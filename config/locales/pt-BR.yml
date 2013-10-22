@@ -37,12 +37,45 @@ pt-BR:
   simple_form:
     labels:
       user:
-        first_name: 'Primeiro nome'
+        first_name: 'Nome'
+        last_name: 'Sobrenome'
+        gender: 'Sexo'
+        state: 'Estado'
+        city: 'Cidade'
+        mobile_phone_number: 'Celular'
+        birthday: 'Data de Nascimento'
+        address1: 'Endereço'
+        address2: 'Complemento'
+        postcode: 'CEP'
+        password: 'Senha'
+        
       tasks:
         task_name:  'Nome compito'
   recaptcha:
     errors:
       incorrect-captcha-sol: 'Código de verificação errada, tente novamente.' 
+  authlogic:
+    error_messages:
+      login_blank: "não pode estar em branco"
+      login_not_found: "não é válido"
+      login_invalid: "utilizar somente letras, números, espaços, e  .-_@"
+      consecutive_failed_logins_limit_exceeded:  "Limite de falhas consecutivas atingida, cadastro bloqueado"
+      email_invalid: "formato de email inválido"
+      password_blank: "não pode estar em branco"
+      password_invalid: "não é válido"
+      not_active: "Sua conta foi ativada."
+      not_confirmed: "Sua conta não foi confirmada"
+      not_approved: "Sua conta não foi aprovada."
+      no_authentication_details: "Você não forneceu nenhum detalhe para a autenticação."
+      general_credentials_error: "Combinação de Usuário e Senha incorreta"
+    models:
+      user_session: "Sessão"
+    attributes:
+      user_session:
+        login: "usuário"
+        email: "Email"
+        password: "Senha"
+        remember_me: "Lembre-me"
   months: meses
   weeks: semanas
   days: dias
