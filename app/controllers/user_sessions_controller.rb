@@ -22,17 +22,17 @@ class UserSessionsController < ApplicationController
         @user = User.find_by_email(@user_session.email)
         back_path = session[:return_to]
         session.delete(:return_to)
-        # if @user.login_count == 1
-        #   @user.set_valid_email(true) 
-        #   begin
-        #     result = @user.send_sms_mobile_phone_code
-        #   rescue Clickatell::API::Error => e
-        #     flash[:error] = "Número de telefone inválido. Favor corrigir."
-        #     # flash[:error] = "Clickatell API error: #{e.message}"
-        #   end
-        # end
-        
+
         if !@user.valid_mobile_phone?
+          if @user.login_count == 1
+            @user.set_valid_email(true) 
+            begin
+              result = @user.send_sms_mobile_phone_code
+            rescue Clickatell::API::Error => e
+              flash[:error] = "Número de telefone inválido. Favor corrigir."
+              # flash[:error] = "Clickatell API error: #{e.message}"
+            end
+          end
           format.html { redirect_to(user_path(@user) + "/#t_tab1", :notice => 'Favor validar seu número de celular através do código que você recebeu por SMS.') }
           format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
         else

@@ -82,22 +82,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.valid?
         if verify_recaptcha then
-          # if @user.save_without_session_maintenance
-          if @user.save
+          if @user.save_without_session_maintenance
             @user.deliver_welcome!
-
-            @user.set_valid_email(true) 
-            begin
-              result = @user.send_sms_mobile_phone_code
-            rescue Clickatell::API::Error => e
-              flash[:error] = "Número de telefone inválido. Favor corrigir."
-              # flash[:error] = "Clickatell API error: #{e.message}"
-            end
-            
-            flash[:notice] = "Em alguns minutos você receberá um SMS com um código para validar seu celular abaixo."
             flash[:warning] = "Sua senha foi enviada por e-mail!"
 
-            format.html { redirect_to user_path(@user) }
+            format.html { redirect_to root_path }
           else
             format.html { render action: "new" }
             format.json { render json: @user.errors, status: :unprocessable_entity }

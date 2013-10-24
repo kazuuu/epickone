@@ -6,14 +6,16 @@
     <body>
       <h1>Seja bem vindo ao ePick One, <%= @user.first_name %></h1>
       <p>
+				Seu usuário é: <%= @user.email %>
+      </p>
+      <p>
 				Sua senha é: <%= @user.password %>
       </p>
       <p>
         Entre no site através deste endereço: <%= @url %>.
       </p>
       <p>
-				Obrigado por se registrar e tenha um ótimo dia!
+				E não se esqueça de validar seu número de celular também.
       </p>
-
     </body>
   </html>
