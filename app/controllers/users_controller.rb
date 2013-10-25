@@ -1,10 +1,11 @@
 include CommomFunctions
 
 class UsersController < ApplicationController
-  before_filter :require_no_user,  :only => [:new]
-#  before_filter :require_user, :except => [:new, :create]
-  before_filter :correct_user,  :only => [:show, :edit, :update]
-#  before_filter :require_user_admin,  :only => [:index]
+ before_filter :require_no_user,  :only => [:new]
+ before_filter :require_user, :except => [:new, :create, :update_city_select]
+ before_filter :correct_user, :only => [:show, :edit, :update]
+ before_filter :require_user_admin,  :only => [:index]
+ skip_before_filter :require_valid_mobile_phone, :only => [:valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
 
 # GET /users
 # GET /users.json
@@ -74,6 +75,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.password = char_generator(4)
+    @user.country_id = 1
     @user.active = true
     @user.mobile_phone_verification_at = 10.minutes.ago
     @states = State.find_all_by_country_id(1)
@@ -86,7 +88,7 @@ class UsersController < ApplicationController
             @user.deliver_welcome!
             flash[:warning] = "Sua senha foi enviada por e-mail!"
 
-            format.html { redirect_to root_path }
+            format.html { redirect_to :login }
           else
             format.html { render action: "new" }
             format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -121,37 +123,6 @@ class UsersController < ApplicationController
   def update_city_phone_code
       @city = City.find_by_id(params[:city_id])
   end
-
-  def send_mobile_phone_verification
-    @user = current_user
-    
-    begin
-      result = @user.send_sms_mobile_phone_code
-      flash[:notice] = "Em alguns minutos você receberá um SMS, favor aguardar."
-    rescue Clickatell::API::Error => e
-      flash[:error] = "Número de telefone inválido. Qualquer dúvida entre em contato."
-      # flash[:error] = "Clickatell API error: #{e.message}"
-      # raise ArgumentError, e.message
-    end
-    redirect_to user_path(@user) + "/#t_tab1"
-  end
-  
-  def mobile_phone_verification
-    @user = current_user
-    verification_code = params[:verification_code].to_s
-    if verification_code == @user.mobile_phone_verification_code
-      @user.set_valid_mobile_phone(true)
-      @user.save
-      flash[:notice] = "Número de celular confirmado."
-      redirect_to user_path(@user) + "/#t_tab1"
-      true
-    else
-      flash[:error] = "Código errado. Não foi confirmado seu número de celular."
-      redirect_to user_path(@user) + "/#t_tab1"
-      false
-    end
-  end
-  
   def facebook_share_event()  
     if current_user.oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."
@@ -211,5 +182,53 @@ class UsersController < ApplicationController
     end
     redirect_to root_path
   end
+  
+  def valid_mobile
+    @user = User.find(params[:id])
+  end
+  
+  def set_mobile
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number])
+        
+        
+        format.html { redirect_to valid_mobile_user_path(@user), notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "valid_mobile" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def send_mobile_phone_verification
+    @user = current_user
+    
+    begin
+      result = @user.send_sms_mobile_phone_code
+      flash[:notice] = "Em alguns minutos você receberá um SMS, favor aguardar."
+    rescue Clickatell::API::Error => e
+      flash[:error] = "Número de telefone inválido. Qualquer dúvida entre em contato."
+      # flash[:error] = "Clickatell API error: #{e.message}"
+      # raise ArgumentError, e.message
+    end
+    redirect_to valid_mobile_user_path(@user)
+  end
+  def mobile_phone_verification
+    @user = current_user
+    verification_code = params[:verification_code].to_s
+    if verification_code == @user.mobile_phone_verification_code
+      @user.set_valid_mobile_phone(true)
+      @user.save
+      flash[:notice] = "Número de celular confirmado."
+      redirect_to user_path(@user) + "/#t_tab1"
+      true
+    else
+      flash[:error] = "Código errado. Tente novamente."
+      redirect_to valid_mobile_user_path(@user)
+      false
+    end
+  end
+  
 end
 

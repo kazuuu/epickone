@@ -9,7 +9,6 @@
 			<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
 			<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list',  "city_phone_code_url" => update_city_phone_code_users_path() } %>
 			
- 			<%=  f.input :mobile_phone_number,  input_html: { style: 'width:180px;' }, hint: 'DDD + Seu número. Somente números.'  %>
 
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
 

@@ -25,6 +25,8 @@ Epickone::Application.routes.draw do
     get 'resend_activation', :on => :member     
     get 'send_mobile_phone_verification', :on => :member     
     post 'mobile_phone_verification', :on => :member     
+    get 'valid_mobile' => "users#valid_mobile", :on => :member     
+    put 'valid_mobile' => "users#set_mobile", :on => :member     
   end
   
   resources :payment_notifications

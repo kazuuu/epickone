@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
                   :locale,
                   :provider,
                   :emails_attributes
-
+                  
   validates_presence_of :email, 
                         :first_name, 
                         :last_name,
@@ -44,18 +44,16 @@ class User < ActiveRecord::Base
                         :state_id,
                         :country_id,
                         :gender,
-                        :birthday,
-                        :mobile_phone_number
-                        
+                        :birthday
+                                                
   validates_presence_of :password, :on => :create
                     
-  validates_uniqueness_of :mobile_phone_number
 
   validates_uniqueness_of :email, :case_sensitive => false
 
-  validates_length_of :mobile_phone_number, :minimum => 10, :maximum => 11
-  
-  validates_format_of :mobile_phone_number, :with => /^[\d]+$/, :message => " - Apenas números"
+  validates_uniqueness_of :mobile_phone_number
+  validates_length_of :mobile_phone_number, :on => :update, :minimum => 10, :maximum => 11
+  validates_format_of :mobile_phone_number, :on => :update, :with => /^[\d]+$/, :message => " - Apenas números"
 
   belongs_to :country
   belongs_to :state
@@ -90,16 +88,16 @@ class User < ActiveRecord::Base
   
   def mobile_verification_sent!
     self.mobile_phone_verification_at = DateTime.now
-    self.save
+    self.save(:validate => false)
   end
   
   def set_valid_email(valid)
     self.valid_email = valid
-    self.save
+    self.save(:validate => false)
   end
   def set_valid_mobile_phone(valid)
     self.valid_mobile_phone = valid
-    self.save
+    self.save(:validate => false)
   end
   def default_values
     if self.mobile_phone_number_changed? or self.city_id_changed?
@@ -107,9 +105,9 @@ class User < ActiveRecord::Base
        self.mobile_phone_verification_code = number_generator(4)
        self.mobile_phone_verification_at = 10.minutes.ago
     end
+    self.mobile_phone_number = self.mobile_phone_number.scan(/\d/).join('').to_i.to_s if !self.mobile_phone_number.nil?
     self.mobile_phone_verification_code = number_generator(4) if self.valid_mobile_phone_changed?
-    self.country_id = 1
-    self.mobile_phone_number = self.mobile_phone_number.scan(/\d/).join('').to_i.to_s
+    true
   end
 
   def DDD

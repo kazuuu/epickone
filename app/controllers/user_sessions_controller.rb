@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  skip_before_filter :require_valid_mobile_phone, :only => [:destroy]
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
 
@@ -22,23 +23,23 @@ class UserSessionsController < ApplicationController
         @user = User.find_by_email(@user_session.email)
         back_path = session[:return_to]
         session.delete(:return_to)
+        @user.set_valid_email(true) if @user.login_count == 1
+        # if !@user.valid_mobile_phone?
+        #   if @user.login_count == 1
+        #     @user.set_valid_email(true) 
+        #     begin
+        #       result = @user.send_sms_mobile_phone_code
+        #     rescue Clickatell::API::Error => e
+        #       flash[:error] = "Número de telefone inválido. Favor corrigir."
+        #       # flash[:error] = "Clickatell API error: #{e.message}"
+        #     end
+        #   end
+        #   format.html { redirect_to(user_path(@user) + "/#t_tab1", :notice => 'Favor validar seu número de celular através do código que você recebeu por SMS.') }
+        #   format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
+        # end
 
-        if !@user.valid_mobile_phone?
-          if @user.login_count == 1
-            @user.set_valid_email(true) 
-            begin
-              result = @user.send_sms_mobile_phone_code
-            rescue Clickatell::API::Error => e
-              flash[:error] = "Número de telefone inválido. Favor corrigir."
-              # flash[:error] = "Clickatell API error: #{e.message}"
-            end
-          end
-          format.html { redirect_to(user_path(@user) + "/#t_tab1", :notice => 'Favor validar seu número de celular através do código que você recebeu por SMS.') }
-          format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
-        else
-          format.html { redirect_to(back_path || root_path, :notice => 'Seja bem vindo(a) e tenha uma ótima diversão!') }
-          format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
-        end
+        format.html { redirect_to(back_path || root_path, :notice => 'Seja bem vindo(a) e tenha uma ótima diversão!') }
+        format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       elsif @user_session.attempted_record &&
           !@user_session.invalid_password? &&
           !@user_session.attempted_record.active?

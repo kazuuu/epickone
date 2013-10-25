@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
   before_filter :set_locale_from_url
+  before_filter :require_valid_mobile_phone
   
   helper_method :current_user, :cart_count, :current_cart
 
@@ -57,7 +58,6 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
   def correct_user
     if current_user
       @user = User.find(params[:id])
@@ -79,7 +79,14 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
       return false
     end
-  end  
+  end 
+  def require_valid_mobile_phone
+    if current_user
+      if !current_user.valid_mobile_phone? && !current_user.admin_flag?
+        redirect_to valid_mobile_user_path(current_user)
+      end
+    end
+  end 
   def current_cart
     if current_user    
       @current_cart = nil
