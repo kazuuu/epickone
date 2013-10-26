@@ -151,7 +151,15 @@ class User < ActiveRecord::Base
   def all_events
     (self.events + self.event_owners).uniq
   end  
-    
+
+  def mobile_phone_verification_sent?
+    if (5.minute.ago > self.mobile_phone_verification_at.to_datetime)
+      false
+    else
+      true
+    end
+  end
+  
   def send_sms_mobile_phone_code
     if (5.minute.ago > self.mobile_phone_verification_at.to_datetime) 
       # Clickatell::API.debug_mode = true

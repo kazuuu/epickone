@@ -191,9 +191,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     respond_to do |format|
       if @user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number])
-        
-        
-        format.html { redirect_to valid_mobile_user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to valid_mobile_user_path(@user), notice: 'Alteração realizada. Favor validar seu número de celular.' }
         format.json { head :no_content }
       else
         format.html { render action: "valid_mobile" }

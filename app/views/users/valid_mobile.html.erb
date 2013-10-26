@@ -13,14 +13,27 @@
 				<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
 			<% end %>
 		<% else %>
+		<div class="fields">
 			<%= formata_telefone(current_user.mobile_phone_number) unless current_user.mobile_phone_number.nil? %>
+			<%= link_to_function "(clique para alterar)", "change_mobile_phone_number(this)" %>
+		</div>
+		<div class="change_number" style="display:none;">
+					<%= simple_form_for @user, :url => valid_mobile_user_path(current_user), :method => 'put' do |f| %>
+						<%= f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+						<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
+					<% end %>
+		</div>
 			<% if !current_user.valid_mobile_phone %>
-				<%= link_to "Enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
-						<%= form_tag(mobile_phone_verification_user_path(current_user)) do %>
-						  <%= label_tag "Celular não verificado. Coloque o código de verificação:" %>
-						  <%=  text_field_tag :verification_code %>
-						  <%= submit_tag "Validar" %>
-						<% end %>				
+			  <% if current_user.mobile_phone_verification_sent? %>
+					Em alguns minutos vc receberá um SMS
+			  <% else %>
+					<%= link_to "Enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
+				<% end %>				
+				<%= form_tag(mobile_phone_verification_user_path(current_user)) do %>
+					<%= label_tag "Celular não verificado. Coloque o código de verificação:" %>
+					<%=  text_field_tag :verification_code %>
+					<%= submit_tag "Validar" %>
+				<% end %>				
 			<% end %>			
 		<% end %>
 
