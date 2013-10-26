@@ -103,8 +103,7 @@ class User < ActiveRecord::Base
     if self.mobile_phone_number_changed?
        self.valid_mobile_phone = false
        self.mobile_phone_verification_code = number_generator(4)
-       self.mobile_phone_verification_at = 10.minutes.ago
-       self.send_sms_mobile_phone_code       
+       self.mobile_phone_verification_at = 10.minutes.ago   
     end
     self.mobile_phone_number = self.mobile_phone_number.scan(/\d/).join('').to_i.to_s if !self.mobile_phone_number.nil?
     self.mobile_phone_verification_code = number_generator(4) if self.valid_mobile_phone_changed?

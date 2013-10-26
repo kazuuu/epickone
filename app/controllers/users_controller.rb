@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Dados atualizados.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -190,7 +190,14 @@ class UsersController < ApplicationController
   def set_mobile
     @user = User.find(params[:id])
     respond_to do |format|
-      if @user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number])
+      if @user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number])        
+        begin
+          result = @user.send_sms_mobile_phone_code
+        rescue Clickatell::API::Error => e
+          flash[:error] = "Número de telefone inválido. Qualquer dúvida entre em contato."
+          # flash[:error] = "Clickatell API error: #{e.message}"
+          # raise ArgumentError, e.message
+        end
         format.html { redirect_to valid_mobile_user_path(@user), notice: 'Alteração realizada. Favor validar seu número de celular.' }
         format.json { head :no_content }
       else
