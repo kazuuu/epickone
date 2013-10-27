@@ -7,6 +7,7 @@ describe User do
     context 'Presence' do 
       it { should validate_presence_of :email }
       it { should validate_presence_of :password } 
+      it { should validate_presence_of :full_name }
       it { should validate_presence_of :first_name }
       it { should validate_presence_of :last_name }
       it { should validate_presence_of :password }
@@ -71,6 +72,7 @@ describe User do
       it { should allow_mass_assignment_of :password }
       it { should allow_mass_assignment_of :first_name }
       it { should allow_mass_assignment_of :last_name }
+      it { should allow_mass_assignment_of :full_name }
       it { should allow_mass_assignment_of :document }
       it { should allow_mass_assignment_of :gender }
       it { should allow_mass_assignment_of :birthday }

@@ -35,9 +35,11 @@ class User < ActiveRecord::Base
                   :twitter_oauth_expires_at,
                   :locale,
                   :provider,
+                  :full_name,
                   :emails_attributes
                   
   validates_presence_of :email, 
+                        :full_name, 
                         :first_name, 
                         :last_name,
                         :city_id,
@@ -117,6 +119,14 @@ class User < ActiveRecord::Base
       self.city.phone_code
     end
   end
+  
+  def full_name=(value)
+    self.first_name, self.last_name = value.to_s.split(" ", 2)
+  end
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+  
   def gender_formatted
     if self.gender == "F"
       "Feminino"

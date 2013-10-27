@@ -4,8 +4,7 @@
 <% end %>
 
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
-		<%= f.input :first_name %>
-		<%= f.input :last_name %>
+		<%= f.input :full_name, :label => "Nome completo" %>
 		<% if @user.tickets.find_running.count > 0 %>
 			<%=  f.input :mobile_phone_number, input_html: { readonly: true, style: 'width:180px;' } %>
 		<% else %>
