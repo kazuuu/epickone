@@ -62,7 +62,7 @@ ul.ui-autocomplete {
       display: block;
       padding: 3px;
     }
-    a.ui-state-hover, a.ui-state-active {
+ 		a.ui-state-hover, a.ui-state-active, a.ui-state-focus {
       background-color: #FFFCB2;
     }
   }
