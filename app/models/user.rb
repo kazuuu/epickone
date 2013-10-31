@@ -123,6 +123,7 @@ class User < ActiveRecord::Base
   end
 
   def city_state=(value)
+    value = value.gsub("/",",")
     c, s = I18n.transliterate(value.to_s).split(",", 2)
     c = c.strip
     s = s.strip
