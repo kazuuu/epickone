@@ -114,15 +114,6 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  def update_city_select
-      @user =  params[:id].present? ? User.find(params[:id]) : User.new
-      @cities = City.where(:state_id => params[:state_id])
-  end
-
-  def update_city_phone_code
-      @city = City.find_by_id(params[:city_id])
-  end
   def facebook_share_event()  
     if current_user.oauth_expires_at.nil?
       flash[:notice] = "Antes, conecte sua conta com seu Facebook para poder compartilhar."

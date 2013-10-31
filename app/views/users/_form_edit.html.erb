@@ -13,11 +13,9 @@
 		<%= f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
 		<%= f.input :birthday, as: :bootstrap_datepicker %>
 	<% if @user.tickets.find_running.count > 0 %>
-		<%=  f.association :state, collection: State.find_all_by_id(@user.state_id), :prompt => "Selecione-", input_html: { readonly: true }, :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
-		<%=  f.association :city, collection: City.find_all_by_id(@user.city_id), :prompt => "Selecione-", input_html: { readonly: true }, :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
+  <%=  f.input :city_state, :label => "Cidade/Estado", :input_html => { data: {autocomplete_source: cities_path} } %>
 	<% else %>
-		<%=  f.association :state, collection: @states, :prompt => "Selecione-", :wrapper_html => { :id => "user-form-state_id", "data-cities-url" => update_city_select_users_path() } %>
-		<%=  f.association :city, collection: @cities, :prompt => "Selecione-", :wrapper_html => { :id => 'cities-select-list', "city_phone_code_url" => update_city_phone_code_users_path()} %>
+    <%=  f.input :city_state, :label => "Cidade/Estado", :input_html => { data: {autocomplete_source: cities_path} } %>
 	<% end %>
 		<%= f.input :address1 %>
 		<%= f.input :address2 %>

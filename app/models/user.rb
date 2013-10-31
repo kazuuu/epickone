@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
                   :gender,
                   :birthday,
                   :city_id,
+                  :city_state,
                   :state_id,
                   :country_id,
                   :address1,
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
                         :last_name,
                         :city_id,
                         :state_id,
+                        :city_state,
                         :country_id,
                         :gender,
                         :birthday
@@ -118,6 +120,16 @@ class User < ActiveRecord::Base
     else
       self.city.phone_code
     end
+  end
+
+  def city_state=(value)
+    c, s = value.to_s.split(", ", 2)
+    self.city = City.find_by_name(c) unless c.blank?
+    self.state = State.find_by_name_code(s) unless s.blank?
+  end
+  
+  def city_state
+    "#{self.city.name}, #{self.state.name_code}" unless city.nil? or state.nil?
   end
   
   def full_name=(value)

@@ -3,7 +3,7 @@ Epickone::Application.routes.draw do
     get 'set_default', :on => :member 
     get 'send_confirmation', :on => :member 
   end
-
+  resources :cities
   resources :quizzes
 
   resource :tools do
@@ -15,10 +15,6 @@ Epickone::Application.routes.draw do
   end
   
   resources :users do
-    collection do
-      get 'update_city_select'
-      get 'update_city_phone_code'
-    end
     get 'wintickets', :on => :member 
     get 'facebook_share_event', :on => :member 
     get 'twitter_share_event', :on => :member 
