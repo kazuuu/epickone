@@ -40,11 +40,7 @@ class User < ActiveRecord::Base
                   :emails_attributes
                   
   validates_presence_of :email, 
-                        :full_name, 
-                        :first_name, 
-                        :last_name,
-                        :city_id,
-                        :state_id,
+                        :full_name,
                         :city_state,
                         :country_id,
                         :gender,
@@ -125,8 +121,8 @@ class User < ActiveRecord::Base
   def city_state=(value)
     value = value.gsub("/",",")
     c, s = I18n.transliterate(value.to_s).split(",", 2)
-    c = c.strip
-    s = s.strip
+    c = c.strip unless c.blank?
+    s = s.strip unless s.blank?
     self.city = City.find(:first, :conditions => [ "lower(name) = ?", c.downcase ]) unless c.blank?
     self.state = State.find(:first, :conditions => [ "lower(name_code) = ?", s.downcase ]) unless s.blank?
   end

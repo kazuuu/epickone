@@ -3,7 +3,7 @@
 
 <%= simple_form_for(@user, :html => { :id  => "user-form" } ) do |f| %>          
       <%=  f.input :email %>
-      <%=  f.input :full_name, :label => "Nome commpleto" %>
+      <%=  f.input :full_name, :label => "Nome completo" %>
       <%=  f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
 	    <%=  f.input :city_state, :label => "Cidade/Estado", :input_html => { data: {autocomplete_source: cities_path} } %>
 			<%=  f.input :birthday, as: :bootstrap_datepicker %>
