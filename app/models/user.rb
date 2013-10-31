@@ -123,9 +123,11 @@ class User < ActiveRecord::Base
   end
 
   def city_state=(value)
-    c, s = value.to_s.split(", ", 2)
-    self.city = City.find_by_name(c) unless c.blank?
-    self.state = State.find_by_name_code(s) unless s.blank?
+    c, s = I18n.transliterate(value.to_s).split(",", 2)
+    c = c.strip
+    s = s.strip
+    self.city = City.find(:first, :conditions => [ "lower(name) = ?", c.downcase ]) unless c.blank?
+    self.state = State.find(:first, :conditions => [ "lower(name_code) = ?", s.downcase ]) unless s.blank?
   end
   
   def city_state

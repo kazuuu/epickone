@@ -1,6 +1,7 @@
 class CitiesController < ApplicationController
   def index 
-    @cities = City.order(:name).where("upper(name) like upper(?)", "#{params[:term]}%")
+    c, s = I18n.transliterate(params[:term].to_s).split(",", 2)
+    @cities = City.order(:name).where("upper(name) like upper(?)", "#{c}%")
     render json: @cities.map {|model| "#{model.name}, #{model.state.name_code}"}
   end
 end
