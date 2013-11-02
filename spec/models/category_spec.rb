@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Category do
   describe 'Validations' do
-    let!(:instance) { FactoryGirl.create :cart  }
+    let!(:instance) { FactoryGirl.create :category  }
     
     context 'Presence' do 
       it { should validate_presence_of :title }
@@ -38,7 +38,7 @@ describe Category do
   end
   
   describe 'Translations' do
-    let!(:instance) { FactoryGirl.create :cart  }
+    let!(:instance) { FactoryGirl.create :category  }
     
   end
 end

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale_from_url
   before_filter :require_valid_mobile_phone
   
-  helper_method :current_user, :cart_count, :current_cart
+  helper_method :current_user
 
 # Para trancar o site
 #  before_filter :site_lock 
@@ -85,22 +85,6 @@ class ApplicationController < ActionController::Base
       if !current_user.valid_mobile_phone? && !current_user.admin_flag?
         redirect_to valid_mobile_user_path(current_user)
       end
-    end
-  end 
-  def current_cart
-    if current_user    
-      @current_cart = nil
-    
-      current_user.carts.each do |cart|
-        @current_cart = cart if cart.purchased_at.nil?
-      end
-    
-      if @current_cart.nil?
-        @current_cart = current_user.carts.build()
-        @current_cart.save
-      end
-      
-      @current_cart
     end
   end 
   

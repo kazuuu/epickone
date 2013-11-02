@@ -22,7 +22,8 @@ Epickone::Application.routes.draw do
     get 'send_mobile_phone_verification', :on => :member     
     post 'mobile_phone_verification', :on => :member     
     get 'valid_mobile' => "users#valid_mobile", :on => :member     
-    put 'valid_mobile' => "users#set_mobile", :on => :member     
+    put 'valid_mobile' => "users#set_mobile", :on => :member
+    post 'add_tickets', :on => :member
   end
   
   resources :payment_notifications
@@ -45,16 +46,8 @@ Epickone::Application.routes.draw do
     resources :photos
     get 'results', :on => :member 
     get 'join_promo', :on => :member 
-    get 'join_paid', :on => :member 
     get 'quiz', :on => :member
     post 'right_answer_check', :on => :member
-    get 'add_cart', :on => :member
-  end
-
-  resources :carts do
-    post 'add_tickets', :on => :member
-    get 'checkout', :on => :member
-    get 'payment_not_needed', :on => :member
   end
 
   resources :tickets do

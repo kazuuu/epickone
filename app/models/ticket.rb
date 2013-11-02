@@ -1,36 +1,27 @@
 class Ticket < ActiveRecord::Base
-  attr_accessible :cart_id, 
+  attr_accessible :user_id, 
                   :event_id,
                   :picked_number,
-                  :origin
-  #belongs_to :cart
+                  :origin,
+                  :validated_at
   belongs_to :event
-  belongs_to :cart 
+  belongs_to :user 
 
   validates_presence_of :origin,
-                        :cart_id,
+                        :user_id,
                         :event_id
 
 
-  scope :find_user_id, lambda { |term| 
-    {
-        :joins => :cart,
-        :conditions => ["carts.user_id = ?", term]
-    }
-  }
-  
   scope :find_validated, lambda {
       {
-        :joins => :cart,
-        :conditions => "carts.purchased_at is not null"
+        :conditions => "validated_at is not null"
       }
     }
 
  
   scope :find_not_validated, lambda {
       {
-        :joins => :cart,
-        :conditions => "carts.purchased_at is null"
+        :conditions => "validated_at is null"
       }
     }
   

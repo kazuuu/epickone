@@ -6,13 +6,14 @@ class User < ActiveRecord::Base
  
   attr_accessible :email, 
                   :password, 
+                  :full_name,
                   :first_name, 
                   :last_name, 
                   :document,
                   :gender,
                   :birthday,
-                  :city_id,
                   :city_state,
+                  :city_id,
                   :state_id,
                   :country_id,
                   :address1,
@@ -36,7 +37,6 @@ class User < ActiveRecord::Base
                   :twitter_oauth_expires_at,
                   :locale,
                   :provider,
-                  :full_name,
                   :emails_attributes
                   
   validates_presence_of :email, 
@@ -60,8 +60,7 @@ class User < ActiveRecord::Base
   belongs_to :city
   
   has_many :emails
-  has_many :carts
-  has_many :tickets, through: :carts
+  has_many :tickets
 
   accepts_nested_attributes_for :emails, allow_destroy: true  
 
@@ -110,14 +109,6 @@ class User < ActiveRecord::Base
     true
   end
 
-  def DDD
-    if self.city_id.nil?
-      "DDD"
-    else
-      self.city.phone_code
-    end
-  end
-
   def city_state=(value)
     value = value.gsub("/",",")
     c, s = I18n.transliterate(value.to_s).split(",", 2)
@@ -146,7 +137,16 @@ class User < ActiveRecord::Base
     else
       "N/A"
     end
-      
+  end
+  
+  def ticket_add(event_id, origin)
+    if !(Event.find(event_id).tickets.find_user_id(user_id).find_all_by_origin(origin).count >= 1)
+      new_ticket = tickets.build(:event_id => event_id)
+      new_ticket.origin = origin
+      new_ticket.save
+    else
+      false
+    end
   end
 
   def activate!

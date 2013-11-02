@@ -1,11 +1,10 @@
 class EventsController < ApplicationController
-  before_filter :require_user,  :only => [:join_questions, :right_answer_check, :pick_a_number, :add_cart, :results, :quiz]
+  before_filter :require_user,  :only => [:join_questions, :right_answer_check, :pick_a_number, :results, :quiz]
   before_filter :require_user_admin,  :only => [:results]
 
   require 'will_paginate/array'
 
   #before_filter :require_user
-  #before_filter :require_user_admin,  :except => [:join_promo, :join_paid, :join_questions, :right_answer_check, :pick_a_number, :pick_a_number_promo, :show, :add_cart ]
   
   # GET /events
   # GET /events.json
@@ -55,7 +54,7 @@ class EventsController < ApplicationController
           redirect_to quiz_event_path(params[:id])
         else
           session.delete(:question_number)
-          if current_cart.ticket_add(params[:id], "answered")
+          if current_user.ticket_add(params[:id], "answered")
             flash[:notice] = "Agora você precisa escolher seu número da sorte para poder participar!"
             redirect_to user_path(current_user.id) + "/#t_tab3"
           else
@@ -71,40 +70,6 @@ class EventsController < ApplicationController
     end
   end
   
-  def add_cart
-    @ticket = Ticket.find(params[:id])
-    
-    if @event.join_type == 'questions'      
-      @new_cart = current_user.carts.build()
-      @new_cart.purchased_at = Time.now
-      @new_cart.save
-
-      @ticket = @new_cart.tickets.build(:event_id => params[:id])
-      @ticket.user_id = current_user.id
-      @ticket.quantity = 1
-      @ticket.unit_price = 0
-      @ticket.picked_number = params[:number]
-      @ticket.save
-
-      flash[:success] = "Congratulations! You've joined."
-      redirect_to pick_a_number_event_path        
-    elsif @event.join_type == 'paid'
-      @ticket = current_cart.ticket.build(:event_id => params[:id])
-      @ticket.user_id = current_user.id
-      @ticket.quantity = 1
-      @ticket.unit_price = @event.price_ticket
-      @ticket.picked_number = params[:number]
-
-      if @ticket.save
-        redirect_to pick_a_number_event_path
-      else
-        flash[:notice] = "error!."
-        redirect_to pick_a_number_event_path
-      end
-    else
-      raise "event.join_type is missing"
-    end
-  end    
   def results
     @event = Event.find(params[:id])
     @max_number = @event.tickets.maximum(:picked_number)

@@ -62,8 +62,7 @@ describe User do
     it { should belong_to :country }
     it { should belong_to :state }
     it { should belong_to :city }
-    it { should have_many :carts }
-    it { should have_many(:tickets).through(:carts)  }
+    it { should have_many :tickets }
   end
 
   describe 'mass assignment' do

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @tickets_new = current_cart.tickets.find_running.find_not_validated
+    @tickets_new = current_user.tickets.find_running.find_not_validated
     @tickets_validated = @user.tickets.find_running.find_validated
     @tickets_old = @user.tickets.find_old.find_validated
     respond_to do |format|
@@ -130,7 +130,7 @@ class UsersController < ApplicationController
         current_user.post_facebook(event_url(event))
 
         (1..total_win).each do
-          current_cart.ticket_add(params[:event_id], "share_facebook")
+          current_user.ticket_add(params[:event_id], "share_facebook")
         end
         
         flash[:success] = "Voce ganhou um ticket! Nao se esqueca de numera-lo e dar checkout nele!"
@@ -160,7 +160,7 @@ class UsersController < ApplicationController
         current_user.post_twitter("Acabou de entrar no evento: " + event_url(event))
         
         (1..total_win).each do
-          current_cart.ticket_add(params[:event_id], "share_twitter")
+          current_user.ticket_add(params[:event_id], "share_twitter")
         end
         
         flash[:success] = "Voce ganhou um ticket! Nao se esqueca de numera-lo e dar checkout nele!"

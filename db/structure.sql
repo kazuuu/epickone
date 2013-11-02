@@ -138,38 +138,6 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
--- Name: carts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE carts (
-    id integer NOT NULL,
-    user_id integer,
-    purchased_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: carts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE carts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE carts_id_seq OWNED BY carts.id;
-
-
---
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -243,6 +211,108 @@ ALTER SEQUENCE category_translations_id_seq OWNED BY category_translations.id;
 
 
 --
+-- Name: cities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cities (
+    id integer NOT NULL,
+    name character varying(255),
+    state_id integer,
+    phone_code integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cities_id_seq OWNED BY cities.id;
+
+
+--
+-- Name: countries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE countries (
+    id integer NOT NULL,
+    name character varying(255),
+    iso2 character varying(255),
+    iso3 character varying(255),
+    phone_code character varying(255),
+    locale character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE countries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: countries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE countries_id_seq OWNED BY countries.id;
+
+
+--
+-- Name: emails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE emails (
+    id integer NOT NULL,
+    user_id integer,
+    email character varying(255),
+    valid_email boolean DEFAULT false NOT NULL,
+    token character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE emails_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE emails_id_seq OWNED BY emails.id;
+
+
+--
 -- Name: event_translations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -298,8 +368,8 @@ CREATE TABLE events (
     join_max integer,
     enable boolean,
     covering_area character varying(255),
-    start_date timestamp without time zone,
-    end_date timestamp without time zone,
+    start_date date,
+    end_date date,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
     avatar_file_size integer,
@@ -326,40 +396,6 @@ CREATE SEQUENCE events_id_seq
 --
 
 ALTER SEQUENCE events_id_seq OWNED BY events.id;
-
-
---
--- Name: payment_notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE payment_notifications (
-    id integer NOT NULL,
-    params text,
-    cart_id integer,
-    status character varying(255),
-    transaction_id character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: payment_notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE payment_notifications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: payment_notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE payment_notifications_id_seq OWNED BY payment_notifications.id;
 
 
 --
@@ -514,15 +550,49 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: states; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE states (
+    id integer NOT NULL,
+    name character varying(255),
+    name_code character varying(255),
+    country_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: states_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE states_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: states_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE states_id_seq OWNED BY states.id;
+
+
+--
 -- Name: tickets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tickets (
     id integer NOT NULL,
+    user_id integer,
     event_id integer,
-    origin character varying(255),
-    cart_id integer,
     picked_number integer,
+    origin character varying(255),
+    validated_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -589,24 +659,28 @@ CREATE TABLE users (
     password character varying(255),
     document character varying(255),
     gender character varying(255),
-    city character varying(255),
-    state character varying(255),
-    country character varying(255),
+    city_id integer,
+    state_id integer,
+    country_id integer,
     address1 character varying(255),
     address2 character varying(255),
     postcode character varying(255),
-    birthday timestamp without time zone,
+    birthday date,
     mobile_phone_number character varying(255),
+    mobile_phone_verification_code character varying(255),
+    mobile_phone_verification_at timestamp without time zone DEFAULT '2000-01-01 00:00:00'::timestamp without time zone NOT NULL,
     avatar_file_name character varying(255),
     avatar_content_type character varying(255),
     avatar_file_size integer,
     avatar_updated_at timestamp without time zone,
     active boolean DEFAULT false NOT NULL,
+    valid_email boolean DEFAULT false NOT NULL,
+    valid_mobile_phone boolean DEFAULT false NOT NULL,
     admin_flag boolean DEFAULT false,
     email_confirmed boolean DEFAULT false NOT NULL,
     newsletter boolean DEFAULT true,
     current_login_ip character varying(255),
-    locale character varying(255),
+    login_count integer DEFAULT 0,
     crypted_password character varying(255),
     password_salt character varying(255),
     persistence_token character varying(255),
@@ -668,13 +742,6 @@ ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY carts ALTER COLUMN id SET DEFAULT nextval('carts_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
@@ -689,6 +756,27 @@ ALTER TABLE ONLY category_translations ALTER COLUMN id SET DEFAULT nextval('cate
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cities ALTER COLUMN id SET DEFAULT nextval('cities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY countries ALTER COLUMN id SET DEFAULT nextval('countries_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY emails ALTER COLUMN id SET DEFAULT nextval('emails_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY event_translations ALTER COLUMN id SET DEFAULT nextval('event_translations_id_seq'::regclass);
 
 
@@ -697,13 +785,6 @@ ALTER TABLE ONLY event_translations ALTER COLUMN id SET DEFAULT nextval('event_t
 --
 
 ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY payment_notifications ALTER COLUMN id SET DEFAULT nextval('payment_notifications_id_seq'::regclass);
 
 
 --
@@ -732,6 +813,13 @@ ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq
 --
 
 ALTER TABLE ONLY quizzes ALTER COLUMN id SET DEFAULT nextval('quizzes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY states ALTER COLUMN id SET DEFAULT nextval('states_id_seq'::regclass);
 
 
 --
@@ -780,14 +868,6 @@ ALTER TABLE ONLY answers
 
 
 --
--- Name: carts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY carts
-    ADD CONSTRAINT carts_pkey PRIMARY KEY (id);
-
-
---
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -804,6 +884,30 @@ ALTER TABLE ONLY category_translations
 
 
 --
+-- Name: cities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cities
+    ADD CONSTRAINT cities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: countries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY countries
+    ADD CONSTRAINT countries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY emails
+    ADD CONSTRAINT emails_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: event_translations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -817,14 +921,6 @@ ALTER TABLE ONLY event_translations
 
 ALTER TABLE ONLY events
     ADD CONSTRAINT events_pkey PRIMARY KEY (id);
-
-
---
--- Name: payment_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY payment_notifications
-    ADD CONSTRAINT payment_notifications_pkey PRIMARY KEY (id);
 
 
 --
@@ -857,6 +953,14 @@ ALTER TABLE ONLY questions
 
 ALTER TABLE ONLY quizzes
     ADD CONSTRAINT quizzes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: states_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY states
+    ADD CONSTRAINT states_pkey PRIMARY KEY (id);
 
 
 --
@@ -1041,8 +1145,6 @@ INSERT INTO schema_migrations (version) VALUES ('20121025165412');
 
 INSERT INTO schema_migrations (version) VALUES ('20121025165413');
 
-INSERT INTO schema_migrations (version) VALUES ('20121028131701');
-
 INSERT INTO schema_migrations (version) VALUES ('20121029023147');
 
 INSERT INTO schema_migrations (version) VALUES ('20121029144441');
@@ -1060,3 +1162,11 @@ INSERT INTO schema_migrations (version) VALUES ('20121128182137');
 INSERT INTO schema_migrations (version) VALUES ('20121128183831');
 
 INSERT INTO schema_migrations (version) VALUES ('20130519114456');
+
+INSERT INTO schema_migrations (version) VALUES ('20131005212624');
+
+INSERT INTO schema_migrations (version) VALUES ('20131005212751');
+
+INSERT INTO schema_migrations (version) VALUES ('20131005212849');
+
+INSERT INTO schema_migrations (version) VALUES ('20131014180831');

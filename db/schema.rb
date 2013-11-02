@@ -54,13 +54,6 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
     t.datetime "updated_at",                             :null => false
   end
 
-  create_table "carts", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "purchased_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
     t.string   "title"
@@ -158,15 +151,6 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
   add_index "events", ["quiz_id"], :name => "index_events_on_quiz_id"
   add_index "events", ["start_date"], :name => "index_events_on_start_date"
 
-  create_table "payment_notifications", :force => true do |t|
-    t.text     "params"
-    t.integer  "cart_id"
-    t.string   "status"
-    t.string   "transaction_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
   create_table "photos", :force => true do |t|
     t.string   "image_type"
     t.string   "image_file_name"
@@ -223,10 +207,11 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
   end
 
   create_table "tickets", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "event_id"
-    t.string   "origin"
-    t.integer  "cart_id"
     t.integer  "picked_number"
+    t.string   "origin"
+    t.datetime "validated_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
