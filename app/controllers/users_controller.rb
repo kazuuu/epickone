@@ -176,6 +176,7 @@ class UsersController < ApplicationController
   
   def valid_mobile
     @user = User.find(params[:id])
+    redirect_to user_path(@user) if @user.valid_mobile_phone
   end
   
   def set_mobile
