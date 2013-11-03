@@ -127,19 +127,7 @@ class User < ActiveRecord::Base
   end
   def full_name
     "#{self.first_name} #{self.last_name}"
-  end
-
-  def mobile_phone_formatted=(value)
-    self.mobile_phone_number = value
-  end
-  def mobile_phone_formatted
-    tel_formatado = "("
-    tel_formatado << self.mobile_phone_number[0..1]
-    tel_formatado << ") "
-    tel_formatado << self.mobile_phone_number[2..10]
-    tel_formatado
-  end
-  
+  end  
   def gender_formatted
     if self.gender == "F"
       "Feminino"

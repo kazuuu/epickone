@@ -5,9 +5,9 @@
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
 		<%= f.input :full_name, :label => "Nome completo" %>
 		<% if @user.tickets.find_running.count > 0 %>
-			<%=  f.input :mobile_phone_formatted, input_html: { class: "phonemask", readonly: true, style: 'width:180px;' } %>
+			<%=  f.input :mobile_phone_number, input_html: { readonly: true, style: 'width:180px;' } %>
 		<% else %>
-			<%=  f.input :mobile_phone_formatted, :class => "phonemask", input_html: { class: "phonemask", style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
+			<%=  f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
 		<% end %>
 		<%= f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
 		<%= f.input :birthday, as: :bootstrap_datepicker %>
