@@ -51,6 +51,7 @@ class EventsController < ApplicationController
       if q.right_answer_check(params[q.id.to_s][:answer].to_i)
         if session[:question_number] < event.quiz.questions.count
           session[:question_number] = session[:question_number] + 1
+          flash[:success] = "Resposta correta. Continue assim!"
           redirect_to quiz_event_path(params[:id])
         else
           session.delete(:question_number)
