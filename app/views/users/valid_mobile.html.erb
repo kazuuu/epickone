@@ -2,8 +2,9 @@
 		<h2>Cadastre seu número de celular</h2>
 		<p>
 			Fique tranquilo, não iremos mandar propagandas ou outras notificações para seu celular.</p>
+		</p>
 		<p>
-			Nós utilizamos o número de celular apenas para identificar que você é uma pessoa verdadeira, e para evitar que a mesma pessoa participe dos eventos com mútiplos cadastros diminuindo a sua chance de vencer.
+			Caso você seja vencedor de algum evento, você receberá uma ligação de nosso CEO que te dará os nossos parabéns.
 		</p>
 
 		<div class="row">
@@ -15,44 +16,40 @@
 			</div>
 		</div>
 <% else %>
+	<h2>Passo final: Código de verificação por SMS</h2>
+	<p>
+		Você receberá um SMS com um código que você deve colocar na caixa abaixo para comprovar que este número de celular é seu.
+	</p>
+	<p>
+		Caso não tenha recebido o SMS, clique na opção "Enviar código de verificação por SMS" que aparecerá abaixo em no máximo 5 minutos.
+	</p>
 
-
-<h2>Passo final: Código de verificação por SMS</h2>
-<p>
-	Você receberá um SMS com um código que você deve colocar na caixa abaixo para comprovar que este número de celular é seu.
-</p>
-<p>
-	Caso não tenha recebido o SMS, clique na opção "Enviar código de verificação por SMS" que aparecerá abaixo em no máximo 5 minutos.
-</p>
-
-<div class="row">
-	<div class="col-xs-12">
-		<div class="fields">
-		<% if !current_user.valid_mobile_phone %>
-		  <% if current_user.mobile_phone_verification_sent? %>
-				Em alguns minutos vc receberá um SMS
-		  <% else %>
-				<%= link_to "Enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
-			<% end %>				
-			<%= form_tag(mobile_phone_verification_user_path(current_user)) do %>
-				<%= label_tag "Coloque o código de verificação:" %>
-				<%=  text_field_tag :verification_code %>
-				<%= submit_tag "Validar" %>
-			<% end %>				
-		<% end %>			
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="fields">
+			<% if !current_user.valid_mobile_phone %>
+			  <% if current_user.mobile_phone_verification_sent? %>
+					Em alguns minutos vc receberá um SMS
+			  <% else %>
+					<%= link_to "Enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
+				<% end %>				
+				<%= form_tag(mobile_phone_verification_user_path(current_user)) do %>
+					<%= label_tag "Coloque o código de verificação:" %>
+					<%=  text_field_tag :verification_code %>
+					<%= submit_tag "Validar" %>
+				<% end %>				
+			<% end %>			
 		
-			<%= formata_telefone(current_user.mobile_phone_number) unless current_user.mobile_phone_number.nil? %>
-			<%= link_to_function "(clique para alterar)", "change_mobile_phone_number(this)" %>
-		</div>
-		<div class="change_number" style="display:none;">
-					<%= simple_form_for @user, :url => valid_mobile_user_path(current_user), :method => 'put' do |f| %>
-						<%= f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'DDD e Número'  %>
-						<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
-					<% end %>
+				<%= formata_telefone(current_user.mobile_phone_number) unless current_user.mobile_phone_number.nil? %>
+				<%= link_to_function "(clique para alterar)", "change_mobile_phone_number(this)" %>
+			</div>
+			<div class="change_number" style="display:none;">
+						<%= simple_form_for @user, :url => valid_mobile_user_path(current_user), :method => 'put' do |f| %>
+							<%= f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'DDD e Número'  %>
+							<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
+						<% end %>
+			</div>
 		</div>
 	</div>
-</div>
-
-
 <% end %>
 
