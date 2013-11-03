@@ -5,7 +5,7 @@ class BootstrapDatepickerInput < SimpleForm::Inputs::Base
     hidden_field_options = text_field_options.dup
     hidden_field_options[:class] = text_field_options[:class].dup # so they won't work with same array object
     hidden_field_options[:id] = "#{attribute_name}_hidden"
-    text_field_options[:class] << 'bootstrap-datepicker'
+    text_field_options[:class] << 'bootstrap-datepicker datemask'
     text_field_options[:type] = 'text'
     text_field_options[:value] ||= I18n.l(value(object), :format => :default ) if !value(object).nil?
     set_data_option text_field_options, 'date-format', I18n.t(format, scope: [:date, :datepicker], default: :default)

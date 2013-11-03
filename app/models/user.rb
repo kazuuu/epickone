@@ -128,6 +128,17 @@ class User < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def mobile_phone_formatted=(value)
+    self.mobile_phone_number = value
+  end
+  def mobile_phone_formatted
+    tel_formatado = "("
+    tel_formatado << self.mobile_phone_number[0..1]
+    tel_formatado << ") "
+    tel_formatado << self.mobile_phone_number[2..10]
+    tel_formatado
+  end
   
   def gender_formatted
     if self.gender == "F"
@@ -138,7 +149,6 @@ class User < ActiveRecord::Base
       "N/A"
     end
   end
-  
   def ticket_add(event_id, origin)
     if self.tickets.find_event(event_id).find_all_by_origin(origin).count < 1
       new_ticket = self.tickets.build(:event_id => event_id)

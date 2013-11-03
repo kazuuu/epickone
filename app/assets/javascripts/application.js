@@ -11,6 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.maskedinput.min
+//= require jquery-ui
 //= require jquery-ui
 //= require jquery_ujs
 //= require fancybox

@@ -4,3 +4,9 @@
 jQuery ->
  $('#user_city_state').autocomplete 
    source: $('#user_city_state').data('autocomplete-source')
+
+jQuery ->
+  $(".phonemask").mask("(99) 999999999")
+
+jQuery ->
+  $(".datemask").mask("99/99/9999")
