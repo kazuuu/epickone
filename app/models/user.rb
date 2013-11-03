@@ -140,8 +140,8 @@ class User < ActiveRecord::Base
   end
   
   def ticket_add(event_id, origin)
-    if !(Event.find(event_id).tickets.find_user_id(user_id).find_all_by_origin(origin).count >= 1)
-      new_ticket = tickets.build(:event_id => event_id)
+    if self.tickets.find_event(event_id).find_all_by_origin(origin).count < 1
+      new_ticket = self.tickets.build(:event_id => event_id)
       new_ticket.origin = origin
       new_ticket.save
     else

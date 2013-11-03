@@ -211,7 +211,7 @@ ActiveRecord::Schema.define(:version => 20131014180831) do
     t.integer  "event_id"
     t.integer  "picked_number"
     t.string   "origin"
-    t.datetime "validated_at"
+    t.datetime "submitted_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end

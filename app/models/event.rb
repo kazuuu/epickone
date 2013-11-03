@@ -87,7 +87,13 @@ class Event < ActiveRecord::Base
       true
     end
   end
-  
+  def full?
+    if self.tickets.count >= SETTINGS['TICKET_MAX_NUMBER']
+      true
+    else
+      false
+    end
+  end
   def avatar_delete
     @avatar_delete ||= "0"
   end

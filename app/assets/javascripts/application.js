@@ -19,10 +19,6 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR
 //= require_tree .
-function change_picked_number(div_number) {
-	$(div_number).parent(".fields").hide();
-	$(div_number).parent(".fields").next(".change_number").show();
-}
 function change_mobile_phone_number(div_number) {
 	$(div_number).parent(".fields").hide();
 	$(div_number).parent(".fields").next(".change_number").show();

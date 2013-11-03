@@ -1,0 +1,15 @@
+<h3>Escolha seu número da sorte</h3>
+<p>
+	Você pode escolher seu número da sorte para participar no evento clicando em "alterar", ou deixe o número que nós escolhemos e clique em "Enviar Ticket" para participar deste evento.
+</p>
+
+<div class="row">
+	<div class="col-sm-6">
+		<%= @ticket.event.title %>
+	</div>
+	<div class="col-sm-6">
+		<%= @ticket.picked_number %> <%= link_to "(alterar)", edit_ticket_path(@ticket) %>
+	</div>
+</div>
+<br>
+<%= link_to "Enviar Ticket", submit_it_ticket_path(@ticket), :class => "btn btn-black btn-large btn-primary", :id => "concluir" %>

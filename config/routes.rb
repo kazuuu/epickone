@@ -51,6 +51,8 @@ Epickone::Application.routes.draw do
   end
 
   resources :tickets do
+    get 'submit_it', :on => :member
+    get 'validation', :on => :member
     post 'add_number', :on => :member
   end
 

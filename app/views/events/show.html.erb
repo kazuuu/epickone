@@ -38,12 +38,11 @@
 		<%= t("home.time_left")%>: <%= @event.distance_of_time %>
 		<br>
 		Participantes: <%= @event.tickets.find_validated.count %>
-		<br><br>
-		Seja mais um!
-    <% if  !@event.expired? %>
-        <%= render 'events/promo_button' %>
+		<br>
+    <% if  @event.expired? or @event.full? %>
+    	<%= link_to "Finalizado", "#", :class => "btn btn-large btn-primary" %>
     <% else %>
-      <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+    	<%= render 'events/promo_button' %>
     <% end %>
   </div>
 </div>  
@@ -59,11 +58,10 @@
 		<br>
 		<b>Data do resultado: </b><%= l @event.end_date.to_date, :format => :simple if !@event.end_date.nil? %>
 		<br>
-		Seja mais um!
-    <% if  !@event.expired? %>
-        <%= render 'events/promo_button' %>
+    <% if  @event.expired? or @event.full? %>
+    	<%= link_to "Finalizado", "#", :class => "btn btn-large btn-primary" %>
     <% else %>
-      <%= link_to "Finished", "#", :class => "btn btn-large btn-primary" %>
+    	<%= render 'events/promo_button' %>
     <% end %>
 	</div>
 </div>

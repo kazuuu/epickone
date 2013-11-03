@@ -7,7 +7,7 @@
     <div class=row>
       <%
  
- @tickets = @event.tickets.find(:all, :conditions => ['picked_number = ? and validated_at is not null', num.to_s])
+ @tickets = @event.tickets.find(:all, :conditions => ['picked_number = ? and submitted_at is not null', num.to_s])
         
         if @tickets.count > 0 %>
           <b><%= num %> (<%=@tickets.count%>) 

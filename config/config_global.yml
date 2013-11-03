@@ -1,0 +1,18 @@
+defaults: &defaults
+   TICKET_MAX_NUMBER: 99999
+
+development:
+  <<: *defaults
+
+playground:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+poststaging:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  

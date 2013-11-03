@@ -1,0 +1,31 @@
+<h3>Escolha seu número da sorte</h3>
+
+<% if @possible_numbers.count > 0 %>
+		<%= simple_form_for(@ticket) do |f| %>
+				<%= f.input :picked_number %>
+				<div class="row">
+					<div class="col-xs-12 text-center">
+						Alguns números disponíveis:
+				<% @possible_numbers.each do |n| %>
+					<br><%= n["num"] %>
+				<% end %>
+					</div>
+				</div>
+				<%= f.button :submit %>
+		<% end %>
+<% else %>
+	<%= simple_form_for(@ticket) do |f| %>
+			<div class="row">
+	  		<%= label_tag "Escolha um Número entre 0 e 999" %>
+			</div>
+			<div class="row">
+			<%= f.input :picked_number, input_html: { readonly: true, style: 'width:180px;' }  %>
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<%= @ticket.picked_number %> é o último número disponível.
+				</div>
+			</div>
+			<%= f.button :submit %>
+			</div>
+	<% end %>
+<% end %>

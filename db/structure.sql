@@ -592,7 +592,7 @@ CREATE TABLE tickets (
     event_id integer,
     picked_number integer,
     origin character varying(255),
-    validated_at timestamp without time zone,
+    submitted_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

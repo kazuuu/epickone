@@ -5,7 +5,7 @@ class CreateTickets < ActiveRecord::Migration
       t.integer  :event_id
       t.integer  :picked_number
       t.string   :origin
-      t.datetime  :validated_at
+      t.datetime  :submitted_at
 
       t.timestamps
     end

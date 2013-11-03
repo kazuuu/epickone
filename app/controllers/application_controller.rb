@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :set_locale_from_url
   before_filter :require_valid_mobile_phone
+  before_filter :require_all_tickets_validated
   
   helper_method :current_user
 
@@ -87,6 +88,13 @@ class ApplicationController < ActionController::Base
       end
     end
   end 
+  def require_all_tickets_validated
+    if current_user
+      t = current_user.tickets.find_not_validated.first
+      redirect_to validation_ticket_path(t) unless t.nil?
+    end
+  end 
+  
   
   protected  
     def rescue_action_in_public(exception)

@@ -55,11 +55,10 @@ class EventsController < ApplicationController
         else
           session.delete(:question_number)
           if current_user.ticket_add(params[:id], "answered")
-            flash[:notice] = "Agora você precisa escolher seu número da sorte para poder participar!"
             redirect_to user_path(current_user.id) + "/#t_tab3"
           else
             flash[:notice] = "Você já ganhou este ticket."
-            redirect_to quiz_event_path(params[:id])
+            redirect_to user_path(current_user.id) + "/#t_tab3"
           end
         end
       else

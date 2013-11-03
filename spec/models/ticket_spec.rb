@@ -21,7 +21,7 @@ describe Ticket do
       it { should allow_mass_assignment_of :user_id }
       it { should allow_mass_assignment_of :event_id }
       it { should allow_mass_assignment_of :origin }
-      it { should allow_mass_assignment_of :validated_at }
+      it { should allow_mass_assignment_of :submitted_at }
       it { should allow_mass_assignment_of :picked_number }
     end
   end
