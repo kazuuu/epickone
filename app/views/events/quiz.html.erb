@@ -4,7 +4,16 @@
 
 <div class="row margin-top">
   <div class="col-md-3">
-    <%= image_tag(@event.avatar.url(:original), :style => "height:200px;width:200px;border-style:dotted;border-width:1px;") %>
+		<div class ="row">
+		  <div class="col-xs-12 text-center">
+    		<%= image_tag(@event.avatar.url(:original), :style => "height:200px;width:200px;border-style:dotted;border-width:1px;") %>
+	  	</div>
+		</div>
+		<div class ="row margin-top">
+		  <div class="col-xs-12 text-center">
+				<%= link_to "Assistir novamente", event_path(@event), :class => "btn btn-black btn-primary" %>
+  		</div>
+  	</div>
   </div>
   <div class="col-md-9">
 		<div class="row margin-top">
@@ -15,7 +24,9 @@
 			</ul>
 		</div>
 		<div class="row">
+		  <div class="col-xs-12">
 			<%= (@question.sort_order.to_s + ": " + @question.title) if !@question.nil? %>
+			</div>
 		</div>
 		
 <% if !@question.nil? %>
@@ -35,17 +46,15 @@
 						<%= simple_format_clean(answer.description).html_safe unless answer.description.blank?  %>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	<% end %>
 <% end %>
-<div class="row margin-top">
-	<%= link_to "Assistir novamente", event_path(@event), :class => "btn btn-black btn-primary" %>
-	<%= submit_tag "Ir para a próxima questão", :class => "btn btn-black btn-primary"  %>
- 	</div>
-
-		
+		<div class="row margin-top">
+		  <div class="col-xs-12 text-right">
+				<%= submit_tag "Ir para a próxima questão", :class => "btn btn-warning"  %>
+			</div>
+		</div>
 	</div>
 </div>
 
