@@ -5,7 +5,7 @@ class UsersController < ApplicationController
  before_filter :require_user, :except => [:new, :create, :update_city_select]
  before_filter :correct_user, :only => [:show, :edit, :update]
  before_filter :require_user_admin,  :only => [:index]
- skip_before_filter :require_valid_mobile_phone, :only => [:valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
+ skip_before_filter :require_valid_mobile_phone, :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
 
 # GET /users
 # GET /users.json
@@ -177,6 +177,10 @@ class UsersController < ApplicationController
   def valid_mobile
     @user = User.find(params[:id])
     redirect_to user_path(@user) if @user.valid_mobile_phone
+  end
+  def valid_mobile_later_on
+    session[:valid_mobile_later_on] = true
+    redirect_to root_path    
   end
   
   def set_mobile

@@ -24,6 +24,7 @@ Epickone::Application.routes.draw do
     get 'valid_mobile' => "users#valid_mobile", :on => :member     
     put 'valid_mobile' => "users#set_mobile", :on => :member
     post 'add_tickets', :on => :member
+    get 'valid_mobile_later_on', :on => :member     
 
     resources :tickets do
       get 'submit_it', :on => :member

@@ -15,6 +15,11 @@
 					<% end %>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-12 text-right">
+				<%= link_to "Verificar mais tarde", valid_mobile_later_on_user_path, :class => "btn btn-primary" %>
+			</div>
+		</div>
 <% else %>
 	<h2>Passo final: Código de verificação por SMS</h2>
 	<p>
@@ -51,5 +56,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-xs-12 text-right">
+			<%= link_to "Verificar mais tarde", valid_mobile_later_on_user_path, :class => "btn btn-primary" %>
+		</div>
+	</div>	
 <% end %>
 
