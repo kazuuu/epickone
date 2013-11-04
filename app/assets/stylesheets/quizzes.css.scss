@@ -3,12 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .bullets {
+	inherite:none;
 	position:relative;
 	left:0px;
 	margin:0px;
 	padding:0px;
-
+	
 	li {
+		list-style-type: none;
 		float:left;
 		margin:0 3px 0 2px;
 		width:15px;
@@ -19,7 +21,7 @@
 			height:15px;
 			width:17px;
 			text-indent:-3000px;
-			outline:0
+			outline:0;
 		}
 		.green {
 		   background-position: 1px 1px;
