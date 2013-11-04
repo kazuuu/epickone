@@ -63,7 +63,8 @@ class User < ActiveRecord::Base
   has_many :tickets
 
   accepts_nested_attributes_for :emails, allow_destroy: true  
-
+  accepts_nested_attributes_for :tickets, allow_destroy: true
+  
   acts_as_authentic do |c| 
     c.login_field = :email 
     c.require_password_confirmation = false

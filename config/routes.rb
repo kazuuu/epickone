@@ -24,6 +24,12 @@ Epickone::Application.routes.draw do
     get 'valid_mobile' => "users#valid_mobile", :on => :member     
     put 'valid_mobile' => "users#set_mobile", :on => :member
     post 'add_tickets', :on => :member
+
+    resources :tickets do
+      get 'submit_it', :on => :member
+      get 'validation', :on => :member
+      post 'add_number', :on => :member
+    end
   end
   
   resources :payment_notifications
@@ -48,12 +54,6 @@ Epickone::Application.routes.draw do
     get 'join_promo', :on => :member 
     get 'quiz', :on => :member
     post 'right_answer_check', :on => :member
-  end
-
-  resources :tickets do
-    get 'submit_it', :on => :member
-    get 'validation', :on => :member
-    post 'add_number', :on => :member
   end
 
   resource :store, :controller => 'store' do

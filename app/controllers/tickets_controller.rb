@@ -1,5 +1,6 @@
 class TicketsController < InheritedResources::Base
   skip_before_filter :require_all_tickets_validated, :only => [:edit, :update, :validation, :submit_it]
+  before_filter :correct_user, :already_submitted?
 
   # PUT /users/1
   # PUT /users/1.json
@@ -9,7 +10,7 @@ class TicketsController < InheritedResources::Base
 
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])
-        format.html { redirect_to validation_ticket_path(@ticket) }
+        format.html { redirect_to validation_user_ticket_path(current_user, @ticket) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -36,4 +37,10 @@ class TicketsController < InheritedResources::Base
     @ticket.submit_it
     redirect_to user_path(current_user) + '/#t_tab3'
   end
+  
+  protected  
+  def already_submitted?
+    @ticket = Ticket.find(params[:id])
+    redirect_to user_path(current_user) + '/#t_tab3' unless @ticket.submitted_at.nil?
+  end  
 end

@@ -61,7 +61,11 @@ class ApplicationController < ActionController::Base
   end
   def correct_user
     if current_user
-      @user = User.find(params[:id])
+      unless params[:user_id].nil?
+        @user = User.find(params[:user_id])
+      else
+        @user = User.find(params[:id])
+      end
       unless ((@user.id == current_user.id) || (current_user.admin_flag))
         flash[:notice] = "Você não tem permissão para acessar esta página."
         redirect_to root_url 
@@ -91,7 +95,7 @@ class ApplicationController < ActionController::Base
   def require_all_tickets_validated
     if current_user
       t = current_user.tickets.find_not_validated.first
-      redirect_to validation_ticket_path(t) unless t.nil?
+      redirect_to validation_user_ticket_path(current_user, t) unless t.nil?
     end
   end 
   
