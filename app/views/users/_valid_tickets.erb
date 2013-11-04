@@ -34,7 +34,7 @@
             <%= link_to item.event.title, item.event %>
           </td>
           <td>
-            <%= item.picked_number.to_s if !item.picked_number.nil? %>
+            <%= item.picked_number_formatted if !item.picked_number.nil? %>
           </td>
         </tr>
 	<% end %>

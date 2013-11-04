@@ -64,6 +64,10 @@ class Ticket < ActiveRecord::Base
     }
   }
 
+  def picked_number_formatted
+    self.picked_number.to_s.rjust(5, '0') 
+  end
+  
   def default_values
     unless self.created_at?
       x = generate_picked_number(10)

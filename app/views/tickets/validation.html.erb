@@ -8,8 +8,11 @@
 		<%= @ticket.event.title %>
 	</div>
 	<div class="col-sm-6">
-		<%= @ticket.picked_number %> <%= link_to "(alterar)", edit_ticket_path(@ticket) %>
+		<%= @ticket.picked_number_formatted  %> <%= link_to "(alterar)", edit_ticket_path(@ticket) %>
 	</div>
 </div>
-<br>
-<%= link_to "Enviar Ticket", submit_it_ticket_path(@ticket), :class => "btn btn-black btn-large btn-primary", :id => "concluir" %>
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<%= link_to "Enviar Ticket", submit_it_ticket_path(@ticket), :class => "btn btn-black btn-large btn-primary", :id => "concluir" %>
+	</div>
+</div>
