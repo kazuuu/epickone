@@ -5,7 +5,7 @@ class UsersController < ApplicationController
  before_filter :require_user, :except => [:new, :create, :update_city_select]
  before_filter :correct_user, :only => [:show, :edit, :update]
  before_filter :require_user_admin,  :only => [:index]
- skip_before_filter :require_valid_mobile_phone, :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
+ skip_before_filter :require_valid_mobile_phone,    :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
  skip_before_filter :require_all_tickets_validated, :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
 
 # GET /users
@@ -187,14 +187,9 @@ class UsersController < ApplicationController
   def set_mobile
     @user = User.find(params[:id])
     respond_to do |format|
-      if @user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number])        
-        begin
-          result = @user.send_sms_mobile_phone_code
-        rescue Clickatell::API::Error => e
-          flash[:error] = "Número de telefone inválido. Qualquer dúvida entre em contato."
-          # flash[:error] = "Clickatell API error: #{e.message}"
-          # raise ArgumentError, e.message
-        end
+      
+      if (@user.mobile_phone_number.to_s != params[:user][:mobile_phone_number].to_s) and (@user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number]))
+        clickatell_send
         format.html { redirect_to valid_mobile_user_path(@user), notice: 'Alteração realizada. Favor validar seu número de celular.' }
         format.json { head :no_content }
       else
@@ -206,16 +201,28 @@ class UsersController < ApplicationController
   def send_mobile_phone_verification
     @user = current_user
     
-    begin
-      result = @user.send_sms_mobile_phone_code
+    if clickatell_send
       flash[:notice] = "Em alguns minutos você receberá um SMS, favor aguardar."
-    rescue Clickatell::API::Error => e
+    else
       flash[:error] = "Número de telefone inválido. Qualquer dúvida entre em contato."
-      # flash[:error] = "Clickatell API error: #{e.message}"
-      # raise ArgumentError, e.message
     end
     redirect_to valid_mobile_user_path(@user)
   end
+  def clickatell_send
+    @user = User.find(params[:id])
+    # sleep 5
+    begin
+      result = @user.send_sms_mobile_phone_code
+      flash[:notice] = "Em alguns minutos você receberá um SMS, favor aguardar."
+      true
+    rescue Clickatell::API::Error => e
+      flash[:error] = "Número de telefone inválido. Qualquer dúvida entre em contato."
+      false
+      # flash[:error] = "Clickatell API error: #{e.message}"
+      # raise ArgumentError, e.message
+    end
+  end
+  
   def mobile_phone_verification
     @user = current_user
     verification_code = params[:verification_code].to_s

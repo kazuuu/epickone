@@ -1,6 +1,6 @@
 class TicketsController < InheritedResources::Base
   skip_before_filter :require_all_tickets_validated, :only => [:edit, :update, :validation, :submit_it]
-  before_filter :correct_user, :already_submitted?
+  before_filter :already_submitted?
   before_filter :correct_ticket_user
   
   # PUT /users/1

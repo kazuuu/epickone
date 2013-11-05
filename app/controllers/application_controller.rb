@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
   end 
   def require_valid_mobile_phone
     if current_user
-      unless (current_user.valid_mobile_phone? && current_user.admin_flag?) or (session[:valid_mobile_later_on])
+      unless current_user.valid_mobile_phone? or (session[:valid_mobile_later_on])
         redirect_to valid_mobile_user_path(current_user)
       end
     end
