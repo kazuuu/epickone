@@ -1,6 +1,6 @@
 class TicketsController < InheritedResources::Base
   skip_before_filter :require_all_tickets_validated, :only => [:edit, :update, :validation, :submit_it]
-  before_filter :already_submitted?
+  before_filter :already_validated?
   before_filter :correct_ticket_user
   
   # PUT /users/1
@@ -45,7 +45,7 @@ class TicketsController < InheritedResources::Base
   end
   
   protected  
-  def already_submitted?
+  def already_validated?
     @ticket = Ticket.find(params[:id])
     redirect_to user_path(current_user) + '/#t_tab3' unless @ticket.submitted_at.nil?
   end  
