@@ -94,8 +94,10 @@ class ApplicationController < ActionController::Base
   end 
   def require_all_tickets_validated
     if current_user
-      t = current_user.tickets.find_not_validated.first
-      redirect_to validation_user_ticket_path(current_user, t) unless t.nil?
+      unless current_user.admin_flag?
+        t = current_user.tickets.find_not_validated.first
+        redirect_to validation_user_ticket_path(current_user, t) unless t.nil?
+      end
     end
   end 
   

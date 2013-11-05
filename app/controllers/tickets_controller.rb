@@ -1,7 +1,8 @@
 class TicketsController < InheritedResources::Base
   skip_before_filter :require_all_tickets_validated, :only => [:edit, :update, :validation, :submit_it]
   before_filter :correct_user, :already_submitted?
-
+  before_filter :correct_ticket_user
+  
   # PUT /users/1
   # PUT /users/1.json
   def update
@@ -48,4 +49,12 @@ class TicketsController < InheritedResources::Base
     @ticket = Ticket.find(params[:id])
     redirect_to user_path(current_user) + '/#t_tab3' unless @ticket.submitted_at.nil?
   end  
+  def correct_ticket_user
+    @ticket = Ticket.find(params[:id])
+    unless current_user.id == @ticket.user_id
+      flash[:notice] = "Você não tem permissão para acessar esta página."
+      redirect_to root_url 
+      return false
+    end
+  end
 end
