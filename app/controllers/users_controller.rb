@@ -224,7 +224,7 @@ class UsersController < ApplicationController
     if verification_code == @user.mobile_phone_verification_code
       @user.set_valid_mobile_phone(true)
       @user.save
-      flash[:success] = "Número de celular confirmado."
+      flash.now[:success] = "Número de celular confirmado."
       redirect_to user_path(@user) + "/#t_tab1"
       true
     else

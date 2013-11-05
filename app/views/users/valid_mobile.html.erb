@@ -14,11 +14,13 @@
 						<div class="row">
 							<div class="col-xs-12 text-right">
 								<%= f.submit "Cadastrar", class: "btn btn-large btn-primary" %>
-								<%= link_to "Mais tarde", valid_mobile_later_on_user_path, :class => "btn btn-primary" %>
+								<% unless session[:valid_mobile_later_on] == "disabled" %>
+									<%= link_to "Mais tarde", valid_mobile_later_on_user_path, :class => "btn btn-primary" %>
+								<% end %>
 							</div>
 						</div>
 					<% end %>
-			</div>
+			</div>	
 		</div>
 <% else %>
 	<h2>Confirme seu celular por SMS</h2>
@@ -49,16 +51,23 @@
 				<%= link_to_function "(clique para alterar)", "change_mobile_phone_number(this)" %>
 			</div>
 			<div class="change_number" style="display:none;">
-						<%= simple_form_for @user, :url => valid_mobile_user_path(current_user), :method => 'put' do |f| %>
-							<%= f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'DDD e Número'  %>
-							<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
-						<% end %>
+				<%= simple_form_for @user, :url => valid_mobile_user_path(current_user), :method => 'put' do |f| %>
+					<%= f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'DDD e Número'  %>
+					<div class="row">
+						<div class="col-xs-12 text-center">
+							<%= f.submit "Cadastrar", class: "btn btn-large btn-primary" %>
+							<%= link_to "Voltar", valid_mobile_user_path(current_user), :class => "btn btn-primary" %>						
+						</div>
+					</div>
+				<% end %>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 text-right">
-			<%= link_to "Verificar mais tarde", valid_mobile_later_on_user_path, :class => "btn btn-primary" %>
+			<% unless session[:valid_mobile_later_on] == "disabled" %>
+				<%= link_to "Mais tarde", valid_mobile_later_on_user_path, :class => "btn btn-primary" %>
+			<% end %>			
 		</div>
 	</div>	
 <% end %>

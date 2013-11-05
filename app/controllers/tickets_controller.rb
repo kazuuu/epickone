@@ -36,6 +36,7 @@ class TicketsController < InheritedResources::Base
   def submit_it
     unless current_user.valid_mobile_phone
       flash[:error] = "Para participar é necessário ter um número de celular confirmado. Favor confirmar."
+      session[:valid_mobile_later_on] = "disabled"
       redirect_to valid_mobile_user_path(current_user.id)
     else
       @ticket = Ticket.find(params[:id])
