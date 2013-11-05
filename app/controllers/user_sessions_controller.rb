@@ -1,7 +1,8 @@
 class UserSessionsController < ApplicationController
-  skip_before_filter :require_valid_mobile_phone, :only => [:destroy]
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
+  skip_before_filter :require_valid_mobile_phone, :only => [:destroy]
+  skip_before_filter :require_all_tickets_validated, :only => [:destroy]
 
   # GET /user_sessions/new
   # GET /user_sessions/new.xml
