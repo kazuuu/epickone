@@ -5,6 +5,5 @@
 	    <%=  f.input :city_state, :label => "Cidade/Estado", :input_html => { data: {autocomplete_source: cities_path} } %>
 			<%=  f.input :birthday, as: :bootstrap_datepicker, :input_html => {} %>
 
- 			<%= recaptcha_tags %>			
       <%= f.submit "Cadastrar" %>
 <% end %>

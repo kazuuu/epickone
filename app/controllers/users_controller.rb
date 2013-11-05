@@ -84,22 +84,17 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.valid?
-        if verify_recaptcha then
-          if @user.save_without_session_maintenance
-            @user.deliver_welcome!
-            flash[:warning] = "Sua senha foi enviada por e-mail!"
+        if @user.save_without_session_maintenance
+          @user.deliver_welcome!
+          flash[:warning] = "Sua senha foi enviada por e-mail!"
 
-            format.html { redirect_to :login }
-          else
-            format.html { render action: "new" }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
+          format.html { redirect_to :login }
         else
           format.html { render action: "new" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       else
         format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

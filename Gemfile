@@ -10,9 +10,6 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'paperclip', '~> 3.0'
 gem "aws-sdk", "~> 1.7.1"
 gem 'carmen', '0.2.13'
-
-gem "recaptcha", :require => "recaptcha/rails"
-
 gem 'country_select'
 gem 'omniauth-facebook', '1.4.1'
 gem 'omniauth-twitter', '0.0.13'
