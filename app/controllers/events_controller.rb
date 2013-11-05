@@ -59,7 +59,7 @@ class EventsController < ApplicationController
         end
       else
         session.delete(:question_number)
-        flash[:error] = "Resposta errada. Tente novamente desde o inicio."
+        session[:wrong_answer] = true
         redirect_to quiz_event_path(params[:id])
       end    
     end

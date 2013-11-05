@@ -1,0 +1,41 @@
+<%= form_tag right_answer_check_event_path do |f| %>
+<div class="row margin-top">
+	<ul class="bullets">
+	<% @event.quiz.questions.each do |q| %>
+		<li><a class ='<%= (q.sort_order == session[:question_number] ? "red" : "green") %>' href="">&nbsp;</a></li>
+	<% end %>
+	</ul>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+		<%= (@question.sort_order.to_s + ": " + @question.title) if !@question.nil? %>
+	</div>
+</div>
+	<% if !@question.nil? %>
+		<% @question.answers.each do |answer| %>
+<div class="row">
+	<div class="col-xs-1 text-right">
+		<%= radio_button @question.id, "answer", answer.id %> 
+	</div>
+	<div class="col-xs-9">
+		<div class="row">
+			<div class="col-md-12">
+				<%= answer.sort_order.to_s + ") " + simple_format_clean(answer.answer_text).html_safe unless answer.answer_text.blank? %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<%= simple_format_clean(answer.description).html_safe unless answer.description.blank?  %>
+			</div>
+		</div>
+	</div>
+</div>
+		<% end %>
+	<% end %>
+<div class="row margin-top">
+  <div class="col-xs-12 text-right">
+		<%= submit_tag "Próxima", :class => "btn btn-warning"  %>
+	</div>
+</div>
+<% end %>
+		
