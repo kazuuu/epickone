@@ -6,6 +6,7 @@ class UsersController < ApplicationController
  before_filter :correct_user, :only => [:show, :edit, :update]
  before_filter :require_user_admin,  :only => [:index]
  skip_before_filter :require_valid_mobile_phone, :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
+ skip_before_filter :require_all_tickets_validated, :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
 
 # GET /users
 # GET /users.json
@@ -221,7 +222,7 @@ class UsersController < ApplicationController
     if verification_code == @user.mobile_phone_verification_code
       @user.set_valid_mobile_phone(true)
       @user.save
-      flash[:notice] = "Número de celular confirmado."
+      flash[:success] = "Número de celular confirmado."
       redirect_to user_path(@user) + "/#t_tab1"
       true
     else

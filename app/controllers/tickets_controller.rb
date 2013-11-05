@@ -33,9 +33,14 @@ class TicketsController < InheritedResources::Base
     redirect_to user_path(current_user) + '/#t_tab3'
   end
   def submit_it
-    @ticket = Ticket.find(params[:id])
-    @ticket.submit_it
-    redirect_to user_path(current_user) + '/#t_tab3'
+    unless current_user.valid_mobile_phone
+      flash[:error] = "Para participar é necessário ter um número de celular confirmado. Favor confirmar."
+      redirect_to valid_mobile_user_path(current_user.id)
+    else
+      @ticket = Ticket.find(params[:id])
+      @ticket.submit_it
+      redirect_to user_path(current_user) + '/#t_tab3'
+    end    
   end
   
   protected  

@@ -99,7 +99,6 @@ class ApplicationController < ActionController::Base
     end
   end 
   
-  
   protected  
     def rescue_action_in_public(exception)
       case exception
