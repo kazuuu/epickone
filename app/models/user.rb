@@ -41,10 +41,14 @@ class User < ActiveRecord::Base
                   
   validates_presence_of :email, 
                         :full_name,
-                        :city_state,
                         :country_id,
                         :gender,
                         :birthday
+                        
+                        
+
+  validates_presence_of :city_state, :message => "Cidade ou estado inexistente"
+  
                                                 
   validates_presence_of :password, :on => :create
                     
