@@ -6,6 +6,10 @@ body {
 .margin-top {
 	margin-top:25px;
 }
+.margin-bottom {
+	margin-bottom:25px;
+}
+
 
 
 // Modules Classes 
@@ -59,7 +63,7 @@ body {
     list-style:none;
     margin:0px;
     li {
-      margin-bottom:10px;
+      margin-bottom:5px;
     }
     .links-horizontal li {
       float:left;margin-left:20px;
@@ -70,9 +74,6 @@ body {
     }
   }
 
-  .row {
-    margin-bottom:20px;
-  }
   a, a:visited {
     color:#bdbdbd;
   }
