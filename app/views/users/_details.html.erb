@@ -1,37 +1,35 @@
 <h1><%= @user.full_name %></h1>
-<h2>Dados de Contato</h2>
+<h2>Informações Básicas</h2>
 <table class="table table-bordered">
 	<tbody>
 		<tr>
 			<td class="col-md-3">Email:</td>
-			<td class=""><%= @user.email %> <%= link_to "Editar", emails_path, :class=>"fancybox" %></td>
+			<td class=""><%= @user.email %> <%= link_to "Alterar", emails_path, :class=>"fancybox" %></td>
 		</tr>
 		<tr>
 			<td class="col-md-3">Celular:</td>
-			<td class=""><%= formata_telefone(@user.mobile_phone_number) unless @user.mobile_phone_number.nil? %>
-<% if !@user.valid_mobile_phone %>
-					<%= link_to "Enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
-<% end %>
-				| <%= link_to 'Editar', edit_user_path(@user) %>
-<% if !@user.valid_mobile_phone %>
-				<%= form_tag(mobile_phone_verification_user_path(@user)) do %>
-				  <%= label_tag "Celular não verificado. Coloque o código de verificação:" %>
-				  <%=  text_field_tag :verification_code %>
-				  <%= submit_tag "Validar" %>
+			<td class="">
+				<%= formata_telefone(@user.mobile_phone_number) unless @user.mobile_phone_number.nil? %>
+				<%= link_to 'Alterar', mobile_phone_user_path(@user) %>
+				<% unless @user.valid_mobile_phone %>
+					<br>
+					<%= link_to 'Clique aqui para confirmar seu celular.', valid_mobile_user_path(@user) %>
 				<% end %>
-<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td class="span2">Senha:</td>
+			<td class="span3">
+				********
+				<%= link_to 'Alterar', password_user_path(@user) %>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
-<h2>Informações Básicas</h2>
+<h2>Detalhes <%= link_to '(Alterar)', edit_user_path(@user), :style => "font-size:50%;" %></h2>
 <table class="table table-bordered">
 	<tbody>
-		<tr>
-			<td class="span2">Senha:</td>
-			<td class="span3">********</td>
-		</tr>
 		<tr>
 			<td class="span2">Sexo:</td>
 			<td class="span3"><%= @user.gender_formatted %></td>
@@ -60,7 +58,3 @@
 		</tr>
 	</tbody>
 </table>
-
-	<%= link_to 'Edit', edit_user_path(@user) %> |
-	<%= link_to 'Back', users_path %>
-

@@ -5,8 +5,8 @@ class UsersController < ApplicationController
  before_filter :require_user, :except => [:new, :create, :update_city_select]
  before_filter :correct_user, :only => [:show, :edit, :update]
  before_filter :require_user_admin,  :only => [:index]
- skip_before_filter :require_valid_mobile_phone,    :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
- skip_before_filter :require_all_tickets_validated, :only => [:valid_mobile_later_on, :valid_mobile, :set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
+ skip_before_filter :require_valid_mobile_phone,    :only => [:valid_mobile_later_on, :new_user_valid_mobile, :new_user_set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
+ skip_before_filter :require_all_tickets_validated, :only => [:valid_mobile_later_on, :new_user_valid_mobile, :new_user_set_mobile, :send_mobile_phone_verification, :mobile_phone_verification]
 
 # GET /users
 # GET /users.json
@@ -170,16 +170,11 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
   
-  def valid_mobile
+  def new_user_valid_mobile
     @user = User.find(params[:id])
     redirect_to user_path(@user) if @user.valid_mobile_phone
   end
-  def valid_mobile_later_on
-    session[:valid_mobile_later_on] = true
-    redirect_to root_path    
-  end
-  
-  def set_mobile
+  def new_user_set_mobile
     @user = User.find(params[:id])
     respond_to do |format|
       
@@ -188,11 +183,48 @@ class UsersController < ApplicationController
         format.html { redirect_to valid_mobile_user_path(@user), notice: 'Alteração realizada. Favor validar seu número de celular.' }
         format.json { head :no_content }
       else
-        format.html { render action: "valid_mobile" }
+        format.html { render action: "new_user_valid_mobile" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
+  def valid_mobile_later_on
+    session[:valid_mobile_later_on] = true
+    redirect_to root_path    
+  end
+  def password
+    @user = User.find(params[:id])
+  end
+  def set_password
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(:password =>  params[:user][:password])
+        format.html { redirect_to user_path(current_user) + "/#t_tab1", notice: 'Senha aterada.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "password" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def mobile_phone
+    @user = User.find(params[:id])
+  end
+  def set_mobile_phone
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(:mobile_phone_number =>  params[:user][:mobile_phone_number])
+        session[:valid_mobile_later_on] = false
+        format.html { redirect_to user_path(current_user) + "/#t_tab1", notice: 'Telefone alterado.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "mobile_phone" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def send_mobile_phone_verification
     @user = current_user
     

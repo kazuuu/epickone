@@ -15,14 +15,18 @@ Epickone::Application.routes.draw do
   end
   
   resources :users do
+    get 'mobile_phone' => "users#mobile_phone", :on => :member     
+    put 'mobile_phone' => "users#set_mobile_phone", :on => :member
+    get 'password' => "users#password", :on => :member     
+    put 'password' => "users#set_password", :on => :member
     get 'wintickets', :on => :member 
     get 'facebook_share_event', :on => :member 
     get 'twitter_share_event', :on => :member 
     get 'resend_activation', :on => :member     
     get 'send_mobile_phone_verification', :on => :member     
     post 'mobile_phone_verification', :on => :member     
-    get 'valid_mobile' => "users#valid_mobile", :on => :member     
-    put 'valid_mobile' => "users#set_mobile", :on => :member
+    get 'valid_mobile' => "users#new_user_valid_mobile", :on => :member     
+    put 'valid_mobile' => "users#new_user_set_mobile", :on => :member
     post 'add_tickets', :on => :member
     get 'valid_mobile_later_on', :on => :member     
 

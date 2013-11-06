@@ -1,14 +1,5 @@
-<% if @user.tickets.find_running.count > 0 %>
-	Você está participando de algum evento. Não é possível alterar dados de localidade e contato neste momento.
-<% end %>
-
 <%= simple_form_for(@user, :html => { :class => 'form-horizontal', :id =>"user-form" }) do |f| %>          
 		<%= f.input :full_name, :label => "Nome completo" %>
-		<% if @user.tickets.find_running.count > 0 %>
-			<%=  f.input :mobile_phone_number, input_html: { readonly: true, style: 'width:180px;' } %>
-		<% else %>
-			<%=  f.input :mobile_phone_number, input_html: { style: 'width:180px;' }, hint: 'Seu número sem DDD'  %>
-		<% end %>
 		<%= f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
 		<%= f.input :birthday, as: :bootstrap_datepicker %>
 	<% if @user.tickets.find_running.count > 0 %>
@@ -19,7 +10,6 @@
 		<%= f.input :address1 %>
 		<%= f.input :address2 %>
 		<%= f.input :postcode %>
-		<%= f.input :password %>
 		<div class="text-center">
 			<%= f.submit "Salvar", class: "btn btn-large btn-primary" %>
 			<%= link_to "Cancelar", user_path(current_user.id) + "/#t_tab1", class: "btn btn-large btn-primary" %>
