@@ -1,4 +1,4 @@
-<h1>Emails</h1>
+<h2>Emails</h2>
 
 <table class="table table-bordered">
 	<tbody>
@@ -25,11 +25,14 @@
 		</tr>
 		<tr>
 			<td>
-			  <%= link_to "Adicionar novo Email", new_email_path %> 
 			</td>
-			<td>
+			<td class="text-right">
+			  <%= link_to "Adicionar Email", new_email_path, :class => "btn btn-primary" %> 
+				<%= link_to "Voltar", user_path(current_user) + "/#t_tab1", :class => "btn btn-primary" %>						
 			</td>
 		</tr>
+	</tbody>
+</table>
 
 
 
