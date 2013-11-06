@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end 
   def require_no_user 
     if current_user 
-      flash[:notice] = "Você não tem permissão para acessar esta página."
+      # flash[:notice] = "Você não tem permissão para acessar esta página."
       redirect_to root_url
       return false
     end
