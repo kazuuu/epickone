@@ -1,7 +1,10 @@
-<h1><%= @user.full_name %></h1>
 <h2>Informações Básicas</h2>
 <table class="table table-bordered">
 	<tbody>
+		<tr>
+			<td class="col-md-3">Nome:</td>
+			<td class=""><%= @user.full_name %> <%= link_to "Alterar", edit_user_path(@user) %></td>
+		</tr>
 		<tr>
 			<td class="col-md-3">Email:</td>
 			<td class=""><%= @user.email %> <%= link_to "Alterar", emails_path, :class=>"fancybox" %></td>
