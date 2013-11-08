@@ -87,7 +87,6 @@ class UsersController < ApplicationController
         if @user.save_without_session_maintenance
           @user.deliver_welcome!
           flash[:warning] = "Sua senha foi enviada por e-mail!"
-
           format.html { redirect_to :login }
         else
           format.html { render action: "new" }
@@ -95,6 +94,7 @@ class UsersController < ApplicationController
         end
       else
         format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

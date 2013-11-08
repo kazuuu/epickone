@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email, :case_sensitive => false
 
-  validates_uniqueness_of :mobile_phone_number
+  validates_uniqueness_of :mobile_phone_number, :on => :update
   validates_length_of :mobile_phone_number, :on => :update, :minimum => 10, :maximum => 11
   validates_format_of :mobile_phone_number, :on => :update, :with => /^[\d]+$/, :message => " - Apenas números"
 
