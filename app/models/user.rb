@@ -50,14 +50,13 @@ class User < ActiveRecord::Base
   validates_presence_of :city_state, :message => "Cidade ou estado inexistente"
   
                                                 
-  validates_presence_of :password
+  validates_presence_of :password, :on => :update, if: :password?
                     
-
   validates_uniqueness_of :email, :case_sensitive => false
 
-  validates_uniqueness_of :mobile_phone_number, :on => :update
-  validates_length_of :mobile_phone_number, :on => :update, :minimum => 10, :maximum => 11
-  validates_format_of :mobile_phone_number, :on => :update, :with => /^[\d]+$/, :message => " - Apenas números"
+  validates_uniqueness_of :mobile_phone_number, :on => :update, if: :mobile_phone_number?
+  validates_length_of :mobile_phone_number, :on => :update, if: :mobile_phone_number?, :minimum => 10, :maximum => 11
+  validates_format_of :mobile_phone_number, :on => :update, if: :mobile_phone_number?, :with => /^[\d]+$/, :message => " - Apenas números"
 
   belongs_to :country
   belongs_to :state
