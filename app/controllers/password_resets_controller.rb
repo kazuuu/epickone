@@ -20,21 +20,23 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
-    render
+    @user = User.find_using_perishable_token(params[:id])
   end
 
   def update
-    @user.password = params[:password]
-    # Only if your are using password confirmation
-    # @user.password_confirmation = params[:password]
+    @user = User.find_using_perishable_token(params[:id])
+    @user.password = params[:user][:password]
 
-    # Use @user.save_without_session_maintenance instead if you
-    # don't want the user to be signed in automatically.
-    if @user.save
-      flash[:success] = "Sua senha foi atualizada."
-      redirect_to @user
-    else
-      render :action => :edit
+    respond_to do |format|
+      if @user.valid_attribute?(:password, params[:user][:password])
+        @user.save_without_session_maintenance(:validate => false)
+        format.html { redirect_to :login, notice: 'Sua senha foi atualizada.' }
+        format.json { head :no_content }
+      else
+        flash[:error] = "Sua senha precisa ter no mínimo 4 caracteres."
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -44,7 +46,7 @@ class PasswordResetsController < ApplicationController
   def load_user_using_perishable_token
     @user = User.find_using_perishable_token(params[:id])
     unless @user
-      flash[:error] = "Não foi possível localizar seu cadastro."
+      flash[:error] = "Este link está vencido. Clique em esqueci minha senha novamente."
       redirect_to root_url
     end
   end

@@ -1,8 +1,10 @@
-<h1>Reset Password</h1>
+<h3>Esqueceu a senha</h3>
 
-<p>Please enter your email address below and then press "Reset Password".</p>
+<p>
+Informe o endereço de e-mail que você usou no cadastro, e enviaremos a você um link para você alterar sua senha.	
+</p>
 
 <%= form_tag password_resets_path do %>
   <%= text_field_tag :email %>
-  <%= submit_tag "Reset Password" %>
+  <%= submit_tag "Enviar" %>
 <% end %>

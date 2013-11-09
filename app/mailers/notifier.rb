@@ -25,7 +25,7 @@ class Notifier < ActionMailer::Base
     @url = edit_password_reset_url(@user.perishable_token)
     mail(
         :to => user.email,
-        :subject => t("notifier.password_reset.subject") 
+        :subject => "Instruções para cadastrar nova senha"
       )
   end
 
@@ -34,7 +34,7 @@ class Notifier < ActionMailer::Base
     @url  = "http://www.epickone.com.br/login"
     mail(
         :to => user.email,
-        :subject => "Sua senha, lembre-se de trocar."
+        :subject => "Sua senha, lembre-se de trocar"
       )
   end   
 end

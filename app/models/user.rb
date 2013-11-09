@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   validates_presence_of :city_state, :message => "Cidade ou estado inexistente"
   
                                                 
-  validates_presence_of :password, :on => :create
+  validates_presence_of :password
                     
 
   validates_uniqueness_of :email, :case_sensitive => false
@@ -89,6 +89,16 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type=>['image/jpeg', 'image/png', 'image/gif']
 
   
+  
+  def valid_attribute?(attr, value)
+    u = User.new(attr => value)
+    u.valid?
+    if(u.errors.to_hash.has_key?(attr))
+      false
+    else
+      true
+    end
+  end
   
   def mobile_verification_sent!
     self.mobile_phone_verification_at = DateTime.now
