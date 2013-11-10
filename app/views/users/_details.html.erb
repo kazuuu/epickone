@@ -12,11 +12,15 @@
 		<tr>
 			<td class="col-md-3">Celular:</td>
 			<td class="">
-				<%= formata_telefone(@user.mobile_phone_number) unless @user.mobile_phone_number.nil? %>
-				<%= link_to 'Alterar', mobile_phone_user_path(@user) %>
-				<% unless @user.valid_mobile_phone %>
-					<br>
-					<%= link_to 'Clique aqui para confirmar seu celular.', valid_mobile_user_path(@user) %>
+				<% if @user.mobile_phone_number? %>
+					<%= formata_telefone(@user.mobile_phone_number) unless @user.mobile_phone_number.nil? %>
+					<%= link_to 'Alterar', mobile_phone_user_path(@user) %>
+					<% unless @user.valid_mobile_phone %>
+						<br>
+						<%= link_to 'Clique aqui para confirmar seu celular.', valid_mobile_user_path(@user) %>
+					<% end %>
+				<% else %>
+					<%= link_to 'Cadastrar', mobile_phone_user_path(@user) %>
 				<% end %>
 			</td>
 		</tr>

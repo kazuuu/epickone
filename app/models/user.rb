@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
                   :twitter_oauth_expires_at,
                   :locale,
                   :provider,
-                  :emails_attributes
+                  :emails_attributes,
+                  :term_of_use
                   
   validates_presence_of :email, 
                         :full_name,
@@ -57,6 +58,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :mobile_phone_number, :on => :update, if: :mobile_phone_number?
   validates_length_of :mobile_phone_number, :on => :update, if: :mobile_phone_number?, :minimum => 10, :maximum => 11
   validates_format_of :mobile_phone_number, :on => :update, if: :mobile_phone_number?, :with => /^[\d]+$/, :message => " - Apenas números"
+
+  validates_acceptance_of :term_of_use
 
   belongs_to :country
   belongs_to :state

@@ -17,11 +17,11 @@ class StaticPagesController < ApplicationController
     @title = "faq"
   end
   def privacy
-    @title = "privacy"
+    @title = "Política de Privacidade"
     render :layout => false
   end
   def term
-    @title = "term"
+    @title = "Termo de Uso"
     render :layout => false
   end
 
