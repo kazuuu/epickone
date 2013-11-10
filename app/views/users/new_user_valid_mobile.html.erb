@@ -28,7 +28,7 @@
 		Você receberá um SMS com um código que você deve colocar na caixa abaixo para comprovar que este número de celular é seu.
 	</p>
 	<p>
-		Caso não tenha recebido o SMS, clique na opção "Re-enviar código de verificação por SMS" que aparecerá abaixo em no máximo 5 minutos.
+		Caso não tenha recebido o SMS, clique na opção "Enviar código de verificação por SMS" que aparecerá abaixo em no máximo 5 minutos.
 	</p>
 
 	<div class="row">
@@ -38,7 +38,7 @@
 			  <% if current_user.mobile_phone_verification_sent? %>
 					Em alguns minutos vc receberá um SMS
 			  <% else %>
-					<%= link_to "Re-enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
+					<%= link_to "Enviar código de verificação (SMS)", send_mobile_phone_verification_user_path %>
 				<% end %>				
 				<%= form_tag(mobile_phone_verification_user_path(current_user)) do %>
 					<%= label_tag "Coloque o código de verificação:" %>
