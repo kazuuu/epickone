@@ -1,5 +1,5 @@
 class TicketsController < InheritedResources::Base
-  skip_before_filter :require_all_tickets_validated, :only => [:edit, :update, :validation, :submit_it]
+  skip_before_filter :require_all_tickets_validated, :only => [:edit, :update, :validation, :submit_it, :destroy, :delete]
   before_filter :already_validated?
   before_filter :correct_ticket_user
   
@@ -25,6 +25,17 @@ class TicketsController < InheritedResources::Base
     @ticket = Ticket.find(params[:id])
     @possible_numbers = @ticket.generate_picked_number(5)
   end
+  
+  def destroy
+    @ticket = Ticket.find(params[:id])
+    @ticket.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_path(current_user) + '/#t_tab3' }
+      format.json { head :no_content }
+    end
+  end
+  
   def validation
     @ticket = Ticket.find(params[:id])
   end
