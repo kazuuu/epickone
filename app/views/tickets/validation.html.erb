@@ -2,15 +2,6 @@
     Confirmo que li e aceito o <%= link_to "regulamento", rules_path, :class=>"fancybox" %>
 <% end %>
 
-<%= content_for(:head) do %>
-	<script type="text/javascript">
-		$('.delete').on('click', function(){
-				alert('teste');
-		    return confirm('Are you sure you want to delete this entry?');
-		});
-	</script>
-<% end %>
-
 <h3>Escolha seu número da sorte</h3>
 <p>
 	Você pode escolher seu número da sorte para participar no evento clicando em "alterar", ou deixe o número que nós escolhemos e clique em "Enviar Ticket" para participar deste evento.

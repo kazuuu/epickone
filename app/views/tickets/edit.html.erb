@@ -1,3 +1,13 @@
+<%= content_for(:head) do %>
+	<script type="text/javascript">
+		function ticket_number(value)
+		{
+			document.getElementById('ticket_picked_number').value = value
+			document.getElementById("edit_ticket_<%= params[:id] %>").submit();
+		}
+	</script>
+<% end %>
+
 <h3>Escolha seu número da sorte</h3>
 
 <% if @possible_numbers.count > 0 %>
@@ -7,7 +17,7 @@
 				<div class="col-xs-12 text-center">
 					Alguns números disponíveis:
 					<% @possible_numbers.each do |n| %>
-						<br><%= n["num"].to_s.rjust(5, '0') %>
+						<br><%= link_to n["num"].to_s.rjust(5, '0'), "javascript:void(0);", :onclick => "ticket_number('#{n["num"].to_s.rjust(5, '0')}');" %>
 					<% end %>
 				</div>
 			</div>
