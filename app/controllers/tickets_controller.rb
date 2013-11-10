@@ -7,7 +7,7 @@ class TicketsController < InheritedResources::Base
   # PUT /users/1.json
   def update
     @ticket = Ticket.find(params[:id])
-    @possible_numbers = @ticket.generate_picked_number(5)
+    @possible_numbers = @ticket.event.available_numbers('',5)
 
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])
@@ -23,7 +23,7 @@ class TicketsController < InheritedResources::Base
   # GET /users/1/edit
   def edit
     @ticket = Ticket.find(params[:id])
-    @possible_numbers = @ticket.generate_picked_number(5)
+    @possible_numbers = @ticket.event.available_numbers('',5)
   end
   
   def destroy

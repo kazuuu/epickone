@@ -87,6 +87,25 @@ class Event < ActiveRecord::Base
       true
     end
   end
+
+  def generate_available_number
+    sql = "select num from (select generate_series as num, random() as sort from generate_series(1,#{SETTINGS['TICKET_MAX_NUMBER']}) where generate_series not in (select picked_number from tickets where event_id=#{self.id}) order by sort limit 1) as series;"
+    ActiveRecord::Base.connection.execute(sql)
+  end
+  
+  def available_numbers(value, limit_number)
+    value = value.to_i.to_s
+    sql =  "select cast(num as text) as num from "
+    sql << "("
+    sql << "  select generate_series as num from generate_series(1,#{SETTINGS['TICKET_MAX_NUMBER']}) where  generate_series not in "
+    sql << "  ("
+    sql << "    select picked_number from tickets where event_id=#{self.id} "
+    sql << "  )"
+    sql << ") as series "
+    sql << "where cast(num as text) like '%#{value}%' order by  cast(num as int) asc limit #{limit_number};"
+    ActiveRecord::Base.connection.execute(sql)
+  end
+  
   def full?
     if self.tickets.count >= SETTINGS['TICKET_MAX_NUMBER']
       true

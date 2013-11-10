@@ -59,6 +59,7 @@ Epickone::Application.routes.draw do
     get 'join_promo', :on => :member 
     get 'quiz', :on => :member
     post 'right_answer_check', :on => :member
+    get 'available_numbers', :on => :member 
   end
 
   resource :store, :controller => 'store' do

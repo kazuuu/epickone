@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_filter :require_user,  :only => [:join_questions, :right_answer_check, :pick_a_number, :results, :quiz]
   before_filter :require_user_admin,  :only => [:results]
+  skip_before_filter :require_all_tickets_validated, :only => [:available_numbers]
 
   require 'will_paginate/array'
 
@@ -69,5 +70,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @max_number = @event.tickets.maximum(:picked_number)
     @numbers = (1..@max_number)
+  end
+  def available_numbers
+    @event = Event.find(params[:id])
+    @available_numbers = @event.available_numbers(params[:term], 5)
+    render json: @available_numbers.map { |i| i['num'].rjust(5, '0') }
   end
 end

@@ -74,7 +74,7 @@ class Ticket < ActiveRecord::Base
   
   def default_values
     unless self.created_at?
-      x = generate_picked_number(10)
+      x = self.event.generate_available_number
       self.picked_number = x.first["num"].to_i unless x.first.nil?
     end
   end
@@ -84,10 +84,5 @@ class Ticket < ActiveRecord::Base
   end
   def submit_it
     update_attribute(:submitted_at, DateTime.now)
-  end
-
-  def generate_picked_number(limit_number)
-    sql = "select num from (select generate_series as num, random() as sort from generate_series(1,#{SETTINGS['TICKET_MAX_NUMBER']}) where generate_series not in (select picked_number from tickets where event_id=#{self.event_id}) order by sort limit #{limit_number}) as series;"
-    ActiveRecord::Base.connection.execute(sql)
   end
 end
