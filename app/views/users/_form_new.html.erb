@@ -1,6 +1,6 @@
 <%= content_for(:the_links) do %>
-    Accept <%= link_to "Terms of use", term_path, :class=>"fancybox" %>
-    and <%= link_to "Política de Privacidade", privacy_path, :class=>"fancybox" %>
+    Confirmo que li e aceito o <%= link_to "termo de uso", term_path, :class=>"fancybox" %>
+    e a <%= link_to "política de privacidade", privacy_path, :class=>"fancybox" %> do ePick One
 <% end %>
 
 <%= simple_form_for(@user, :html => { :id  => "user-form" } ) do |f| %>          
