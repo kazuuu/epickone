@@ -31,7 +31,7 @@ Epickone::Application.routes.draw do
     get 'valid_mobile_later_on', :on => :member     
 
     resources :tickets do
-      get 'submit_it', :on => :member
+      put 'submit_it', :on => :member
       get 'validation', :on => :member
       post 'add_number', :on => :member
     end
@@ -71,6 +71,7 @@ Epickone::Application.routes.draw do
   match '/faq',          to: 'static_pages#faq'
   match '/privacy',      to: 'static_pages#privacy'
   match '/term',         to: 'static_pages#term'
+  match '/rules',         to: 'static_pages#rules'
   match '/about',        to: 'static_pages#about'
   match '/contact',      to: 'static_pages#contact'
   match '/msgbox',          to: 'static_pages#msgbox'

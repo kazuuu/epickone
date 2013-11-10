@@ -5,7 +5,9 @@ class Ticket < ActiveRecord::Base
                   :event_id,
                   :picked_number,
                   :origin,
-                  :submitted_at
+                  :submitted_at,
+                  :rules
+                  
   belongs_to :event
   belongs_to :user 
 
@@ -20,6 +22,8 @@ class Ticket < ActiveRecord::Base
       :message => "apenas números entre 1 e #{SETTINGS['TICKET_MAX_NUMBER']}"                      
 
   validates_uniqueness_of :picked_number, :scope => [:event_id]
+  
+  validates_acceptance_of :rules, :on => :update
   
   before_validation :default_values
 

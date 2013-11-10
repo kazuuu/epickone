@@ -40,8 +40,15 @@ class TicketsController < InheritedResources::Base
       redirect_to valid_mobile_user_path(current_user.id)
     else
       @ticket = Ticket.find(params[:id])
-      @ticket.submit_it
-      redirect_to user_path(current_user) + '/#t_tab3'
+      respond_to do |format|
+        if @ticket.update_attributes(params[:ticket])
+          format.html { redirect_to  user_path(current_user) + '/#t_tab3', notice: 'Prabéns! Você está participando deste evento.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "validation" }
+          format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        end
+      end    
     end    
   end
   

@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  skip_before_filter :require_all_tickets_validated, :only => [:rules]
+
   def home
     unless params[:locale]
       # it takes I18n.locale from the previous example set_locale as before_filter in application controller
@@ -21,6 +23,10 @@ class StaticPagesController < ApplicationController
     render :layout => false
   end
   def term
+    @title = "Termo de Uso"
+    render :layout => false
+  end
+  def rules
     @title = "Termo de Uso"
     render :layout => false
   end
