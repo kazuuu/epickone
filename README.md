@@ -1,9 +1,10 @@
 Install:
 
-Before run this application, set your credentials up in those files:
-   config/environments/development.rb
-   config/environments/production.rb
+Before run this application, remember to rename the files listed bellow:
+   - /config/environments/production.rb.template to production.rb
+   - /config/environments/development.rb.template to development.rb
 
+And set your credentials up in the same files: 
   ENV['FACEBOOK_APP_ID'] = "facebook_id_number";
   ENV['FACEBOOK_SECRET'] = "facebook_secret_number";
   ENV['TWITTER_CONSUMER_KEY'] = "twitter_key_number"
