@@ -1,0 +1,38 @@
+<%= content_for(:head) do %>
+	<script type="text/javascript">
+		function ticket_number(value)
+		{
+			document.getElementById('ticket_picked_number').value = value
+			document.getElementById("edit_ticket_<%= params[:id] %>").submit();
+		}
+	</script>
+<% end %>
+
+<h3>Escolha seu número da sorte</h3>
+
+<% if @possible_numbers.count > 0 %>
+		<%= simple_form_for [current_user, @ticket] do |f| %>
+			<%= f.input :picked_number, :label => "Escolha um número entre 1 e 99999", :input_html => { data: {autocomplete_source: available_numbers_event_path(@ticket.event_id)} } %>
+	    
+			<div class="row">
+				<div class="col-xs-12 text-right">
+					<%= f.button :submit, "Escolher" %>
+					<%= link_to "<input class='btn btn-primary' type='button' name='cancel' value='Voltar'>".html_safe, validation_user_ticket_path(current_user, @ticket) %>
+				</div>
+			</div>
+		<% end %>
+<% else %>
+	<%= simple_form_for [current_user, @ticket] do |f| %>
+			<%= f.input :picked_number, :label => "Escolha um número entre 1 e 99999", input_html: { readonly: true }  %>
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					ATENÇÃO: <%= @ticket.picked_number_formatted %> é o último número disponível! Infelizmente não tem como alterar mais.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 text-right">
+					<%= f.button :submit, :label => "Escolher" %>
+				</div>
+			</div>
+		<% end %>
+<% end %>

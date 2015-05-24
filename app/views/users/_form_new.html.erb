@@ -1,0 +1,14 @@
+<%= content_for(:the_links) do %>
+    Confirmo que li e aceito o <%= link_to "termo de uso", term_path, :class=>"fancybox" %>
+    e a <%= link_to "política de privacidade", privacy_path, :class=>"fancybox" %> do ePick One
+<% end %>
+
+<%= simple_form_for(@user, :html => { :id  => "user-form" } ) do |f| %>          
+      <%= f.input :email %>
+      <%= f.input :full_name, :label => "Nome completo" %>
+      <%= f.input :gender, as: :radio_buttons,  collection: [['Feminino', 'F'] ,['Masculino', 'M']] %>
+	    <%= f.input :city_state, :label => "Cidade/Estado", :input_html => { data: {autocomplete_source: cities_path} } %>
+			<%= f.input :birthday, as: :bootstrap_datepicker, :input_html => {} %>
+			<%= f.input :term_of_use, :as => :boolean, :label => content_for(:the_links) %>
+      <%= f.submit "Cadastrar" %>
+<% end %>

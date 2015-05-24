@@ -1,0 +1,44 @@
+<div style="height:15px;">
+</div>
+
+<div class="row">
+  <div class="span12">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab1" data-toggle="tab">DETALHES</a></li>
+      <li>
+        <a href="<%= user_path(current_user) %>#t_tab2">
+           CONNECTAR
+        </a>
+      </li>
+      <li>
+        <a href="<%= user_path(current_user) %>#t_tab3">
+			TICKETS
+		</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+				<%= render 'form_edit' %>
+      </div>
+      <div class="tab-pane" id="tab2">  
+      </div>
+      <div class="tab-pane" id="tab3">
+      </div>      
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // Javascript to enable link to tab
+  var hash = document.location.hash;
+  var prefix = "t_";
+  if (hash) {
+      $('.nav-tabs a[href='+hash.replace(prefix,"")+']').tab('show');
+  } 
+
+  // Change hash for page-reload
+  $('.nav-tabs a').on('shown', function (e) {
+      window.location.hash = e.target.hash.replace("#", "#" + prefix);
+  });
+</script>
+

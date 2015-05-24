@@ -1,0 +1,20 @@
+<tr>
+  <td colspan=2>
+    <h3><%= event.title %></h3>
+  </td>
+</tr>
+<tr>
+  <td style="width:300px;">
+    <%= image_tag event.avatar.url(:medium) %>
+  </td>
+  <td  style="width:600px;">
+    <%= simple_format(event.description) %>
+    <br>
+    <span class="timestamp">Due Date <%= event.date_due %>. </span>
+  </td>
+</tr>
+<tr>
+  <td>
+    <%= link_to "Join this event", join_event_path(event) %>
+  </td>
+</tr>

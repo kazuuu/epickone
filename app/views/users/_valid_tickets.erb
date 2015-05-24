@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-12">  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-md-2">
+            Data do Resultado
+          </th>
+          <th class="col-md-7">
+            Evento
+          </th>
+          <th class="col-md-1">
+            Número
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+<% if @tickets_validated.count <= 0  %>
+				<tr>
+					<td colspan='2'>
+						Você não está concorrendo a nenhum evento.
+					</td>
+					<td>
+					</td>
+				</tr>
+<% else %>
+	<% @tickets_validated.each do |item| %>
+        <tr>
+          <td>
+	          <%= l item.end_date.to_date, :format => :simple if !item.end_date.nil? %> 
+          </td>
+          <td>
+            <%= link_to item.event.title, item.event %>
+          </td>
+          <td>
+            <%= item.picked_number_formatted if !item.picked_number.nil? %>
+          </td>
+        </tr>
+	<% end %>
+<% end %>
+      </tbody>
+    </table>
+  </div> 
+</div> <!-- class row -->

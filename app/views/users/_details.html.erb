@@ -1,0 +1,67 @@
+<h2>Informações Básicas</h2>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="col-md-3">Nome:</td>
+			<td class=""><%= @user.full_name %> <%= link_to "Alterar", edit_user_path(@user) %></td>
+		</tr>
+		<tr>
+			<td class="col-md-3">Email:</td>
+			<td class=""><%= @user.email %> <%= link_to "Alterar", emails_path %></td>
+		</tr>
+		<tr>
+			<td class="col-md-3">Celular:</td>
+			<td class="">
+				<% if @user.mobile_phone_number? %>
+					<%= formata_telefone(@user.mobile_phone_number) unless @user.mobile_phone_number.nil? %>
+					<%= link_to 'Alterar', mobile_phone_user_path(@user) %>
+					<% unless @user.valid_mobile_phone %>
+						<br>
+						<%= link_to 'Clique aqui para confirmar seu celular.', valid_mobile_user_path(@user) %>
+					<% end %>
+				<% else %>
+					<%= link_to 'Cadastrar', mobile_phone_user_path(@user) %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td class="span2">Senha:</td>
+			<td class="span3">
+				********
+				<%= link_to 'Alterar', password_user_path(@user) %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Detalhes <%= link_to '(Alterar)', edit_user_path(@user), :style => "font-size:50%;" %></h2>
+<table class="table table-bordered">
+	<tbody>
+		<tr>
+			<td class="span2">Sexo:</td>
+			<td class="span3"><%= @user.gender_formatted %></td>
+		</tr>
+
+		<tr>
+			<td class="">Data de Nascimento:</td>
+			<td class="">
+				<%= l @user.birthday, :format => :default %> 
+		</tr>
+		<tr>
+			<td class="">Cidade / Estado:</td>
+			<td class=""><%= @user.city.name %> / <%= @user.state.name_code %></td>
+		</tr>
+		<tr>
+			<td class="">Endereco 1:</td>
+			<td class=""><%= @user.address1 %></td>
+		</tr>
+		<tr>
+			<td class="">Endereco 2:</td>
+			<td class=""><%= @user.address2 %></td>
+		</tr>
+		<tr>
+			<td class="">CEP:</td>
+			<td class=""><%= @user.postcode %></td>
+		</tr>
+	</tbody>
+</table>

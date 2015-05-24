@@ -1,0 +1,9 @@
+<%= simple_form_for(@email) do |f| %>
+    <%= f.input :email %>
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<%= f.submit "Alterar", class: "btn btn-large btn-primary" %>
+				<%= link_to "Voltar", emails_path, :class => "btn btn-primary" %>						
+			</div>
+		</div>
+<% end %>

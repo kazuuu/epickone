@@ -1,0 +1,10 @@
+<% provide(:title, 'Resultados') %>
+
+<div style="float:left;width:385px;margin-left:auto;margin-right:auto;">
+  <% 
+  @event.tickets.find_validated.each do |t| %>
+    <div class="row">
+			<%= t.picked_number %>
+    </div>  
+  <% end %>  
+</div>

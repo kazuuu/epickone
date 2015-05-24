@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='<%= I18n.locale%>'>
+<head>
+  <title><%= full_title(yield(:title)) %></title>      
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Marcello Kazuo Miyajima">
+
+  <%= render 'layouts/fixes' %>  
+  <%= render 'layouts/shiv' %>  
+  <%= render 'layouts/shim' %>  
+	
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tags %>
+
+  <%= yield :head %>
+</head>
+
+<body>
+	<%= render 'layouts/header' %>
+  <div class="container">
+    <% flash.each do |key, value| %>
+			<%
+				key = "info" if key.to_s == "notice"
+				key = "danger" if key.to_s == "error"
+				key = "danger" if key.to_s == "recaptcha_error"
+			%>
+			<% if key.to_s == "msgbox" %>
+				<% session[:msgbox]=  value.to_s %>
+				<%= link_to('', msgbox_path, :class=>"fancybox", :id => "linkfancy", :style=>"display:none;")  %>
+				<script type="text/javascript">
+					$(document).ready(function(){
+					      $('#linkfancy').fancybox().trigger('click');
+					});
+				</script>
+			<% else %>
+	      <div class="alert alert-<%= key %>" style="margin-top:20px;">
+	        <%= value %>
+	        <a class="close" data-dismiss="alert">x</a>
+	      </div>
+    	<% end %> 
+    <% end %>
+  </div>
+
+	<%= yield :wide %>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+	<%= render 'layouts/footer' %>
+	<%= debug(params) if Rails.env.development? %>
+	Current Time: <%= Time.now if Rails.env.development? %>
+</body>
+</html>

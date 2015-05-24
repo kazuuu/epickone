@@ -1,0 +1,31 @@
+<%= content_for(:the_links) do %>
+    Confirmo que li e aceito o <%= link_to "regulamento", rules_path, :class=>"fancybox" %>
+<% end %>
+
+<h3>Escolha seu número da sorte</h3>
+<p>
+	Você pode escolher seu número da sorte para participar no evento clicando em "alterar", ou deixe o número que nós escolhemos e clique em "Enviar Ticket" para participar deste evento.
+</p>
+
+<div class="row">
+	<div class="col-sm-6">
+		<%= @ticket.event.title %>
+	</div>
+	<div class="col-sm-6">
+		<%= @ticket.picked_number_formatted  %> <%= link_to "(alterar)", edit_user_ticket_path(current_user, @ticket) %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 text-right">
+		<%= simple_form_for @ticket, :url => submit_it_user_ticket_path(current_user, @ticket), :method => 'put' do |f| %>
+			<div class="row">
+				<div class="col-xs-12 text-right">
+					<%= f.input :submitted_at, :as => :hidden, :input_html => { :value => DateTime.now } %>
+					<%= f.input :rules, :as => :boolean, :label => content_for(:the_links) %>
+				 	<%= link_to "Desistir", user_ticket_path(current_user, @ticket), class: 'btn btn-danger', :confirm => 'Tem certeza que deseja desistr?', data: {method: 'delete'} %>
+					<%= f.submit "Enviar Ticket", class: "btn btn-primary" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

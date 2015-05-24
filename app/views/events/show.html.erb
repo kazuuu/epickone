@@ -1,0 +1,83 @@
+<% provide(:title, @event.title) %>
+
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] %>
+  <%= tag :meta, property: "og:site_name", content: "ePick One" %>
+  <%= tag :meta, property: "og:type", content: "epickone:evento" %>
+  <%= tag :meta, property: "og:title", content: @event.title %>
+  <%= tag :meta, property: "og:url", content: event_url(@event) %>
+  <%= tag :meta, property: "og:image", content: @event.avatar.url(:medium) %>
+  <%= tag :meta, property: "og:description", content: "Faca parte deste movimento tambem" %>
+<% end %>
+
+<div class="row hidden-xs hidden-sm margin-top">
+  <div class="col-md-9">
+    <p>
+      <b>Evento:</b>
+      <%= @event.title %>
+    </p>
+    <p>
+      <b>Promovido por:</b>
+      <%= @event.promoter %>
+    </p>
+
+    <p>
+      <b>Instruções:</b>
+      <%= simple_format(@event.instruction) %>
+    </p>
+    <p>
+      <b>Briefing:</b>
+      <%= @event.description.html_safe %>
+    </p>
+  </div>    
+  <div class="col-md-3">  
+        <%= image_tag @event.avatar.url(:thumb) %>
+		<br>
+					Data do resultado: <%= l @event.end_date.to_date, :format => :simple if !@event.end_date.nil? %>
+		<br>
+		<%= t("home.time_left")%>: <%= @event.distance_of_time %>
+		<br>
+		Participantes: <%= @event.tickets.find_validated.count %>
+		<br>
+    <% if  @event.expired? or @event.full? %>
+    	<%= link_to "Finalizado", "#", :class => "btn btn-large btn-primary" %>
+    <% else %>
+    	<%= render 'events/promo_button' %>
+    <% end %>
+  </div>
+</div>  
+
+<div class="row visible-xs visible-sm margin-top">
+  <div class="col-xs-3">  
+    <%= image_tag @event.avatar.url(:thumb) %>
+	</div>
+  <div class="col-xs-9">  
+    <b>Evento: </b><%= @event.title %>
+		<br>
+    <b>Promovido por: </b><%= @event.promoter %>
+		<br>
+		<b>Data do resultado: </b><%= l @event.end_date.to_date, :format => :simple if !@event.end_date.nil? %>
+		<br>
+    <% if  @event.expired? or @event.full? %>
+    	<%= link_to "Finalizado", "#", :class => "btn btn-large btn-primary" %>
+    <% else %>
+    	<%= render 'events/promo_button' %>
+    <% end %>
+	</div>
+</div>
+<div class="row visible-xs visible-sm">
+  <div class="col-xs-12">
+    <p>
+      <b>Instruções:</b>
+      <%= simple_format(@event.instruction) %>
+    </p>
+    <p>
+      <b>Briefing:</b>
+      <%= @event.description.html_safe %>
+    </p>
+  </div>    
+</div>  
+
+
+
+

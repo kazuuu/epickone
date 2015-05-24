@@ -1,0 +1,12 @@
+<h3>Alterar senha</h3>
+
+<p>
+	Coloque sua nova senha abaixo e clique em alterar.
+</p>
+
+<%= simple_form_for @user, :url => password_reset_path(@user.perishable_token), :method => 'put' do |f| %>
+		<%= f.input :password %>
+		<div class="text-center">
+			<%= f.submit "alterar", class: "btn btn-large btn-primary" %>
+		</div>
+<% end %>
