@@ -1,5 +1,5 @@
 Epickone::Application.configure do
-  ENV['FACEBOOK_APP_ID'] = "222";
+  ENV['FACEBOOK_APP_ID'] = "2332";
   ENV['FACEBOOK_SECRET'] = "facebook_secret_number";
   ENV['TWITTER_CONSUMER_KEY'] = "twitter_key_number"
   ENV['TWITTER_CONSUMER_SECRET'] = "twitter_secret_string"
