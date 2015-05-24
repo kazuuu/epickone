@@ -32,5 +32,5 @@ doc/api
 doc/app
 *.swp
 *~
-config/environments/production.rb
-config/environments/development.rb
+/config/environments/production.rb
+/config/environments/development.rb
