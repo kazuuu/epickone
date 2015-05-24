@@ -1,8 +1,0 @@
-<%= form_tag(event_clone_tools_path) do %>
-  <%= label_tag "Event:" %>
-
-  <%= select_tag :event_id, options_for_select(@events.collect{ |u| [u.id.to_s + " " + u.title, u.id] })%>
-	
-	 <%= submit_tag "Duplicate", class: "btn btn-black btn-large btn-primary" %>
-<% end %>
-
